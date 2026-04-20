@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use CogniPrint in your research, please cite it as follows."
+title: "CogniPrint: A mathematical framework for cognitive fingerprint analysis of text"
+authors:
+  - family-names: "Researcher"
+    given-names: "Independent"
+version: "0.1.0"
+date-released: 2026-04-20
+url: "https://cogniprint.org"
+repository-code: "https://github.com/TakoVHS/CogniPrint"
+license: MIT
+abstract: "CogniPrint is a research methodology for constructing compact statistical profiles (cognitive fingerprints) of text and studying the geometry of profile similarity. It provides reproducible feature extraction, vector representation, and heuristic assessment tools for empirical language analysis."
+keywords:
+  - "cognitive fingerprint"
+  - "statistical text analysis"
+  - "mathematical profile"
+  - "feature space"
+  - "empirical regularities"
