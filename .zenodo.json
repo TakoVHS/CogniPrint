@@ -1,0 +1,21 @@
+{
+  "title": "CogniPrint: A mathematical framework for cognitive fingerprint analysis of text",
+  "description": "CogniPrint is a research methodology for constructing compact statistical profiles (cognitive fingerprints) of text and studying profile similarity in feature space. The software provides tools for feature extraction, vector representation, and heuristic assessment of textual regularities. All outputs are intended for research and experimentation, not for definitive source classification.",
+  "creators": [
+    {
+      "name": "Independent Researcher",
+      "affiliation": "Independent Researcher"
+    }
+  ],
+  "keywords": [
+    "cognitive fingerprint",
+    "statistical text analysis",
+    "mathematical profile",
+    "feature space",
+    "empirical regularities"
+  ],
+  "license": "MIT",
+  "upload_type": "software",
+  "access_right": "open",
+  "language": "eng"
+}
