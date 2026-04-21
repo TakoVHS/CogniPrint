@@ -5,6 +5,7 @@ This directory contains the manuscript layer for CogniPrint.
 ## Files
 
 - `main.tex` — the current LaTeX manuscript scaffold.
+- `references.bib` — the BibTeX reference database for the manuscript.
 - `README.md` — overview of the manuscript layer.
 - `NOTES.md` — editorial notes and next writing tasks.
 
@@ -19,19 +20,27 @@ The manuscript is an early research draft. It already contains:
 - limitations;
 - empirical protocol;
 - conclusion and open problems;
-- appendix scaffold.
+- appendix scaffold;
+- an initial verified bibliography layer.
 
 ## Build notes
 
-A minimal local build flow is expected to be:
+A minimal local build flow is:
 
 ```bash
 cd paper
 pdflatex main.tex
+bibtex main
+pdflatex main.tex
 pdflatex main.tex
 ```
 
-A BibTeX or biber stage can be added later if the reference layer is expanded.
+If `latexmk` is available, an equivalent one-command flow is:
+
+```bash
+cd paper
+latexmk -pdf main.tex
+```
 
 ## Editorial rule
 
