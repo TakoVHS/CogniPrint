@@ -31,15 +31,13 @@ We introduce a mathematical framework for representing text samples by compact f
 
 \section{Introduction}
 
-Quantitative study of text often requires a representation that is compact enough for analysis, yet expressive enough to preserve regularities of interest. A common mathematical strategy is to map structured objects into finite-dimensional feature spaces and then reason about geometry, distances, and perturbations in that space. In the case of text, such a representation provides a principled way to study regularity, variation, and similarity across samples without reducing the problem to a single scalar summary.
+Quantitative study of text often requires a representation that is compact enough for analysis, yet expressive enough to preserve regularities of interest. A common mathematical strategy is to map structured objects into finite-dimensional feature spaces and then reason about geometry, distances, and perturbations in that space. In the case of text, such a representation provides a principled way to study regularity, variation, and similarity across samples without reducing the problem to a single scalar summary. The historical background for this viewpoint touches both information-theoretic thinking and quantitative style analysis \cite{Shannon1948,Holmes1998}.
 
-The CogniPrint programme adopts this viewpoint. Its central object is the \emph{cognitive fingerprint} of a text sample: a finite-dimensional vector of empirical statistics extracted from the text. The purpose of this object is not to act as a final judgment mechanism. Rather, it serves as a mathematical profile that enables reproducible comparison of text samples and collections of text samples.
+The CogniPrint programme adopts this viewpoint. Its central object is the \emph{cognitive fingerprint} of a text sample: a finite-dimensional vector of empirical statistics extracted from the text. The purpose of this object is not to act as a final judgment mechanism. Rather, it serves as a mathematical profile that enables reproducible comparison of text samples and collections of text samples. Early work on quantitative composition curves and later computational approaches to style analysis provide useful historical context for this direction \cite{Mendenhall1887,Burrows1987,EderEtAl2016}.
 
 This framing leads naturally to four questions. First, what class of feature maps yields a useful profile representation? Second, how should one compare profiles in a way that respects both magnitude and geometric orientation in feature space? Third, under what assumptions does the profile remain stable when a text sample is perturbed by a bounded number of edits? Fourth, how do aggregated profiles behave for collections of samples?
 
-The present manuscript takes a deliberately conservative position. It does not claim universal invariance properties for arbitrary feature maps, nor does it claim that any profile representation can support definitive conclusions about authorship or source. Instead, it introduces a formal setting, states explicit assumptions, and derives basic bounds that clarify what can be proved once a suitable feature map has been fixed.
-
-The broader mathematical background of the manuscript is compatible with information-theoretic thinking and quantitative style analysis, while remaining narrower in scope than those literatures; see, for example, Shannon's foundational treatment of information, Holmes's historical account of stylometry, and the computational text-analysis perspective of Eder, Rybicki, and Kestemont.
+The present manuscript takes a deliberately conservative position. It does not claim universal invariance properties for arbitrary feature maps, nor does it claim that any profile representation can support definitive conclusions about authorship or source. Instead, it introduces a formal setting, states explicit assumptions, and derives basic bounds that clarify what can be proved once a suitable feature map has been fixed. The choice to work with explicit feature maps and quantitative comparison is also compatible with general retrieval and vector-space perspectives on text representation \cite{ManningEtAl2008}.
 
 \subsection{Contributions of the manuscript}
 
@@ -380,26 +378,7 @@ This appendix is intentionally minimal at the current stage. In the next manuscr
     \item supplementary protocol details.
 \end{itemize}
 
-\begin{thebibliography}{9}
-
-\bibitem{Shannon1948}
-C. E. Shannon.
-\newblock A Mathematical Theory of Communication.
-\newblock \emph{Bell System Technical Journal}, 27(3):379--423, 1948.
-\newblock doi:10.1002/j.1538-7305.1948.tb01338.x.
-
-\bibitem{Holmes1998}
-David I. Holmes.
-\newblock The Evolution of Stylometry in Humanities Scholarship.
-\newblock \emph{Literary and Linguistic Computing}, 13(3):111--117, 1998.
-\newblock doi:10.1093/llc/13.3.111.
-
-\bibitem{EderEtAl2016}
-Maciej Eder, Jan Rybicki, and Mike Kestemont.
-\newblock Stylometry with R: A Package for Computational Text Analysis.
-\newblock \emph{The R Journal}, 8(1):107--121, 2016.
-\newblock doi:10.32614/RJ-2016-007.
-
-\end{thebibliography}
+\bibliographystyle{plain}
+\bibliography{references}
 
 \end{document}
