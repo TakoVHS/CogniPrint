@@ -8,9 +8,13 @@ Completed:
 - added `project_brief.md`;
 - normalised `README.md` to the canonical research framing;
 - created `TODO.md` and `ROADMAP.md`;
-- ran a first repository terminology pass for prohibited public terms.
+- ran repository terminology passes for prohibited public terms;
+- updated author metadata in `CITATION.cff` and `.zenodo.json`;
+- added `docs/phase2-plan.md` and `docs/terminology-policy.md`;
+- added `docs/math.md` as a conservative mathematical note;
+- added `docs/preprint-outline.md` and `docs/preprint-draft.md` as preprint scaffolds.
 
 Next:
-- deepen the repository terminology audit;
-- review the public documentation set for consistency;
-- prepare the next documentation pass before Phase 2 work.
+- deepen the terminology audit on internal comments and examples;
+- review documentation consistency;
+- continue the preprint draft from the formal setting section.
