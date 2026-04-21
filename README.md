@@ -2,7 +2,7 @@
 
 **CogniPrint** is a mathematical research framework for constructing compact statistical profiles of text — called *cognitive fingerprints* — and studying the geometry of profile similarity in feature space.
 
-The project is positioned as a reproducible research methodology. It is not presented as a commercial product or a definitive source classifier.
+The project is positioned as a reproducible research methodology. It is not presented as a commercial product or a definitive judgement system.
 
 ## Research Scope
 
