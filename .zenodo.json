@@ -3,8 +3,9 @@
   "description": "CogniPrint is a research methodology for constructing compact statistical profiles (cognitive fingerprints) of text and studying profile similarity in feature space. The software provides tools for feature extraction, vector representation, and heuristic assessment of textual regularities. All outputs are intended for research and experimentation, not for definitive source classification.",
   "creators": [
     {
-      "name": "Independent Researcher",
-      "affiliation": "Independent Researcher"
+      "name": "Adriashkin, Roman",
+      "affiliation": "Independent Researcher",
+      "orcid": "0009-0009-6337-1806"
     }
   ],
   "keywords": [
