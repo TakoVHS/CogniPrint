@@ -35,7 +35,7 @@ Quantitative study of text often requires a representation that is compact enoug
 
 The CogniPrint programme adopts this viewpoint. Its central object is the \emph{cognitive fingerprint} of a text sample: a finite-dimensional vector of empirical statistics extracted from the text. The purpose of this object is not to act as a final judgment mechanism. Rather, it serves as a mathematical profile that enables reproducible comparison of text samples and collections of text samples.
 
-This framing leads naturally to several mathematical questions. First, what class of feature maps yields a useful profile representation? Second, how should one compare profiles in a way that respects both magnitude and geometric orientation in feature space? Third, under what assumptions does the profile remain stable when a text sample is perturbed by a bounded number of edits? Fourth, how do aggregated profiles behave for collections of samples?
+This framing leads naturally to four questions. First, what class of feature maps yields a useful profile representation? Second, how should one compare profiles in a way that respects both magnitude and geometric orientation in feature space? Third, under what assumptions does the profile remain stable when a text sample is perturbed by a bounded number of edits? Fourth, how do aggregated profiles behave for collections of samples?
 
 The present manuscript takes a deliberately conservative position. It does not claim universal invariance properties for arbitrary feature maps, nor does it claim that any profile representation can support definitive conclusions about authorship or source. Instead, it introduces a formal setting, states explicit assumptions, and derives basic bounds that clarify what can be proved once a suitable feature map has been fixed.
 
@@ -48,11 +48,33 @@ This manuscript makes the following limited but precise contributions:
     \item It introduces profile comparison through Euclidean distance and cosine similarity.
     \item It states conservative stability results under explicit coordinate-wise Lipschitz assumptions.
     \item It defines aggregated profiles for corpora and records the corresponding mean-profile perturbation bound.
+    \item It records a reproducible empirical protocol for future study without claiming completed experimental results.
 \end{enumerate}
 
 \subsection{Scope and limitations}
 
 The analysis in this manuscript is intentionally narrow in scope. The results are conditional on explicit assumptions about the chosen feature coordinates. They are not intended to be read as universal theorems about all conceivable text statistics. Likewise, this manuscript does not yet include a completed empirical results section. Its primary purpose is to establish a clean mathematical foundation and a disciplined vocabulary for future formal and empirical work.
+
+\section{Notation and standing assumptions}
+
+We use the following notation throughout the manuscript.
+\begin{itemize}
+    \item $\mathcal{V}$ denotes a finite vocabulary.
+    \item $\mathcal{T} = \bigcup_{n \geq 1} \mathcal{V}^n$ denotes the set of all finite token sequences over $\mathcal{V}$.
+    \item A point $T \in \mathcal{T}$ is called a \emph{text sample}.
+    \item The token length of $T$ is denoted by $|T|$.
+    \item The Euclidean norm on $\mathbb{R}^d$ is denoted by $\|\cdot\|_2$.
+    \item The angle-based similarity between non-zero vectors is measured by cosine similarity.
+    \item $d_{\mathrm{edit}}(T_1,T_2)$ denotes an edit distance on token sequences.
+\end{itemize}
+
+Two assumptions recur in the analysis.
+\begin{enumerate}[label=(A\arabic*)]
+    \item \textbf{Coordinate stability:} each chosen feature coordinate is Lipschitz with respect to the edit metric in the regime of interest.
+    \item \textbf{Non-degeneracy:} the profile norm stays bounded away from zero when normalised comparisons are considered.
+\end{enumerate}
+
+These are not universal claims about arbitrary text statistics. They are modelling assumptions about the selected feature family and the specific analysis regime.
 
 \section{Formal setting}
 
@@ -60,7 +82,7 @@ Let $\mathcal{V}$ be a finite vocabulary, and let
 \[
 \mathcal{T} = \bigcup_{n \geq 1} \mathcal{V}^n
 \]
-be the set of all finite token sequences over $\mathcal{V}$. An element $T \in \mathcal{T}$ is called a \emph{text sample}. Its token length is denoted by $|T|$.
+be the set of all finite token sequences over $\mathcal{V}$.
 
 \subsection{Feature map}
 
@@ -203,7 +225,7 @@ By definition of the empirical mean profile,
 Applying the triangle inequality and then the basic stability proposition termwise gives the result.
 \end{proof}
 
-\subsection{Theorem-level statements versus modelling assumptions}
+\subsection{Discussion of assumptions}
 
 The previous propositions should be interpreted carefully.
 \begin{itemize}
@@ -342,5 +364,22 @@ Several open problems remain central for future work:
 \end{enumerate}
 
 A mature version of the preprint should therefore combine two elements: a mathematically explicit representation framework and a carefully controlled empirical programme. Only the combination of these two parts can justify stronger conclusions in future iterations.
+
+\appendix
+
+\section{Appendix scaffold}
+
+This appendix is intentionally minimal at the current stage. In the next manuscript pass it may be used for:
+\begin{itemize}
+    \item extended proof details;
+    \item notation tables;
+    \item admissible feature-family examples;
+    \item reproducibility checklists;
+    \item supplementary protocol details.
+\end{itemize}
+
+\section*{References}
+
+A formal reference list has not yet been added. The next literature pass should introduce only real and directly relevant sources. No placeholder citations are intentionally included in the current manuscript.
 
 \end{document}
