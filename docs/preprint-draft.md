@@ -126,6 +126,135 @@ $$
 
 This aggregated object is useful when the object of study is a corpus rather than a single sample.
 
-## 3. Immediate next section
+## 3. Stability of normalised and aggregated profiles
 
-The next section of the preprint should state the normalised comparison bound, extend the argument to aggregated profiles, and make explicit which parts of the framework are theorem-level statements and which parts remain open empirical questions.
+The previous section gives a perturbation bound for raw profile vectors. In many applications, however, comparisons are made after normalisation, and the unit of analysis may be a collection of samples rather than a single text. We therefore record the corresponding conservative extensions.
+
+### 3.1. Non-degeneracy condition
+
+To reason about normalised profiles, one must exclude the degenerate case where the profile norm becomes arbitrarily small.
+
+**Assumption 3.1 (Non-degeneracy).** There exists a constant $m > 0$ such that
+
+$$
+\|\phi(T)\|_2 \geq m
+$$
+
+for all text samples considered in the analysis regime.
+
+This assumption is not automatic. It must be checked or enforced by the particular feature design and data regime.
+
+### 3.2. Stability of normalised profiles
+
+Under Assumption 3.1, the map
+
+$$
+x \mapsto \frac{x}{\|x\|_2}
+$$
+
+is Lipschitz on the subset $\{x \in \mathbb{R}^d : \|x\|_2 \geq m\}$. Combining this with the perturbation bound from Section 2 yields the following statement.
+
+**Proposition 3.2 (Normalised profile stability).** Under Assumption 2.1 and Assumption 3.1, there exists a constant $C > 0$ such that
+
+$$
+\|\widehat{\phi}(T_1) - \widehat{\phi}(T_2)\|_2 \leq C \, d_{\mathrm{edit}}(T_1, T_2)
+$$
+
+for all text samples in the analysis regime.
+
+**Proof sketch.** Proposition 2.5 gives a Lipschitz bound for the unnormalised profile map. The normalisation map is Lipschitz away from the origin, with constant depending only on the lower norm bound $m$. Composition of these two Lipschitz maps gives the result.
+
+### 3.3. Aggregated profile perturbation bound
+
+Let
+
+$$
+\mathcal{C}_1 = \{T_1^{(1)}, \ldots, T_1^{(N)}\}, \qquad
+\mathcal{C}_2 = \{T_2^{(1)}, \ldots, T_2^{(N)}\}
+$$
+
+be two aligned collections of equal size. Applying the triangle inequality together with the single-sample perturbation bound yields a corpus-level estimate.
+
+**Proposition 3.3 (Mean-profile perturbation bound).** Under Assumption 2.1,
+
+$$
+\|\overline{\phi}(\mathcal{C}_1) - \overline{\phi}(\mathcal{C}_2)\|_2
+\leq
+\frac{1}{N} \sum_{j=1}^{N} K \, d_{\mathrm{edit}}\big(T_1^{(j)}, T_2^{(j)}\big),
+$$
+
+where
+
+$$
+K = \Big(\sum_{i=1}^{d} L_i^2\Big)^{1/2}.
+$$
+
+**Proof.** By definition of the empirical mean profile,
+
+$$
+\overline{\phi}(\mathcal{C}_1) - \overline{\phi}(\mathcal{C}_2)
+=
+\frac{1}{N} \sum_{j=1}^{N} \big(\phi(T_1^{(j)}) - \phi(T_2^{(j)})\big).
+$$
+
+Applying the triangle inequality and then Proposition 2.5 termwise gives the result.
+
+### 3.4. Theorem-level statements versus modelling assumptions
+
+The previous propositions should be interpreted carefully.
+
+- The inequalities themselves are theorem-level statements once the assumptions are fixed.
+- The assumptions are modelling statements about the chosen feature map and the analysis regime.
+- Therefore the framework is rigorous, but only conditionally so: its strength depends on how well the selected coordinates satisfy the stated stability requirements.
+
+This separation between formal implications and feature-design assumptions is essential for keeping the theory honest.
+
+## 4. Limits of the framework
+
+The CogniPrint framework is intended as a mathematical basis for profile construction and comparison. It is not intended as a universal inference engine.
+
+### 4.1. Dependence on feature choice
+
+Every substantive conclusion depends on the choice of feature coordinates. Different feature families can induce different geometries, different notions of closeness, and different perturbation behaviour. No claim in this draft should be read as feature-independent unless this is explicitly proved.
+
+### 4.2. Dependence on regime
+
+The perturbation bounds are meaningful only in the regime in which the coordinate stability assumptions hold. If a chosen statistic reacts non-smoothly to small text edits, the corresponding Lipschitz constant may be large or the assumption may fail altogether.
+
+### 4.3. No definitive inference claim
+
+The framework does not justify definitive judgments about authorship, source, or any other categorical conclusion. Its role is to define a mathematically controlled profile space and to enable reproducible comparison inside that space.
+
+### 4.4. Empirical work still required
+
+A full research programme must still answer empirical questions, including:
+
+1. which feature coordinates remain stable in realistic corpora;
+2. how profile geometry behaves under heterogeneity of length and style;
+3. which normalisation procedures preserve meaningful comparison;
+4. how aggregated profiles behave under sampling variation.
+
+These questions are outside the scope of the present draft, but they define the natural path forward.
+
+## 5. Next empirical and formal steps
+
+The next stage of the preprint should include two carefully separated parts.
+
+### 5.1. Formal continuation
+
+The formal continuation should:
+- refine the proof sketches where needed;
+- specify admissible classes of feature coordinates;
+- clarify whether additional concentration results can be obtained for empirical mean profiles.
+
+### 5.2. Empirical protocol
+
+The empirical section should not make strong claims in advance. It should instead specify:
+- corpus construction principles;
+- preprocessing rules;
+- feature extraction steps;
+- profile comparison metrics;
+- perturbation experiments;
+- descriptive and robustness analyses.
+
+Only after such a protocol is written and executed should any stronger empirical narrative be considered.
