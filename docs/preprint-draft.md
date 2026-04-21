@@ -258,3 +258,103 @@ The empirical section should not make strong claims in advance. It should instea
 - descriptive and robustness analyses.
 
 Only after such a protocol is written and executed should any stronger empirical narrative be considered.
+
+## 6. Empirical protocol
+
+This section records a conservative empirical protocol for future experiments. It is written as a reproducible plan, not as a statement of completed results.
+
+### 6.1. Corpus construction principles
+
+The empirical study should begin with explicitly defined corpora rather than ad hoc samples.
+
+At minimum, each corpus description should specify:
+- the source and collection procedure;
+- language and tokenisation assumptions;
+- admissible length range for samples;
+- inclusion and exclusion rules;
+- whether the corpus is analysed at the single-sample or aggregated level.
+
+The protocol should avoid mixing heterogeneous sources without documentation. If corpora of different genres or length distributions are compared, that heterogeneity must be stated explicitly.
+
+### 6.2. Preprocessing rules
+
+All preprocessing steps must be deterministic and documented. At minimum, the study should record:
+- tokenisation procedure;
+- case normalisation policy;
+- punctuation handling;
+- treatment of numerals, URLs, or markup;
+- truncation or minimum-length rules.
+
+No empirical comparison should be reported without freezing these preprocessing choices in advance.
+
+### 6.3. Feature extraction protocol
+
+Given a fixed preprocessing pipeline, the study should define the feature family used to build the map $\phi$. The protocol should state:
+- the full coordinate list;
+- any normalisation applied to raw statistics;
+- the admissible range of each coordinate when relevant;
+- whether the resulting profile is used in raw or normalised form.
+
+If feature ablations are performed, each ablation should be treated as a separate experimental setting.
+
+### 6.4. Profile comparison metrics
+
+The empirical protocol should specify the comparison quantities before any result is reported. The minimum set may include:
+- Euclidean profile distance;
+- cosine profile similarity;
+- within-corpus and between-corpus dispersion summaries;
+- distance between empirical mean profiles when aggregated analysis is used.
+
+If additional comparison metrics are introduced, they should be justified mathematically or empirically rather than chosen post hoc.
+
+### 6.5. Perturbation experiments
+
+The perturbation analysis should be designed to test how profile geometry changes under controlled edits. Representative perturbation families may include:
+- bounded token insertions;
+- bounded token deletions;
+- bounded substitutions;
+- sentence-level reorderings when relevant.
+
+For each perturbation family, the protocol should record:
+- the perturbation budget;
+- whether edits are random or structured;
+- the number of repeated trials;
+- the summary statistic used to report profile change.
+
+The purpose of this section is not to demonstrate universal robustness, but to identify the regime in which the chosen feature family behaves in a stable and interpretable way.
+
+### 6.6. Robustness analysis
+
+The robustness layer should include at least the following checks:
+- sensitivity to text length;
+- sensitivity to preprocessing choices;
+- sensitivity to feature ablation;
+- sensitivity to corpus heterogeneity.
+
+Whenever possible, robustness results should be reported with uncertainty summaries rather than isolated point values.
+
+### 6.7. Reproducibility rule
+
+Every empirical run should be reproducible from a documented configuration consisting of:
+- corpus definition;
+- preprocessing version;
+- feature definition;
+- comparison metric set;
+- perturbation protocol;
+- random seed, if randomness is present.
+
+## 7. Conclusion and open problems
+
+This draft establishes a conservative mathematical basis for the CogniPrint framework. Its main contribution is structural: it defines a finite-dimensional profile representation for text samples, formalises profile comparison, and records conditional stability statements under explicit assumptions.
+
+The framework should be understood as a basis for analysis, not as a final inference mechanism. Its value lies in the fact that profile construction, profile comparison, and perturbation questions can be studied within a controlled mathematical language.
+
+Several open problems remain central for future work:
+
+1. identifying feature families with strong empirical stability properties;
+2. deriving concentration results for empirical mean profiles under realistic sampling assumptions;
+3. understanding how feature-space geometry changes across heterogeneous corpora;
+4. formalising admissible normalisation procedures for robust profile comparison;
+5. linking empirical protocol design more tightly to theorem-level guarantees.
+
+A mature version of the preprint should therefore combine two elements: a mathematically explicit representation framework and a carefully controlled empirical programme. Only the combination of these two parts can justify stronger conclusions in future iterations.
