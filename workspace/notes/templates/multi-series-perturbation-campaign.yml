@@ -1,0 +1,12 @@
+name: multi-series-perturbation-campaign
+campaign_id: multi-series-perturbation-campaign
+description: Multi-series empirical campaign template for repeated perturbation studies.
+series:
+  - name: series-001
+    baseline_file: workspace/input/original.txt
+    light_file: workspace/input/edited.txt
+    variant_folder: workspace/input/variants
+  - name: series-002
+    baseline_file: workspace/input/original.txt
+    light_file: workspace/input/edited.txt
+    variant_folder: workspace/input/variants
