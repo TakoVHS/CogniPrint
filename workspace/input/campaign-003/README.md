@@ -22,4 +22,4 @@ The campaign-003 corpus should not be a duplicate of the earlier micro-series. I
 
 ## Safe interpretation note
 
-The resulting campaign should be described in terms of observed profile changes, perturbation effects, and stability tendencies. Avoid stronger language implying definitive attribution or certainty.
+The resulting campaign should be described in terms of observed profile changes, perturbation effects, and stability tendencies. Avoid stronger language implying source finality or universal conclusions.
