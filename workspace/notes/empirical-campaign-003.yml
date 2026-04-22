@@ -1,0 +1,10 @@
+name: empirical-campaign-003
+campaign_id: empirical-campaign-003
+description: Genuinely separate campaign scaffold for empirical stability notes.
+sources_file: ../input/SOURCES.md
+source_record_id: empirical-campaign-003-controlled-variants
+series:
+  - name: campaign-003-series-001
+    baseline_file: ../input/campaign-003/original.txt
+    light_file: ../input/campaign-003/edited.txt
+    variant_folder: ../input/campaign-003/variants
