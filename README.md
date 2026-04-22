@@ -1,6 +1,6 @@
 # CogniPrint
 
-**CogniPrint** is a mathematical research framework for constructing compact statistical profiles of text — called *cognitive fingerprints* — and studying the geometry of profile similarity in feature space.
+**CogniPrint** is a mathematical research framework for constructing compact statistical profiles of text - called *cognitive fingerprints* - and studying the geometry of profile similarity in feature space.
 
 The project is positioned as a reproducible research methodology. It is not presented as a commercial product or a definitive judgement system.
 
@@ -29,9 +29,33 @@ Its outputs are not:
 - guaranteed source classification;
 - final judgments about a text.
 
-## Citation
+## How to Cite
 
-If you use CogniPrint in your research, please cite it using the metadata in `CITATION.cff`. A DOI is assigned to each release via Zenodo.
+If you use CogniPrint in research, please cite the project using the metadata in `CITATION.cff`.
+
+Canonical manuscript form:
+
+> Adriashkin, R. (2026). *Cognitive Fingerprints: A Mathematical Framework for Statistical Profiling of Text*. CogniPrint Research Initiative. Preprint v0.1. arXiv submission pending.
+
+Canonical metadata:
+
+- **Author:** Adriashkin Roman
+- **ORCID:** 0009-0009-6337-1806
+- **Affiliation:** CogniPrint Research Initiative
+- **Project site:** https://cogniprint.org
+- **Repository:** https://github.com/TakoVHS/CogniPrint
+
+A DOI is assigned to each release via Zenodo.
+
+## Public Research Surface
+
+The current public research surface consists of:
+
+- the project website at `cogniprint.org`;
+- the source repository `TakoVHS/CogniPrint`;
+- the website repository `TakoVHS/TakoVHS.github.io`;
+- manuscript source under `paper/`;
+- citation metadata in `CITATION.cff`.
 
 ## Project Status
 
