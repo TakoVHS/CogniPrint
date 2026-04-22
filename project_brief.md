@@ -29,14 +29,15 @@ CogniPrint is a mathematical research programme focused on the construction and 
 
 All public communication about CogniPrint must adhere to the following vocabulary:
 
-| Allowed Terms | Forbidden Terms |
-|---|---|
-| cognitive fingerprint | DNA, Linguistic DNA |
-| mathematical profile | origin, authorship, attribution |
-| statistical signature | bot, bot detection |
-| profile similarity | forensics, forensic analysis |
-| heuristic assessment | legal proof, evidence, guaranteed |
-| empirical regularities | detector, classifier (as product claims) |
+Allowed terms include:
+- cognitive fingerprint
+- mathematical profile
+- statistical signature
+- profile similarity
+- heuristic assessment
+- empirical regularities
+
+Avoid product-like, accusatory, or over-strong language such as source finality, automated source judgement, investigative finality, legal conclusions, guaranteed classification, or product detection claims.
 
 ## Citation and Visibility
 

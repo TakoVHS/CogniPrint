@@ -20,15 +20,11 @@ All public-facing materials must use only CogniPrint-safe language.
 - empirical regularities
 - reproducible computation
 
-### Forbidden public terms
-- DNA
-- Linguistic DNA
-- origin
-- bot detection
-- attribution
-- forensics
-- legal proof
-- evidence engine
+### Public language to avoid
+- source finality
+- automated source judgement
+- investigative finality
+- legal conclusions
 - guaranteed classification
 - third-party infrastructure brand names in public copy
 
@@ -53,7 +49,7 @@ Its outputs are:
 - profile comparison signals.
 
 Its outputs are not:
-- definitive authorship proof;
+- source guarantees;
 - legal conclusions;
 - guaranteed source classification;
 - final judgments about a text.
@@ -100,11 +96,10 @@ If Phase 2 introduces an HTTP interface, the external vocabulary must remain bra
 - `profile_similarity`
 
 ### Avoid
-- `origin`
-- `author`
-- `bot_probability`
-- `forensic_score`
-- `attribution_result`
+- `source_guarantee`
+- `source_judgement`
+- `investigative_score`
+- `finality_result`
 
 ## Example research workflow
 
@@ -160,7 +155,7 @@ When discussing infrastructure outside internal engineering notes:
 
 - describe capabilities generically;
 - avoid naming third-party infrastructure products;
-- avoid claims that imply legal, investigative, or definitive classification;
+- avoid claims that imply legal, investigative, or over-strong classification;
 - keep all statements compatible with a research methodology framing.
 
 ## Next implementation steps

@@ -1,104 +1,194 @@
-# Local Validation Workstation
+# CogniPrint Local Validation Workstation
 
-This document defines the next practical phase for CogniPrint: a local research workstation for theory validation, evidence gathering, and repeatable experiment runs on a personal computer.
+This document describes the actual local research workstation implemented in this repository.
 
-## Goal
+CogniPrint outputs are analytical signals for research use. They are not legal conclusions, source guarantees, or final judgments about a text.
 
-Create a local operating mode in which CogniPrint can be used as a private research workstation for:
+## Install on WSL
 
-- testing theoretical assumptions on controlled text samples;
-- generating reproducible profile outputs;
-- comparing perturbation variants of the same text;
-- saving experiment inputs and outputs;
-- exporting evidence materials for later writing and publication.
+Run these commands from the repository root:
 
-## Intended outcome
+```bash
+cd /home/vietcash/projects/CogniPrint
+python3 -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+pip install -e .
+```
 
-The workstation should allow the researcher to:
+Or use the bootstrap target:
 
-1. load one or more text samples locally;
-2. run the same analysis pipeline repeatedly;
-3. compare baseline and perturbed variants;
-4. save results into structured artifacts;
-5. assemble materials for manuscripts, notes, and future dataset releases.
+```bash
+cd /home/vietcash/projects/CogniPrint
+make bootstrap
+source .venv/bin/activate
+```
 
-## Target local capabilities
+## Workspace Structure
 
-### 1. Local analysis mode
+The workstation uses:
 
-A simple local mode should exist for running CogniPrint against files or pasted text without any external platform dependency.
+- `workspace/input/` for local input material
+- `workspace/runs/` for per-run bundles
+- `workspace/reports/` for copied markdown summaries
+- `workspace/notes/` for researcher notes
+- `workspace/exports/` for copied CSV exports
+- `workspace/studies/` for named study bundles and aggregated outputs
 
-Minimum inputs:
-- single text file;
-- folder of text files;
-- manual text input.
+Create or repair the structure with:
 
-Minimum outputs:
-- fingerprint/profile vector;
-- metrics summary;
-- comparison output for multiple samples;
-- timestamped run record.
+```bash
+cogniprint init-workspace
+```
 
-### 2. Evidence bundle generation
+## Run Commands
 
-Each local run should be able to produce a saved evidence bundle containing:
+Inline text:
 
-- original input text or an internal reference to it;
-- experiment metadata;
-- output metrics;
-- profile representation;
-- optional comparison notes;
-- exportable markdown or JSON summary.
+```bash
+cogniprint run --label inline-note --text "CogniPrint studies compact statistical profiles of text."
+```
 
-### 3. Controlled perturbation workflow
+Single file:
 
-The workstation should support comparing:
+```bash
+cogniprint run --label file-note --file workspace/input/sample.txt
+```
 
-- original text;
-- lightly edited text;
-- strongly edited text;
-- multilingual or translated variants when relevant.
+Folder of text files:
 
-This is intended for theory checking and perturbation analysis, not for forensic certainty claims.
+```bash
+cogniprint run --label folder-batch --folder workspace/input/
+```
 
-### 4. Research material archive
+Multiple inputs in one run automatically produce comparison artifacts:
 
-The local workstation should maintain a clean directory structure for preserving research materials:
+```bash
+cogniprint run --label two-sample-check --file workspace/input/original.txt --file workspace/input/edited.txt
+```
 
-- `workspace/input/`
-- `workspace/runs/`
-- `workspace/reports/`
-- `workspace/notes/`
-- `workspace/exports/`
+## Comparison Commands
 
-## Suggested implementation phases
+Inline baseline and variant:
 
-### Phase A — reliable local baseline
+```bash
+cogniprint compare \
+  --label perturbation-check \
+  --baseline-text "A concise research note about profile stability." \
+  --variant-text "A revised research note about profile stability under controlled edits."
+```
 
-- local CLI entrypoint;
-- deterministic run output folder;
-- experiment manifest per run;
-- markdown summary export.
+File baseline and file variant:
 
-### Phase B — comparison mode
+```bash
+cogniprint compare \
+  --label original-vs-edited \
+  --baseline-file workspace/input/original.txt \
+  --variant-file workspace/input/edited.txt
+```
 
-- pairwise comparison of two texts;
-- folder-based batch comparison;
-- perturbation experiment table.
+One baseline against many folder variants:
 
-### Phase C — evidence materials
+```bash
+cogniprint compare \
+  --label one-to-many \
+  --baseline-file workspace/input/original.txt \
+  --variant-folder workspace/input/variants/
+```
 
-- machine-readable JSON export;
-- human-readable markdown report;
-- optional CSV summary for repeated experiments.
+## Study Commands
 
-### Phase D — researcher convenience layer
+Use study mode when a single baseline should be compared against controlled variants as one named experiment series.
 
-- local desktop-friendly launcher or script;
-- simple preset commands;
-- optional notebook or lightweight local UI.
+Inline baseline and variants:
 
-## Rule of interpretation
+```bash
+cogniprint study \
+  --name perturbation-inline-study \
+  --baseline-text "A concise research note about profile stability." \
+  --variant-text "A lightly revised research note about profile stability." \
+  --variant-text "A strongly revised research note about profile stability with added context."
+```
 
-The workstation is for research validation, evidence collection, and manuscript preparation.
-It must remain aligned with the CogniPrint disclaimer: outputs are analytical signals, not definitive legal or forensic conclusions.
+File baseline and folder variants:
+
+```bash
+cogniprint study \
+  --name perturbation-folder-study \
+  --baseline-file workspace/input/original.txt \
+  --variant-file workspace/input/edited.txt \
+  --variant-folder workspace/input/variants/
+```
+
+## Generated Run Artifacts
+
+Each run writes a bundle under `workspace/runs/<run-id>/`:
+
+- `manifest.json` records timestamp, label, input mode, input references, CLI args, configuration, project identity, Python version, environment summary, and git commit when available.
+- `results.json` records metrics, profile representation, fingerprint vector, and comparison signals.
+- `summary.md` provides a human-readable research summary.
+- `comparisons.json` appears when two or more texts are analyzed.
+- `export.csv` provides a compact tabular export for notes and manuscript preparation.
+
+The same markdown summary is copied to `workspace/reports/`, and the CSV export is copied to `workspace/exports/`.
+
+## Study Artifacts
+
+Each study writes a bundle under `workspace/studies/<study-id>/`:
+
+- `study-manifest.json` records the study name, source run, input references, CLI args, and conservative notes.
+- `aggregated-results.json` records baseline metrics, variant rows, comparison metrics, and perturbation effect notes.
+- `aggregated-results.csv` provides a compact table for manuscript preparation.
+- `study-summary.md` is a manuscript-friendly markdown summary.
+- `manuscript-note.md` is a conservative note stub for drafting.
+
+Study mode also creates a source comparison run under `workspace/runs/<study-id>-comparison/` so the underlying per-text bundle remains reproducible.
+
+## Reproducible Run IDs
+
+By default, run directories include a UTC timestamp and a content/configuration hash. For exact scripted paths, pass `--run-id`:
+
+```bash
+cogniprint run --run-id experiment-001 --text "Controlled sample text."
+```
+
+The command fails rather than overwriting an existing run directory.
+
+## Make Targets
+
+```bash
+make bootstrap
+make test
+make smoke
+make demo
+make sample-study
+```
+
+`make smoke` runs deterministic local checks without requiring credentials. `make demo` creates example run, compare, and study bundles.
+
+## GitHub Workflows
+
+`CogniPrint CI` runs on push, pull request, and manual dispatch. It installs the package on Python 3.11, runs tests, compiles `src` and `tests`, and runs the smoke target.
+
+`CogniPrint Research Validation` is manual-only through `workflow_dispatch`. It runs workstation validation commands and uploads generated `workspace/runs`, `workspace/studies`, `workspace/reports`, and `workspace/exports` artifacts for review.
+
+There is no Jekyll, GitHub Pages deploy, or website deployment logic in this repository.
+
+## Research Use
+
+Use generated bundles for:
+
+- theory validation notes
+- baseline and perturbation comparisons
+- manuscript tables and descriptive summaries
+- future dataset preparation
+
+Interpret the outputs as profile, metric, comparison, observed change, and perturbation effect signals that require context and repeated validation.
+
+Avoid turning a single run into an over-strong claim. The recommended workflow is:
+
+1. Keep original input files under `workspace/input/`.
+2. Put controlled edits under `workspace/input/variants/`.
+3. Run `cogniprint study`.
+4. Review `study-summary.md` and `aggregated-results.csv`.
+5. Copy conservative observations into `workspace/notes/` or manuscript drafts.

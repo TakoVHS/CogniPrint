@@ -66,12 +66,10 @@ Use:
 - heuristic assessment
 
 Avoid:
-- DNA
-- origin
-- bot detection
-- attribution
-- forensics
-- legal proof
+- source finality
+- automated source judgement
+- investigative finality
+- legal conclusions
 - guaranteed classification
 - vendor-specific infrastructure names
 

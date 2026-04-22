@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       run_demo:
-        description: 'Run demo target if available'
+        description: 'Run demo target'
         required: false
         default: 'true'
       run_sample_study:
-        description: 'Run sample study target if available'
+        description: 'Run sample study target'
         required: false
         default: 'true'
 
@@ -32,45 +32,22 @@ jobs:
           set -euo pipefail
           python -m venv .venv
           source .venv/bin/activate
-          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install --upgrade pip
+          python -m pip install -e .
 
-          if [ -f pyproject.toml ]; then
-            python -m pip install -e '.[dev]' || python -m pip install -e .
-          fi
-
-          if [ -f requirements.txt ]; then
-            python -m pip install -r requirements.txt
-          fi
-
-          if [ -d tests ] && ! python - <<'PY'
-import importlib.util, sys
-sys.exit(0 if importlib.util.find_spec('pytest') else 1)
-PY
-          then
-            python -m pip install pytest
-          fi
-
-      - name: Initialize workspace if supported
+      - name: Initialize workspace
         shell: bash
         run: |
           set -euo pipefail
           source .venv/bin/activate
-          if command -v cogniprint >/dev/null 2>&1; then
-            cogniprint init-workspace || true
-          else
-            echo 'cogniprint CLI not available yet; skipping init-workspace.'
-          fi
+          cogniprint init-workspace
 
-      - name: Run smoke target when present
+      - name: Run smoke target
         shell: bash
         run: |
           set -euo pipefail
           source .venv/bin/activate
-          if [ -f Makefile ] && grep -Eq '^[[:space:]]*smoke:' Makefile; then
-            make smoke
-          else
-            echo 'No smoke target found; skipping.'
-          fi
+          make smoke
 
       - name: Run demo target when requested
         if: ${{ inputs.run_demo == 'true' }}
@@ -78,11 +55,7 @@ PY
         run: |
           set -euo pipefail
           source .venv/bin/activate
-          if [ -f Makefile ] && grep -Eq '^[[:space:]]*demo:' Makefile; then
-            make demo
-          else
-            echo 'No demo target found; skipping.'
-          fi
+          make demo
 
       - name: Run sample study target when requested
         if: ${{ inputs.run_sample_study == 'true' }}
@@ -90,11 +63,7 @@ PY
         run: |
           set -euo pipefail
           source .venv/bin/activate
-          if [ -f Makefile ] && grep -Eq '^[[:space:]]*sample-study:' Makefile; then
-            make sample-study
-          else
-            echo 'No sample-study target found; skipping.'
-          fi
+          make sample-study
 
       - name: Upload generated workspace artifacts
         if: always()

@@ -18,17 +18,14 @@ Preferred framing:
 
 ## Avoid in public materials
 
-The following terms must not appear in README files, slides, preprints, public documentation, or public-facing examples:
+Avoid language that implies source finality, legal judgement, or product-style detection claims in README files, slides, preprints, public documentation, or public-facing examples.
 
-- DNA
-- Linguistic DNA
-- origin
-- bot detection
-- attribution
-- forensics
-- legal proof
-- evidence
-- guaranteed
+Examples of language to avoid:
+- source finality
+- automated source judgement
+- investigative finality
+- legal conclusion
+- guaranteed classification
 - vendor names for infrastructure products
 
 ## Writing rule

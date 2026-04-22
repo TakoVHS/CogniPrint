@@ -26,60 +26,26 @@ jobs:
           set -euo pipefail
           python -m venv .venv
           source .venv/bin/activate
-          python -m pip install --upgrade pip setuptools wheel
-
-          if [ -f pyproject.toml ]; then
-            python -m pip install -e '.[dev]' || python -m pip install -e .
-          fi
-
-          if [ -f requirements.txt ]; then
-            python -m pip install -r requirements.txt
-          fi
-
-          if [ -d tests ] && ! python - <<'PY'
-import importlib.util, sys
-sys.exit(0 if importlib.util.find_spec('pytest') else 1)
-PY
-          then
-            python -m pip install pytest
-          fi
+          python -m pip install --upgrade pip
+          python -m pip install -e .
 
       - name: Run tests
         shell: bash
         run: |
           set -euo pipefail
           source .venv/bin/activate
-
-          if [ -f Makefile ] && grep -Eq '^[[:space:]]*test:' Makefile; then
-            make test
-          elif [ -d tests ]; then
-            python -m pytest -q
-          else
-            echo 'No tests target or tests directory found; skipping test step.'
-          fi
+          make test
 
       - name: Verify import compilation
         shell: bash
         run: |
           set -euo pipefail
           source .venv/bin/activate
-          paths=()
-          [ -d src ] && paths+=(src)
-          [ -d tests ] && paths+=(tests)
-          if [ ${#paths[@]} -gt 0 ]; then
-            python -m compileall -q "${paths[@]}"
-          else
-            echo 'No src/ or tests/ directory found; skipping compileall.'
-          fi
+          python -m compileall -q src tests
 
       - name: Run lightweight smoke checks
         shell: bash
         run: |
           set -euo pipefail
           source .venv/bin/activate
-
-          if [ -f Makefile ] && grep -Eq '^[[:space:]]*smoke:' Makefile; then
-            make smoke
-          else
-            echo 'No smoke target found; skipping smoke step.'
-          fi
+          make smoke

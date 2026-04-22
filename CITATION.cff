@@ -5,6 +5,7 @@ authors:
   - family-names: "Adriashkin"
     given-names: "Roman"
     orcid: "https://orcid.org/0009-0009-6337-1806"
+    affiliation: "CogniPrint Research Initiative"
 version: "0.1.0"
 date-released: 2026-04-20
 url: "https://cogniprint.org"
