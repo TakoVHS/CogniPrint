@@ -79,7 +79,7 @@ def create_run(
         raise ValueError("At least one input text is required.")
 
     ensure_workspace(workspace)
-    timestamp = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    timestamp = datetime.now(timezone.utc).isoformat(timespec="microseconds").replace("+00:00", "Z")
     profiles = {sample.sample_id: analyze_text(sample.text) for sample in samples}
     actual_run_id = run_id or _build_run_id(timestamp, samples, command_name, run_label)
     run_dir = workspace / "runs" / actual_run_id

@@ -27,7 +27,7 @@ def create_study(
         raise ValueError("Study mode requires at least one variant text.")
 
     ensure_workspace(workspace)
-    timestamp = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    timestamp = datetime.now(timezone.utc).isoformat(timespec="microseconds").replace("+00:00", "Z")
     actual_study_id = study_id or _build_study_id(timestamp, name, baseline + variants)
     study_dir = workspace / "studies" / actual_study_id
     if study_dir.exists():
