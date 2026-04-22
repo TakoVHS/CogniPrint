@@ -196,12 +196,41 @@ output_dir: workspace/experiments
 cogniprint experiment run --config workspace/notes/experiment.yml
 ```
 
+Perturbation lab:
+
+```bash
+cogniprint perturb \
+  --name perturbation-lab-001 \
+  --baseline-file workspace/input/original.txt \
+  --light-file workspace/input/edited.txt \
+  --variant-folder workspace/input/variants/
+```
+
+Empirical notes and aggregate study report:
+
+```bash
+cogniprint notes --study-dir workspace/studies/<study-id> --output-dir workspace/reports/<study-id>
+cogniprint report --study-dir workspace/studies --aggregate --output workspace/reports/aggregate-study-summary.md --csv-output workspace/exports/aggregate-study-summary.csv
+```
+
+Dataset scaffold:
+
+```bash
+cogniprint dataset \
+  --name perturbation-dataset-001 \
+  --description "Local dataset scaffold for controlled profile studies." \
+  --baseline-file workspace/input/original.txt \
+  --variant-file workspace/input/edited.txt
+```
+
 Convenience targets:
 
 ```bash
 make test
 make smoke
 make demo
+make sample-perturb
+make sample-dataset
 ```
 
 ## GitHub Workflows

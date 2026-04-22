@@ -37,6 +37,8 @@ The workstation uses:
 - `workspace/profiles/` for saved profile JSON
 - `workspace/corpus/` for batch profile outputs
 - `workspace/experiments/` for YAML experiment outputs
+- `workspace/perturbations/` for perturbation lab bundles
+- `workspace/datasets/` for dataset scaffolds
 
 Create or repair the structure with:
 
@@ -207,6 +209,79 @@ cogniprint experiment run --config workspace/notes/experiment.yml
 
 The runner creates a normal study under `workspace/studies/` and copies the study bundle into `workspace/experiments/<experiment-name>/study/`.
 
+## Perturbation Lab
+
+Use `perturb` when you want a baseline, light variant, strong variant, and candidate variants to be treated as one stability-oriented lab bundle:
+
+```bash
+cogniprint perturb \
+  --name perturbation-lab-001 \
+  --baseline-file workspace/input/original.txt \
+  --light-file workspace/input/edited.txt \
+  --strong-file workspace/input/variants/strongly-edited.txt \
+  --variant-folder workspace/input/variants/
+```
+
+Outputs are written under `workspace/perturbations/<perturbation-id>/`:
+
+- `perturbation-manifest.json`
+- `perturbation-results.json`
+- `perturbation-summary.csv`
+- `stability-summary.md`
+- `study/` copy of the underlying study bundle
+
+Interpret the output as profile shifts, observed changes, perturbation effects, and stability patterns.
+
+## Empirical Notes
+
+Use `notes` to turn completed study artifacts into manuscript-oriented internal notes:
+
+```bash
+cogniprint notes --study-dir workspace/studies/<study-id> --output-dir workspace/reports/<study-id>
+```
+
+The command writes:
+
+- `empirical-note.md`
+- `methods-note.md`
+- `result-summary.md`
+
+## Dataset Scaffold
+
+Use `dataset` to create a clean future-release scaffold:
+
+```bash
+cogniprint dataset \
+  --name perturbation-dataset-001 \
+  --description "Local dataset scaffold for controlled profile studies." \
+  --baseline-file workspace/input/original.txt \
+  --variant-file workspace/input/edited.txt
+```
+
+Outputs are written under `workspace/datasets/<dataset-name>/`:
+
+- `dataset-manifest.json`
+- `README.md`
+- `raw/`
+- `variants/`
+- `metadata/samples.csv`
+- `metadata/variants.csv`
+- `exports/`
+
+## Aggregate Study Reports
+
+Use aggregate reporting to compare repeated study outputs:
+
+```bash
+cogniprint report \
+  --study-dir workspace/studies \
+  --aggregate \
+  --output workspace/reports/aggregate-study-summary.md \
+  --csv-output workspace/exports/aggregate-study-summary.csv
+```
+
+This produces a markdown table and optional CSV across all study bundles found in the study root.
+
 ## Reproducible Run IDs
 
 By default, run directories include a UTC timestamp and a content/configuration hash. For exact scripted paths, pass `--run-id`:
@@ -227,6 +302,8 @@ make demo
 make sample-study
 make sample-profile
 make sample-corpus
+make sample-perturb
+make sample-dataset
 ```
 
 `make smoke` runs deterministic local checks without requiring credentials. `make demo` creates example run, compare, and study bundles.

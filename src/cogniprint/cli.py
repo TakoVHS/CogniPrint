@@ -8,8 +8,11 @@ from pathlib import Path
 
 from .core.analyzer import get_analyzer
 from .core.profile_manager import ProfileManager
+from .dataset import create_dataset_scaffold
 from .experiment.runner import run_experiment
-from .reporting.markdown import generate_markdown_report
+from .perturbation import create_perturbation_lab
+from .reporting.markdown import generate_aggregate_report, generate_markdown_report
+from .reporting.notes import generate_empirical_notes
 from .reporting.pdf import generate_pdf_report
 from .study import collect_study_samples, create_study
 from .workstation import collect_samples, create_run, ensure_workspace
@@ -96,6 +99,8 @@ def build_parser() -> argparse.ArgumentParser:
     report_parser.add_argument("--study-dir", type=Path, required=True, help="Study artifact directory.")
     report_parser.add_argument("--format", choices=["md", "pdf"], default="md", help="Report output format.")
     report_parser.add_argument("--output", "-o", type=Path, help="Report output path.")
+    report_parser.add_argument("--aggregate", action="store_true", help="Treat --study-dir as a directory of studies and write an aggregate report.")
+    report_parser.add_argument("--csv-output", type=Path, help="Optional aggregate CSV output path.")
     report_parser.set_defaults(handler=_handle_report)
 
     experiment_parser = subparsers.add_parser("experiment", help="Run YAML-configured experiment workflows.")
@@ -103,6 +108,28 @@ def build_parser() -> argparse.ArgumentParser:
     experiment_run_parser = experiment_subparsers.add_parser("run", help="Run an experiment from a YAML config file.")
     experiment_run_parser.add_argument("--config", type=Path, required=True, help="YAML experiment configuration file.")
     experiment_run_parser.set_defaults(handler=_handle_experiment_run)
+
+    perturb_parser = subparsers.add_parser("perturb", help="Run a perturbation lab study from baseline and variants.")
+    perturb_parser.add_argument("--name", required=True, help="Human-readable perturbation study name.")
+    perturb_parser.add_argument("--perturbation-id", help="Optional explicit perturbation output directory name.")
+    perturb_parser.add_argument("--baseline-file", type=Path, required=True, help="Baseline text file.")
+    perturb_parser.add_argument("--light-file", type=Path, help="Lightly edited variant file.")
+    perturb_parser.add_argument("--strong-file", type=Path, help="Strongly edited variant file.")
+    perturb_parser.add_argument("--variant-file", action="append", type=Path, default=[], help="Additional variant file. Repeatable.")
+    perturb_parser.add_argument("--variant-folder", type=Path, help="Folder of additional variants.")
+    perturb_parser.set_defaults(handler=_handle_perturb)
+
+    notes_parser = subparsers.add_parser("notes", help="Generate empirical manuscript notes from a study directory.")
+    notes_parser.add_argument("--study-dir", type=Path, required=True, help="Study artifact directory.")
+    notes_parser.add_argument("--output-dir", type=Path, help="Output directory for generated note files.")
+    notes_parser.set_defaults(handler=_handle_notes)
+
+    dataset_parser = subparsers.add_parser("dataset", help="Create a lightweight dataset scaffold.")
+    dataset_parser.add_argument("--name", required=True, help="Dataset name.")
+    dataset_parser.add_argument("--description", help="Short dataset description.")
+    dataset_parser.add_argument("--baseline-file", action="append", type=Path, default=[], help="Baseline/source sample file. Repeatable.")
+    dataset_parser.add_argument("--variant-file", action="append", type=Path, default=[], help="Variant sample file. Repeatable.")
+    dataset_parser.set_defaults(handler=_handle_dataset)
 
     return parser
 
@@ -233,6 +260,11 @@ def _handle_report(args: argparse.Namespace) -> int:
     study_dir = args.study_dir.expanduser().resolve()
     if not study_dir.is_dir():
         raise SystemExit(f"Study directory not found: {study_dir}")
+    if args.aggregate:
+        output = args.output or Path("workspace/reports/aggregate-study-summary.md")
+        generate_aggregate_report(study_dir, output, args.csv_output)
+        print(f"Aggregate report written: {output.resolve()}")
+        return 0
     output = args.output or Path(f"{study_dir.name}-report.{args.format}")
     if args.format == "md":
         generate_markdown_report(study_dir, output)
@@ -246,6 +278,44 @@ def _handle_experiment_run(args: argparse.Namespace) -> int:
     payload = _load_yaml(args.config)
     experiment_dir = run_experiment(payload, config_path=args.config.expanduser().resolve(), workspace=args.workspace)
     print(f"Experiment written: {experiment_dir.resolve()}")
+    return 0
+
+
+def _handle_perturb(args: argparse.Namespace) -> int:
+    lab_dir = create_perturbation_lab(
+        workspace=args.workspace,
+        name=args.name,
+        lab_id=args.perturbation_id,
+        baseline_file=args.baseline_file,
+        light_file=args.light_file,
+        strong_file=args.strong_file,
+        variant_files=args.variant_file,
+        variant_folder=args.variant_folder,
+        cli_args=vars(args),
+    )
+    print(f"Perturbation lab written: {lab_dir.resolve()}")
+    return 0
+
+
+def _handle_notes(args: argparse.Namespace) -> int:
+    study_dir = args.study_dir.expanduser().resolve()
+    if not study_dir.is_dir():
+        raise SystemExit(f"Study directory not found: {study_dir}")
+    output_dir = args.output_dir or Path("workspace/reports") / study_dir.name
+    generate_empirical_notes(study_dir, output_dir)
+    print(f"Empirical notes written: {output_dir.resolve()}")
+    return 0
+
+
+def _handle_dataset(args: argparse.Namespace) -> int:
+    dataset_dir = create_dataset_scaffold(
+        workspace=args.workspace,
+        name=args.name,
+        description=args.description,
+        baseline_files=args.baseline_file,
+        variant_files=args.variant_file,
+    )
+    print(f"Dataset scaffold written: {dataset_dir.resolve()}")
     return 0
 
 

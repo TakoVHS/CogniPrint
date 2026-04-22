@@ -1,4 +1,4 @@
-.PHONY: bootstrap init-workspace test smoke demo sample-run sample-compare sample-study sample-profile sample-corpus
+.PHONY: bootstrap init-workspace test smoke demo sample-run sample-compare sample-study sample-profile sample-corpus sample-perturb sample-dataset
 
 PYTHON ?= python3
 VENV ?= .venv
@@ -37,5 +37,11 @@ sample-profile:
 
 sample-corpus:
 	$(CLI) corpus --input-dir workspace/input --output-dir workspace/corpus --pattern "*.txt"
+
+sample-perturb:
+	$(CLI) perturb --name sample-perturbation-lab --baseline-file workspace/input/original.txt --light-file workspace/input/edited.txt --variant-folder workspace/input/variants
+
+sample-dataset:
+	$(CLI) dataset --name sample-dataset --description "Local CogniPrint dataset scaffold." --baseline-file workspace/input/original.txt --variant-file workspace/input/edited.txt
 
 demo: sample-run sample-compare sample-study sample-profile

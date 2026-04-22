@@ -251,6 +251,104 @@ class CliTests(unittest.TestCase):
             )
             self.assertTrue((temp_path / "experiments" / "yaml-experiment" / "experiment-manifest.json").exists())
 
+    def test_perturb_notes_dataset_and_aggregate(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_path = Path(temp_dir)
+            workspace = temp_path / "workspace"
+            input_dir = workspace / "input"
+            variants_dir = input_dir / "variants"
+            variants_dir.mkdir(parents=True)
+            original = input_dir / "original.txt"
+            light = input_dir / "light.txt"
+            strong = variants_dir / "strong.txt"
+            original.write_text("A baseline text for perturbation lab testing.", encoding="utf-8")
+            light.write_text("A lightly edited baseline text for perturbation lab testing.", encoding="utf-8")
+            strong.write_text("A strongly edited sample changes length, structure, and several metrics.", encoding="utf-8")
+
+            subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "cogniprint",
+                    "--workspace",
+                    str(workspace),
+                    "perturb",
+                    "--name",
+                    "test perturbation lab",
+                    "--perturbation-id",
+                    "test-perturbation",
+                    "--baseline-file",
+                    str(original),
+                    "--light-file",
+                    str(light),
+                    "--variant-folder",
+                    str(variants_dir),
+                ],
+                check=True,
+            )
+            perturb_dir = workspace / "perturbations" / "test-perturbation"
+            self.assertTrue((perturb_dir / "perturbation-manifest.json").exists())
+            self.assertTrue((perturb_dir / "stability-summary.md").exists())
+            self.assertTrue((perturb_dir / "perturbation-summary.csv").exists())
+            study_dir = perturb_dir / "study"
+            self.assertTrue((study_dir / "aggregated-results.json").exists())
+
+            notes_dir = temp_path / "notes"
+            subprocess.run(
+                [sys.executable, "-m", "cogniprint", "--workspace", str(workspace), "notes", "--study-dir", str(study_dir), "--output-dir", str(notes_dir)],
+                check=True,
+            )
+            self.assertTrue((notes_dir / "empirical-note.md").exists())
+            self.assertTrue((notes_dir / "methods-note.md").exists())
+            self.assertTrue((notes_dir / "result-summary.md").exists())
+
+            subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "cogniprint",
+                    "--workspace",
+                    str(workspace),
+                    "dataset",
+                    "--name",
+                    "test dataset",
+                    "--description",
+                    "Local dataset scaffold for tests.",
+                    "--baseline-file",
+                    str(original),
+                    "--variant-file",
+                    str(light),
+                ],
+                check=True,
+            )
+            dataset_dir = workspace / "datasets" / "test-dataset"
+            self.assertTrue((dataset_dir / "dataset-manifest.json").exists())
+            self.assertTrue((dataset_dir / "metadata" / "samples.csv").exists())
+            self.assertTrue((dataset_dir / "metadata" / "variants.csv").exists())
+
+            aggregate_md = temp_path / "aggregate.md"
+            aggregate_csv = temp_path / "aggregate.csv"
+            subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "cogniprint",
+                    "--workspace",
+                    str(workspace),
+                    "report",
+                    "--study-dir",
+                    str(workspace / "studies"),
+                    "--aggregate",
+                    "--output",
+                    str(aggregate_md),
+                    "--csv-output",
+                    str(aggregate_csv),
+                ],
+                check=True,
+            )
+            self.assertIn("Aggregate Study Summary", aggregate_md.read_text(encoding="utf-8"))
+            self.assertTrue(aggregate_csv.exists())
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -23,3 +23,7 @@ workspace/corpus/*
 !workspace/corpus/.gitkeep
 workspace/experiments/*
 !workspace/experiments/.gitkeep
+workspace/perturbations/*
+!workspace/perturbations/.gitkeep
+workspace/datasets/*
+!workspace/datasets/.gitkeep

@@ -47,7 +47,19 @@ class TextSample:
 
 
 def ensure_workspace(workspace: Path) -> None:
-    for relative in ["input", "runs", "reports", "notes", "exports", "studies", "profiles", "corpus", "experiments"]:
+    for relative in [
+        "input",
+        "runs",
+        "reports",
+        "notes",
+        "exports",
+        "studies",
+        "profiles",
+        "corpus",
+        "experiments",
+        "perturbations",
+        "datasets",
+    ]:
         (workspace / relative).mkdir(parents=True, exist_ok=True)
 
 
