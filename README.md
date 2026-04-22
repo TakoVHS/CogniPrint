@@ -243,6 +243,14 @@ cogniprint campaign run --config workspace/notes/campaign.yml
 cogniprint campaign summarize --campaign-dir workspace/campaigns/empirical-campaign-001
 ```
 
+Multi-campaign and colleague-facing materials:
+
+```bash
+cogniprint campaign summarize-all
+cogniprint campaign share-pack --campaign-dir workspace/campaigns/empirical-campaign-001 --output-dir workspace/share/colleague-pack-001
+cogniprint campaign paper2 --campaign-root workspace/campaigns --output-dir workspace/reports/paper-2
+```
+
 Convenience targets:
 
 ```bash

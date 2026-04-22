@@ -327,6 +327,39 @@ Campaign outputs are written under `workspace/campaigns/<campaign-name>/`:
 
 Use these files as empirical appendix and second-paper preparation material. Keep claims tied to observed patterns, stability signals, profile shifts, metric deltas, and comparative regularities.
 
+## Multi-Campaign and Share Materials
+
+Summarize all completed campaigns under `workspace/campaigns/`:
+
+```bash
+cogniprint campaign summarize-all
+```
+
+This writes:
+
+- `workspace/reports/multi-campaign-summary.md`
+- `workspace/reports/multi-campaign-appendix.md`
+- `workspace/reports/multi-campaign-limitations.md`
+- `workspace/exports/multi-campaign-summary.json`
+- `workspace/exports/multi-campaign-summary.csv`
+
+Create a compact colleague-facing pack from one real campaign:
+
+```bash
+cogniprint campaign share-pack \
+  --campaign-dir workspace/campaigns/empirical-campaign-001 \
+  --dataset-dir workspace/datasets/final-v5-dataset \
+  --output-dir workspace/share/colleague-pack-001
+```
+
+Generate paper-2 drafting outputs from campaign artifacts:
+
+```bash
+cogniprint campaign paper2 \
+  --campaign-root workspace/campaigns \
+  --output-dir workspace/reports/paper-2
+```
+
 ## Reproducible Run IDs
 
 By default, run directories include a UTC timestamp and a content/configuration hash. For exact scripted paths, pass `--run-id`:

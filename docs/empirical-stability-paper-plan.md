@@ -2,15 +2,15 @@
 
 This document records the working plan for the second CogniPrint manuscript line: an empirical paper focused on stability under controlled perturbations.
 
-## Working title
+## Working Title
 
 **Empirical Stability of Cognitive Fingerprints Under Controlled Text Perturbations**
 
 ## Purpose
 
-The paper should document observed profile shifts and stability tendencies across controlled edits of the same underlying text. It should remain within a cautious research framing and should not overclaim source attribution or forensic certainty.
+The paper should document observed profile shifts and stability tendencies across controlled edits of the same underlying text. It should remain within a cautious research framing and should not overclaim source attribution.
 
-## Canonical identity
+## Canonical Identity
 
 - **Project:** CogniPrint
 - **Author:** Adriashkin Roman
@@ -20,41 +20,44 @@ The paper should document observed profile shifts and stability tendencies acros
 - **Secondary category target:** cs.CL
 - **Contact:** roman@cogniprint.org
 
-## Central question
+## Central Question
 
 How stable are compact statistical text profiles under light, moderate, and stronger controlled perturbations of the same baseline text?
 
-## Suggested structure
+## Suggested Structure
 
 ### 1. Introduction
+
 - Motivation for empirical stability analysis.
 - Relation to the CogniPrint mathematical framework.
-- Scope limits: observed profile shifts are empirical signals, not definitive identity claims.
+- Scope limits: observed profile shifts are empirical signals, not final identity claims.
 
-### 2. Experimental design
+### 2. Experimental Design
+
 - Baseline text selection.
 - Controlled perturbation types.
 - Series construction rules.
 - Metric families and comparison outputs.
 
 ### 3. Results
+
 - Metric-level changes across perturbation severity.
 - Stability tendencies across repeated series.
 - Aggregate campaign observations.
 - Representative tables and appendix summaries.
 
-### 4. Interpretation limits
+### 4. Interpretation Limits
+
 - Dependence on corpus and perturbation design.
 - Absence of universal claims.
 - Need for repeated validation.
 
 ### 5. Conclusion
+
 - What can currently be said empirically.
 - What remains open for future formalisation.
 
-## Target artifacts from the workstation
-
-The following artifacts are intended to feed the paper:
+## Target Artifacts From The Workstation
 
 - `campaign-summary.md`
 - `campaign-results.json`
@@ -64,10 +67,21 @@ The following artifacts are intended to feed the paper:
 - `methods-note.md`
 - `result-summary.md`
 - LaTeX summary tables
+- `workspace/reports/multi-campaign-summary.md`
+- `workspace/reports/paper-2/`
 
-## Safe wording policy
+## Drafting Command
+
+```bash
+cogniprint campaign paper2 \
+  --campaign-root workspace/campaigns \
+  --output-dir workspace/reports/paper-2
+```
+
+## Safe Wording Policy
 
 Preferred wording:
+
 - observed pattern
 - measured shift
 - profile difference
@@ -75,13 +89,8 @@ Preferred wording:
 - stability tendency
 - empirical note
 
-Avoid:
-- proof
-- certainty
-- definitive attribution
-- forensic determination
-- confirmed identity
+Avoid stronger claims that imply source guarantees, legal conclusions, or final classification.
 
-## Practical next step
+## Practical Next Step
 
 Run three to five campaign-level perturbation studies on controlled text sets, then use the resulting notes and tables to assemble the first empirical draft.

@@ -2,7 +2,7 @@
 
 This document defines the current minimum viable research package that can be shown to scientific colleagues.
 
-## Current MVP status
+## Current MVP Status
 
 CogniPrint currently provides a working local research workstation with:
 
@@ -14,46 +14,55 @@ CogniPrint currently provides a working local research workstation with:
 - campaign-level summaries;
 - markdown, CSV, JSON, LaTeX, and PDF-oriented outputs.
 
-The MVP should be presented as a reproducible research workstation, not as a definitive attribution or forensic system.
+The MVP should be presented as a reproducible research workstation for compact statistical text profiles and empirical perturbation studies.
 
-## What to show colleagues
+## What To Show Colleagues
 
 A concise colleague-facing package should include:
 
-1. one real campaign directory under `workspace/campaigns/`;
-2. `campaign-summary.md`;
-3. `manuscript-appendix.md`;
-4. `latex/campaign-summary-table.tex`;
-5. one `empirical-note.md` from a series;
-6. one dataset scaffold manifest;
-7. the canonical project identity and disclaimer.
+1. `README.md` from the generated share pack.
+2. `project-summary.md`.
+3. `campaign-summary.md`.
+4. `manuscript-appendix.md`.
+5. `latex-summary-table.tex`.
+6. one `empirical-note.md` from a series.
+7. one dataset scaffold manifest when available.
+8. `interpretation-note.md`.
 
-## Suggested demonstration sequence
+## Suggested Demonstration Sequence
 
 1. Show the baseline input and controlled variants.
-2. Run a campaign config.
+2. Run or inspect a campaign config.
 3. Show campaign summary outputs.
 4. Show manuscript appendix text.
 5. Show the LaTeX table as evidence of export readiness.
-6. Show that the same workstation can generate dataset scaffolds for future publication work.
+6. Show the dataset scaffold manifest for future publication preparation.
 
-## Canonical framing
-
-Recommended language:
+## Recommended Framing
 
 - reproducible research workstation
 - compact statistical text profiles
-- empirical stability studies
-- perturbation effects
-- profile shifts
+- controlled perturbation campaigns
+- profile shifts and metric shifts
+- stability tendencies observed across campaign rows
 - campaign-level evidence
 
-Avoid stronger wording such as:
+## Do Not Send As Claims
 
-- proof of authorship
-- forensic certainty
-- definitive source determination
+- source guarantees
+- legal conclusions
+- final classification claims
+- final judgments about a text
 
-## Practical sharing rule
+## Command
+
+```bash
+cogniprint campaign share-pack \
+  --campaign-dir workspace/campaigns/empirical-campaign-001 \
+  --dataset-dir workspace/datasets/final-v5-dataset \
+  --output-dir workspace/share/colleague-pack-001
+```
+
+## Practical Sharing Rule
 
 When sharing with colleagues, prefer a small curated output set over the entire workspace tree.

@@ -6,7 +6,7 @@ import argparse
 import json
 from pathlib import Path
 
-from .campaign import run_campaign, summarize_campaign
+from .campaign import create_colleague_pack, generate_paper2_outputs, run_campaign, summarize_all_campaigns, summarize_campaign
 from .core.analyzer import get_analyzer
 from .core.profile_manager import ProfileManager
 from .dataset import create_dataset_scaffold
@@ -140,6 +140,18 @@ def build_parser() -> argparse.ArgumentParser:
     campaign_summary_parser = campaign_subparsers.add_parser("summarize", help="Regenerate campaign synthesis outputs.")
     campaign_summary_parser.add_argument("--campaign-dir", type=Path, required=True, help="Campaign directory.")
     campaign_summary_parser.set_defaults(handler=_handle_campaign_summarize)
+    campaign_all_parser = campaign_subparsers.add_parser("summarize-all", help="Summarize all campaign directories into multi-campaign artifacts.")
+    campaign_all_parser.add_argument("--campaign-root", type=Path, help="Directory containing campaign directories. Defaults to workspace/campaigns.")
+    campaign_all_parser.set_defaults(handler=_handle_campaign_summarize_all)
+    campaign_share_parser = campaign_subparsers.add_parser("share-pack", help="Build a compact colleague-facing pack from one real campaign.")
+    campaign_share_parser.add_argument("--campaign-dir", type=Path, required=True, help="Campaign directory to package.")
+    campaign_share_parser.add_argument("--output-dir", type=Path, default=Path("workspace/share/colleague-pack-001"), help="Output directory for the share pack.")
+    campaign_share_parser.add_argument("--dataset-dir", type=Path, help="Optional dataset directory or dataset-manifest.json to include.")
+    campaign_share_parser.set_defaults(handler=_handle_campaign_share_pack)
+    campaign_paper2_parser = campaign_subparsers.add_parser("paper2", help="Generate paper-2 drafting outputs from real campaigns.")
+    campaign_paper2_parser.add_argument("--campaign-root", type=Path, help="Directory containing campaign directories. Defaults to workspace/campaigns.")
+    campaign_paper2_parser.add_argument("--output-dir", type=Path, default=Path("workspace/reports/paper-2"), help="Output directory for paper-2 drafts.")
+    campaign_paper2_parser.set_defaults(handler=_handle_campaign_paper2)
 
     return parser
 
@@ -342,6 +354,30 @@ def _handle_campaign_summarize(args: argparse.Namespace) -> int:
         raise SystemExit(f"Campaign directory not found: {campaign_dir}")
     summarize_campaign(campaign_dir)
     print(f"Campaign summary written: {campaign_dir.resolve()}")
+    return 0
+
+
+def _handle_campaign_summarize_all(args: argparse.Namespace) -> int:
+    campaign_root = args.campaign_root.expanduser().resolve() if args.campaign_root else None
+    output = summarize_all_campaigns(workspace=args.workspace, campaign_root=campaign_root)
+    print(f"Multi-campaign summary written: {output.resolve()}")
+    return 0
+
+
+def _handle_campaign_share_pack(args: argparse.Namespace) -> int:
+    output = create_colleague_pack(
+        campaign_dir=args.campaign_dir.expanduser().resolve(),
+        output_dir=args.output_dir,
+        dataset_dir=args.dataset_dir.expanduser().resolve() if args.dataset_dir else None,
+    )
+    print(f"Colleague share pack written: {output.resolve()}")
+    return 0
+
+
+def _handle_campaign_paper2(args: argparse.Namespace) -> int:
+    campaign_root = args.campaign_root.expanduser().resolve() if args.campaign_root else None
+    output = generate_paper2_outputs(workspace=args.workspace, campaign_root=campaign_root, output_dir=args.output_dir)
+    print(f"Paper-2 drafting outputs written: {output.resolve()}")
     return 0
 
 

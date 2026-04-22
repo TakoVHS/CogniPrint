@@ -53,6 +53,7 @@ def ensure_workspace(workspace: Path) -> None:
         "reports",
         "notes",
         "exports",
+        "share",
         "studies",
         "profiles",
         "corpus",

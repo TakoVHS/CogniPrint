@@ -406,6 +406,60 @@ class CliTests(unittest.TestCase):
             payload = json.loads((campaign_dir / "campaign-results.json").read_text(encoding="utf-8"))
             self.assertGreaterEqual(payload["comparison_count"], 2)
 
+            subprocess.run(
+                [sys.executable, "-m", "cogniprint", "--workspace", str(workspace), "campaign", "summarize-all"],
+                check=True,
+            )
+            self.assertTrue((workspace / "reports" / "multi-campaign-summary.md").exists())
+            self.assertTrue((workspace / "reports" / "multi-campaign-appendix.md").exists())
+            self.assertTrue((workspace / "reports" / "multi-campaign-limitations.md").exists())
+            self.assertTrue((workspace / "exports" / "multi-campaign-summary.csv").exists())
+            self.assertTrue((workspace / "exports" / "multi-campaign-summary.json").exists())
+
+            share_dir = workspace / "share" / "test-pack"
+            subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "cogniprint",
+                    "--workspace",
+                    str(workspace),
+                    "campaign",
+                    "share-pack",
+                    "--campaign-dir",
+                    str(campaign_dir),
+                    "--output-dir",
+                    str(share_dir),
+                ],
+                check=True,
+            )
+            self.assertTrue((share_dir / "README.md").exists())
+            self.assertTrue((share_dir / "project-summary.md").exists())
+            self.assertTrue((share_dir / "campaign-summary.md").exists())
+            self.assertTrue((share_dir / "manuscript-appendix.md").exists())
+            self.assertTrue((share_dir / "empirical-note.md").exists())
+            self.assertTrue((share_dir / "latex-summary-table.tex").exists())
+            self.assertTrue((share_dir / "interpretation-note.md").exists())
+
+            paper2_dir = workspace / "reports" / "paper-2"
+            subprocess.run(
+                [sys.executable, "-m", "cogniprint", "--workspace", str(workspace), "campaign", "paper2", "--output-dir", str(paper2_dir)],
+                check=True,
+            )
+            for filename in [
+                "title-options.md",
+                "abstract-notes.md",
+                "introduction-notes.md",
+                "methods-section-draft.md",
+                "results-section-draft.md",
+                "limitations-section-draft.md",
+                "conclusion-notes.md",
+                "appendix-draft.md",
+                "candidate-tables.md",
+                "candidate-figures.md",
+            ]:
+                self.assertTrue((paper2_dir / filename).exists())
+
 
 if __name__ == "__main__":
     unittest.main()
