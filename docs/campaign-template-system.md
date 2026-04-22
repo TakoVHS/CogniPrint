@@ -22,9 +22,11 @@ Recommended starter templates:
 
 1. Copy the template into `workspace/notes/`.
 2. Rename it for the active campaign.
-3. Replace sample input paths with your real local inputs.
-4. Run `cogniprint campaign run --config <file>`.
-5. Run `cogniprint campaign summarize --campaign-dir <campaign-dir>`.
+3. Replace `name` and `campaign_id` with unique values.
+4. Replace sample input paths with your real local inputs.
+   The bundled templates use paths relative to copied configs in `workspace/notes/`.
+5. Run `cogniprint campaign run --config <file>`.
+6. Run `cogniprint campaign summarize --campaign-dir <campaign-dir>`.
 
 ## Safe interpretation rule
 

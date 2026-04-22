@@ -3,6 +3,6 @@ campaign_id: single-baseline-perturbation
 description: Single-series perturbation campaign template for local empirical stability notes.
 series:
   - name: single-series-001
-    baseline_file: workspace/input/original.txt
-    light_file: workspace/input/edited.txt
-    variant_folder: workspace/input/variants
+    baseline_file: ../input/original.txt
+    light_file: ../input/edited.txt
+    variant_folder: ../input/variants

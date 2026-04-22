@@ -12,8 +12,10 @@ These YAML files are starter templates for repeatable CogniPrint empirical campa
 
 1. Copy one template into `workspace/notes/`.
 2. Rename it for the active campaign.
-3. Replace the example file paths with your real local inputs.
-4. Run:
+3. Replace `name` and `campaign_id` with unique values.
+4. Replace the example file paths with your real local inputs.
+   Paths in these templates are written for configs copied into `workspace/notes/`.
+5. Run:
 
 ```bash
 cogniprint campaign run --config workspace/notes/<your-campaign>.yml

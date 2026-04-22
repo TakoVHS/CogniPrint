@@ -3,10 +3,10 @@ campaign_id: multilingual-comparison-campaign
 description: Multilingual comparison campaign template for cautious cross-version profile studies.
 series:
   - name: multilingual-series-001
-    baseline_file: workspace/input/original.txt
-    light_file: workspace/input/edited.txt
-    variant_folder: workspace/input/variants
+    baseline_file: ../input/original.txt
+    light_file: ../input/edited.txt
+    variant_folder: ../input/variants
   - name: multilingual-series-002
-    baseline_file: workspace/input/original-translated.txt
-    light_file: workspace/input/edited-translated.txt
-    variant_folder: workspace/input/translated-variants
+    baseline_file: ../input/original-translated.txt
+    light_file: ../input/edited-translated.txt
+    variant_folder: ../input/translated-variants
