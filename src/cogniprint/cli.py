@@ -6,6 +6,7 @@ import argparse
 import json
 from pathlib import Path
 
+from .campaign import run_campaign, summarize_campaign
 from .core.analyzer import get_analyzer
 from .core.profile_manager import ProfileManager
 from .dataset import create_dataset_scaffold
@@ -130,6 +131,15 @@ def build_parser() -> argparse.ArgumentParser:
     dataset_parser.add_argument("--baseline-file", action="append", type=Path, default=[], help="Baseline/source sample file. Repeatable.")
     dataset_parser.add_argument("--variant-file", action="append", type=Path, default=[], help="Variant sample file. Repeatable.")
     dataset_parser.set_defaults(handler=_handle_dataset)
+
+    campaign_parser = subparsers.add_parser("campaign", help="Run or summarize empirical campaigns.")
+    campaign_subparsers = campaign_parser.add_subparsers(dest="campaign_command")
+    campaign_run_parser = campaign_subparsers.add_parser("run", help="Run a campaign from a YAML config.")
+    campaign_run_parser.add_argument("--config", type=Path, required=True, help="YAML campaign configuration file.")
+    campaign_run_parser.set_defaults(handler=_handle_campaign_run)
+    campaign_summary_parser = campaign_subparsers.add_parser("summarize", help="Regenerate campaign synthesis outputs.")
+    campaign_summary_parser.add_argument("--campaign-dir", type=Path, required=True, help="Campaign directory.")
+    campaign_summary_parser.set_defaults(handler=_handle_campaign_summarize)
 
     return parser
 
@@ -316,6 +326,22 @@ def _handle_dataset(args: argparse.Namespace) -> int:
         variant_files=args.variant_file,
     )
     print(f"Dataset scaffold written: {dataset_dir.resolve()}")
+    return 0
+
+
+def _handle_campaign_run(args: argparse.Namespace) -> int:
+    payload = _load_yaml(args.config)
+    campaign_dir = run_campaign(payload, config_path=args.config.expanduser().resolve(), workspace=args.workspace)
+    print(f"Campaign written: {campaign_dir.resolve()}")
+    return 0
+
+
+def _handle_campaign_summarize(args: argparse.Namespace) -> int:
+    campaign_dir = args.campaign_dir.expanduser().resolve()
+    if not campaign_dir.is_dir():
+        raise SystemExit(f"Campaign directory not found: {campaign_dir}")
+    summarize_campaign(campaign_dir)
+    print(f"Campaign summary written: {campaign_dir.resolve()}")
     return 0
 
 

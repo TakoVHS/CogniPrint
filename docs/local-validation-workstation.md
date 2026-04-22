@@ -39,6 +39,7 @@ The workstation uses:
 - `workspace/experiments/` for YAML experiment outputs
 - `workspace/perturbations/` for perturbation lab bundles
 - `workspace/datasets/` for dataset scaffolds
+- `workspace/campaigns/` for multi-series empirical campaigns
 
 Create or repair the structure with:
 
@@ -268,6 +269,8 @@ Outputs are written under `workspace/datasets/<dataset-name>/`:
 - `metadata/variants.csv`
 - `exports/`
 
+The metadata CSV files include source references, SHA-256 hashes, and explicit baseline/variant relations for later dataset review.
+
 ## Aggregate Study Reports
 
 Use aggregate reporting to compare repeated study outputs:
@@ -281,6 +284,48 @@ cogniprint report \
 ```
 
 This produces a markdown table and optional CSV across all study bundles found in the study root.
+
+## Empirical Campaigns
+
+Use `campaign run` when you have multiple perturbation series and want campaign-level synthesis files for manuscript preparation.
+
+Example campaign config:
+
+```yaml
+name: empirical-campaign-001
+campaign_id: empirical-campaign-001
+description: Multi-series perturbation campaign for empirical stability notes.
+series:
+  - name: empirical-series-001
+    baseline_file: workspace/input/original.txt
+    light_file: workspace/input/edited.txt
+    variant_folder: workspace/input/variants
+  - name: empirical-series-002
+    baseline_file: workspace/input/original.txt
+    light_file: workspace/input/edited.txt
+```
+
+Run and summarize:
+
+```bash
+cogniprint campaign run --config workspace/notes/campaign.yml
+cogniprint campaign summarize --campaign-dir workspace/campaigns/empirical-campaign-001
+```
+
+Campaign outputs are written under `workspace/campaigns/<campaign-name>/`:
+
+- `manifest.json`
+- `campaign-summary.md`
+- `campaign-results.json`
+- `campaign-results.csv`
+- `manuscript-appendix.md`
+- `latex/campaign-summary-table.tex`
+- `reports/paper-outline.md`
+- `reports/methods-section-draft.md`
+- `reports/results-section-draft.md`
+- `reports/limitations-section-draft.md`
+
+Use these files as empirical appendix and second-paper preparation material. Keep claims tied to observed patterns, stability signals, profile shifts, metric deltas, and comparative regularities.
 
 ## Reproducible Run IDs
 

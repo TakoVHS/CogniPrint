@@ -223,6 +223,26 @@ cogniprint dataset \
   --variant-file workspace/input/edited.txt
 ```
 
+The scaffold records source references, SHA-256 hashes, and explicit baseline/variant relations in `metadata/`.
+
+Empirical campaign:
+
+```yaml
+name: empirical-campaign-001
+campaign_id: empirical-campaign-001
+description: Multi-series perturbation campaign for empirical stability notes.
+series:
+  - name: empirical-series-001
+    baseline_file: workspace/input/original.txt
+    light_file: workspace/input/edited.txt
+    variant_folder: workspace/input/variants
+```
+
+```bash
+cogniprint campaign run --config workspace/notes/campaign.yml
+cogniprint campaign summarize --campaign-dir workspace/campaigns/empirical-campaign-001
+```
+
 Convenience targets:
 
 ```bash

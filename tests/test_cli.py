@@ -325,6 +325,11 @@ class CliTests(unittest.TestCase):
             self.assertTrue((dataset_dir / "dataset-manifest.json").exists())
             self.assertTrue((dataset_dir / "metadata" / "samples.csv").exists())
             self.assertTrue((dataset_dir / "metadata" / "variants.csv").exists())
+            samples_csv = (dataset_dir / "metadata" / "samples.csv").read_text(encoding="utf-8")
+            variants_csv = (dataset_dir / "metadata" / "variants.csv").read_text(encoding="utf-8")
+            self.assertIn("sha256", samples_csv)
+            self.assertIn("baseline_sample_id", variants_csv)
+            self.assertIn("controlled_variant", variants_csv)
 
             aggregate_md = temp_path / "aggregate.md"
             aggregate_csv = temp_path / "aggregate.csv"
@@ -348,6 +353,58 @@ class CliTests(unittest.TestCase):
             )
             self.assertIn("Aggregate Study Summary", aggregate_md.read_text(encoding="utf-8"))
             self.assertTrue(aggregate_csv.exists())
+
+    def test_campaign_run_and_summarize(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_path = Path(temp_dir)
+            workspace = temp_path / "workspace"
+            input_dir = workspace / "input"
+            variants_dir = input_dir / "variants"
+            variants_dir.mkdir(parents=True)
+            original = input_dir / "original.txt"
+            light = input_dir / "light.txt"
+            strong = variants_dir / "strong.txt"
+            original.write_text("A baseline campaign text for empirical synthesis.", encoding="utf-8")
+            light.write_text("A lightly edited campaign text for empirical synthesis.", encoding="utf-8")
+            strong.write_text("A strongly edited campaign variant changes length and structure.", encoding="utf-8")
+            config = temp_path / "campaign.yml"
+            config.write_text(
+                "\n".join(
+                    [
+                        "name: test campaign",
+                        "campaign_id: test-campaign",
+                        "description: Test campaign synthesis.",
+                        "series:",
+                        "  - name: series one",
+                        f"    baseline_file: {original}",
+                        f"    light_file: {light}",
+                        f"    variant_folder: {variants_dir}",
+                        "  - name: series two",
+                        f"    baseline_file: {original}",
+                        f"    light_file: {light}",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+            subprocess.run(
+                [sys.executable, "-m", "cogniprint", "--workspace", str(workspace), "campaign", "run", "--config", str(config)],
+                check=True,
+            )
+            campaign_dir = workspace / "campaigns" / "test-campaign"
+            self.assertTrue((campaign_dir / "manifest.json").exists())
+            self.assertTrue((campaign_dir / "campaign-summary.md").exists())
+            self.assertTrue((campaign_dir / "campaign-results.json").exists())
+            self.assertTrue((campaign_dir / "campaign-results.csv").exists())
+            self.assertTrue((campaign_dir / "manuscript-appendix.md").exists())
+            self.assertTrue((campaign_dir / "latex" / "campaign-summary-table.tex").exists())
+            self.assertTrue((campaign_dir / "reports" / "methods-section-draft.md").exists())
+
+            subprocess.run(
+                [sys.executable, "-m", "cogniprint", "--workspace", str(workspace), "campaign", "summarize", "--campaign-dir", str(campaign_dir)],
+                check=True,
+            )
+            payload = json.loads((campaign_dir / "campaign-results.json").read_text(encoding="utf-8"))
+            self.assertGreaterEqual(payload["comparison_count"], 2)
 
 
 if __name__ == "__main__":

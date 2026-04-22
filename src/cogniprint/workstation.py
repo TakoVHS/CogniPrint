@@ -59,6 +59,7 @@ def ensure_workspace(workspace: Path) -> None:
         "experiments",
         "perturbations",
         "datasets",
+        "campaigns",
     ]:
         (workspace / relative).mkdir(parents=True, exist_ok=True)
 

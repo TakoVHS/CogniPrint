@@ -27,3 +27,5 @@ workspace/perturbations/*
 !workspace/perturbations/.gitkeep
 workspace/datasets/*
 !workspace/datasets/.gitkeep
+workspace/campaigns/*
+!workspace/campaigns/.gitkeep

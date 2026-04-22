@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 from datetime import datetime, timezone
 from pathlib import Path
@@ -31,6 +32,7 @@ def create_dataset_scaffold(
         "exports_dir": str(dataset_dir / "exports"),
         "sample_count": len(baseline_files or []),
         "variant_count": len(variant_files or []),
+        "relation_model": "variants reference baseline_sample_id when a baseline sample is available",
     }
     _write_json(dataset_dir / "dataset-manifest.json", manifest)
     _write_samples_csv(dataset_dir / "metadata" / "samples.csv", baseline_files or [])
@@ -42,17 +44,17 @@ def create_dataset_scaffold(
 def _write_samples_csv(path: Path, files: list[Path]) -> None:
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.writer(handle)
-        writer.writerow(["sample_id", "source_ref", "role"])
+        writer.writerow(["sample_id", "source_ref", "role", "sha256"])
         for index, file_path in enumerate(files, start=1):
-            writer.writerow([f"sample-{index:04d}", str(file_path), "baseline"])
+            writer.writerow([f"sample-{index:04d}", str(file_path), "baseline", _sha256(file_path)])
 
 
 def _write_variants_csv(path: Path, files: list[Path]) -> None:
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.writer(handle)
-        writer.writerow(["variant_id", "source_ref", "baseline_relation", "notes"])
+        writer.writerow(["variant_id", "source_ref", "baseline_sample_id", "relation_type", "sha256", "notes"])
         for index, file_path in enumerate(files, start=1):
-            writer.writerow([f"variant-{index:04d}", str(file_path), "unspecified", ""])
+            writer.writerow([f"variant-{index:04d}", str(file_path), "sample-0001", "controlled_variant", _sha256(file_path), ""])
 
 
 def _write_readme(path: Path, manifest: dict[str, Any]) -> None:
@@ -68,6 +70,8 @@ def _write_readme(path: Path, manifest: dict[str, Any]) -> None:
         "- `metadata/` stores sample and variant metadata.",
         "- `exports/` stores derived release or analysis exports.",
         "",
+        "Variant rows include `baseline_sample_id` and `relation_type` so baseline/variant relations remain explicit during later review.",
+        "",
         "## Interpretation",
         "",
         "Dataset outputs should be used as research material for profile and perturbation analysis. They should not be framed as final judgements about any source text.",
@@ -78,6 +82,13 @@ def _write_readme(path: Path, manifest: dict[str, Any]) -> None:
 
 def _write_json(path: Path, payload: dict[str, Any]) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def _sha256(path: Path) -> str:
+    try:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+    except OSError:
+        return ""
 
 
 def _slug(value: str) -> str:
