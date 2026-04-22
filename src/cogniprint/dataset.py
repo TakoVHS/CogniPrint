@@ -17,6 +17,7 @@ def create_dataset_scaffold(
     description: str | None = None,
     baseline_files: list[Path] | None = None,
     variant_files: list[Path] | None = None,
+    sources_file: Path | None = None,
 ) -> Path:
     dataset_dir = workspace / "datasets" / _slug(name)
     for relative in ["raw", "variants", "metadata", "exports"]:
@@ -33,8 +34,12 @@ def create_dataset_scaffold(
         "sample_count": len(baseline_files or []),
         "variant_count": len(variant_files or []),
         "relation_model": "variants reference baseline_sample_id when a baseline sample is available",
+        "source_policy": "Record source, license, acquisition date, and usage notes for external texts. This is a research provenance record, not legal advice.",
+        "sources_file": str(sources_file) if sources_file else None,
     }
     _write_json(dataset_dir / "dataset-manifest.json", manifest)
+    if sources_file and sources_file.exists():
+        (dataset_dir / "metadata" / "SOURCES.md").write_text(sources_file.read_text(encoding="utf-8"), encoding="utf-8")
     _write_samples_csv(dataset_dir / "metadata" / "samples.csv", baseline_files or [])
     _write_variants_csv(dataset_dir / "metadata" / "variants.csv", variant_files or [])
     _write_readme(dataset_dir / "README.md", manifest)

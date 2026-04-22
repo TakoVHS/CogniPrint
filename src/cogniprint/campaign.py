@@ -53,6 +53,7 @@ def run_campaign(config: dict[str, Any], *, config_path: Path, workspace: Path) 
         series_records.append(
             {
                 "series_name": series_name,
+                "source_record_id": entry.get("source_record_id"),
                 "perturbation_dir": str(lab_dir),
                 "study_dir": str(study_copy),
                 "notes_dir": str(notes_dir),
@@ -65,9 +66,11 @@ def run_campaign(config: dict[str, Any], *, config_path: Path, workspace: Path) 
         "description": config.get("description"),
         "created_utc": datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z"),
         "config_path": str(config_path),
+        "sources_file": str(_optional_path(base_dir, config.get("sources_file"))) if config.get("sources_file") else None,
         "series_count": len(series_records),
         "series": series_records,
         "interpretive_note": DISCLAIMER,
+        "source_policy_note": "Campaign source metadata supports research reproducibility and should not be treated as legal advice.",
     }
     _write_json(campaign_dir / "manifest.json", manifest)
     summarize_campaign(campaign_dir)

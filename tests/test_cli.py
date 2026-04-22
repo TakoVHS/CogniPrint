@@ -261,9 +261,27 @@ class CliTests(unittest.TestCase):
             original = input_dir / "original.txt"
             light = input_dir / "light.txt"
             strong = variants_dir / "strong.txt"
+            sources = temp_path / "SOURCES.md"
             original.write_text("A baseline text for perturbation lab testing.", encoding="utf-8")
             light.write_text("A lightly edited baseline text for perturbation lab testing.", encoding="utf-8")
             strong.write_text("A strongly edited sample changes length, structure, and several metrics.", encoding="utf-8")
+            sources.write_text(
+                "\n".join(
+                    [
+                        "# Sources",
+                        "",
+                        "## source-id: test-self-authored",
+                        "",
+                        "- source_name: Test self-authored note",
+                        "- source_ref: local/test",
+                        "- source_class: self-authored",
+                        "- license: self-authored local research use",
+                        "- acquisition_date: 2026-04-22",
+                        "- usage_note: Test fixture provenance.",
+                    ]
+                ),
+                encoding="utf-8",
+            )
 
             subprocess.run(
                 [
@@ -318,6 +336,8 @@ class CliTests(unittest.TestCase):
                     str(original),
                     "--variant-file",
                     str(light),
+                    "--sources-file",
+                    str(sources),
                 ],
                 check=True,
             )
@@ -325,6 +345,9 @@ class CliTests(unittest.TestCase):
             self.assertTrue((dataset_dir / "dataset-manifest.json").exists())
             self.assertTrue((dataset_dir / "metadata" / "samples.csv").exists())
             self.assertTrue((dataset_dir / "metadata" / "variants.csv").exists())
+            self.assertTrue((dataset_dir / "metadata" / "SOURCES.md").exists())
+            dataset_manifest = json.loads((dataset_dir / "dataset-manifest.json").read_text(encoding="utf-8"))
+            self.assertIn("source_policy", dataset_manifest)
             samples_csv = (dataset_dir / "metadata" / "samples.csv").read_text(encoding="utf-8")
             variants_csv = (dataset_dir / "metadata" / "variants.csv").read_text(encoding="utf-8")
             self.assertIn("sha256", samples_csv)

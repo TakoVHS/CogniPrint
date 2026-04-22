@@ -1,4 +1,4 @@
-.PHONY: bootstrap init-workspace test smoke demo sample-run sample-compare sample-study sample-profile sample-corpus sample-perturb sample-dataset
+.PHONY: bootstrap init-workspace test smoke validate-sources demo sample-run sample-compare sample-study sample-profile sample-corpus sample-perturb sample-dataset
 
 PYTHON ?= python3
 VENV ?= .venv
@@ -22,6 +22,9 @@ smoke:
 	$(CLI) profile --text "CogniPrint smoke profile for local workstation verification." --output workspace/exports/smoke-profile.json
 	$(CLI) run --label smoke-inline --text "CogniPrint smoke run for local workstation verification."
 	$(CLI) compare --label smoke-compare --baseline-text "A compact baseline note for profile comparison." --variant-text "A revised baseline note for profile comparison with added context."
+
+validate-sources:
+	$(PY) scripts/validate_sources.py
 
 sample-run:
 	$(CLI) run --label sample-inline --text "CogniPrint studies compact statistical profiles of text for reproducible research notes."

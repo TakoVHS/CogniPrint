@@ -220,10 +220,19 @@ cogniprint dataset \
   --name perturbation-dataset-001 \
   --description "Local dataset scaffold for controlled profile studies." \
   --baseline-file workspace/input/original.txt \
-  --variant-file workspace/input/edited.txt
+  --variant-file workspace/input/edited.txt \
+  --sources-file workspace/input/SOURCES.md
 ```
 
 The scaffold records source references, SHA-256 hashes, and explicit baseline/variant relations in `metadata/`.
+
+Input provenance:
+
+```bash
+make validate-sources
+```
+
+Use `workspace/input/SOURCES.md` to record source name, source reference, license, acquisition date, and usage notes. Keep private or sensitive local texts out of public-share paths.
 
 Empirical campaign:
 

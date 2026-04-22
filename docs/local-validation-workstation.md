@@ -256,7 +256,8 @@ cogniprint dataset \
   --name perturbation-dataset-001 \
   --description "Local dataset scaffold for controlled profile studies." \
   --baseline-file workspace/input/original.txt \
-  --variant-file workspace/input/edited.txt
+  --variant-file workspace/input/edited.txt \
+  --sources-file workspace/input/SOURCES.md
 ```
 
 Outputs are written under `workspace/datasets/<dataset-name>/`:
@@ -270,6 +271,24 @@ Outputs are written under `workspace/datasets/<dataset-name>/`:
 - `exports/`
 
 The metadata CSV files include source references, SHA-256 hashes, and explicit baseline/variant relations for later dataset review.
+
+## Data Sourcing And Provenance
+
+Use `workspace/input/SOURCES.md` to record source metadata for external texts. The source record should include source name, source reference or URL, license, acquisition date, and usage note. This supports reproducibility and does not provide legal advice.
+
+Recommended storage convention:
+
+- `workspace/input/public/` for examples reviewed as public-share compatible
+- `workspace/input/private/` or other ignored local paths for private/local-only experimental texts
+- `workspace/input/SOURCES.md` for source records
+
+Validate the lightweight source records with:
+
+```bash
+make validate-sources
+```
+
+Private or sensitive full texts should not be committed to the public repository. Colleague share packs should prefer derived outputs, manifests, and source metadata over raw private texts.
 
 ## Aggregate Study Reports
 

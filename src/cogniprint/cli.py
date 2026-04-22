@@ -130,6 +130,7 @@ def build_parser() -> argparse.ArgumentParser:
     dataset_parser.add_argument("--description", help="Short dataset description.")
     dataset_parser.add_argument("--baseline-file", action="append", type=Path, default=[], help="Baseline/source sample file. Repeatable.")
     dataset_parser.add_argument("--variant-file", action="append", type=Path, default=[], help="Variant sample file. Repeatable.")
+    dataset_parser.add_argument("--sources-file", type=Path, help="Optional source metadata file to copy into dataset metadata.")
     dataset_parser.set_defaults(handler=_handle_dataset)
 
     campaign_parser = subparsers.add_parser("campaign", help="Run or summarize empirical campaigns.")
@@ -336,6 +337,7 @@ def _handle_dataset(args: argparse.Namespace) -> int:
         description=args.description,
         baseline_files=args.baseline_file,
         variant_files=args.variant_file,
+        sources_file=args.sources_file,
     )
     print(f"Dataset scaffold written: {dataset_dir.resolve()}")
     return 0

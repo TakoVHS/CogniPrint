@@ -7,6 +7,11 @@ __pycache__/
 
 workspace/input/*
 !workspace/input/.gitkeep
+!workspace/input/SOURCES.md
+!workspace/input/public/
+!workspace/input/public/.gitkeep
+workspace/input/private/
+workspace/input/private/*
 workspace/runs/*
 !workspace/runs/.gitkeep
 workspace/reports/*
