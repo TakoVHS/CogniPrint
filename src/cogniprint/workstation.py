@@ -16,6 +16,7 @@ from typing import Any
 
 from . import __version__
 from .analysis import FINGERPRINT_KEYS, TextProfile, analyze_text, compare_profiles
+from .core.distances import selected_metric
 
 CANONICAL_IDENTITY = {
     "project_name": "CogniPrint",
@@ -46,7 +47,7 @@ class TextSample:
 
 
 def ensure_workspace(workspace: Path) -> None:
-    for relative in ["input", "runs", "reports", "notes", "exports", "studies"]:
+    for relative in ["input", "runs", "reports", "notes", "exports", "studies", "profiles", "corpus", "experiments"]:
         (workspace / relative).mkdir(parents=True, exist_ok=True)
 
 
@@ -74,6 +75,7 @@ def create_run(
     run_id: str | None = None,
     baseline_index: int = 0,
     cli_args: dict[str, Any] | None = None,
+    metric: str = "all",
 ) -> Path:
     if not samples:
         raise ValueError("At least one input text is required.")
@@ -87,7 +89,7 @@ def create_run(
         raise FileExistsError(f"Run directory already exists: {run_dir}")
     run_dir.mkdir(parents=True)
 
-    comparisons = _build_comparisons(samples, profiles, baseline_index) if len(samples) > 1 else []
+    comparisons = _build_comparisons(samples, profiles, baseline_index, metric) if len(samples) > 1 else []
     manifest = _build_manifest(
         samples=samples,
         timestamp=timestamp,
@@ -96,6 +98,7 @@ def create_run(
         run_id=actual_run_id,
         baseline_index=baseline_index,
         cli_args=cli_args,
+        metric=metric,
     )
     results = _build_results(samples, profiles, comparisons)
 
@@ -162,13 +165,25 @@ def _build_comparisons(
     samples: list[TextSample],
     profiles: dict[str, TextProfile],
     baseline_index: int,
+    metric: str,
 ) -> list[dict[str, Any]]:
     baseline = samples[baseline_index]
+    reference_vectors = [profiles[sample.sample_id].fingerprint_vector for sample in samples]
     comparisons = []
     for sample in samples:
         if sample.sample_id == baseline.sample_id:
             continue
         comparison = compare_profiles(profiles[baseline.sample_id], profiles[sample.sample_id])
+        if metric != "all":
+            metric_payload = selected_metric(
+                metric,
+                profiles[baseline.sample_id].fingerprint_vector,
+                profiles[sample.sample_id].fingerprint_vector,
+                reference_vectors,
+            )
+            if isinstance(metric_payload.get("value"), float):
+                metric_payload["value"] = round(metric_payload["value"], 6)
+            comparison["selected_metric"] = metric_payload
         comparison.update(
             {
                 "baseline_sample_id": baseline.sample_id,
@@ -190,6 +205,7 @@ def _build_manifest(
     run_id: str,
     baseline_index: int,
     cli_args: dict[str, Any] | None,
+    metric: str,
 ) -> dict[str, Any]:
     input_modes = sorted({sample.source_type for sample in samples})
     return {
@@ -219,6 +235,7 @@ def _build_manifest(
             "baseline_index": baseline_index,
             "input_count": len(samples),
             "text_suffixes": sorted(TEXT_SUFFIXES),
+            "comparison_metric": metric,
         },
         "inputs": [
             {

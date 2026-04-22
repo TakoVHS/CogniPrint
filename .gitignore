@@ -17,3 +17,9 @@ workspace/exports/*
 !workspace/exports/.gitkeep
 workspace/studies/*
 !workspace/studies/.gitkeep
+workspace/profiles/*
+!workspace/profiles/.gitkeep
+workspace/corpus/*
+!workspace/corpus/.gitkeep
+workspace/experiments/*
+!workspace/experiments/.gitkeep

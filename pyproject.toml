@@ -28,7 +28,9 @@ classifiers = [
   "Programming Language :: Python :: 3.12",
   "Topic :: Scientific/Engineering :: Information Analysis"
 ]
-dependencies = []
+dependencies = [
+  "PyYAML>=6.0"
+]
 
 [project.urls]
 Homepage = "https://cogniprint.org"

@@ -1,0 +1,69 @@
+name: CogniPrint Nightly Research
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * *"
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install package
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m venv .venv
+          source .venv/bin/activate
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+
+      - name: Prepare guarded sample inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workspace/input/variants
+          if [ ! -f workspace/input/original.txt ]; then
+            printf '%s\n' 'CogniPrint nightly baseline text for local research validation.' > workspace/input/original.txt
+          fi
+          if [ ! -f workspace/input/edited.txt ]; then
+            printf '%s\n' 'CogniPrint nightly edited text for local research validation with added context.' > workspace/input/edited.txt
+          fi
+          if [ ! -f workspace/input/variants/strongly-edited.txt ]; then
+            printf '%s\n' 'A stronger nightly variant changes length, structure, punctuation, and descriptive detail.' > workspace/input/variants/strongly-edited.txt
+          fi
+
+      - name: Run nightly study and reports
+        shell: bash
+        run: |
+          set -euo pipefail
+          source .venv/bin/activate
+          cogniprint study \
+            --name "nightly-research-${{ github.run_id }}" \
+            --baseline-file workspace/input/original.txt \
+            --variant-file workspace/input/edited.txt \
+            --variant-folder workspace/input/variants
+          latest_study="$(find workspace/studies -mindepth 1 -maxdepth 1 -type d | sort | tail -n 1)"
+          cogniprint report --study-dir "$latest_study" --format md --output workspace/reports/nightly-research.md
+          cogniprint report --study-dir "$latest_study" --format pdf --output workspace/reports/nightly-research.pdf
+
+      - name: Upload generated workspace artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: cogniprint-nightly-research-artifacts
+          path: |
+            workspace/runs
+            workspace/studies
+            workspace/reports
+            workspace/exports
+          if-no-files-found: error

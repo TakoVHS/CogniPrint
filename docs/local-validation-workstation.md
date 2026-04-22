@@ -34,6 +34,9 @@ The workstation uses:
 - `workspace/notes/` for researcher notes
 - `workspace/exports/` for copied CSV exports
 - `workspace/studies/` for named study bundles and aggregated outputs
+- `workspace/profiles/` for saved profile JSON
+- `workspace/corpus/` for batch profile outputs
+- `workspace/experiments/` for YAML experiment outputs
 
 Create or repair the structure with:
 
@@ -84,7 +87,8 @@ File baseline and file variant:
 cogniprint compare \
   --label original-vs-edited \
   --baseline-file workspace/input/original.txt \
-  --variant-file workspace/input/edited.txt
+  --variant-file workspace/input/edited.txt \
+  --metric cosine
 ```
 
 One baseline against many folder variants:
@@ -144,6 +148,65 @@ Each study writes a bundle under `workspace/studies/<study-id>/`:
 
 Study mode also creates a source comparison run under `workspace/runs/<study-id>-comparison/` so the underlying per-text bundle remains reproducible.
 
+## Profile Command
+
+Use `profile` when you need one machine-readable profile without a full run bundle.
+
+```bash
+cogniprint profile --text "CogniPrint studies compact statistical profiles of text."
+cogniprint profile --file workspace/input/original.txt --output workspace/exports/original-profile.json
+cogniprint profile --file workspace/input/original.txt --save --label original
+```
+
+Saved profiles go to `workspace/profiles/`. You can ask the command to compare against saved profiles with a conservative cosine threshold:
+
+```bash
+cogniprint profile --file workspace/input/original.txt --similar-threshold 0.98
+```
+
+## Corpus Command
+
+Use `corpus` to batch profile a directory of local text files:
+
+```bash
+cogniprint corpus --input-dir workspace/input --output-dir workspace/corpus/sample --pattern "*.txt"
+```
+
+The command writes one `*.profile.json` artifact per matched input and a `corpus-manifest.json` with source references.
+
+## Report Command
+
+Use `report` to generate manuscript-friendly reports from existing study artifacts:
+
+```bash
+cogniprint report --study-dir workspace/studies/<study-id> --format md --output workspace/reports/study-report.md
+cogniprint report --study-dir workspace/studies/<study-id> --format pdf --output workspace/reports/study-report.pdf
+```
+
+Markdown reports are intended for editing and manuscript notes. PDF reports are plain archival reports generated without extra rendering infrastructure.
+
+## YAML Experiments
+
+Minimal experiment configs are YAML mappings:
+
+```yaml
+name: perturbation-series-001
+description: Controlled profile comparison for local theory validation.
+baseline_file: workspace/input/original.txt
+variant_files:
+  - workspace/input/edited.txt
+variant_folder: workspace/input/variants
+output_dir: workspace/experiments
+```
+
+Run the experiment with:
+
+```bash
+cogniprint experiment run --config workspace/notes/experiment.yml
+```
+
+The runner creates a normal study under `workspace/studies/` and copies the study bundle into `workspace/experiments/<experiment-name>/study/`.
+
 ## Reproducible Run IDs
 
 By default, run directories include a UTC timestamp and a content/configuration hash. For exact scripted paths, pass `--run-id`:
@@ -162,6 +225,8 @@ make test
 make smoke
 make demo
 make sample-study
+make sample-profile
+make sample-corpus
 ```
 
 `make smoke` runs deterministic local checks without requiring credentials. `make demo` creates example run, compare, and study bundles.
@@ -171,6 +236,8 @@ make sample-study
 `CogniPrint CI` runs on push, pull request, and manual dispatch. It installs the package on Python 3.11, runs tests, compiles `src` and `tests`, and runs the smoke target.
 
 `CogniPrint Research Validation` is manual-only through `workflow_dispatch`. It runs workstation validation commands and uploads generated `workspace/runs`, `workspace/studies`, `workspace/reports`, and `workspace/exports` artifacts for review.
+
+`CogniPrint Nightly Research` supports manual dispatch and a guarded nightly schedule. It creates sample inputs only when missing, runs a study, generates markdown/PDF reports, and uploads workspace artifacts.
 
 There is no Jekyll, GitHub Pages deploy, or website deployment logic in this repository.
 

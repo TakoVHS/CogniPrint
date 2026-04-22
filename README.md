@@ -107,7 +107,8 @@ Comparison:
 cogniprint compare \
   --label original-vs-edited \
   --baseline-file workspace/input/original.txt \
-  --variant-file workspace/input/edited.txt
+  --variant-file workspace/input/edited.txt \
+  --metric cosine
 ```
 
 One baseline against many variants:
@@ -158,6 +159,43 @@ Each study writes:
 - `study-summary.md`
 - `manuscript-note.md`
 
+## Profile, Corpus, Reports, and Experiments
+
+Single profile JSON:
+
+```bash
+cogniprint profile --text "CogniPrint studies compact statistical profiles of text."
+cogniprint profile --file workspace/input/original.txt --output workspace/exports/original-profile.json --save --label original
+```
+
+Corpus batch profiling:
+
+```bash
+cogniprint corpus --input-dir workspace/input --output-dir workspace/corpus/sample --pattern "*.txt"
+```
+
+Study reports:
+
+```bash
+cogniprint report --study-dir workspace/studies/<study-id> --format md --output workspace/reports/study-report.md
+cogniprint report --study-dir workspace/studies/<study-id> --format pdf --output workspace/reports/study-report.pdf
+```
+
+YAML experiment:
+
+```yaml
+name: perturbation-series-001
+baseline_file: workspace/input/original.txt
+variant_files:
+  - workspace/input/edited.txt
+variant_folder: workspace/input/variants
+output_dir: workspace/experiments
+```
+
+```bash
+cogniprint experiment run --config workspace/notes/experiment.yml
+```
+
 Convenience targets:
 
 ```bash
@@ -172,6 +210,7 @@ This repository uses Python-only GitHub Actions workflows. There is no Jekyll, G
 
 - `CogniPrint CI` runs on push, pull request, and manual dispatch. It installs the package on Python 3.11, runs `make test`, verifies `compileall`, and runs `make smoke`.
 - `CogniPrint Research Validation` is manual-only. It runs the local workstation smoke/demo/study flow and uploads generated workspace artifacts for review.
+- `CogniPrint Nightly Research` can run on schedule or manually. It creates guarded sample inputs when needed, runs a study, generates markdown/PDF reports, and uploads workspace artifacts.
 
 See `docs/local-validation-workstation.md` for the full local workflow.
 
