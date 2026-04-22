@@ -1,0 +1,109 @@
+name: CogniPrint Research Validation
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_demo:
+        description: 'Run demo target if available'
+        required: false
+        default: 'true'
+      run_sample_study:
+        description: 'Run sample study target if available'
+        required: false
+        default: 'true'
+
+jobs:
+  validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Bootstrap environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m venv .venv
+          source .venv/bin/activate
+          python -m pip install --upgrade pip setuptools wheel
+
+          if [ -f pyproject.toml ]; then
+            python -m pip install -e '.[dev]' || python -m pip install -e .
+          fi
+
+          if [ -f requirements.txt ]; then
+            python -m pip install -r requirements.txt
+          fi
+
+          if [ -d tests ] && ! python - <<'PY'
+import importlib.util, sys
+sys.exit(0 if importlib.util.find_spec('pytest') else 1)
+PY
+          then
+            python -m pip install pytest
+          fi
+
+      - name: Initialize workspace if supported
+        shell: bash
+        run: |
+          set -euo pipefail
+          source .venv/bin/activate
+          if command -v cogniprint >/dev/null 2>&1; then
+            cogniprint init-workspace || true
+          else
+            echo 'cogniprint CLI not available yet; skipping init-workspace.'
+          fi
+
+      - name: Run smoke target when present
+        shell: bash
+        run: |
+          set -euo pipefail
+          source .venv/bin/activate
+          if [ -f Makefile ] && grep -Eq '^[[:space:]]*smoke:' Makefile; then
+            make smoke
+          else
+            echo 'No smoke target found; skipping.'
+          fi
+
+      - name: Run demo target when requested
+        if: ${{ inputs.run_demo == 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          source .venv/bin/activate
+          if [ -f Makefile ] && grep -Eq '^[[:space:]]*demo:' Makefile; then
+            make demo
+          else
+            echo 'No demo target found; skipping.'
+          fi
+
+      - name: Run sample study target when requested
+        if: ${{ inputs.run_sample_study == 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          source .venv/bin/activate
+          if [ -f Makefile ] && grep -Eq '^[[:space:]]*sample-study:' Makefile; then
+            make sample-study
+          else
+            echo 'No sample-study target found; skipping.'
+          fi
+
+      - name: Upload generated workspace artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cogniprint-workspace-artifacts
+          path: |
+            workspace/runs
+            workspace/studies
+            workspace/reports
+            workspace/exports
+          if-no-files-found: ignore
