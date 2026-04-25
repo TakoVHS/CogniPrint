@@ -6,17 +6,18 @@ This checklist is intended for colleagues reviewing the current CogniPrint empir
 
 CogniPrint should currently be evaluated as a working empirical evidence package supporting a follow-up manuscript.
 
-It should not be evaluated as a settled publication-level empirical paper.
+It should not be evaluated as a publication-ready empirical paper.
 
 ## Recommended review order
 
 1. `docs/empirical-evidence-summary-v1.md`
-2. `workspace/reports/paper-2/clean-methods-section.md`
-3. `workspace/reports/paper-2/clean-results-section.md`
-4. `workspace/reports/paper-2/clean-limitations-section.md`
-5. `workspace/reports/paper-2/evidence-table.md`
-6. `workspace/share/colleague-pack-004/one-page-summary.md`
-7. `workspace/share/colleague-pack-004/what-to-send-colleagues.md`
+2. `workspace/reports/paper-2/follow-up-manuscript-draft.md`
+3. `workspace/reports/paper-2/clean-methods-section.md`
+4. `workspace/reports/paper-2/clean-results-section.md`
+5. `workspace/reports/paper-2/clean-limitations-section.md`
+6. `workspace/reports/paper-2/evidence-table.md`
+7. `workspace/share/colleague-pack-004/one-page-summary.md`
+8. `workspace/share/colleague-pack-004/what-to-send-colleagues.md`
 
 ## Review questions
 
@@ -43,7 +44,7 @@ It should not be evaluated as a settled publication-level empirical paper.
 
 - Is the small-corpus limitation explicit?
 - Is the self-authored/local-research nature of current inputs explicit?
-- Is it clear that current outputs are not a source-attribution or forensic determination system?
+- Is it clear that current outputs are not a source-attribution or forensic workflow?
 
 ## Useful feedback to provide
 
@@ -51,7 +52,7 @@ Reviewers should focus on:
 
 - whether the empirical design is understandable;
 - whether the evidence table is useful;
-- whether the Methods/Results/Limitations drafts are ready to become a formal manuscript section;
+- whether the Methods, Results, and Limitations drafts are ready to become a formal manuscript section;
 - which additional campaign types or corpora would strengthen the follow-up manuscript.
 
 ## Language guardrail

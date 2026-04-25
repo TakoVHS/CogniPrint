@@ -27,9 +27,9 @@ CogniPrint should currently be described as:
 
 CogniPrint should not currently be described as:
 
-- a settled publication-level empirical paper;
-- a definitive attribution system;
-- a forensic certainty engine;
+- a publication-ready empirical paper;
+- a source-finality system;
+- a forensic-style decision engine;
 - a final judgment system.
 
 ## Current scientific value
@@ -43,4 +43,4 @@ The current value of the project is that it provides:
 
 ## Practical next step
 
-The next scientific step is to convert the empirical evidence summary and clean Methods, Results, and Limitations drafts into a formal follow-up manuscript draft.
+The next scientific step is to consolidate the current `5`-campaign / `41`-row empirical evidence package into a cleaner follow-up manuscript draft, circulate a compact review pack to colleagues, and use that feedback to refine framing, methods clarity, evidence-table usefulness, and limitations.

@@ -8,12 +8,14 @@ CogniPrint currently has a working empirical evidence package supporting a follo
 
 The current evidence package is based on:
 
-- 5 controlled perturbation campaigns;
-- 41 comparison rows;
+- `5` controlled perturbation campaigns;
+- `41` comparison rows;
 - provenance-linked inputs;
 - dataset scaffolds;
 - campaign summaries;
 - clean Methods, Results, and Limitations drafting materials.
+
+Campaign `empirical-campaign-004` contributes `1` controlled perturbation series and `11` comparison rows within that package.
 
 ## Recommended reading order
 
@@ -25,8 +27,11 @@ The current evidence package is based on:
 6. `workspace/reports/paper-2/clean-results-section.md`
 7. `workspace/reports/paper-2/clean-limitations-section.md`
 8. `workspace/reports/paper-2/evidence-table.md`
-9. `workspace/share/colleague-pack-004/one-page-summary.md`
-10. `workspace/share/colleague-pack-004/what-to-send-colleagues.md`
+9. `workspace/reports/paper-2/follow-up-manuscript-draft.md`
+10. `workspace/share/colleague-pack-004/one-page-summary.md`
+11. `workspace/share/colleague-pack-004/what-to-send-colleagues.md`
+12. `workspace/share/colleague-pack-004/email-to-colleagues.md`
+13. `workspace/share/colleague-pack-004/review-request-message.md`
 
 ## What this package is for
 
@@ -34,8 +39,8 @@ Use this package to support scientific review, manuscript planning, and discussi
 
 ## What this package is not for
 
-Do not present this package as a settled publication-level empirical paper or as a general-purpose decision system.
+Do not present this package as a publication-ready empirical paper or as a general-purpose decision system.
 
 ## Next manuscript step
 
-The next step is to consolidate the evidence summary, clean Methods, clean Results, clean Limitations, and evidence table into a formal follow-up manuscript draft.
+The next step is to consolidate the evidence summary, clean Methods, clean Results, clean Limitations, and evidence table into a formal follow-up manuscript draft and circulate a compact review pack to colleagues.

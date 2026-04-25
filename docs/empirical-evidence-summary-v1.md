@@ -6,7 +6,7 @@ This document gives a public, colleague-readable summary of the current CogniPri
 
 CogniPrint currently has a working empirical evidence package supporting a follow-up manuscript. The public research state consists of a mathematical manuscript layer, a reproducible local workstation, controlled perturbation campaigns, provenance-linked inputs, dataset scaffolds, and manuscript-oriented empirical drafting outputs.
 
-The present materials should be read as working empirical materials for scientific review and manuscript preparation. They should not be presented as a settled publication-level empirical paper.
+The present materials should be read as working empirical materials for scientific review and manuscript preparation. They should not be presented as a publication-ready empirical paper.
 
 ## What exists now
 
@@ -18,21 +18,22 @@ The current project materials include:
 - dataset scaffolds linked to campaign inputs;
 - multi-campaign summaries and CSV/JSON exports;
 - colleague-facing share packs;
-- clean Methods, Results, and Limitations drafting materials for a follow-up manuscript.
+- clean Methods, Results, and Limitations drafting materials for a follow-up manuscript;
+- a local follow-up manuscript draft assembled from the current evidence package.
 
 ## Empirical base
 
 The current local empirical base contains:
 
-- 5 controlled perturbation campaigns;
-- 41 comparison rows across those campaigns;
+- `5` controlled perturbation campaigns;
+- `41` comparison rows across those campaigns;
 - provenance-linked input records;
 - generated campaign summaries, appendix-oriented notes, and table-ready outputs.
 
-Campaign 004 contributes:
+Campaign `empirical-campaign-004` contributes:
 
-- 1 controlled perturbation series;
-- 11 comparison rows;
+- `1` controlled perturbation series;
+- `11` comparison rows;
 - a dataset scaffold with copied source metadata;
 - a colleague-facing share pack;
 - updated paper-2 drafting outputs.
@@ -70,8 +71,8 @@ It is appropriate to say that CogniPrint currently has:
 
 - a reproducible local empirical workstation;
 - a working empirical evidence package;
-- 5 controlled perturbation campaigns;
-- 41 comparison rows;
+- `5` controlled perturbation campaigns;
+- `41` comparison rows;
 - provenance-linked inputs;
 - campaign summaries and table-ready outputs;
 - clean Methods, Results, and Limitations drafting materials for a follow-up manuscript.
@@ -84,7 +85,7 @@ Do not present the current materials as:
 
 - a universal text-origin system;
 - a broad benchmark across heterogeneous public corpora;
-- a settled publication-level empirical paper;
+- a publication-ready empirical paper;
 - a general-purpose decision system.
 
 The correct framing is: working empirical evidence package supporting a follow-up manuscript.
@@ -94,12 +95,13 @@ The correct framing is: working empirical evidence package supporting a follow-u
 For scientific feedback, send a compact package rather than the whole workspace:
 
 1. `docs/empirical-evidence-summary-v1.md`
-2. `workspace/reports/paper-2/clean-methods-section.md`
-3. `workspace/reports/paper-2/clean-results-section.md`
-4. `workspace/reports/paper-2/clean-limitations-section.md`
-5. `workspace/reports/paper-2/evidence-table.md`
-6. `workspace/share/colleague-pack-004/one-page-summary.md`
-7. `workspace/share/colleague-pack-004/what-to-send-colleagues.md`
+2. `workspace/reports/paper-2/follow-up-manuscript-draft.md`
+3. `workspace/reports/paper-2/clean-methods-section.md`
+4. `workspace/reports/paper-2/clean-results-section.md`
+5. `workspace/reports/paper-2/clean-limitations-section.md`
+6. `workspace/reports/paper-2/evidence-table.md`
+7. `workspace/share/colleague-pack-004/one-page-summary.md`
+8. `workspace/share/colleague-pack-004/what-to-send-colleagues.md`
 
 ## Recommended colleague-facing description
 
