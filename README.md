@@ -1,8 +1,33 @@
 # CogniPrint
 
-**CogniPrint** is a mathematical research framework for constructing compact statistical profiles of text - called *cognitive fingerprints* - and studying the geometry of profile similarity in feature space.
+**CogniPrint** is a mathematical research framework and reproducible empirical workstation for constructing compact statistical profiles of text - called *cognitive fingerprints* - and studying profile similarity and stability under controlled perturbations.
 
-The project is positioned as a reproducible research methodology. It is not presented as a commercial product or a definitive judgement system.
+The project is positioned as a reproducible research methodology and a working empirical evidence package supporting a follow-up manuscript. It is not presented as a commercial product, a definitive judgement system, or a publication-ready empirical paper.
+
+## Current Empirical Evidence Package
+
+CogniPrint now has a public evidence summary and review route for colleagues:
+
+- [`docs/empirical-evidence-summary-v1.md`](docs/empirical-evidence-summary-v1.md)
+- [`docs/evidence-package-index.md`](docs/evidence-package-index.md)
+- [`docs/public-review-bundle.md`](docs/public-review-bundle.md)
+- [`docs/colleague-review-checklist.md`](docs/colleague-review-checklist.md)
+
+Current empirical base:
+
+- **5 controlled perturbation campaigns**
+- **41 comparison rows**
+- **campaign-004:** 1 controlled series / 11 comparison rows
+- provenance-linked input records
+- dataset scaffolds
+- multi-campaign summaries
+- clean Methods, Results, and Limitations drafting materials
+
+Correct framing:
+
+> CogniPrint currently has a working empirical evidence package supporting a follow-up manuscript.
+
+Do not describe the current repository as a completed publication-level empirical study. The public materials should be read as a research framework, reproducible workstation, and empirical evidence package under active manuscript consolidation.
 
 ## Research Scope
 
@@ -19,11 +44,14 @@ CogniPrint investigates:
 CogniPrint provides statistical and heuristic analysis for research purposes only.
 
 Its outputs are:
+
 - metrics derived from text structure;
 - a compact fingerprint vector;
-- profile comparison signals for regularity patterns.
+- profile comparison signals for regularity patterns;
+- campaign-level empirical summaries for research review.
 
 Its outputs are not:
+
 - source guarantees;
 - legal conclusions;
 - guaranteed source classification;
@@ -45,7 +73,7 @@ Canonical metadata:
 - **Project site:** https://cogniprint.org
 - **Repository:** https://github.com/TakoVHS/CogniPrint
 
-A DOI is assigned to each release via Zenodo.
+A DOI may be assigned to reviewed releases via Zenodo.
 
 ## Public Research Surface
 
@@ -55,11 +83,16 @@ The current public research surface consists of:
 - the source repository `TakoVHS/CogniPrint`;
 - the website repository `TakoVHS/TakoVHS.github.io`;
 - manuscript source under `paper/`;
-- citation metadata in `CITATION.cff`.
+- citation metadata in `CITATION.cff`;
+- current-state documentation under `docs/`;
+- the empirical evidence summary v1;
+- the public review bundle and colleague checklist.
 
 ## Project Status
 
-The current repository provides a local research workstation baseline with a command-line interface for repeatable text profile runs, comparison runs, and exportable run bundles.
+CogniPrint has progressed from a framework scaffold into a local empirical workstation with campaign execution, provenance validation, dataset scaffolding, multi-campaign summaries, colleague-facing share packs, and manuscript-oriented outputs.
+
+The next scientific step is manuscript consolidation: converting the current evidence summary plus clean Methods, Results, and Limitations drafts into a follow-up empirical manuscript.
 
 ## Getting Started
 
@@ -130,6 +163,8 @@ The local workspace convention is:
 - `workspace/notes/` for researcher notes
 - `workspace/exports/` for copied CSV exports
 - `workspace/studies/` for aggregated study bundles
+- `workspace/campaigns/` for campaign outputs
+- `workspace/share/` for colleague-facing share packs
 
 Every run writes:
 
