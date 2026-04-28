@@ -1,13 +1,29 @@
 from __future__ import annotations
 
+import os
+from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 from hashlib import sha256
 from typing import Any
 
 import stripe
-from fastapi import FastAPI, Header, HTTPException, Request
+from fastapi import Depends, FastAPI, Header, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
+from sqlalchemy.orm import Session
+
+from .database import (
+    ScanRecord,
+    activate_pro,
+    create_tables,
+    downgrade_by_customer,
+    downgrade_subscription,
+    ensure_account,
+    get_daily_usage,
+    get_db,
+    increment_daily_usage,
+    is_pro_account,
+)
 
 try:
     from cogniprint.analysis import analyze_text
@@ -20,17 +36,36 @@ DISCLAIMER = (
     "or final judgments about a text."
 )
 
-FREE_DAILY_LIMIT = 3
 PRO_PRICE_USD_MONTHLY = 199
 
-# MVP in-memory quota store. Replace with Postgres before production traffic.
-USAGE: dict[str, dict[str, int]] = {}
-SUBSCRIPTIONS: dict[str, dict[str, Any]] = {}
 
-app = FastAPI(title="CogniPrint Content Scanner API", version="0.1.0")
+def _free_daily_limit() -> int:
+    return int(os.getenv("FREE_DAILY_SCAN_LIMIT", "3"))
+
+
+def _max_text_chars(is_pro: bool) -> int:
+    if is_pro:
+        return int(os.getenv("MAX_TEXT_CHARS_PRO", "120000"))
+    return int(os.getenv("MAX_TEXT_CHARS_FREE", "12000"))
+
+
+def _cors_origins() -> list[str]:
+    frontend = os.getenv("FRONTEND_URL", "")
+    if frontend:
+        return [frontend]
+    return ["*"]
+
+
+@asynccontextmanager
+async def lifespan(application: FastAPI):  # type: ignore[type-arg]
+    create_tables()
+    yield
+
+
+app = FastAPI(title="CogniPrint Content Scanner API", version="0.1.0", lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=_cors_origins(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -47,33 +82,21 @@ class CheckoutRequest(BaseModel):
     email: str | None = Field(default=None, max_length=320)
 
 
-def _today() -> str:
-    return datetime.now(timezone.utc).date().isoformat()
+def _today() -> datetime.date:  # type: ignore[return-value]
+    return datetime.now(timezone.utc).date()
 
 
-def _is_pro(user_id: str) -> bool:
-    state = SUBSCRIPTIONS.get(user_id, {})
-    return state.get("plan") in {"pro", "enterprise"} and state.get("status") in {"active", "trialing", "enterprise"}
-
-
-def _quota_remaining(user_id: str) -> int | None:
-    if _is_pro(user_id):
+def _consume_quota(db: Session, user_id: str) -> int | None:
+    """Check and increment daily scan quota. Returns remaining count or None for Pro."""
+    if is_pro_account(db, user_id):
         return None
+    limit = _free_daily_limit()
     day = _today()
-    used = USAGE.get(user_id, {}).get(day, 0)
-    return max(FREE_DAILY_LIMIT - used, 0)
-
-
-def _consume_quota(user_id: str) -> int | None:
-    if _is_pro(user_id):
-        return None
-    day = _today()
-    USAGE.setdefault(user_id, {})
-    used = USAGE[user_id].get(day, 0)
-    if used >= FREE_DAILY_LIMIT:
+    used = get_daily_usage(db, user_id, day)
+    if used >= limit:
         raise HTTPException(status_code=402, detail="Free daily scan limit reached. Upgrade to Pro.")
-    USAGE[user_id][day] = used + 1
-    return max(FREE_DAILY_LIMIT - USAGE[user_id][day], 0)
+    new_count = increment_daily_usage(db, user_id, day)
+    return max(limit - new_count, 0)
 
 
 def _fallback_profile(text: str) -> dict[str, Any]:
@@ -129,12 +152,26 @@ def health() -> dict[str, Any]:
 
 
 @app.post("/scan")
-def scan(payload: ScanRequest) -> dict[str, Any]:
-    remaining = _consume_quota(payload.user_id)
+def scan(payload: ScanRequest, db: Session = Depends(get_db)) -> dict[str, Any]:
+    ensure_account(db, payload.user_id)
+    pro = is_pro_account(db, payload.user_id)
+    max_chars = _max_text_chars(pro)
+    if len(payload.text) > max_chars:
+        raise HTTPException(status_code=413, detail=f"Text exceeds {max_chars} character limit for your plan.")
+    remaining = _consume_quota(db, payload.user_id)
     profile = _profile(payload.text)
+    record = ScanRecord(
+        user_id=payload.user_id,
+        plan_at_scan="pro" if pro else "free",
+        content_hash=profile["content_hash"],
+        char_count=profile["metrics"].get("char_count", 0),
+        word_count=profile["metrics"].get("word_count", 0),
+    )
+    db.add(record)
+    db.commit()
     return {
         "disclaimer": DISCLAIMER,
-        "plan": "pro" if _is_pro(payload.user_id) else "free",
+        "plan": "pro" if pro else "free",
         "quota_remaining_today": remaining,
         "metrics": profile["metrics"],
         "fingerprint": profile["fingerprint"],
@@ -145,14 +182,17 @@ def scan(payload: ScanRequest) -> dict[str, Any]:
 
 
 @app.post("/billing/create-checkout-session")
-def create_checkout_session(payload: CheckoutRequest, request: Request) -> dict[str, str]:
-    import os
-
+def create_checkout_session(
+    payload: CheckoutRequest, request: Request, db: Session = Depends(get_db)
+) -> dict[str, str]:
     secret_key = os.getenv("STRIPE_SECRET_KEY")
     price_id = os.getenv("STRIPE_PRO_PRICE_ID")
     frontend_url = os.getenv("FRONTEND_URL", "http://localhost:5173")
     if not secret_key or not price_id:
         raise HTTPException(status_code=503, detail="Stripe is not configured.")
+
+    ensure_account(db, payload.user_id, payload.email)
+    db.commit()
 
     stripe.api_key = secret_key
     session = stripe.checkout.Session.create(
@@ -169,9 +209,11 @@ def create_checkout_session(payload: CheckoutRequest, request: Request) -> dict[
 
 
 @app.post("/webhooks/stripe")
-async def stripe_webhook(request: Request, stripe_signature: str = Header(default="")) -> dict[str, bool]:
-    import os
-
+async def stripe_webhook(
+    request: Request,
+    stripe_signature: str = Header(default=""),
+    db: Session = Depends(get_db),
+) -> dict[str, bool]:
     secret_key = os.getenv("STRIPE_SECRET_KEY")
     webhook_secret = os.getenv("STRIPE_WEBHOOK_SECRET")
     if not secret_key or not webhook_secret:
@@ -186,12 +228,39 @@ async def stripe_webhook(request: Request, stripe_signature: str = Header(defaul
 
     event_type = event["type"]
     data = event["data"]["object"]
+
     if event_type == "checkout.session.completed":
         user_id = data.get("client_reference_id") or data.get("metadata", {}).get("user_id")
         if user_id:
-            SUBSCRIPTIONS[user_id] = {"plan": "pro", "status": "active", "stripe_customer_id": data.get("customer")}
-    elif event_type in {"customer.subscription.deleted", "customer.subscription.paused", "invoice.payment_failed"}:
-        # MVP: real production implementation should map Stripe customer/subscription IDs to persisted users.
-        pass
+            activate_pro(
+                db,
+                user_id=user_id,
+                stripe_customer_id=data.get("customer"),
+                stripe_subscription_id=data.get("subscription"),
+            )
+
+    elif event_type == "customer.subscription.deleted":
+        sub_id = data.get("id")
+        customer_id = data.get("customer")
+        if sub_id:
+            downgrade_subscription(db, sub_id, "cancelled")
+        elif customer_id:
+            downgrade_by_customer(db, customer_id, "cancelled")
+
+    elif event_type == "customer.subscription.paused":
+        sub_id = data.get("id")
+        customer_id = data.get("customer")
+        if sub_id:
+            downgrade_subscription(db, sub_id, "paused")
+        elif customer_id:
+            downgrade_by_customer(db, customer_id, "paused")
+
+    elif event_type == "invoice.payment_failed":
+        customer_id = data.get("customer")
+        sub_id = data.get("subscription")
+        if sub_id:
+            downgrade_subscription(db, sub_id, "past_due")
+        elif customer_id:
+            downgrade_by_customer(db, customer_id, "past_due")
 
     return {"received": True}
