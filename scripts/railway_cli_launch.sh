@@ -139,8 +139,9 @@ info "Running health check: ${HEALTH_URL}"
 
 MAX_RETRIES=10
 SLEEP_SECONDS=6
+CURL_FAILURE_CODE='000'
 for i in $(seq 1 $MAX_RETRIES); do
-  HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 "$HEALTH_URL" 2>/dev/null || echo "000")
+  HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 "$HEALTH_URL" 2>/dev/null || echo "$CURL_FAILURE_CODE")
   if [[ "$HTTP_STATUS" == "200" ]]; then
     ok "Health check passed (HTTP 200)."
     curl -s "$HEALTH_URL" | python3 -m json.tool 2>/dev/null || true
@@ -148,7 +149,7 @@ for i in $(seq 1 $MAX_RETRIES); do
   fi
   warn "Attempt ${i}/${MAX_RETRIES}: got HTTP ${HTTP_STATUS}, waiting ${SLEEP_SECONDS}s..."
   sleep "$SLEEP_SECONDS"
-  if [[ "$i" == "$MAX_RETRIES" ]]; then
+  if [[ $i -eq $MAX_RETRIES ]]; then
     error "Health check failed after ${MAX_RETRIES} attempts. Check Railway logs:"
     echo "  railway logs"
     exit 1
