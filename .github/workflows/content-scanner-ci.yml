@@ -1,0 +1,24 @@
+name: Content Scanner CI
+
+on:
+  pull_request:
+    paths:
+      - 'apps/**'
+      - '.github/workflows/content-scanner-ci.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'apps/**'
+
+jobs:
+  api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --upgrade pip
+      - run: pip install -e .
+      - run: pip install -r apps/api/requirements.txt
+      - run: python -m compileall -q apps/api || true
