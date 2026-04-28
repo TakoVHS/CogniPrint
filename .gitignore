@@ -5,6 +5,14 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 
+# Node / frontend
+node_modules/
+dist/
+*.local
+
+# SQLite dev database
+*.db
+
 workspace/input/*
 !workspace/input/.gitkeep
 !workspace/input/SOURCES.md
