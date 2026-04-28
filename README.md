@@ -2,7 +2,7 @@
 
 **CogniPrint** is a mathematical research framework and reproducible empirical workstation for constructing compact statistical profiles of text - called *cognitive fingerprints* - and studying profile similarity and stability under controlled perturbations.
 
-The project is positioned as a reproducible research methodology and a working empirical evidence package supporting a follow-up manuscript. It is not presented as a commercial product, a definitive judgement system, or a publication-ready empirical paper.
+The public project framing is a reproducible research methodology and a working empirical evidence package supporting a follow-up manuscript. Optional deployment materials for `apps/api` and `apps/web` exist as a separate application layer around the research engine, but they do not replace the current research-first positioning of the repository.
 
 ## Current Empirical Evidence Package
 

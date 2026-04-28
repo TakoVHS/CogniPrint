@@ -2,13 +2,13 @@
 
 ## Status
 
-This branch is reserved for the SaaS product layer around the existing CogniPrint research engine.
+This branch is reserved for an optional application deployment layer around the existing CogniPrint research engine.
 
 The implementation package is prepared externally as `cogniprint-content-scanner-enterprise.zip` and should be unpacked at repository root before opening the final PR.
 
 ## Product boundary
 
-CogniPrint Content Scanner must remain a statistical content profiling and review product. It must not be marketed as legal proof, authorship proof, source guarantee, or final judgment system.
+CogniPrint Content Scanner must remain a statistical content profiling and review surface. It must not be marketed as legal proof, authorship proof, source guarantee, or final judgment system.
 
 ## Target architecture
 

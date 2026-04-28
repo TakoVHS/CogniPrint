@@ -1,10 +1,5 @@
 # CogniPrint Content Scanner Web
 
-React/Vite frontend deployed to Vercel.
+React/Vite frontend for the optional application layer deployed separately from the core research workstation.
 
-Planned pages:
-- high-tech landing page
-- scanner console
-- pricing
-- enterprise contact flow
-- results dashboard with charts
+This frontend is not the primary public scientific surface of CogniPrint. The current research-facing public surface remains the repository documentation, evidence snapshot, manuscript materials, and static site at `cogniprint.org`.

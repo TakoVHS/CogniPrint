@@ -1,6 +1,6 @@
 # CogniPrint Content Scanner — Live Production Runbook
 
-This runbook covers the final production launch path for the SaaS layer.
+This runbook covers an optional production launch path for the application layer around the CogniPrint research engine.
 
 ## 1. Railway backend
 
