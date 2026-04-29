@@ -1,0 +1,10 @@
+{
+  "snapshot_id": "public-benchmark-v1",
+  "status": "planned public benchmark scaffold",
+  "dataset_root": "datasets/public-benchmark-v1",
+  "evidence_root": "evidence/public-benchmark-v1",
+  "released_samples": 0,
+  "released_variants": 0,
+  "counts_source": "not yet populated",
+  "guardrail": "This scaffold does not claim that a public benchmark has been assembled or validated yet."
+}

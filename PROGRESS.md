@@ -31,6 +31,26 @@ Next:
 - continue manuscript consolidation from the clean Methods, Results, Limitations, and evidence table;
 - obtain external review on the evidence package and manuscript draft.
 
+## 2026-04-29 — Public Benchmark Scaffold v1
+
+Completed:
+- added `docs/due-diligence-response.md` for technical reviewers;
+- added `docs/public-benchmark-plan.md` to define the next empirical maturity step;
+- added `docs/statistical-validation-plan.md` to separate current descriptive evidence from later validation work;
+- added `paper/empirical-stability-v1.md` as a manuscript draft scaffold for the follow-up paper;
+- added `datasets/public-benchmark-v1/` as a public benchmark scaffold with metadata templates;
+- added `evidence/public-benchmark-v1/` as a zero-count public benchmark evidence scaffold.
+
+Current status:
+- the benchmark layer is now scaffolded in the repository;
+- no public benchmark samples are claimed as released yet;
+- the active public empirical package remains `evidence/empirical-v1/`.
+
+Next:
+- prepare a first small benchmark corpus with explicit licensing and provenance;
+- request external review on the current evidence package and manuscript layer;
+- implement the planned statistical validation layer after benchmark assembly.
+
 ## 2026-04-20
 
 Completed:
