@@ -1,6 +1,6 @@
-# Statistical Validation v1
+# Statistical Validation v1.1
 
-This directory contains the first implemented descriptive statistical validation layer for CogniPrint.
+This directory contains the expanded descriptive statistical validation layer for CogniPrint.
 
 ## Current coverage
 
@@ -10,6 +10,7 @@ This directory contains the first implemented descriptive statistical validation
 - public benchmark variants reviewed: `36`
 - shared campaign axes summarized: `12`
 - benchmark axes summarized: `6`
+- overlapping bridge axes summarized: `6`
 
 ## Guardrail
 

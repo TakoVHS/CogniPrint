@@ -20,6 +20,7 @@
     "group_count": 1,
     "mean_cosine_similarity": 0.990595,
     "mean_euclidean_distance": 9.016583,
+    "mean_manhattan_distance": 10.608102,
     "row_count": 6
   },
   {
@@ -43,6 +44,7 @@
     "group_count": 1,
     "mean_cosine_similarity": 0.996753,
     "mean_euclidean_distance": 4.983856,
+    "mean_manhattan_distance": 6.223191,
     "row_count": 6
   },
   {
@@ -66,6 +68,7 @@
     "group_count": 1,
     "mean_cosine_similarity": 0.990321,
     "mean_euclidean_distance": 9.356799,
+    "mean_manhattan_distance": 11.290178,
     "row_count": 6
   },
   {
@@ -89,6 +92,7 @@
     "group_count": 1,
     "mean_cosine_similarity": 0.999525,
     "mean_euclidean_distance": 0.200403,
+    "mean_manhattan_distance": 0.203515,
     "row_count": 6
   },
   {
@@ -112,6 +116,7 @@
     "group_count": 1,
     "mean_cosine_similarity": 0.993089,
     "mean_euclidean_distance": 7.154827,
+    "mean_manhattan_distance": 7.317966,
     "row_count": 6
   },
   {
@@ -135,6 +140,7 @@
     "group_count": 1,
     "mean_cosine_similarity": 0.999269,
     "mean_euclidean_distance": 2.853086,
+    "mean_manhattan_distance": 3.336298,
     "row_count": 6
   }
 ]

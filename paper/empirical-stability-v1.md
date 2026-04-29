@@ -31,7 +31,18 @@ The public artifact policy excludes raw local-only inputs from the public snapsh
 
 ## Results
 
-The current campaign outputs show observed patterns, measured shifts, profile differences, perturbation effects, and stability tendencies across the present corpus. The current validation layer adds bootstrap interval summaries, benchmark-versus-campaign bridge summaries, seeded random baseline references, and threshold sensitivity outputs. These materials remain descriptive. They do not establish inferential statistical support and should not be generalized beyond the current campaign set.
+The current campaign outputs show observed patterns, measured shifts, profile differences, perturbation effects, and stability tendencies across the present corpus. The current validation layer adds bootstrap interval summaries, benchmark-versus-campaign bridge summaries, repeatable multi-draw random baseline references, and threshold sensitivity outputs across cosine, Euclidean, and Manhattan metric families. These materials remain descriptive. They do not establish inferential statistical support and should not be generalized beyond the current campaign set.
+
+## Validation Layer v1.1
+
+The current validation layer should be read as a bridge between campaign-level evidence and a broader benchmark programme. In its current v1.1 state it contributes four practical elements:
+
+- repeatable multi-draw cross-baseline random reference distributions from the released benchmark subset;
+- threshold-sensitivity summaries across several metric families rather than a single Euclidean convention;
+- richer benchmark-versus-campaign bridge rows for overlapping perturbation axes;
+- benchmark-linked validation summaries that can be cited in manuscript drafting without exposing local-only raw inputs.
+
+This v1.1 layer improves interpretability but does not remove the descriptive and corpus-bound character of the current evidence package.
 
 ## Limitations
 
@@ -43,9 +54,9 @@ The present repository state is stronger than a framework scaffold alone because
 
 ## Future Work
 
-- prepare a public benchmark corpus with explicit licensing and provenance;
-- implement a statistical validation layer;
+- expand the released public benchmark corpus with broader source classes and language coverage;
 - strengthen the current descriptive validation layer into a broader inferential program;
+- add richer random-reference and threshold-review outputs where they remain empirically justified;
 - expand campaign diversity and corpus heterogeneity;
 - incorporate colleague review feedback into the next manuscript iteration.
 

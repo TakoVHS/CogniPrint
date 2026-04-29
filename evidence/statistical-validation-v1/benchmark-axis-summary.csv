@@ -1,7 +1,7 @@
-axis,row_count,group_count,mean_cosine_similarity,mean_euclidean_distance,cosine_bootstrap_lower,cosine_bootstrap_upper,euclidean_bootstrap_lower,euclidean_bootstrap_upper
-compressed_version,6,1,0.990595,9.016583,0.984635,0.99624,3.567167,14.677736
-formalized_style,6,1,0.996753,4.983856,0.99486,0.998295,2.6558,7.475502
-informalized_style,6,1,0.990321,9.356799,0.985532,0.994623,4.844318,13.383252
-punctuation_cleanup,6,1,0.999525,0.200403,0.998575,1.0,0.005401,0.58757
-sentence_split_merge,6,1,0.993089,7.154827,0.988867,0.996075,3.761454,10.22297
-word_order_shift,6,1,0.999269,2.853086,0.998831,0.999678,1.025828,4.813902
+axis,row_count,group_count,mean_cosine_similarity,mean_euclidean_distance,mean_manhattan_distance,cosine_bootstrap_lower,cosine_bootstrap_upper,euclidean_bootstrap_lower,euclidean_bootstrap_upper
+compressed_version,6,1,0.990595,9.016583,10.608102,0.984635,0.99624,3.567167,14.677736
+formalized_style,6,1,0.996753,4.983856,6.223191,0.99486,0.998295,2.6558,7.475502
+informalized_style,6,1,0.990321,9.356799,11.290178,0.985532,0.994623,4.844318,13.383252
+punctuation_cleanup,6,1,0.999525,0.200403,0.203515,0.998575,1.0,0.005401,0.58757
+sentence_split_merge,6,1,0.993089,7.154827,7.317966,0.988867,0.996075,3.761454,10.22297
+word_order_shift,6,1,0.999269,2.853086,3.336298,0.998831,0.999678,1.025828,4.813902

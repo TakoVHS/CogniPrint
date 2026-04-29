@@ -10,7 +10,7 @@ The earlier repository state was organized but still closer to a framework and w
 
 ## What has changed after the feedback
 
-The repository now contains a public empirical evidence snapshot, a released public benchmark subset, colleague-facing review materials, an initial descriptive statistical validation layer, a manuscript-drafting layer, and clearer public framing about the scope and limits of the current corpus.
+The repository now contains a public empirical evidence snapshot, a released public benchmark subset, colleague-facing review materials, an expanded descriptive statistical validation layer, a manuscript-drafting layer, and clearer public framing about the scope and limits of the current corpus.
 
 ## What is now public and auditable
 
@@ -40,7 +40,7 @@ The public snapshot under `evidence/empirical-v1/` includes:
 
 These files provide a stable public summary of the current empirical base without exposing raw local-only input texts.
 
-The repository also now exposes a released benchmark subset under `evidence/public-benchmark-v1/` and a descriptive validation layer under `evidence/statistical-validation-v1/`. Those layers remain bounded and should be read as validation-oriented evidence rather than as a finished benchmark program.
+The repository also now exposes a released benchmark subset under `evidence/public-benchmark-v1/` and a descriptive validation layer under `evidence/statistical-validation-v1/`. That validation layer now includes repeatable random-reference summaries, threshold review across multiple metric families, and benchmark-versus-campaign bridge artifacts. These layers remain bounded and should be read as validation-oriented evidence rather than as a finished benchmark program.
 
 ## What is still not finished
 

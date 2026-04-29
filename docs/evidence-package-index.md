@@ -12,7 +12,7 @@ The current evidence package is based on:
 - `41` comparison rows;
 - provenance-linked inputs;
 - released benchmark subset materials;
-- descriptive statistical validation outputs;
+- expanded descriptive statistical validation outputs;
 - dataset scaffolds;
 - campaign summaries;
 - clean Methods, Results, and Limitations drafting materials.
@@ -27,16 +27,17 @@ Campaign `empirical-campaign-004` contributes `1` controlled perturbation series
 4. `docs/colleague-review-checklist.md`
 5. `evidence/public-benchmark-v1/coverage-summary.md`
 6. `evidence/statistical-validation-v1/results-summary.md`
-7. `evidence/statistical-validation-v1/limitations-summary.md`
-8. `workspace/reports/paper-2/clean-methods-section.md`
-9. `workspace/reports/paper-2/clean-results-section.md`
-10. `workspace/reports/paper-2/clean-limitations-section.md`
-11. `workspace/reports/paper-2/evidence-table.md`
-12. `workspace/reports/paper-2/follow-up-manuscript-draft.md`
-13. `workspace/share/colleague-pack-004/one-page-summary.md`
-14. `workspace/share/colleague-pack-004/what-to-send-colleagues.md`
-15. `workspace/share/colleague-pack-004/email-to-colleagues.md`
-16. `workspace/share/colleague-pack-004/review-request-message.md`
+7. `evidence/statistical-validation-v1/benchmark-campaign-bridge-summary.md`
+8. `evidence/statistical-validation-v1/limitations-summary.md`
+9. `workspace/reports/paper-2/clean-methods-section.md`
+10. `workspace/reports/paper-2/clean-results-section.md`
+11. `workspace/reports/paper-2/clean-limitations-section.md`
+12. `workspace/reports/paper-2/evidence-table.md`
+13. `workspace/reports/paper-2/follow-up-manuscript-draft.md`
+14. `workspace/share/colleague-pack-004/one-page-summary.md`
+15. `workspace/share/colleague-pack-004/what-to-send-colleagues.md`
+16. `workspace/share/colleague-pack-004/email-to-colleagues.md`
+17. `workspace/share/colleague-pack-004/review-request-message.md`
 
 ## What this package is for
 

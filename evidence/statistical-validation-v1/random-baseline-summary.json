@@ -1,26 +1,80 @@
 {
   "cosine_similarity": {
-    "count": 36,
-    "max": 1.0,
-    "mean": 0.994351,
-    "median": 0.997059,
-    "min": 0.978311
+    "draw_mean_bootstrap": {
+      "confidence": 0.95,
+      "count": 64,
+      "lower": 0.994557,
+      "mean": 0.994825,
+      "resamples": 2000,
+      "upper": 0.995081
+    },
+    "draw_mean_summary": {
+      "count": 64,
+      "max": 0.997303,
+      "mean": 0.994825,
+      "median": 0.99479,
+      "min": 0.992862
+    },
+    "pooled_summary": {
+      "count": 2304,
+      "max": 1.0,
+      "mean": 0.994825,
+      "median": 0.997149,
+      "min": 0.978311
+    }
   },
+  "draw_count": 64,
   "euclidean_distance": {
-    "count": 36,
-    "max": 18.544352,
-    "mean": 6.160437,
-    "median": 4.265335,
-    "min": 0.005086
+    "draw_mean_bootstrap": {
+      "confidence": 0.95,
+      "count": 64,
+      "lower": 5.536993,
+      "mean": 5.783678,
+      "resamples": 2000,
+      "upper": 6.025547
+    },
+    "draw_mean_summary": {
+      "count": 64,
+      "max": 8.819288,
+      "mean": 5.783678,
+      "median": 5.748587,
+      "min": 3.71343
+    },
+    "pooled_summary": {
+      "count": 2304,
+      "max": 18.544352,
+      "mean": 5.783678,
+      "median": 3.050177,
+      "min": 0.003535
+    }
   },
   "manhattan_distance": {
-    "count": 36,
-    "max": 21.300696,
-    "mean": 7.133944,
-    "median": 5.072217,
-    "min": 0.007168
+    "draw_mean_bootstrap": {
+      "confidence": 0.95,
+      "count": 64,
+      "lower": 6.413228,
+      "mean": 6.687673,
+      "resamples": 2000,
+      "upper": 6.957549
+    },
+    "draw_mean_summary": {
+      "count": 64,
+      "max": 10.107801,
+      "mean": 6.687673,
+      "median": 6.600428,
+      "min": 4.333331
+    },
+    "pooled_summary": {
+      "count": 2304,
+      "max": 21.300696,
+      "mean": 6.687673,
+      "median": 4.436227,
+      "min": 0.004982
+    }
   },
-  "pair_count": 36,
+  "mode": "repeatable multi-draw cross-baseline reference distribution",
+  "pair_count_per_draw": 36,
   "seed": 1729,
-  "source_note": "Random baseline uses seeded cross-baseline benchmark variant pairings rather than matched same-baseline perturbations."
+  "source_note": "Random baseline uses repeatable seeded cross-baseline benchmark variant draws rather than matched same-baseline perturbations.",
+  "total_pairs": 2304
 }

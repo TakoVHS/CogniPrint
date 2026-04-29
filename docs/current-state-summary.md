@@ -16,7 +16,7 @@ CogniPrint currently consists of:
 - manuscript-oriented empirical drafting outputs;
 - a public colleague-readable empirical evidence summary: `docs/empirical-evidence-summary-v1.md`;
 - a released public benchmark subset under `datasets/public-benchmark-v1/` and `evidence/public-benchmark-v1/`;
-- an initial descriptive statistical validation layer under `evidence/statistical-validation-v1/`.
+- an expanded descriptive statistical validation layer under `evidence/statistical-validation-v1/`.
 
 ## Correct public framing
 
@@ -42,8 +42,8 @@ The current value of the project is that it provides:
 2. explicit empirical artifacts for scientific review;
 3. manuscript-oriented outputs that can support a stronger second empirical paper;
 4. a concise evidence summary for colleagues and reviewers.
-5. a benchmark-linked validation layer that bridges public benchmark axes with campaign-level evidence.
+5. a benchmark-linked validation layer that bridges public benchmark axes with campaign-level evidence, multi-draw random references, and threshold sensitivity review across several metrics.
 
 ## Practical next step
 
-The next scientific step is to refine the current validation layer by adding a stronger random reference model, threshold sensitivity review, and broader benchmark diversity, then fold those outputs into the follow-up manuscript and external review loop.
+The next scientific step is to use the expanded validation layer in external review, then decide which parts justify a stronger inferential implementation beyond the current descriptive package.

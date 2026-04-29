@@ -7,5 +7,6 @@
   "campaign_axis_count": 12,
   "empirical_campaign_count": 5,
   "empirical_comparison_row_count": 41,
-  "snapshot_id": "statistical-validation-v1"
+  "shared_bridge_axis_count": 6,
+  "snapshot_id": "statistical-validation-v1.1"
 }

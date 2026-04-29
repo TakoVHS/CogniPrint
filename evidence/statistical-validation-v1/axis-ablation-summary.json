@@ -20,6 +20,7 @@
     "group_count": 3,
     "mean_cosine_similarity": 0.99418,
     "mean_euclidean_distance": 3.522476,
+    "mean_manhattan_distance": 4.228894,
     "row_count": 3
   },
   {
@@ -43,6 +44,7 @@
     "group_count": 3,
     "mean_cosine_similarity": 0.990458,
     "mean_euclidean_distance": 4.681358,
+    "mean_manhattan_distance": 5.619359,
     "row_count": 3
   },
   {
@@ -66,6 +68,7 @@
     "group_count": 3,
     "mean_cosine_similarity": 0.999374,
     "mean_euclidean_distance": 1.038277,
+    "mean_manhattan_distance": 1.776839,
     "row_count": 3
   },
   {
@@ -89,6 +92,7 @@
     "group_count": 3,
     "mean_cosine_similarity": 0.99785,
     "mean_euclidean_distance": 1.527384,
+    "mean_manhattan_distance": 2.455715,
     "row_count": 3
   },
   {
@@ -112,6 +116,7 @@
     "group_count": 5,
     "mean_cosine_similarity": 0.983409,
     "mean_euclidean_distance": 2.990434,
+    "mean_manhattan_distance": 3.962185,
     "row_count": 7
   },
   {
@@ -135,6 +140,7 @@
     "group_count": 3,
     "mean_cosine_similarity": 0.999968,
     "mean_euclidean_distance": 0.144192,
+    "mean_manhattan_distance": 0.192468,
     "row_count": 3
   },
   {
@@ -158,6 +164,7 @@
     "group_count": 3,
     "mean_cosine_similarity": 0.996644,
     "mean_euclidean_distance": 3.707315,
+    "mean_manhattan_distance": 3.712973,
     "row_count": 3
   },
   {
@@ -181,6 +188,7 @@
     "group_count": 3,
     "mean_cosine_similarity": 0.984256,
     "mean_euclidean_distance": 3.447801,
+    "mean_manhattan_distance": 3.739148,
     "row_count": 3
   },
   {
@@ -204,6 +212,7 @@
     "group_count": 3,
     "mean_cosine_similarity": 0.9708,
     "mean_euclidean_distance": 4.191884,
+    "mean_manhattan_distance": 6.25405,
     "row_count": 4
   },
   {
@@ -227,6 +236,7 @@
     "group_count": 3,
     "mean_cosine_similarity": 0.989811,
     "mean_euclidean_distance": 1.738515,
+    "mean_manhattan_distance": 2.612161,
     "row_count": 3
   },
   {
@@ -250,6 +260,7 @@
     "group_count": 3,
     "mean_cosine_similarity": 0.994949,
     "mean_euclidean_distance": 2.198266,
+    "mean_manhattan_distance": 3.71489,
     "row_count": 3
   },
   {
@@ -273,6 +284,7 @@
     "group_count": 3,
     "mean_cosine_similarity": 0.999354,
     "mean_euclidean_distance": 1.108345,
+    "mean_manhattan_distance": 1.436529,
     "row_count": 3
   }
 ]

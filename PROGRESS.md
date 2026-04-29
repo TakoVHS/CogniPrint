@@ -64,6 +64,26 @@ Next:
 - request external review on the current evidence package and manuscript layer;
 - implement the planned statistical validation layer after benchmark assembly.
 
+## 2026-04-29 — Statistical Validation v1.1
+
+Completed:
+- expanded `evidence/statistical-validation-v1/` from a first-pass descriptive layer into a stronger v1.1 validation package;
+- added repeatable multi-draw cross-baseline random reference summaries;
+- added threshold-sensitivity outputs across cosine, Euclidean, and Manhattan metric families;
+- added richer benchmark-versus-campaign bridge outputs and a dedicated bridge summary;
+- updated `paper/empirical-stability-v1.md` to include a separate validation-layer section;
+- updated public evidence and review routes to surface the benchmark and validation layer more clearly.
+
+Current status:
+- the repository now contains a released benchmark subset and an expanded descriptive validation layer;
+- the validation package remains descriptive and corpus-bound;
+- it should still be read as support for a follow-up manuscript rather than as a completed inferential programme.
+
+Next:
+- use the current validation layer in external review;
+- decide which validation components justify a stronger inferential implementation;
+- expand corpus diversity only where provenance and release criteria remain clear.
+
 ## 2026-04-20
 
 Completed:

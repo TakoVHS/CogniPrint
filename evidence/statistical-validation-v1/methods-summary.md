@@ -1,6 +1,6 @@
-# Statistical Validation v1 Methods Summary
+# Statistical Validation v1.1 Methods Summary
 
-This package aggregates campaign-level comparison rows and benchmark-subset comparison rows into an initial descriptive validation layer.
+This package aggregates campaign-level comparison rows and benchmark-subset comparison rows into an expanded descriptive validation layer.
 
 ## Inputs
 
@@ -15,8 +15,8 @@ This package aggregates campaign-level comparison rows and benchmark-subset comp
 - per-axis descriptive summaries for campaign rows and benchmark rows;
 - within-campaign and between-campaign variance summaries;
 - Hedges' g comparisons against the light-edit reference axis;
-- seeded cross-baseline random pairing reference from released benchmark variants;
-- threshold-sensitivity summaries around the current Euclidean interpretation convention;
-- benchmark-versus-campaign bridge summaries for overlapping perturbation axes.
+- repeatable multi-draw cross-baseline random reference distributions from released benchmark variants;
+- threshold-sensitivity summaries across cosine, Euclidean, and Manhattan metric families;
+- benchmark-versus-campaign bridge summaries for overlapping perturbation axes with alignment bands.
 
 No statistical significance claims are made in this layer.
