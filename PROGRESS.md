@@ -39,7 +39,8 @@ Completed:
 - added `docs/statistical-validation-plan.md` to separate current descriptive evidence from later validation work;
 - added `paper/empirical-stability-v1.md` as a manuscript draft scaffold for the follow-up paper;
 - added `datasets/public-benchmark-v1/` as a public benchmark scaffold with metadata templates;
-- added `evidence/public-benchmark-v1/` as a zero-count public benchmark evidence scaffold.
+- added `evidence/public-benchmark-v1/` as a zero-count public benchmark evidence scaffold;
+- added a first verified candidate-source intake layer in `datasets/public-benchmark-v1/metadata/candidate-sources.csv`.
 
 Current status:
 - the benchmark layer is now scaffolded in the repository;

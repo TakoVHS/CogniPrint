@@ -15,3 +15,9 @@ Each released sample in `public-benchmark-v1` should have:
 - usage note
 
 Do not add benchmark samples here without clear provenance and licensing.
+
+Current intake files:
+
+- `provenance-template.csv` — empty schema for released benchmark rows
+- `candidate-sources.csv` — verified public-source candidate pool for the first benchmark pass
+- `selection-notes.md` — benchmark intake notes and next-step guidance

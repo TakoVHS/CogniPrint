@@ -23,3 +23,11 @@ The first benchmark package is planned to include:
 ## Guardrail
 
 Do not treat this directory as a released benchmark corpus yet. It is a planning scaffold for the next empirical maturity step.
+
+## Current intake status
+
+The repository now includes a candidate-source intake file under:
+
+- `metadata/candidate-sources.csv`
+
+These rows identify verified public candidate sources for the first benchmark pass. They do not mean benchmark samples have already been released into `raw/` or `variants/`.
