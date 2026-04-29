@@ -19,7 +19,9 @@ The current project materials include:
 - multi-campaign summaries and CSV/JSON exports;
 - colleague-facing share packs;
 - clean Methods, Results, and Limitations drafting materials for a follow-up manuscript;
-- a local follow-up manuscript draft assembled from the current evidence package.
+- a local follow-up manuscript draft assembled from the current evidence package;
+- a released public benchmark subset with explicit provenance and perturbation-axis metadata;
+- an initial descriptive statistical validation layer built from real campaign artifacts and benchmark coverage.
 
 ## Empirical base
 
@@ -29,6 +31,13 @@ The current local empirical base contains:
 - `41` comparison rows across those campaigns;
 - provenance-linked input records;
 - generated campaign summaries, appendix-oriented notes, and table-ready outputs.
+
+The current public benchmark layer contains:
+
+- `6` released baseline excerpts;
+- `36` released controlled variants;
+- `3` released languages;
+- `6` released perturbation axes.
 
 Campaign `empirical-campaign-004` contributes:
 
@@ -54,6 +63,8 @@ The current outputs are useful for colleague review because they provide explici
 
 No broad corpus-level claim is made from the current material. The present outputs document observed behavior inside the controlled campaigns that have been run so far.
 
+The current validation layer adds bootstrap mean intervals, axis-level ablation summaries, seeded random baseline summaries, threshold sensitivity outputs, and benchmark-versus-campaign bridge summaries. These remain descriptive and should not be read as inferential certainty claims.
+
 ## Limitations summary
 
 The current evidence package remains bounded by several limitations:
@@ -64,6 +75,7 @@ The current evidence package remains bounded by several limitations:
 - the outputs describe profile behavior only;
 - the current materials are intended for research review and manuscript preparation;
 - further work requires larger corpora, more heterogeneous domains, and stronger comparative baselines.
+- the current statistical layer is still descriptive and does not constitute a completed inferential program.
 
 ## What can be claimed
 
@@ -78,6 +90,7 @@ It is appropriate to say that CogniPrint currently has:
 - clean Methods, Results, and Limitations drafting materials for a follow-up manuscript.
 
 It is also appropriate to discuss observed profile shifts, measured metric deltas, and stability tendencies within the current controlled corpus.
+It is also appropriate to discuss the released benchmark subset and the initial descriptive statistical validation layer as bridge materials between campaign-level evidence and a broader benchmark program.
 
 ## What must not be claimed
 

@@ -8,6 +8,8 @@ This directory contains the first implemented descriptive statistical validation
 - empirical comparison rows reviewed: `41`
 - public benchmark baselines reviewed: `6`
 - public benchmark variants reviewed: `36`
+- shared campaign axes summarized: `12`
+- benchmark axes summarized: `6`
 
 ## Guardrail
 

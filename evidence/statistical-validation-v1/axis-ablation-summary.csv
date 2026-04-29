@@ -1,4 +1,4 @@
-axis,row_count,campaign_count,mean_cosine_similarity,mean_euclidean_distance,cosine_bootstrap_lower,cosine_bootstrap_upper,euclidean_bootstrap_lower,euclidean_bootstrap_upper
+axis,row_count,group_count,mean_cosine_similarity,mean_euclidean_distance,cosine_bootstrap_lower,cosine_bootstrap_upper,euclidean_bootstrap_lower,euclidean_bootstrap_upper
 compressed_version,3,3,0.99418,3.522476,0.989334,0.997725,1.026511,6.023463
 expanded_version,3,3,0.990458,4.681358,0.977413,0.998375,2.759222,7.222145
 formalized_style,3,3,0.999374,1.038277,0.998232,0.999964,0.569884,1.457738

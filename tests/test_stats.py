@@ -32,6 +32,10 @@ class StatsTests(unittest.TestCase):
             campaign_dir.mkdir(parents=True)
             benchmark_dir = root / "datasets" / "public-benchmark-v1" / "metadata"
             benchmark_dir.mkdir(parents=True)
+            raw_dir = root / "raw"
+            variant_dir = root / "variants"
+            raw_dir.mkdir()
+            variant_dir.mkdir()
             output_dir = root / "evidence" / "statistical-validation-v1"
             rows = [
                 {
@@ -77,12 +81,14 @@ class StatsTests(unittest.TestCase):
                 + "\n",
                 encoding="utf-8",
             )
+            (raw_dir / "a.txt").write_text("A compact baseline text for benchmark validation.", encoding="utf-8")
+            (variant_dir / "a1.txt").write_text("A compact benchmark variant with punctuation and wording shifts.", encoding="utf-8")
             (benchmark_dir / "samples.csv").write_text(
                 "\n".join(
                     [
                         "sample_id,relation_type,baseline_sample_id,sample_title,file_path,source_candidate_id,license,source_url,acquisition_date,source_class,language,release_status,usage_note",
-                        "pbv1-sample-001-baseline,baseline,,Sample A,raw/a.txt,pbv1-cand-001,public-domain,https://example.org/a,2026-04-29,public-domain literary text,en,released,test",
-                        "pbv1-sample-001-variant-a,punctuation_cleanup,pbv1-sample-001-baseline,Sample A punctuation,variants/a1.txt,pbv1-cand-001,derived,https://example.org/a,2026-04-29,controlled public benchmark variant,en,released,test",
+                        f"pbv1-sample-001-baseline,baseline,,Sample A,{raw_dir / 'a.txt'},pbv1-cand-001,public-domain,https://example.org/a,2026-04-29,public-domain literary text,en,released,test",
+                        f"pbv1-sample-001-variant-a,punctuation_cleanup,pbv1-sample-001-baseline,Sample A punctuation,{variant_dir / 'a1.txt'},pbv1-cand-001,derived,https://example.org/a,2026-04-29,controlled public benchmark variant,en,released,test",
                     ]
                 )
                 + "\n",
@@ -115,11 +121,15 @@ class StatsTests(unittest.TestCase):
             self.assertTrue((output_dir / "bootstrap-summary.json").exists())
             self.assertTrue((output_dir / "effect-size-summary.json").exists())
             self.assertTrue((output_dir / "axis-ablation-summary.csv").exists())
+            self.assertTrue((output_dir / "random-baseline-summary.json").exists())
+            self.assertTrue((output_dir / "threshold-sensitivity.json").exists())
+            self.assertTrue((output_dir / "benchmark-campaign-bridge.json").exists())
             manifest = json.loads((output_dir / "manifest.json").read_text(encoding="utf-8"))
             counts = json.loads((output_dir / "counts.json").read_text(encoding="utf-8"))
             self.assertEqual(manifest["status"], "initial descriptive statistical validation layer")
             self.assertEqual(counts["empirical_campaign_count"], 1)
             self.assertEqual(counts["benchmark_baseline_count"], 1)
+            self.assertEqual(counts["benchmark_axis_count"], 1)
 
 
 if __name__ == "__main__":

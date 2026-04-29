@@ -1,0 +1,26 @@
+{
+  "cosine_similarity": {
+    "count": 36,
+    "max": 1.0,
+    "mean": 0.994351,
+    "median": 0.997059,
+    "min": 0.978311
+  },
+  "euclidean_distance": {
+    "count": 36,
+    "max": 18.544352,
+    "mean": 6.160437,
+    "median": 4.265335,
+    "min": 0.005086
+  },
+  "manhattan_distance": {
+    "count": 36,
+    "max": 21.300696,
+    "mean": 7.133944,
+    "median": 5.072217,
+    "min": 0.007168
+  },
+  "pair_count": 36,
+  "seed": 1729,
+  "source_note": "Random baseline uses seeded cross-baseline benchmark variant pairings rather than matched same-baseline perturbations."
+}

@@ -1,0 +1,4 @@
+grid,low_max,moderate_max,campaign_low,campaign_moderate,campaign_larger,benchmark_low,benchmark_moderate,benchmark_larger
+strict,0.5,2.0,9,9,23,6,8,22
+current,1.0,4.0,12,13,16,7,13,16
+relaxed,1.5,5.0,17,19,5,12,8,16

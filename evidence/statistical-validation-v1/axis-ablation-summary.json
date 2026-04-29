@@ -1,7 +1,6 @@
 [
   {
     "axis": "compressed_version",
-    "campaign_count": 3,
     "cosine_bootstrap": {
       "confidence": 0.95,
       "count": 3,
@@ -18,13 +17,13 @@
       "resamples": 2000,
       "upper": 6.023463
     },
+    "group_count": 3,
     "mean_cosine_similarity": 0.99418,
     "mean_euclidean_distance": 3.522476,
     "row_count": 3
   },
   {
     "axis": "expanded_version",
-    "campaign_count": 3,
     "cosine_bootstrap": {
       "confidence": 0.95,
       "count": 3,
@@ -41,13 +40,13 @@
       "resamples": 2000,
       "upper": 7.222145
     },
+    "group_count": 3,
     "mean_cosine_similarity": 0.990458,
     "mean_euclidean_distance": 4.681358,
     "row_count": 3
   },
   {
     "axis": "formalized_style",
-    "campaign_count": 3,
     "cosine_bootstrap": {
       "confidence": 0.95,
       "count": 3,
@@ -64,13 +63,13 @@
       "resamples": 2000,
       "upper": 1.457738
     },
+    "group_count": 3,
     "mean_cosine_similarity": 0.999374,
     "mean_euclidean_distance": 1.038277,
     "row_count": 3
   },
   {
     "axis": "informalized_style",
-    "campaign_count": 3,
     "cosine_bootstrap": {
       "confidence": 0.95,
       "count": 3,
@@ -87,13 +86,13 @@
       "resamples": 2000,
       "upper": 2.299288
     },
+    "group_count": 3,
     "mean_cosine_similarity": 0.99785,
     "mean_euclidean_distance": 1.527384,
     "row_count": 3
   },
   {
     "axis": "light_edit",
-    "campaign_count": 5,
     "cosine_bootstrap": {
       "confidence": 0.95,
       "count": 7,
@@ -110,13 +109,13 @@
       "resamples": 2000,
       "upper": 4.063923
     },
+    "group_count": 5,
     "mean_cosine_similarity": 0.983409,
     "mean_euclidean_distance": 2.990434,
     "row_count": 7
   },
   {
     "axis": "minor_lexical_substitution",
-    "campaign_count": 3,
     "cosine_bootstrap": {
       "confidence": 0.95,
       "count": 3,
@@ -133,13 +132,13 @@
       "resamples": 2000,
       "upper": 0.272972
     },
+    "group_count": 3,
     "mean_cosine_similarity": 0.999968,
     "mean_euclidean_distance": 0.144192,
     "row_count": 3
   },
   {
     "axis": "punctuation_cleanup",
-    "campaign_count": 3,
     "cosine_bootstrap": {
       "confidence": 0.95,
       "count": 3,
@@ -156,13 +155,13 @@
       "resamples": 2000,
       "upper": 6.000001
     },
+    "group_count": 3,
     "mean_cosine_similarity": 0.996644,
     "mean_euclidean_distance": 3.707315,
     "row_count": 3
   },
   {
     "axis": "sentence_split_merge",
-    "campaign_count": 3,
     "cosine_bootstrap": {
       "confidence": 0.95,
       "count": 3,
@@ -179,13 +178,13 @@
       "resamples": 2000,
       "upper": 5.829847
     },
+    "group_count": 3,
     "mean_cosine_similarity": 0.984256,
     "mean_euclidean_distance": 3.447801,
     "row_count": 3
   },
   {
     "axis": "strong_rewrite",
-    "campaign_count": 3,
     "cosine_bootstrap": {
       "confidence": 0.95,
       "count": 4,
@@ -202,13 +201,13 @@
       "resamples": 2000,
       "upper": 4.191884
     },
+    "group_count": 3,
     "mean_cosine_similarity": 0.9708,
     "mean_euclidean_distance": 4.191884,
     "row_count": 4
   },
   {
     "axis": "strong_rewrite_same_claim",
-    "campaign_count": 3,
     "cosine_bootstrap": {
       "confidence": 0.95,
       "count": 3,
@@ -225,13 +224,13 @@
       "resamples": 2000,
       "upper": 4.213654
     },
+    "group_count": 3,
     "mean_cosine_similarity": 0.989811,
     "mean_euclidean_distance": 1.738515,
     "row_count": 3
   },
   {
     "axis": "translated_or_crosslingual",
-    "campaign_count": 3,
     "cosine_bootstrap": {
       "confidence": 0.95,
       "count": 3,
@@ -248,13 +247,13 @@
       "resamples": 2000,
       "upper": 2.512189
     },
+    "group_count": 3,
     "mean_cosine_similarity": 0.994949,
     "mean_euclidean_distance": 2.198266,
     "row_count": 3
   },
   {
     "axis": "word_order_shift",
-    "campaign_count": 3,
     "cosine_bootstrap": {
       "confidence": 0.95,
       "count": 3,
@@ -271,6 +270,7 @@
       "resamples": 2000,
       "upper": 3.228437
     },
+    "group_count": 3,
     "mean_cosine_similarity": 0.999354,
     "mean_euclidean_distance": 1.108345,
     "row_count": 3

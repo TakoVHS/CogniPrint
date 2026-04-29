@@ -10,7 +10,7 @@ The earlier repository state was organized but still closer to a framework and w
 
 ## What has changed after the feedback
 
-The repository now contains a public empirical evidence snapshot, colleague-facing review materials, a manuscript-drafting layer, and clearer public framing about the scope and limits of the current corpus.
+The repository now contains a public empirical evidence snapshot, a released public benchmark subset, colleague-facing review materials, an initial descriptive statistical validation layer, a manuscript-drafting layer, and clearer public framing about the scope and limits of the current corpus.
 
 ## What is now public and auditable
 
@@ -22,6 +22,8 @@ The following materials are now available for review:
 - `docs/public-review-bundle.md`
 - `docs/colleague-review-checklist.md`
 - `docs/current-state-summary.md`
+- `evidence/public-benchmark-v1/`
+- `evidence/statistical-validation-v1/`
 - website routes `/evidence/` and `/review/`
 
 ## What the public evidence snapshot contains
@@ -38,11 +40,13 @@ The public snapshot under `evidence/empirical-v1/` includes:
 
 These files provide a stable public summary of the current empirical base without exposing raw local-only input texts.
 
+The repository also now exposes a released benchmark subset under `evidence/public-benchmark-v1/` and a descriptive validation layer under `evidence/statistical-validation-v1/`. Those layers remain bounded and should be read as validation-oriented evidence rather than as a finished benchmark program.
+
 ## What is still not finished
 
 - The current empirical base remains small and corpus-bound.
 - The statistical layer remains descriptive rather than inferential.
-- A public benchmark corpus with broad licensing coverage has not yet been assembled.
+- The public benchmark corpus is still small and excerpt-based.
 - External review and benchmark-oriented validation are still future steps.
 
 ## What would be required for the next maturity level

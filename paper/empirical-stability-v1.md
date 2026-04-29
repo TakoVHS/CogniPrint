@@ -24,16 +24,18 @@ The current evidence package contains:
 - `41` comparison rows;
 - campaign-004 contribution of `1` controlled series and `11` comparison rows;
 - public evidence snapshot under `evidence/empirical-v1/`.
+- released public benchmark subset under `evidence/public-benchmark-v1/`;
+- initial descriptive statistical validation outputs under `evidence/statistical-validation-v1/`.
 
 The public artifact policy excludes raw local-only inputs from the public snapshot.
 
 ## Results
 
-The current campaign outputs show observed patterns, measured shifts, profile differences, perturbation effects, and stability tendencies across the present corpus. These materials remain descriptive. They do not establish inferential statistical support and should not be generalized beyond the current campaign set.
+The current campaign outputs show observed patterns, measured shifts, profile differences, perturbation effects, and stability tendencies across the present corpus. The current validation layer adds bootstrap interval summaries, benchmark-versus-campaign bridge summaries, seeded random baseline references, and threshold sensitivity outputs. These materials remain descriptive. They do not establish inferential statistical support and should not be generalized beyond the current campaign set.
 
 ## Limitations
 
-The evidence package remains limited by corpus size, self-authored local inputs, and the absence of a stronger inferential statistical layer. The current materials are useful for manuscript preparation and technical review, but not for broad population-level claims.
+The evidence package remains limited by corpus size, self-authored local inputs, excerpt-based benchmark releases, and the absence of a stronger inferential statistical layer. The current materials are useful for manuscript preparation and technical review, but not for broad population-level claims.
 
 ## Discussion
 
@@ -43,6 +45,7 @@ The present repository state is stronger than a framework scaffold alone because
 
 - prepare a public benchmark corpus with explicit licensing and provenance;
 - implement a statistical validation layer;
+- strengthen the current descriptive validation layer into a broader inferential program;
 - expand campaign diversity and corpus heterogeneity;
 - incorporate colleague review feedback into the next manuscript iteration.
 

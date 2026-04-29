@@ -1,0 +1,4 @@
+metric,count,mean,median,min,max
+cosine_similarity,36,0.994351,0.997059,0.978311,1.0
+euclidean_distance,36,6.160437,4.265335,0.005086,18.544352
+manhattan_distance,36,7.133944,5.072217,0.007168,21.300696
