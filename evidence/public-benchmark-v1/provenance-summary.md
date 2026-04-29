@@ -13,7 +13,7 @@ This file summarizes provenance for the current small public benchmark subset.
 ## Current subset
 
 - `6` released baseline excerpts;
-- `24` released controlled variants derived locally from those baselines;
+- `36` released controlled variants derived locally from those baselines;
 - public-domain literary prose from Project Gutenberg;
 - public-domain political prose from Project Gutenberg;
 - public-domain government prose from GovInfo;

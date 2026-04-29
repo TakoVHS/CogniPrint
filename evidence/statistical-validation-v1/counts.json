@@ -1,0 +1,10 @@
+{
+  "axis_count": 12,
+  "benchmark_baseline_count": 6,
+  "benchmark_language_count": 3,
+  "benchmark_source_class_count": 3,
+  "benchmark_variant_count": 36,
+  "empirical_campaign_count": 5,
+  "empirical_comparison_row_count": 41,
+  "snapshot_id": "statistical-validation-v1"
+}

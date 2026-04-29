@@ -1,15 +1,14 @@
-# Statistical Validation v1 Scaffold
+# Statistical Validation v1
 
-This directory is reserved for the first statistical validation layer associated with the current empirical and public benchmark materials.
+This directory contains the first implemented descriptive statistical validation layer for CogniPrint.
 
-It is a scaffold only. No statistical validation outputs are being claimed here yet.
+## Current coverage
 
-## Intended contents
-
-- `manifest.json`
-- `planned-metrics.md`
-- later validation outputs derived from implemented and verified statistics code
+- empirical campaigns reviewed: `5`
+- empirical comparison rows reviewed: `41`
+- public benchmark baselines reviewed: `6`
+- public benchmark variants reviewed: `36`
 
 ## Guardrail
 
-Do not read this directory as evidence of completed statistical validation. It exists to mark the next implementation layer only.
+These outputs are validation-oriented descriptive summaries. They do not claim inferential certainty or a completed statistical program.

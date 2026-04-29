@@ -17,6 +17,6 @@ When the benchmark is assembled and validated, this directory should contain:
 
 ## Current status
 
-The benchmark layer now publishes a small released subset with `6` baseline excerpts and `24` controlled variants. The current empirical evidence package for CogniPrint still remains `evidence/empirical-v1/`.
+The benchmark layer now publishes a small released subset with `6` baseline excerpts and `36` controlled variants. The current empirical evidence package for CogniPrint still remains `evidence/empirical-v1/`.
 
 The repository also contains candidate-source intake records under `datasets/public-benchmark-v1/metadata/`. This benchmark layer should still be read as a corpus-release layer, not as a benchmark-results layer.

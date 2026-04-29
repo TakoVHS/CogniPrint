@@ -19,11 +19,13 @@ The current release subset is limited to:
 - public-domain literary prose;
 - public-domain political prose;
 - public-domain government prose;
-- four controlled perturbation axes:
+- six controlled perturbation axes:
   - punctuation cleanup;
   - controlled compression;
   - sentence split and merge;
-  - word-order shift.
+  - word-order shift;
+  - formalized style;
+  - informalized style.
 
 ## Guardrail
 

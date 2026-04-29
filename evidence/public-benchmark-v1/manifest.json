@@ -4,7 +4,7 @@
   "dataset_root": "datasets/public-benchmark-v1",
   "evidence_root": "evidence/public-benchmark-v1",
   "released_samples": 6,
-  "released_variants": 24,
+  "released_variants": 36,
   "released_languages": [
     "en",
     "es",
@@ -19,7 +19,9 @@
     "punctuation_cleanup",
     "compressed_version",
     "sentence_split_merge",
-    "word_order_shift"
+    "word_order_shift",
+    "formalized_style",
+    "informalized_style"
   ],
   "counts_source": "datasets/public-benchmark-v1/metadata/samples.csv",
   "guardrail": "This subset releases benchmark texts and controlled variants, but does not claim benchmark analysis results or statistical validation yet."

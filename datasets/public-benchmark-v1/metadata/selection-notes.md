@@ -37,7 +37,7 @@ The corresponding released rows are tracked in `samples.csv`.
 
 ## Next benchmark step
 
-The next step is to expand from the current released subset to a broader benchmark pool, add more perturbation axes such as style shifts and controlled expansion, and then populate:
+The next step is to expand from the current released subset to a broader benchmark pool, add controlled expansion and cross-lingual variants, and then populate:
 
 - `raw/`
 - `variants/`

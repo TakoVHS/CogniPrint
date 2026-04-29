@@ -5,9 +5,10 @@ This file records the current benchmark-subset release status.
 ## Current release counts
 
 - `6` released baseline excerpts;
-- `24` released controlled variants;
+- `36` released controlled variants;
 - `3` released languages;
 - `3` released source classes.
+- `6` released perturbation axes.
 
 ## Guardrail
 

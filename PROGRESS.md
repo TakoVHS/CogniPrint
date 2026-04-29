@@ -43,7 +43,7 @@ Completed:
 - added a first verified candidate-source intake layer in `datasets/public-benchmark-v1/metadata/candidate-sources.csv`.
 - released a first small public benchmark subset:
   - `6` baseline excerpts;
-  - `24` controlled variants;
+  - `36` controlled variants;
   - `3` released languages;
   - literary, political, and government prose source classes;
 - added `datasets/public-benchmark-v1/metadata/samples.csv`;
@@ -51,6 +51,7 @@ Completed:
 - updated `evidence/public-benchmark-v1/manifest.json` and `counts.json` to reflect the released subset.
 - added `evidence/public-benchmark-v1/evidence-table.md` for descriptive benchmark-subset coverage;
 - added `evidence/statistical-validation-v1/` as a no-results validation scaffold for the next implementation layer.
+- expanded benchmark perturbation coverage to sentence segmentation, word-order shifts, and style-shift variants.
 
 Current status:
 - the benchmark layer is now scaffolded in the repository;

@@ -1,16 +1,9 @@
 {
+  "benchmark_baseline_count": 6,
+  "benchmark_variant_count": 36,
+  "empirical_campaign_count": 5,
+  "empirical_comparison_row_count": 41,
+  "guardrail": "These outputs provide initial descriptive validation summaries and bootstrap intervals. They do not claim inferential certainty or publication-level completion.",
   "snapshot_id": "statistical-validation-v1",
-  "status": "planned validation scaffold",
-  "input_evidence_roots": [
-    "evidence/empirical-v1",
-    "evidence/public-benchmark-v1"
-  ],
-  "planned_outputs": [
-    "effect-size summaries",
-    "bootstrap confidence intervals",
-    "within-campaign variance",
-    "between-campaign variance",
-    "perturbation-type ablation"
-  ],
-  "guardrail": "This scaffold does not claim that any statistical validation outputs have been generated yet."
+  "status": "initial descriptive statistical validation layer"
 }

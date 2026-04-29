@@ -15,6 +15,7 @@ from .perturbation import create_perturbation_lab
 from .reporting.markdown import generate_aggregate_report, generate_markdown_report
 from .reporting.notes import generate_empirical_notes
 from .reporting.pdf import generate_pdf_report
+from .stats.validation import generate_statistical_validation
 from .study import collect_study_samples, create_study
 from .workstation import collect_samples, create_run, ensure_workspace
 
@@ -153,6 +154,14 @@ def build_parser() -> argparse.ArgumentParser:
     campaign_paper2_parser.add_argument("--campaign-root", type=Path, help="Directory containing campaign directories. Defaults to workspace/campaigns.")
     campaign_paper2_parser.add_argument("--output-dir", type=Path, default=Path("workspace/reports/paper-2"), help="Output directory for paper-2 drafts.")
     campaign_paper2_parser.set_defaults(handler=_handle_campaign_paper2)
+
+    stats_parser = subparsers.add_parser("stats", help="Generate statistical validation outputs from existing artifacts.")
+    stats_subparsers = stats_parser.add_subparsers(dest="stats_command")
+    stats_validate_parser = stats_subparsers.add_parser("validate", help="Build descriptive statistical validation outputs.")
+    stats_validate_parser.add_argument("--campaign-root", type=Path, default=Path("workspace/campaigns"), help="Directory containing campaign directories.")
+    stats_validate_parser.add_argument("--benchmark-samples", type=Path, default=Path("datasets/public-benchmark-v1/metadata/samples.csv"), help="Benchmark sample registry CSV.")
+    stats_validate_parser.add_argument("--output-dir", type=Path, default=Path("evidence/statistical-validation-v1"), help="Output directory for validation artifacts.")
+    stats_validate_parser.set_defaults(handler=_handle_stats_validate)
 
     return parser
 
@@ -380,6 +389,16 @@ def _handle_campaign_paper2(args: argparse.Namespace) -> int:
     campaign_root = args.campaign_root.expanduser().resolve() if args.campaign_root else None
     output = generate_paper2_outputs(workspace=args.workspace, campaign_root=campaign_root, output_dir=args.output_dir)
     print(f"Paper-2 drafting outputs written: {output.resolve()}")
+    return 0
+
+
+def _handle_stats_validate(args: argparse.Namespace) -> int:
+    output = generate_statistical_validation(
+        campaign_root=args.campaign_root.expanduser().resolve(),
+        benchmark_samples_csv=args.benchmark_samples.expanduser().resolve(),
+        output_dir=args.output_dir.expanduser().resolve(),
+    )
+    print(f"Statistical validation outputs written: {output.resolve()}")
     return 0
 
 
