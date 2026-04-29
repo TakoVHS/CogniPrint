@@ -3,13 +3,15 @@
   "status": "small released public benchmark subset",
   "dataset_root": "datasets/public-benchmark-v1",
   "evidence_root": "evidence/public-benchmark-v1",
-  "released_samples": 3,
-  "released_variants": 6,
+  "released_samples": 5,
+  "released_variants": 10,
   "released_languages": [
-    "en"
+    "en",
+    "es"
   ],
   "released_source_classes": [
     "public-domain literary text",
+    "public-domain political prose",
     "public-domain government text"
   ],
   "counts_source": "datasets/public-benchmark-v1/metadata/samples.csv",

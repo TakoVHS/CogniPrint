@@ -1,6 +1,6 @@
 # Public Benchmark v1 Methods Summary
 
-This file records the release method for the first small public benchmark subset.
+This file records the release method for the current public benchmark subset.
 
 ## Current release method
 
@@ -12,9 +12,9 @@ This file records the release method for the first small public benchmark subset
 
 ## Current subset profile
 
-- `3` released baseline excerpts;
-- `6` released controlled variants;
-- English-language release only;
+- `5` released baseline excerpts;
+- `10` released controlled variants;
+- English-language and Spanish-language release;
 - perturbation axes released in this subset:
   - punctuation cleanup;
   - controlled compression.

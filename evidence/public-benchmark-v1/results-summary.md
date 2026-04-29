@@ -4,10 +4,10 @@ This file records the current benchmark-subset release status.
 
 ## Current release counts
 
-- `3` released baseline excerpts;
-- `6` released controlled variants;
-- `1` released language;
-- `2` released source classes.
+- `5` released baseline excerpts;
+- `10` released controlled variants;
+- `2` released languages;
+- `3` released source classes.
 
 ## Guardrail
 

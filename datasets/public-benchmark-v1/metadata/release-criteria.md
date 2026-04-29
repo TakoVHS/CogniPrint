@@ -15,8 +15,9 @@ The first public benchmark subset is intentionally small and conservative.
 
 The current release subset is limited to:
 
-- English-language baseline excerpts;
+- English-language and Spanish-language baseline excerpts;
 - public-domain literary prose;
+- public-domain political prose;
 - public-domain government prose;
 - two controlled perturbation axes:
   - punctuation cleanup;

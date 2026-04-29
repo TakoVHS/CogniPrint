@@ -12,9 +12,10 @@ This file summarizes provenance for the current small public benchmark subset.
 
 ## Current subset
 
-- `3` released baseline excerpts;
-- `6` released controlled variants derived locally from those baselines;
+- `5` released baseline excerpts;
+- `10` released controlled variants derived locally from those baselines;
 - public-domain literary prose from Project Gutenberg;
+- public-domain political prose from Project Gutenberg;
 - public-domain government prose from GovInfo;
 - acquisition date recorded as `2026-04-29` for the first subset intake pass.
 

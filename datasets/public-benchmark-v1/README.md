@@ -32,11 +32,11 @@ The repository now includes a candidate-source intake file under:
 - `metadata/samples.csv`
 - `metadata/release-criteria.md`
 
-The first small release subset currently includes:
+The current released subset includes:
 
-- `3` released baseline excerpts;
-- `6` released controlled variants;
-- `1` released language (`en`);
-- literary and government prose source classes.
+- `5` released baseline excerpts;
+- `10` released controlled variants;
+- `2` released languages (`en`, `es`);
+- literary, political, and government prose source classes.
 
-This subset is suitable for public benchmark assembly work. It does not claim benchmark analysis results or statistical validation yet.
+This subset is suitable for public benchmark assembly work and early external review. It does not claim benchmark analysis results or statistical validation yet.

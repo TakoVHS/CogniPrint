@@ -28,6 +28,8 @@ The current first release subset selects these candidate sources:
 
 - `pbv1-cand-001` — Pride and Prejudice
 - `pbv1-cand-002` — Alice's Adventures in Wonderland
+- `pbv1-cand-003` — The Federalist Papers
+- `pbv1-cand-004` — Don Quijote
 - `pbv1-cand-006` — Constitution Annotated
 
 The corresponding released rows are tracked in `samples.csv`.

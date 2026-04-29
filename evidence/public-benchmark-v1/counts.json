@@ -1,8 +1,8 @@
 {
   "snapshot_id": "public-benchmark-v1",
-  "released_samples": 3,
-  "released_variants": 6,
-  "released_languages": 1,
-  "released_source_classes": 2,
+  "released_samples": 5,
+  "released_variants": 10,
+  "released_languages": 2,
+  "released_source_classes": 3,
   "notes": "Counts reflect the first small public benchmark subset only. They do not imply benchmark analysis results."
 }
