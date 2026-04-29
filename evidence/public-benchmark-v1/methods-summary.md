@@ -12,9 +12,11 @@ This file records the release method for the current public benchmark subset.
 
 ## Current subset profile
 
-- `5` released baseline excerpts;
-- `10` released controlled variants;
-- English-language and Spanish-language release;
+- `6` released baseline excerpts;
+- `24` released controlled variants;
+- English-language, Spanish-language, and French-language release;
 - perturbation axes released in this subset:
   - punctuation cleanup;
-  - controlled compression.
+  - controlled compression;
+  - sentence split and merge;
+  - word-order shift.

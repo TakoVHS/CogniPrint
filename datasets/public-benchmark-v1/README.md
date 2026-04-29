@@ -34,9 +34,9 @@ The repository now includes a candidate-source intake file under:
 
 The current released subset includes:
 
-- `5` released baseline excerpts;
-- `10` released controlled variants;
-- `2` released languages (`en`, `es`);
+- `6` released baseline excerpts;
+- `24` released controlled variants;
+- `3` released languages (`en`, `es`, `fr`);
 - literary, political, and government prose source classes.
 
 This subset is suitable for public benchmark assembly work and early external review. It does not claim benchmark analysis results or statistical validation yet.

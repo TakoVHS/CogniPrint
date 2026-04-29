@@ -1,0 +1,16 @@
+{
+  "snapshot_id": "statistical-validation-v1",
+  "status": "planned validation scaffold",
+  "input_evidence_roots": [
+    "evidence/empirical-v1",
+    "evidence/public-benchmark-v1"
+  ],
+  "planned_outputs": [
+    "effect-size summaries",
+    "bootstrap confidence intervals",
+    "within-campaign variance",
+    "between-campaign variance",
+    "perturbation-type ablation"
+  ],
+  "guardrail": "This scaffold does not claim that any statistical validation outputs have been generated yet."
+}

@@ -42,13 +42,15 @@ Completed:
 - added `evidence/public-benchmark-v1/` as a zero-count public benchmark evidence scaffold;
 - added a first verified candidate-source intake layer in `datasets/public-benchmark-v1/metadata/candidate-sources.csv`.
 - released a first small public benchmark subset:
-  - `5` baseline excerpts;
-  - `10` controlled variants;
-  - `2` released languages;
+  - `6` baseline excerpts;
+  - `24` controlled variants;
+  - `3` released languages;
   - literary, political, and government prose source classes;
 - added `datasets/public-benchmark-v1/metadata/samples.csv`;
 - added `datasets/public-benchmark-v1/metadata/release-criteria.md`;
 - updated `evidence/public-benchmark-v1/manifest.json` and `counts.json` to reflect the released subset.
+- added `evidence/public-benchmark-v1/evidence-table.md` for descriptive benchmark-subset coverage;
+- added `evidence/statistical-validation-v1/` as a no-results validation scaffold for the next implementation layer.
 
 Current status:
 - the benchmark layer is now scaffolded in the repository;
