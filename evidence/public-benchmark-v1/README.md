@@ -1,8 +1,8 @@
 # Public Benchmark v1 Evidence Scaffold
 
-This directory is reserved for the future public evidence package associated with `datasets/public-benchmark-v1/`.
+This directory is reserved for the public evidence package associated with `datasets/public-benchmark-v1/`.
 
-It is currently a scaffold only. No benchmark results are being claimed here yet.
+It currently describes a small released benchmark subset only. No benchmark analysis results are being claimed here yet.
 
 ## Intended contents
 
@@ -17,6 +17,6 @@ When the benchmark is assembled and validated, this directory should contain:
 
 ## Current status
 
-No public benchmark samples have been released into this scaffold yet. The current empirical evidence package for CogniPrint remains `evidence/empirical-v1/`.
+The benchmark layer now publishes a small released subset with baseline excerpts and controlled variants. The current empirical evidence package for CogniPrint still remains `evidence/empirical-v1/`.
 
-The repository now contains a candidate-source intake layer under `datasets/public-benchmark-v1/metadata/`, but candidate-source intake is not the same as a released benchmark snapshot.
+The repository also contains candidate-source intake records under `datasets/public-benchmark-v1/metadata/`. This benchmark layer should still be read as a corpus-release layer, not as a benchmark-results layer.

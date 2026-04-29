@@ -41,14 +41,23 @@ Completed:
 - added `datasets/public-benchmark-v1/` as a public benchmark scaffold with metadata templates;
 - added `evidence/public-benchmark-v1/` as a zero-count public benchmark evidence scaffold;
 - added a first verified candidate-source intake layer in `datasets/public-benchmark-v1/metadata/candidate-sources.csv`.
+- released a first small public benchmark subset:
+  - `3` baseline excerpts;
+  - `6` controlled variants;
+  - `1` released language;
+  - literary and government prose source classes;
+- added `datasets/public-benchmark-v1/metadata/samples.csv`;
+- added `datasets/public-benchmark-v1/metadata/release-criteria.md`;
+- updated `evidence/public-benchmark-v1/manifest.json` and `counts.json` to reflect the released subset.
 
 Current status:
 - the benchmark layer is now scaffolded in the repository;
-- no public benchmark samples are claimed as released yet;
+- a first small public benchmark subset is now released;
 - the active public empirical package remains `evidence/empirical-v1/`.
 
 Next:
 - prepare a first small benchmark corpus with explicit licensing and provenance;
+- expand the released public subset beyond the initial three baselines and six variants;
 - request external review on the current evidence package and manuscript layer;
 - implement the planned statistical validation layer after benchmark assembly.
 

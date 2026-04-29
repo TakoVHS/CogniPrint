@@ -1,8 +1,8 @@
 # Public Benchmark v1 Provenance Summary
 
-This file is reserved for the future provenance summary of the public benchmark package.
+This file summarizes provenance for the current small public benchmark subset.
 
-When populated, it should summarize:
+## Current coverage
 
 - source classes;
 - license classes;
@@ -10,4 +10,17 @@ When populated, it should summarize:
 - acquisition-date coverage;
 - exclusions applied to protect privacy and licensing boundaries.
 
-At the current stage, this scaffold does not yet publish benchmark samples or provenance records.
+## Current subset
+
+- `3` released baseline excerpts;
+- `6` released controlled variants derived locally from those baselines;
+- public-domain literary prose from Project Gutenberg;
+- public-domain government prose from GovInfo;
+- acquisition date recorded as `2026-04-29` for the first subset intake pass.
+
+## Exclusions
+
+- no private texts;
+- no unclear-license source rows;
+- no local-only research inputs;
+- no benchmark analysis claims beyond the released corpus metadata.

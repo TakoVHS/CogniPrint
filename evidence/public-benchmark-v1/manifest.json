@@ -1,10 +1,17 @@
 {
   "snapshot_id": "public-benchmark-v1",
-  "status": "planned public benchmark scaffold",
+  "status": "small released public benchmark subset",
   "dataset_root": "datasets/public-benchmark-v1",
   "evidence_root": "evidence/public-benchmark-v1",
-  "released_samples": 0,
-  "released_variants": 0,
-  "counts_source": "not yet populated",
-  "guardrail": "This scaffold does not claim that a public benchmark has been assembled or validated yet."
+  "released_samples": 3,
+  "released_variants": 6,
+  "released_languages": [
+    "en"
+  ],
+  "released_source_classes": [
+    "public-domain literary text",
+    "public-domain government text"
+  ],
+  "counts_source": "datasets/public-benchmark-v1/metadata/samples.csv",
+  "guardrail": "This subset releases benchmark texts and controlled variants, but does not claim benchmark analysis results or statistical validation yet."
 }

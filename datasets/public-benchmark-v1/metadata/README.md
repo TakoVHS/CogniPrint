@@ -21,3 +21,5 @@ Current intake files:
 - `provenance-template.csv` — empty schema for released benchmark rows
 - `candidate-sources.csv` — verified public-source candidate pool for the first benchmark pass
 - `selection-notes.md` — benchmark intake notes and next-step guidance
+- `samples.csv` — released sample and variant registry for the first small public subset
+- `release-criteria.md` — scope and guardrails for the first released subset

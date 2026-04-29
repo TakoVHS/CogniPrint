@@ -1,5 +1,14 @@
 # Public Benchmark v1 Results Summary
 
-This file is reserved for the future results summary of the public benchmark package.
+This file records the current benchmark-subset release status.
 
-At the current stage, no benchmark results are being claimed. The current public empirical evidence package remains `evidence/empirical-v1/`.
+## Current release counts
+
+- `3` released baseline excerpts;
+- `6` released controlled variants;
+- `1` released language;
+- `2` released source classes.
+
+## Guardrail
+
+No benchmark performance or statistical results are being claimed here yet. The current public empirical evidence package with campaign-level observed patterns remains `evidence/empirical-v1/`.

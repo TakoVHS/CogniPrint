@@ -1,8 +1,8 @@
 # Public Benchmark v1 Scaffold
 
-This directory is the planned repository location for the first public CogniPrint benchmark corpus.
+This directory is the repository location for the first public CogniPrint benchmark corpus.
 
-It is currently a scaffold only. It does not yet contain released benchmark samples.
+It now contains a small released subset built from public baseline excerpts and locally derived controlled variants.
 
 ## Intended scope
 
@@ -29,5 +29,14 @@ Do not treat this directory as a released benchmark corpus yet. It is a planning
 The repository now includes a candidate-source intake file under:
 
 - `metadata/candidate-sources.csv`
+- `metadata/samples.csv`
+- `metadata/release-criteria.md`
 
-These rows identify verified public candidate sources for the first benchmark pass. They do not mean benchmark samples have already been released into `raw/` or `variants/`.
+The first small release subset currently includes:
+
+- `3` released baseline excerpts;
+- `6` released controlled variants;
+- `1` released language (`en`);
+- literary and government prose source classes.
+
+This subset is suitable for public benchmark assembly work. It does not claim benchmark analysis results or statistical validation yet.

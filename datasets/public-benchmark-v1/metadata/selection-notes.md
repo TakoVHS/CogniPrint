@@ -22,12 +22,22 @@ The benchmark corpus is not assembled yet. The files in this directory describe 
 - French literary prose
 - U.S. government prose
 
+## Selected first release subset
+
+The current first release subset selects these candidate sources:
+
+- `pbv1-cand-001` — Pride and Prejudice
+- `pbv1-cand-002` — Alice's Adventures in Wonderland
+- `pbv1-cand-006` — Constitution Annotated
+
+The corresponding released rows are tracked in `samples.csv`.
+
 ## Next benchmark step
 
-The next step is to choose a small first release subset from this candidate pool, create baseline and controlled variant relations, and then populate:
+The next step is to expand from the current released subset to a broader benchmark pool, add more perturbation axes, and then populate:
 
 - `raw/`
 - `variants/`
 - benchmark-level metadata manifests
 
-Only after that should `evidence/public-benchmark-v1/` move from scaffold status toward a real public benchmark snapshot.
+Only after that should `evidence/public-benchmark-v1/` move from a small subset release toward a broader benchmark snapshot with actual benchmark analyses.
