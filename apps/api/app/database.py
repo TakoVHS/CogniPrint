@@ -108,6 +108,9 @@ def ensure_account(db: Session, user_id: str, email: str | None = None) -> Accou
         account = Account(user_id=user_id, email=email)
         db.add(account)
         db.flush()
+    elif email and account.email != email:
+        account.email = email
+        db.add(account)
     return account
 
 
@@ -141,7 +144,7 @@ def increment_daily_usage(db: Session, user_id: str, day: date) -> int:
         row = ScanUsage(user_id=user_id, usage_date=day, count=1)
         db.add(row)
     else:
-        row.count = ScanUsage.count + 1  # type: ignore[assignment]
+        row.count += 1
         db.add(row)
     db.flush()
     # Re-query for the committed value.

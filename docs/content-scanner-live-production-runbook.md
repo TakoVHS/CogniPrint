@@ -41,6 +41,7 @@ Production gate:
 - Landing page loads.
 - Scanner can call the Railway API.
 - Pricing section points to Pro checkout.
+- Browser-local account state restores through `/account/status`.
 
 ## 3. Stripe live mode
 
@@ -88,7 +89,8 @@ Minimum revenue path:
 3. User hits Free quota or sees Pro CTA.
 4. User enters Stripe Checkout.
 5. Webhook activates Pro state.
-6. User scans without Free quota block.
+6. User returns to `/?checkout=success#pricing`.
+7. User scans without Free quota block from the same browser account.
 
 ## 6. Sales page claims
 
@@ -118,5 +120,6 @@ Do not announce public paid launch until all are true:
 - Stripe webhook is verified.
 - Free quota is tested.
 - Pro unlock is tested.
+- Browser-local account restore is tested after returning from Checkout.
 - Public copy includes the research disclaimer.
 - Privacy Policy and Terms are linked.

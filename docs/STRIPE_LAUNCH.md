@@ -129,7 +129,7 @@ User clicks "Upgrade to Pro"
                     │       └─▶ Stripe sends checkout.session.completed
                     │               └─▶ POST /webhooks/stripe → activate_pro()
                     └─▶ Payment failure / cancellation
-                            └─▶ User redirected to /pricing?checkout=cancelled
+                            └─▶ User redirected to /?checkout=cancelled#pricing
                                 (no state change; account remains free)
 ```
 
@@ -174,3 +174,15 @@ railway variables set STRIPE_PRO_PRICE_ID="price_..."
 - [ ] `STRIPE_WEBHOOK_SECRET` set in Railway
 - [ ] End-to-end test with a real card in live mode
 - [ ] `FRONTEND_URL` set in Railway (required for Stripe redirect URLs)
+- [ ] `FRONTEND_URL` points to the root frontend origin, because success/cancel return URLs use `/?checkout=...#pricing`
+
+## Browser-account note
+
+The current frontend stores a browser-local `user_id` and uses it for `/scan`, `/account/status`, and Stripe checkout creation. This is the minimum viable identity layer for the current optional SaaS surface.
+
+Implications:
+
+- the same browser returns to the same free/pro account state;
+- checkout completion activates Pro for that browser-linked account id;
+- this is not a full authentication system;
+- before broader paid launch, decide whether browser-local identity is sufficient or whether a stronger account system is required.

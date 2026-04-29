@@ -54,6 +54,22 @@ def test_health(client: TestClient):
     body = r.json()
     assert body["ok"] is True
     assert "cogniprint" in body["service"]
+    assert "stripe_checkout_enabled" in body
+
+
+# ──────────────────────────── /account/status ────────────────────────────────
+
+
+def test_account_status_initializes_free_account(client: TestClient):
+    r = client.get("/account/status", params={"user_id": "acct-user-1", "email": "acct@example.com"})
+    assert r.status_code == 200
+    body = r.json()
+    assert body["user_id"] == "acct-user-1"
+    assert body["email"] == "acct@example.com"
+    assert body["plan"] == "free"
+    assert body["subscription_status"] == "free"
+    assert body["quota_remaining_today"] == 3
+    assert body["checkout_enabled"] is False
 
 
 # ──────────────────────────── /scan ──────────────────────────────────────────

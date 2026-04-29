@@ -93,6 +93,22 @@ vercel --prod
    railway variables set FRONTEND_URL="https://app.cogniprint.org"
    ```
 
+## Current frontend behavior
+
+The current frontend expects:
+
+- `GET /health` on the Railway backend;
+- `POST /scan` for scanner results;
+- `GET /account/status?user_id=...` to restore plan and quota state for the current browser account;
+- `POST /billing/create-checkout-session` to start Stripe Checkout.
+
+Stripe success and cancel returns use root-page query parameters:
+
+- `/?checkout=success#pricing`
+- `/?checkout=cancelled#pricing`
+
+Do not configure Stripe return URLs to `/app` or `/pricing` routes unless the frontend is changed to support those routes explicitly.
+
 ---
 
 ## CORS Configuration

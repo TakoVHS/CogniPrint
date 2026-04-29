@@ -26,6 +26,18 @@ export interface CheckoutResponse {
   url: string
 }
 
+export interface AccountStatus {
+  user_id: string
+  email: string | null
+  plan: 'free' | 'pro'
+  subscription_status: string
+  quota_remaining_today: number | null
+  free_daily_scan_limit: number
+  max_text_chars: number
+  checkout_enabled: boolean
+  price_usd_monthly: number
+}
+
 export async function scanText(text: string, userId = 'anonymous'): Promise<ScanResult> {
   const res = await fetch(`${API_BASE}/scan`, {
     method: 'POST',
@@ -51,4 +63,17 @@ export async function createCheckoutSession(userId = 'anonymous', email?: string
   }
   const data: CheckoutResponse = await res.json()
   return data.url
+}
+
+export async function getAccountStatus(userId: string, email?: string): Promise<AccountStatus> {
+  const params = new URLSearchParams({ user_id: userId })
+  if (email) {
+    params.set('email', email)
+  }
+  const res = await fetch(`${API_BASE}/account/status?${params.toString()}`)
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ detail: res.statusText }))
+    throw new Error(err.detail ?? 'Failed to load account status')
+  }
+  return res.json()
 }

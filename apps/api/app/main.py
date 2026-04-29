@@ -7,7 +7,7 @@ from hashlib import sha256
 from typing import Any
 
 import stripe
-from fastapi import Depends, FastAPI, Header, HTTPException, Request
+from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
@@ -21,6 +21,7 @@ from .database import (
     ensure_account,
     get_daily_usage,
     get_db,
+    get_subscription,
     increment_daily_usage,
     is_pro_account,
 )
@@ -37,6 +38,7 @@ DISCLAIMER = (
 )
 
 PRO_PRICE_USD_MONTHLY = 199
+STRIPE_API_VERSION = "2026-02-25.clover"
 
 
 def _free_daily_limit() -> int:
@@ -54,6 +56,10 @@ def _cors_origins() -> list[str]:
     if frontend:
         return [frontend]
     return ["*"]
+
+
+def _stripe_checkout_enabled() -> bool:
+    return bool(os.getenv("STRIPE_SECRET_KEY") and os.getenv("STRIPE_PRO_PRICE_ID"))
 
 
 @asynccontextmanager
@@ -97,6 +103,14 @@ def _consume_quota(db: Session, user_id: str) -> int | None:
         raise HTTPException(status_code=402, detail="Free daily scan limit reached. Upgrade to Pro.")
     new_count = increment_daily_usage(db, user_id, day)
     return max(limit - new_count, 0)
+
+
+def _quota_remaining_today(db: Session, user_id: str) -> int | None:
+    if is_pro_account(db, user_id):
+        return None
+    limit = _free_daily_limit()
+    used = get_daily_usage(db, user_id, _today())
+    return max(limit - used, 0)
 
 
 def _fallback_profile(text: str) -> dict[str, Any]:
@@ -148,7 +162,36 @@ def _insights(profile: dict[str, Any]) -> list[dict[str, Any]]:
 
 @app.get("/health")
 def health() -> dict[str, Any]:
-    return {"ok": True, "service": "cogniprint-content-scanner-api", "version": "0.1.0"}
+    return {
+        "ok": True,
+        "service": "cogniprint-content-scanner-api",
+        "version": "0.1.0",
+        "stripe_checkout_enabled": _stripe_checkout_enabled(),
+        "environment": os.getenv("ENVIRONMENT", "development"),
+    }
+
+
+@app.get("/account/status")
+def account_status(
+    user_id: str = Query(..., min_length=1, max_length=160),
+    email: str | None = Query(default=None, max_length=320),
+    db: Session = Depends(get_db),
+) -> dict[str, Any]:
+    account = ensure_account(db, user_id, email)
+    db.commit()
+    pro = is_pro_account(db, user_id)
+    sub = get_subscription(db, user_id)
+    return {
+        "user_id": account.user_id,
+        "email": account.email,
+        "plan": "pro" if pro else "free",
+        "subscription_status": sub.status if sub else "free",
+        "quota_remaining_today": _quota_remaining_today(db, user_id),
+        "free_daily_scan_limit": _free_daily_limit(),
+        "max_text_chars": _max_text_chars(pro),
+        "checkout_enabled": _stripe_checkout_enabled(),
+        "price_usd_monthly": PRO_PRICE_USD_MONTHLY,
+    }
 
 
 @app.post("/scan")
@@ -191,18 +234,20 @@ def create_checkout_session(
     if not secret_key or not price_id:
         raise HTTPException(status_code=503, detail="Stripe is not configured.")
 
-    ensure_account(db, payload.user_id, payload.email)
+    account = ensure_account(db, payload.user_id, payload.email)
     db.commit()
 
     stripe.api_key = secret_key
+    stripe.api_version = STRIPE_API_VERSION
     session = stripe.checkout.Session.create(
         mode="subscription",
         line_items=[{"price": price_id, "quantity": 1}],
         customer_email=payload.email,
+        customer=account.stripe_customer_id or None,
         client_reference_id=payload.user_id,
         metadata={"user_id": payload.user_id, "plan": "pro"},
-        success_url=f"{frontend_url}/app?checkout=success",
-        cancel_url=f"{frontend_url}/pricing?checkout=cancelled",
+        success_url=f"{frontend_url}/?checkout=success#pricing",
+        cancel_url=f"{frontend_url}/?checkout=cancelled#pricing",
         allow_promotion_codes=True,
     )
     return {"url": session.url}
@@ -220,6 +265,7 @@ async def stripe_webhook(
         raise HTTPException(status_code=503, detail="Stripe webhook is not configured.")
 
     stripe.api_key = secret_key
+    stripe.api_version = STRIPE_API_VERSION
     body = await request.body()
     try:
         event = stripe.Webhook.construct_event(body, stripe_signature, webhook_secret)
