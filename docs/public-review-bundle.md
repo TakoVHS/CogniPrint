@@ -19,11 +19,13 @@ Use the following files for a compact review package:
 5. `workspace/reports/paper-2/clean-methods-section.md`
 6. `workspace/reports/paper-2/clean-results-section.md`
 7. `workspace/reports/paper-2/clean-limitations-section.md`
-8. `workspace/reports/paper-2/evidence-table.md`
-9. `workspace/reports/paper-2/follow-up-manuscript-draft.md`
-10. `workspace/share/colleague-pack-004/one-page-summary.md`
-11. `workspace/share/colleague-pack-004/email-to-colleagues.md`
-12. `workspace/share/colleague-pack-004/review-request-message.md`
+8. `evidence/statistical-validation-v1/results-summary.md`
+9. `evidence/statistical-validation-v1/benchmark-campaign-bridge-summary.md`
+10. `workspace/reports/paper-2/evidence-table.md`
+11. `workspace/reports/paper-2/follow-up-manuscript-draft.md`
+12. `workspace/share/colleague-pack-004/one-page-summary.md`
+13. `workspace/share/colleague-pack-004/email-to-colleagues.md`
+14. `workspace/share/colleague-pack-004/review-request-message.md`
 
 ## Current empirical base
 
@@ -45,6 +47,8 @@ Ask colleagues to evaluate:
 - whether the Methods section is reproducible enough;
 - whether the Results section is appropriately bounded;
 - whether the Limitations section is explicit enough;
+- whether validation v1.1 improves interpretability or adds unnecessary complexity;
+- whether the benchmark-versus-campaign bridge is useful for manuscript discussion of perturbation families;
 - which additional corpora or campaign types would make the follow-up manuscript stronger.
 
 ## Guardrail
