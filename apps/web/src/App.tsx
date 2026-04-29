@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect, useMemo } from 'react'
 import {
   RadarChart,
   Radar,
@@ -12,7 +12,14 @@ import {
   Tooltip,
   Cell,
 } from 'recharts'
-import { scanText, createCheckoutSession, ScanResult } from './lib/api'
+import {
+  scanText,
+  createCheckoutSession,
+  createPortalSession,
+  getAccountStatus,
+  AccountStatus,
+  ScanResult,
+} from './lib/api'
 
 // ─────────────────────────── helpers ──────────────────────────────────────────
 
@@ -39,6 +46,22 @@ function NavBar() {
   )
 }
 
+const USER_ID_STORAGE_KEY = 'cogniprint.content_scanner.user_id'
+const EMAIL_STORAGE_KEY = 'cogniprint.content_scanner.email'
+
+function getOrCreateUserId() {
+  const existing = window.localStorage.getItem(USER_ID_STORAGE_KEY)
+  if (existing) {
+    return existing
+  }
+  const generated =
+    typeof crypto !== 'undefined' && 'randomUUID' in crypto
+      ? crypto.randomUUID()
+      : `cp_${Math.random().toString(36).slice(2)}${Date.now().toString(36)}`
+  window.localStorage.setItem(USER_ID_STORAGE_KEY, generated)
+  return generated
+}
+
 function Hero({ onStart }: { onStart: () => void }) {
   return (
     <section className="hero">
@@ -50,8 +73,9 @@ function Hero({ onStart }: { onStart: () => void }) {
         </h1>
         <p className="hero-sub">
           CogniPrint profiles lexical diversity, structural cadence, and stylistic
-          consistency — giving editorial teams measurable signals for content QA and
-          drift detection.
+          consistency as a hosted convenience layer around the research workstation.
+          The commercial surface is meant for managed empirical reports and workflow access,
+          not stronger scientific claims.
         </p>
         <div className="hero-cta-row">
           <button className="btn-primary" onClick={onStart}>
@@ -60,8 +84,8 @@ function Hero({ onStart }: { onStart: () => void }) {
           <a className="btn-ghost" href="#pricing">See Pro Plans →</a>
         </div>
         <p className="hero-disclaimer">
-          Outputs are statistical signals only — not legal proof, authorship
-          guarantee, or AI detector verdict.
+          Outputs are research-oriented statistical signals only — not legal proof,
+          authorship guarantee, or detector verdict.
         </p>
       </div>
     </section>
@@ -73,11 +97,13 @@ function ScannerForm({
   loading,
   setLoading,
   quota,
+  userId,
 }: {
   onResult: (r: ScanResult) => void
   loading: boolean
   setLoading: (v: boolean) => void
   quota: number | null
+  userId: string
 }) {
   const [text, setText] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -87,7 +113,7 @@ function ScannerForm({
     setError(null)
     setLoading(true)
     try {
-      const result = await scanText(text)
+      const result = await scanText(text, userId)
       onResult(result)
     } catch (err: unknown) {
       const e = err as { status?: number; message?: string }
@@ -99,7 +125,7 @@ function ScannerForm({
     } finally {
       setLoading(false)
     }
-  }, [text, onResult, setLoading])
+  }, [text, onResult, setLoading, userId])
 
   return (
     <section id="scanner" className="scanner-section">
@@ -110,6 +136,10 @@ function ScannerForm({
         </p>
       )}
       <div className="scanner-card">
+        <div className="account-inline">
+          <span className="account-inline-label">Browser account</span>
+          <code>{userId.slice(0, 8)}…{userId.slice(-6)}</code>
+        </div>
         <textarea
           className="scanner-textarea"
           placeholder="Paste your text here (min 10 words)…"
@@ -220,10 +250,20 @@ function ResultPanel({ result }: { result: ScanResult }) {
   )
 }
 
-function PricingSection() {
+function PricingSection({
+  userId,
+  email,
+  setEmail,
+  checkoutEnabled,
+}: {
+  userId: string
+  email: string
+  setEmail: (value: string) => void
+  checkoutEnabled: boolean
+}) {
   const handleUpgrade = async () => {
     try {
-      const url = await createCheckoutSession()
+      const url = await createCheckoutSession(userId, email || undefined)
       window.location.href = url
     } catch {
       alert('Stripe checkout is not available in this environment.')
@@ -233,10 +273,10 @@ function PricingSection() {
   return (
     <section id="pricing" className="pricing-section">
       <h2 className="section-title">Plans</h2>
-      <p className="pricing-sub">Statistical content profiling for every team size.</p>
+      <p className="pricing-sub">Hosted access for research workflow convenience, not stronger conclusions.</p>
       <div className="pricing-grid">
         <div className="pricing-card">
-          <div className="plan-name">Free</div>
+          <div className="plan-name">Starter</div>
           <div className="plan-price">$0<span>/month</span></div>
           <ul className="plan-features">
             <li>3 scans per day</li>
@@ -251,32 +291,78 @@ function PricingSection() {
 
         <div className="pricing-card pricing-card--featured">
           <div className="plan-badge-top">Most popular</div>
-          <div className="plan-name">Pro</div>
-          <div className="plan-price">$199<span>/month</span></div>
+          <div className="plan-name">Research Pro</div>
+          <div className="plan-price">$199<span>/month (test-mode prep)</span></div>
+          <label className="plan-field">
+            <span>Billing email</span>
+            <input
+              className="plan-input"
+              type="email"
+              placeholder="you@company.com"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
+          </label>
           <ul className="plan-features">
-            <li>Unlimited scans</li>
+            <li>Higher hosted analysis usage</li>
             <li>Extended text (120k chars)</li>
-            <li>Priority support</li>
-            <li>All Free features</li>
+            <li>Managed empirical report flow</li>
+            <li>Review-oriented exports</li>
           </ul>
-          <button className="btn-primary-full" onClick={handleUpgrade}>
-            Upgrade to Pro →
+          <button className="btn-primary-full" onClick={handleUpgrade} disabled={!checkoutEnabled || !email.trim()}>
+            Subscribe Research Pro →
           </button>
+          {!checkoutEnabled && <p className="plan-note">Stripe checkout is not configured in this environment yet.</p>}
+          {checkoutEnabled && !email.trim() && <p className="plan-note">Enter a billing email before starting checkout.</p>}
         </div>
 
         <div className="pricing-card">
-          <div className="plan-name">Enterprise</div>
+          <div className="plan-name">Institution</div>
           <div className="plan-price">Custom</div>
           <ul className="plan-features">
-            <li>Volume pricing</li>
-            <li>SSO &amp; audit logs</li>
-            <li>Dedicated support</li>
-            <li>SLA guarantee</li>
+            <li>Audit-friendly workflows</li>
+            <li>Private project workspace</li>
+            <li>Custom support review</li>
+            <li>Manual contact</li>
           </ul>
           <a className="btn-ghost-full" href="mailto:enterprise@cogniprint.org">
-            Contact sales
+            Contact for Institution
           </a>
         </div>
+      </div>
+    </section>
+  )
+}
+
+function AccountSection({ account, userId }: { account: AccountStatus | null; userId: string }) {
+  const [portalError, setPortalError] = useState<string | null>(null)
+  const [portalLoading, setPortalLoading] = useState(false)
+
+  const openPortal = useCallback(async () => {
+    setPortalError(null)
+    setPortalLoading(true)
+    try {
+      const url = await createPortalSession(userId)
+      window.location.href = url
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Customer portal is unavailable.'
+      setPortalError(message)
+    } finally {
+      setPortalLoading(false)
+    }
+  }, [userId])
+
+  return (
+    <section id="account" className="scanner-section">
+      <h2 className="section-title">Billing Status</h2>
+      <div className="scanner-card">
+        <p><strong>Current plan:</strong> {account?.plan ?? 'free'}</p>
+        <p><strong>Subscription status:</strong> {account?.subscription_status ?? 'none'}</p>
+        <p><strong>Billing mode:</strong> {account?.billing_mode ?? 'test'}</p>
+        <button className="btn-ghost-full" onClick={openPortal} disabled={portalLoading}>
+          {portalLoading ? 'Opening portal…' : 'Open customer portal'}
+        </button>
+        {portalError && <p className="scanner-error">{portalError}</p>}
       </div>
     </section>
   )
@@ -304,16 +390,57 @@ export default function App() {
   const [result, setResult] = useState<ScanResult | null>(null)
   const [loading, setLoading] = useState(false)
   const [quota, setQuota] = useState<number | null>(null)
+  const [account, setAccount] = useState<AccountStatus | null>(null)
+  const [accountError, setAccountError] = useState<string | null>(null)
+  const [email, setEmail] = useState('')
+  const [statusMessage, setStatusMessage] = useState<string | null>(null)
+  const userId = useMemo(() => getOrCreateUserId(), [])
+
+  const loadAccount = useCallback(async (nextEmail?: string) => {
+    try {
+      const resolvedEmail = nextEmail ?? email
+      const status = await getAccountStatus(userId, resolvedEmail || undefined)
+      setAccount(status)
+      setQuota(status.quota_remaining_today)
+      setAccountError(null)
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to load account status.'
+      setAccountError(message)
+    }
+  }, [email, userId])
+
+  useEffect(() => {
+    const savedEmail = window.localStorage.getItem(EMAIL_STORAGE_KEY) ?? ''
+    if (savedEmail) {
+      setEmail(savedEmail)
+      void loadAccount(savedEmail)
+    } else {
+      void loadAccount()
+    }
+    const params = new URLSearchParams(window.location.search)
+    const checkout = params.get('checkout')
+    if (checkout === 'success') {
+      setStatusMessage('Checkout completed. Refreshing plan status for this browser account.')
+      void loadAccount(savedEmail)
+    } else if (checkout === 'cancelled') {
+      setStatusMessage('Checkout was cancelled. Your free access remains active.')
+    }
+  }, [loadAccount])
+
+  useEffect(() => {
+    window.localStorage.setItem(EMAIL_STORAGE_KEY, email)
+  }, [email])
 
   const handleResult = useCallback((r: ScanResult) => {
     setResult(r)
     if (r.quota_remaining_today !== null) {
       setQuota(r.quota_remaining_today)
     }
+    void loadAccount()
     setTimeout(() => {
       document.getElementById('results')?.scrollIntoView({ behavior: 'smooth' })
     }, 100)
-  }, [])
+  }, [loadAccount])
 
   const scrollToScanner = useCallback(() => {
     document.getElementById('scanner')?.scrollIntoView({ behavior: 'smooth' })
@@ -323,18 +450,37 @@ export default function App() {
     <div className="app">
       <NavBar />
       <Hero onStart={scrollToScanner} />
+      <section className="status-strip">
+        <div>
+          <strong>Plan:</strong> {account?.plan?.toUpperCase() ?? 'FREE'}
+          {' · '}
+          <strong>Browser account:</strong> <code>{userId.slice(0, 8)}…{userId.slice(-6)}</code>
+        </div>
+        <div>
+          <strong>Checkout:</strong> {account?.checkout_enabled ? 'enabled' : 'not configured'}
+        </div>
+      </section>
+      {statusMessage && <section className="status-banner">{statusMessage}</section>}
+      {accountError && <section className="status-banner status-banner-error">{accountError}</section>}
       <ScannerForm
         onResult={handleResult}
         loading={loading}
         setLoading={setLoading}
         quota={quota}
+        userId={userId}
       />
       {result && (
         <div id="results">
           <ResultPanel result={result} />
         </div>
       )}
-      <PricingSection />
+      <PricingSection
+        userId={userId}
+        email={email}
+        setEmail={setEmail}
+        checkoutEnabled={account?.checkout_enabled ?? false}
+      />
+      <AccountSection account={account} userId={userId} />
       <Footer />
     </div>
   )

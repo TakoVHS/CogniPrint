@@ -1,6 +1,6 @@
 # CogniPrint Content Scanner — Live Production Runbook
 
-This runbook covers an optional production launch path for the application layer around the CogniPrint research engine.
+This runbook covers an optional hosted application layer around the CogniPrint research engine. Treat it as test-mode-first launch preparation, not as proof of production readiness.
 
 ## 1. Railway backend
 
@@ -41,29 +41,39 @@ Production gate:
 - Landing page loads.
 - Scanner can call the Railway API.
 - Pricing section points to Pro checkout.
+- Browser-local account state restores through `/account/status`.
 
-## 3. Stripe live mode
+## 3. Stripe billing
 
-Create one product and one recurring monthly price:
+Use [`docs/stripe-billing-runbook.md`](docs/stripe-billing-runbook.md) for the current test-mode checklist.
 
-- Product: CogniPrint Pro
-- Price: USD 199 monthly recurring
+Current integration surface:
 
-Configure webhook endpoint:
+- `GET /api/billing/config`
+- `POST /api/billing/create-checkout-session`
+- `POST /api/billing/create-portal-session`
+- `POST /api/billing/webhook`
+- `GET /api/billing/subscription-status`
 
-`/webhooks/stripe`
+Webhook endpoint:
 
-Required events:
+`/api/billing/webhook`
+
+Required Stripe events:
 
 - checkout.session.completed
+- customer.subscription.created
+- customer.subscription.updated
 - customer.subscription.deleted
-- customer.subscription.paused
+- invoice.paid
 - invoice.payment_failed
 
-Production gate:
+Hosted readiness gate:
 
+- Billing env is configured in test mode.
 - Checkout session opens.
-- Successful payment changes account state to Pro.
+- Webhook signature verification works.
+- Customer portal session opens for a provisioned customer.
 - Failed payment does not leave account as falsely active.
 
 ## 4. Domain
@@ -88,7 +98,8 @@ Minimum revenue path:
 3. User hits Free quota or sees Pro CTA.
 4. User enters Stripe Checkout.
 5. Webhook activates Pro state.
-6. User scans without Free quota block.
+6. User returns to `/?checkout=success#pricing`.
+7. User scans without Free quota block from the same browser account.
 
 ## 6. Sales page claims
 
@@ -114,9 +125,10 @@ Do not announce public paid launch until all are true:
 
 - Railway backend is live.
 - Vercel frontend is live.
-- Stripe Checkout is live.
+- Stripe test-mode checkout is validated end to end.
 - Stripe webhook is verified.
 - Free quota is tested.
 - Pro unlock is tested.
+- Browser-local account restore is tested after returning from Checkout.
 - Public copy includes the research disclaimer.
 - Privacy Policy and Terms are linked.

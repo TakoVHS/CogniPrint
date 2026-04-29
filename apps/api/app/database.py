@@ -53,10 +53,21 @@ class Subscription(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(String(160), ForeignKey("accounts.user_id", ondelete="CASCADE"), unique=True, nullable=False, index=True)
-    plan = Column(String(32), nullable=False, default="free")  # free | pro | enterprise
-    status = Column(String(32), nullable=False, default="active")  # active | trialing | cancelled | past_due | paused
+    plan = Column(String(32), nullable=False, default="free")  # free | starter | research_pro | institution
+    status = Column(String(32), nullable=False, default="active")  # active | trialing | canceled | past_due | paused
     stripe_subscription_id = Column(String(64), nullable=True, index=True)
     updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
+
+
+class StripeWebhookEvent(Base):
+    """Processed Stripe webhook event IDs for idempotency."""
+
+    __tablename__ = "stripe_webhook_events"
+
+    id = Column(Integer, primary_key=True, index=True)
+    event_id = Column(String(128), unique=True, nullable=False, index=True)
+    event_type = Column(String(128), nullable=False)
+    processed_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
 
 class ScanUsage(Base):
@@ -108,6 +119,9 @@ def ensure_account(db: Session, user_id: str, email: str | None = None) -> Accou
         account = Account(user_id=user_id, email=email)
         db.add(account)
         db.flush()
+    elif email and account.email != email:
+        account.email = email
+        db.add(account)
     return account
 
 
@@ -119,7 +133,11 @@ def is_pro_account(db: Session, user_id: str) -> bool:
     sub = get_subscription(db, user_id)
     if sub is None:
         return False
-    return sub.plan in {"pro", "enterprise"} and sub.status in {"active", "trialing", "enterprise"}
+    return sub.plan in {"pro", "enterprise", "starter", "research_pro", "institution"} and sub.status in {
+        "active",
+        "trialing",
+        "enterprise",
+    }
 
 
 def get_daily_usage(db: Session, user_id: str, day: date) -> int:
@@ -141,7 +159,7 @@ def increment_daily_usage(db: Session, user_id: str, day: date) -> int:
         row = ScanUsage(user_id=user_id, usage_date=day, count=1)
         db.add(row)
     else:
-        row.count = ScanUsage.count + 1  # type: ignore[assignment]
+        row.count += 1
         db.add(row)
     db.flush()
     # Re-query for the committed value.
@@ -149,15 +167,28 @@ def increment_daily_usage(db: Session, user_id: str, day: date) -> int:
     return row.count
 
 
-def activate_pro(db: Session, user_id: str, stripe_customer_id: str | None = None, stripe_subscription_id: str | None = None) -> None:
+def set_subscription_state(
+    db: Session,
+    user_id: str,
+    *,
+    plan: str,
+    status: str,
+    stripe_customer_id: str | None = None,
+    stripe_subscription_id: str | None = None,
+) -> None:
     ensure_account(db, user_id)
     sub = get_subscription(db, user_id)
     if sub is None:
-        sub = Subscription(user_id=user_id, plan="pro", status="active", stripe_subscription_id=stripe_subscription_id)
+        sub = Subscription(
+            user_id=user_id,
+            plan=plan,
+            status=status,
+            stripe_subscription_id=stripe_subscription_id,
+        )
         db.add(sub)
     else:
-        sub.plan = "pro"
-        sub.status = "active"
+        sub.plan = plan
+        sub.status = status
         if stripe_subscription_id:
             sub.stripe_subscription_id = stripe_subscription_id
     if stripe_customer_id:
@@ -167,12 +198,30 @@ def activate_pro(db: Session, user_id: str, stripe_customer_id: str | None = Non
     db.commit()
 
 
+def activate_pro(
+    db: Session,
+    user_id: str,
+    stripe_customer_id: str | None = None,
+    stripe_subscription_id: str | None = None,
+    plan: str = "research_pro",
+    status: str = "active",
+) -> None:
+    set_subscription_state(
+        db,
+        user_id,
+        plan=plan,
+        status=status,
+        stripe_customer_id=stripe_customer_id,
+        stripe_subscription_id=stripe_subscription_id,
+    )
+
+
 def downgrade_subscription(db: Session, stripe_subscription_id: str, new_status: str) -> None:
     """Downgrade or cancel a subscription by its Stripe subscription ID."""
     sub = db.query(Subscription).filter(Subscription.stripe_subscription_id == stripe_subscription_id).first()
     if sub:
         sub.status = new_status
-        if new_status in {"cancelled", "past_due"}:
+        if new_status in {"canceled", "past_due"}:
             sub.plan = "free"
         db.commit()
 
@@ -184,6 +233,39 @@ def downgrade_by_customer(db: Session, stripe_customer_id: str, new_status: str)
         sub = get_subscription(db, account.user_id)
         if sub:
             sub.status = new_status
-            if new_status in {"cancelled", "past_due"}:
+            if new_status in {"canceled", "past_due"}:
                 sub.plan = "free"
             db.commit()
+
+
+def set_subscription_by_customer(
+    db: Session,
+    stripe_customer_id: str,
+    *,
+    plan: str,
+    status: str,
+    stripe_subscription_id: str | None = None,
+) -> None:
+    account = db.query(Account).filter(Account.stripe_customer_id == stripe_customer_id).first()
+    if account:
+        set_subscription_state(
+            db,
+            account.user_id,
+            plan=plan,
+            status=status,
+            stripe_customer_id=stripe_customer_id,
+            stripe_subscription_id=stripe_subscription_id,
+        )
+
+
+def get_account_by_user_id(db: Session, user_id: str) -> Account | None:
+    return db.query(Account).filter(Account.user_id == user_id).first()
+
+
+def mark_webhook_event_processed(db: Session, event_id: str, event_type: str) -> bool:
+    existing = db.query(StripeWebhookEvent).filter(StripeWebhookEvent.event_id == event_id).first()
+    if existing:
+        return False
+    db.add(StripeWebhookEvent(event_id=event_id, event_type=event_type))
+    db.commit()
+    return True

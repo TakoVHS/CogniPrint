@@ -1,4 +1,4 @@
-.PHONY: bootstrap init-workspace test smoke validate-sources demo sample-run sample-compare sample-study sample-profile sample-corpus sample-perturb sample-dataset
+.PHONY: bootstrap init-workspace test smoke validate-sources demo sample-run sample-compare sample-study sample-profile sample-corpus sample-perturb sample-dataset billing-test billing-smoke billing-run-api
 
 PYTHON ?= python3
 VENV ?= .venv
@@ -48,3 +48,17 @@ sample-dataset:
 	$(CLI) dataset --name sample-dataset --description "Local CogniPrint dataset scaffold." --baseline-file workspace/input/original.txt --variant-file workspace/input/edited.txt
 
 demo: sample-run sample-compare sample-study sample-profile
+
+billing-test:
+	$(PY) -m pytest -q apps/api/tests/test_api.py
+
+billing-smoke:
+	test -f .env.example
+	test -f .env.billing.example
+	test -f apps/api/.env.example
+	test -f apps/web/.env.example
+	$(PY) -m compileall -q apps/api
+	$(PY) -c "from apps.api.app.main import app; print(sorted(route.path for route in app.routes if route.path.startswith('/api/billing')))"
+
+billing-run-api:
+	$(VENV)/bin/uvicorn apps.api.app.main:app --reload --port 8000

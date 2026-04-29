@@ -5,6 +5,8 @@ Uses an in-process SQLite database so no external services are required.
 from __future__ import annotations
 
 import os
+from types import SimpleNamespace
+from unittest.mock import Mock
 
 import pytest
 from fastapi.testclient import TestClient
@@ -13,8 +15,10 @@ from sqlalchemy.orm import sessionmaker
 
 os.environ.setdefault("DATABASE_URL", "sqlite:///./test_cogniprint.db")
 os.environ.setdefault("FREE_DAILY_SCAN_LIMIT", "3")
+os.environ.setdefault("BILLING_ENABLED", "true")
 
 # Import after env vars are set.
+from apps.api.app.billing import reset_billing_settings_cache  # noqa: E402
 from apps.api.app.database import Base, SessionLocal, get_db  # noqa: E402
 from apps.api.app.main import app  # noqa: E402
 
@@ -33,11 +37,13 @@ def _override_get_db():
 
 @pytest.fixture(autouse=True)
 def setup_db():
+    reset_billing_settings_cache()
     Base.metadata.create_all(bind=_test_engine)
     app.dependency_overrides[get_db] = _override_get_db
     yield
     app.dependency_overrides.clear()
     Base.metadata.drop_all(bind=_test_engine)
+    reset_billing_settings_cache()
 
 
 @pytest.fixture()
@@ -54,6 +60,22 @@ def test_health(client: TestClient):
     body = r.json()
     assert body["ok"] is True
     assert "cogniprint" in body["service"]
+    assert "stripe_checkout_enabled" in body
+
+
+# ──────────────────────────── /account/status ────────────────────────────────
+
+
+def test_account_status_initializes_free_account(client: TestClient):
+    r = client.get("/account/status", params={"user_id": "acct-user-1", "email": "acct@example.com"})
+    assert r.status_code == 200
+    body = r.json()
+    assert body["user_id"] == "acct-user-1"
+    assert body["email"] == "acct@example.com"
+    assert body["plan"] == "free"
+    assert body["subscription_status"] == "none"
+    assert body["quota_remaining_today"] == 3
+    assert body["checkout_enabled"] is False
 
 
 # ──────────────────────────── /scan ──────────────────────────────────────────
@@ -119,14 +141,165 @@ def test_scan_text_too_long_rejected(client: TestClient):
 
 
 def test_checkout_session_503_when_stripe_not_configured(client: TestClient):
-    # Stripe env vars are not set in this test environment.
-    r = client.post("/billing/create-checkout-session", json={"user_id": "u3"})
+    for key in (
+        "STRIPE_SECRET_KEY",
+        "STRIPE_WEBHOOK_SECRET",
+        "STRIPE_PRICE_STARTER",
+        "STRIPE_PRICE_RESEARCH_PRO",
+    ):
+        os.environ.pop(key, None)
+    reset_billing_settings_cache()
+    r = client.post("/api/billing/create-checkout-session", json={"user_id": "u3", "plan": "starter"})
     assert r.status_code == 503
+
+
+def test_billing_config_does_not_expose_secret(monkeypatch: pytest.MonkeyPatch, client: TestClient):
+    monkeypatch.setenv("STRIPE_SECRET_KEY", "sk_test_hidden")
+    monkeypatch.setenv("STRIPE_WEBHOOK_SECRET", "whsec_hidden")
+    monkeypatch.setenv("STRIPE_PRICE_STARTER", "price_starter_test")
+    monkeypatch.setenv("STRIPE_PRICE_RESEARCH_PRO", "price_research_pro_test")
+    reset_billing_settings_cache()
+    r = client.get("/api/billing/config")
+    assert r.status_code == 200
+    body = r.json()
+    assert body["billing_enabled"] is True
+    assert body["plans"]["starter"]["price_id"] == "price_starter_test"
+    assert "sk_test_hidden" not in r.text
+    assert "whsec_hidden" not in r.text
+
+
+def test_checkout_session_uses_valid_plan_and_returns_url(
+    monkeypatch: pytest.MonkeyPatch,
+    client: TestClient,
+):
+    monkeypatch.setenv("STRIPE_SECRET_KEY", "sk_test_hidden")
+    monkeypatch.setenv("STRIPE_WEBHOOK_SECRET", "whsec_hidden")
+    monkeypatch.setenv("STRIPE_PRICE_STARTER", "price_starter_test")
+    monkeypatch.setenv("STRIPE_PRICE_RESEARCH_PRO", "price_research_pro_test")
+    monkeypatch.setenv("STRIPE_SUCCESS_URL", "http://localhost:8000/billing/success")
+    monkeypatch.setenv("STRIPE_CANCEL_URL", "http://localhost:8000/billing/cancel")
+    monkeypatch.setenv("APP_PUBLIC_URL", "http://localhost:8000")
+    reset_billing_settings_cache()
+
+    create_mock = Mock(return_value=SimpleNamespace(url="https://checkout.stripe.test/session"))
+    monkeypatch.setattr("apps.api.app.main.stripe.checkout.Session.create", create_mock)
+
+    r = client.post(
+        "/api/billing/create-checkout-session",
+        json={"user_id": "u3", "email": "u3@example.com", "plan": "starter"},
+    )
+    assert r.status_code == 200
+    assert r.json()["url"] == "https://checkout.stripe.test/session"
+    kwargs = create_mock.call_args.kwargs
+    assert kwargs["line_items"][0]["price"] == "price_starter_test"
+    assert kwargs["mode"] == "subscription"
+
+
+def test_checkout_session_rejects_unknown_plan(client: TestClient):
+    r = client.post("/api/billing/create-checkout-session", json={"user_id": "u3", "plan": "enterprise"})
+    assert r.status_code == 422
+
+
+def test_portal_session_requires_customer(
+    monkeypatch: pytest.MonkeyPatch,
+    client: TestClient,
+):
+    monkeypatch.setenv("STRIPE_SECRET_KEY", "sk_test_hidden")
+    monkeypatch.setenv("STRIPE_WEBHOOK_SECRET", "whsec_hidden")
+    monkeypatch.setenv("STRIPE_PRICE_STARTER", "price_starter_test")
+    monkeypatch.setenv("STRIPE_PRICE_RESEARCH_PRO", "price_research_pro_test")
+    reset_billing_settings_cache()
+    r = client.post("/api/billing/create-portal-session", json={"user_id": "missing-customer"})
+    assert r.status_code == 404
+
+
+def test_portal_session_returns_url_for_known_customer(
+    monkeypatch: pytest.MonkeyPatch,
+    client: TestClient,
+):
+    monkeypatch.setenv("STRIPE_SECRET_KEY", "sk_test_hidden")
+    monkeypatch.setenv("STRIPE_WEBHOOK_SECRET", "whsec_hidden")
+    monkeypatch.setenv("STRIPE_PRICE_STARTER", "price_starter_test")
+    monkeypatch.setenv("STRIPE_PRICE_RESEARCH_PRO", "price_research_pro_test")
+    reset_billing_settings_cache()
+    create_mock = Mock(return_value=SimpleNamespace(url="https://billing.stripe.test/session"))
+    monkeypatch.setattr("apps.api.app.main.stripe.billing_portal.Session.create", create_mock)
+    r = client.post("/api/billing/create-portal-session", json={"customer_id": "cus_known"})
+    assert r.status_code == 200
+    assert r.json()["url"] == "https://billing.stripe.test/session"
 
 
 # ──────────────────────────── /webhooks/stripe ───────────────────────────────
 
 
 def test_webhook_503_when_not_configured(client: TestClient):
-    r = client.post("/webhooks/stripe", content=b"{}")
+    for key in ("STRIPE_SECRET_KEY", "STRIPE_WEBHOOK_SECRET"):
+        os.environ.pop(key, None)
+    reset_billing_settings_cache()
+    r = client.post("/api/billing/webhook", content=b"{}")
     assert r.status_code == 503
+
+
+def test_webhook_invalid_signature_rejected(
+    monkeypatch: pytest.MonkeyPatch,
+    client: TestClient,
+):
+    monkeypatch.setenv("STRIPE_SECRET_KEY", "sk_test_hidden")
+    monkeypatch.setenv("STRIPE_WEBHOOK_SECRET", "whsec_hidden")
+    monkeypatch.setenv("STRIPE_PRICE_STARTER", "price_starter_test")
+    monkeypatch.setenv("STRIPE_PRICE_RESEARCH_PRO", "price_research_pro_test")
+    reset_billing_settings_cache()
+
+    def _raise(*args, **kwargs):
+        raise ValueError("bad sig")
+
+    monkeypatch.setattr("apps.api.app.main.stripe.Webhook.construct_event", _raise)
+    r = client.post("/api/billing/webhook", content=b"{}", headers={"Stripe-Signature": "t=1,v1=bad"})
+    assert r.status_code == 400
+
+
+def test_webhook_idempotency(
+    monkeypatch: pytest.MonkeyPatch,
+    client: TestClient,
+):
+    monkeypatch.setenv("STRIPE_SECRET_KEY", "sk_test_hidden")
+    monkeypatch.setenv("STRIPE_WEBHOOK_SECRET", "whsec_hidden")
+    monkeypatch.setenv("STRIPE_PRICE_STARTER", "price_starter_test")
+    monkeypatch.setenv("STRIPE_PRICE_RESEARCH_PRO", "price_research_pro_test")
+    reset_billing_settings_cache()
+
+    event = {
+        "id": "evt_duplicate",
+        "type": "checkout.session.completed",
+        "data": {
+            "object": {
+                "client_reference_id": "dup-user",
+                "customer": "cus_123",
+                "subscription": "sub_123",
+                "metadata": {"user_id": "dup-user", "plan": "research_pro"},
+            }
+        },
+    }
+    monkeypatch.setattr("apps.api.app.main.stripe.Webhook.construct_event", lambda *args, **kwargs: event)
+    first = client.post("/api/billing/webhook", content=b"{}", headers={"Stripe-Signature": "ok"})
+    second = client.post("/api/billing/webhook", content=b"{}", headers={"Stripe-Signature": "ok"})
+    assert first.status_code == 200
+    assert second.status_code == 200
+    assert second.json()["duplicate"] is True
+
+
+def test_subscription_status_schema(
+    monkeypatch: pytest.MonkeyPatch,
+    client: TestClient,
+):
+    monkeypatch.setenv("STRIPE_SECRET_KEY", "sk_test_hidden")
+    monkeypatch.setenv("STRIPE_WEBHOOK_SECRET", "whsec_hidden")
+    monkeypatch.setenv("STRIPE_PRICE_STARTER", "price_starter_test")
+    monkeypatch.setenv("STRIPE_PRICE_RESEARCH_PRO", "price_research_pro_test")
+    reset_billing_settings_cache()
+
+    status = client.get("/api/billing/subscription-status", params={"user_id": "status-user"})
+    assert status.status_code == 200
+    body = status.json()
+    assert set(body.keys()) == {"user_id", "plan", "subscription_status", "current_period_end"}
+    assert body["subscription_status"] == "none"

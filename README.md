@@ -4,6 +4,22 @@
 
 The public project framing is a reproducible research methodology and a working empirical evidence package supporting a follow-up manuscript. Optional deployment materials for `apps/api` and `apps/web` exist as a separate application layer around the research engine, but they do not replace the current research-first positioning of the repository.
 
+## Optional Hosted Billing Layer
+
+CogniPrint also contains an optional hosted convenience layer under `apps/api` and `apps/web`. This layer is bounded:
+
+- the research core remains separate;
+- Stripe setup is test-mode first;
+- real secrets must never be committed;
+- paid access does not imply stronger scientific claims;
+- the public evidence package remains intact and separate.
+
+Setup notes:
+
+- [`docs/commercial-layer-positioning.md`](docs/commercial-layer-positioning.md)
+- [`docs/stripe-billing-runbook.md`](docs/stripe-billing-runbook.md)
+- [`docs/content-scanner-live-production-runbook.md`](docs/content-scanner-live-production-runbook.md)
+
 ## Current Empirical Evidence Package
 
 CogniPrint now has a public evidence summary and review route for colleagues:

@@ -4,14 +4,15 @@ import os
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 from hashlib import sha256
-from typing import Any
+from typing import Any, Literal
 
 import stripe
-from fastapi import Depends, FastAPI, Header, HTTPException, Request
+from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
+from .billing import PLAN_LABELS, BillingSettings, get_billing_settings
 from .database import (
     ScanRecord,
     activate_pro,
@@ -19,10 +20,15 @@ from .database import (
     downgrade_by_customer,
     downgrade_subscription,
     ensure_account,
+    get_account_by_user_id,
     get_daily_usage,
     get_db,
+    get_subscription,
     increment_daily_usage,
     is_pro_account,
+    mark_webhook_event_processed,
+    set_subscription_by_customer,
+    set_subscription_state,
 )
 
 try:
@@ -36,7 +42,7 @@ DISCLAIMER = (
     "or final judgments about a text."
 )
 
-PRO_PRICE_USD_MONTHLY = 199
+STRIPE_API_VERSION = "2026-02-25.clover"
 
 
 def _free_daily_limit() -> int:
@@ -54,6 +60,27 @@ def _cors_origins() -> list[str]:
     if frontend:
         return [frontend]
     return ["*"]
+
+
+def _billing_public_config(settings: BillingSettings) -> dict[str, Any]:
+    return settings.public_config()
+
+
+def _stripe_checkout_enabled() -> bool:
+    return get_billing_settings().public_config()["billing_enabled"] is True
+
+
+def _require_billing_settings() -> BillingSettings:
+    settings = get_billing_settings()
+    if not settings.billing_enabled:
+        raise HTTPException(status_code=503, detail="Billing is disabled.")
+    missing = settings.missing_required()
+    if missing:
+        raise HTTPException(
+            status_code=503,
+            detail=f"Billing configuration incomplete: {', '.join(missing)}",
+        )
+    return settings
 
 
 @asynccontextmanager
@@ -80,6 +107,42 @@ class ScanRequest(BaseModel):
 class CheckoutRequest(BaseModel):
     user_id: str = Field(default="anonymous", max_length=160)
     email: str | None = Field(default=None, max_length=320)
+    plan: Literal["starter", "research_pro"] = "research_pro"
+
+
+class PortalRequest(BaseModel):
+    user_id: str = Field(default="anonymous", max_length=160)
+    customer_id: str | None = Field(default=None, max_length=64)
+
+
+class SubscriptionStatusResponse(BaseModel):
+    user_id: str
+    plan: str
+    subscription_status: str
+    current_period_end: str | None = None
+
+
+def _account_status_payload(db: Session, user_id: str, email: str | None = None) -> dict[str, Any]:
+    settings = get_billing_settings()
+    account = ensure_account(db, user_id, email)
+    db.commit()
+    pro = is_pro_account(db, user_id)
+    sub = get_subscription(db, user_id)
+    return {
+        "user_id": account.user_id,
+        "email": account.email,
+        "plan": sub.plan if sub else ("research_pro" if pro else "free"),
+        "subscription_status": sub.status if sub else "none",
+        "quota_remaining_today": _quota_remaining_today(db, user_id),
+        "free_daily_scan_limit": _free_daily_limit(),
+        "max_text_chars": _max_text_chars(pro),
+        "checkout_enabled": _stripe_checkout_enabled(),
+        "billing_mode": settings.billing_mode,
+        "price_ids": {
+            "starter": settings.stripe_price_starter if settings.is_configured() else None,
+            "research_pro": settings.stripe_price_research_pro if settings.is_configured() else None,
+        },
+    }
 
 
 def _today() -> datetime.date:  # type: ignore[return-value]
@@ -97,6 +160,14 @@ def _consume_quota(db: Session, user_id: str) -> int | None:
         raise HTTPException(status_code=402, detail="Free daily scan limit reached. Upgrade to Pro.")
     new_count = increment_daily_usage(db, user_id, day)
     return max(limit - new_count, 0)
+
+
+def _quota_remaining_today(db: Session, user_id: str) -> int | None:
+    if is_pro_account(db, user_id):
+        return None
+    limit = _free_daily_limit()
+    used = get_daily_usage(db, user_id, _today())
+    return max(limit - used, 0)
 
 
 def _fallback_profile(text: str) -> dict[str, Any]:
@@ -148,7 +219,29 @@ def _insights(profile: dict[str, Any]) -> list[dict[str, Any]]:
 
 @app.get("/health")
 def health() -> dict[str, Any]:
-    return {"ok": True, "service": "cogniprint-content-scanner-api", "version": "0.1.0"}
+    settings = get_billing_settings()
+    return {
+        "ok": True,
+        "service": "cogniprint-content-scanner-api",
+        "version": "0.1.0",
+        "stripe_checkout_enabled": _stripe_checkout_enabled(),
+        "environment": os.getenv("ENVIRONMENT", "development"),
+        "billing_mode": settings.billing_mode,
+    }
+
+
+@app.get("/account/status")
+def account_status(
+    user_id: str = Query(..., min_length=1, max_length=160),
+    email: str | None = Query(default=None, max_length=320),
+    db: Session = Depends(get_db),
+) -> dict[str, Any]:
+    return _account_status_payload(db, user_id, email)
+
+
+@app.get("/api/billing/config")
+def billing_config() -> dict[str, Any]:
+    return _billing_public_config(get_billing_settings())
 
 
 @app.post("/scan")
@@ -182,70 +275,137 @@ def scan(payload: ScanRequest, db: Session = Depends(get_db)) -> dict[str, Any]:
 
 
 @app.post("/billing/create-checkout-session")
+@app.post("/api/billing/create-checkout-session")
 def create_checkout_session(
     payload: CheckoutRequest, request: Request, db: Session = Depends(get_db)
 ) -> dict[str, str]:
-    secret_key = os.getenv("STRIPE_SECRET_KEY")
-    price_id = os.getenv("STRIPE_PRO_PRICE_ID")
-    frontend_url = os.getenv("FRONTEND_URL", "http://localhost:5173")
-    if not secret_key or not price_id:
-        raise HTTPException(status_code=503, detail="Stripe is not configured.")
+    del request
+    settings = _require_billing_settings()
+    price_id = settings.price_for_plan(payload.plan)
+    if not price_id:
+        raise HTTPException(status_code=400, detail="Unknown or unconfigured plan.")
 
-    ensure_account(db, payload.user_id, payload.email)
+    account = ensure_account(db, payload.user_id, payload.email)
     db.commit()
 
-    stripe.api_key = secret_key
+    stripe.api_key = settings.stripe_secret_key
+    stripe.api_version = STRIPE_API_VERSION
     session = stripe.checkout.Session.create(
         mode="subscription",
         line_items=[{"price": price_id, "quantity": 1}],
         customer_email=payload.email,
+        customer=account.stripe_customer_id or None,
         client_reference_id=payload.user_id,
-        metadata={"user_id": payload.user_id, "plan": "pro"},
-        success_url=f"{frontend_url}/app?checkout=success",
-        cancel_url=f"{frontend_url}/pricing?checkout=cancelled",
+        metadata={"user_id": payload.user_id, "plan": payload.plan},
+        success_url=settings.stripe_success_url,
+        cancel_url=settings.stripe_cancel_url,
         allow_promotion_codes=True,
     )
     return {"url": session.url}
 
 
+@app.post("/billing/create-portal-session")
+@app.post("/api/billing/create-portal-session")
+def create_portal_session(payload: PortalRequest, db: Session = Depends(get_db)) -> dict[str, str]:
+    settings = _require_billing_settings()
+    customer_id = payload.customer_id
+    if not customer_id:
+        account = get_account_by_user_id(db, payload.user_id)
+        if account is None or not account.stripe_customer_id:
+            raise HTTPException(status_code=404, detail="No Stripe customer exists for this account.")
+        customer_id = account.stripe_customer_id
+
+    stripe.api_key = settings.stripe_secret_key
+    stripe.api_version = STRIPE_API_VERSION
+    portal = stripe.billing_portal.Session.create(
+        customer=customer_id,
+        return_url=settings.stripe_customer_portal_return_url,
+    )
+    return {"url": portal.url}
+
+
+@app.get("/api/billing/subscription-status", response_model=SubscriptionStatusResponse)
+def billing_subscription_status(
+    user_id: str = Query(..., min_length=1, max_length=160),
+    db: Session = Depends(get_db),
+) -> SubscriptionStatusResponse:
+    status = _account_status_payload(db, user_id)
+    return SubscriptionStatusResponse(
+        user_id=user_id,
+        plan=status["plan"],
+        subscription_status=status["subscription_status"],
+        current_period_end=None,
+    )
+
+
+def _normalize_subscription_status(raw_status: str | None) -> str:
+    mapping = {
+        "active": "active",
+        "trialing": "trialing",
+        "past_due": "past_due",
+        "canceled": "canceled",
+        "cancelled": "canceled",
+        "unpaid": "past_due",
+        "incomplete_expired": "canceled",
+        "paused": "paused",
+    }
+    return mapping.get(raw_status or "", "active")
+
+
 @app.post("/webhooks/stripe")
+@app.post("/api/billing/webhook")
 async def stripe_webhook(
     request: Request,
     stripe_signature: str = Header(default=""),
     db: Session = Depends(get_db),
 ) -> dict[str, bool]:
-    secret_key = os.getenv("STRIPE_SECRET_KEY")
-    webhook_secret = os.getenv("STRIPE_WEBHOOK_SECRET")
-    if not secret_key or not webhook_secret:
-        raise HTTPException(status_code=503, detail="Stripe webhook is not configured.")
+    settings = _require_billing_settings()
 
-    stripe.api_key = secret_key
+    stripe.api_key = settings.stripe_secret_key
+    stripe.api_version = STRIPE_API_VERSION
     body = await request.body()
     try:
-        event = stripe.Webhook.construct_event(body, stripe_signature, webhook_secret)
+        event = stripe.Webhook.construct_event(body, stripe_signature, settings.stripe_webhook_secret)
     except Exception as exc:
-        raise HTTPException(status_code=400, detail=f"Invalid webhook: {exc}") from exc
+        raise HTTPException(status_code=400, detail="Invalid webhook signature.") from exc
 
+    event_id = event["id"]
     event_type = event["type"]
     data = event["data"]["object"]
+    if not mark_webhook_event_processed(db, event_id, event_type):
+        return {"received": True, "duplicate": True}
 
     if event_type == "checkout.session.completed":
         user_id = data.get("client_reference_id") or data.get("metadata", {}).get("user_id")
+        plan = data.get("metadata", {}).get("plan", "research_pro")
         if user_id:
             activate_pro(
                 db,
                 user_id=user_id,
                 stripe_customer_id=data.get("customer"),
                 stripe_subscription_id=data.get("subscription"),
+                plan=plan,
+                status="active",
+            )
+
+    elif event_type in {"customer.subscription.created", "customer.subscription.updated"}:
+        customer_id = data.get("customer")
+        if customer_id:
+            set_subscription_by_customer(
+                db,
+                customer_id,
+                plan=(data.get("metadata", {}) or {}).get("plan", "research_pro"),
+                status=_normalize_subscription_status(data.get("status")),
+                stripe_subscription_id=data.get("id"),
             )
 
     elif event_type == "customer.subscription.deleted":
         sub_id = data.get("id")
         customer_id = data.get("customer")
         if sub_id:
-            downgrade_subscription(db, sub_id, "cancelled")
+            downgrade_subscription(db, sub_id, "canceled")
         elif customer_id:
-            downgrade_by_customer(db, customer_id, "cancelled")
+            downgrade_by_customer(db, customer_id, "canceled")
 
     elif event_type == "customer.subscription.paused":
         sub_id = data.get("id")
@@ -254,6 +414,18 @@ async def stripe_webhook(
             downgrade_subscription(db, sub_id, "paused")
         elif customer_id:
             downgrade_by_customer(db, customer_id, "paused")
+
+    elif event_type == "invoice.paid":
+        customer_id = data.get("customer")
+        sub_id = data.get("subscription")
+        if customer_id:
+            set_subscription_by_customer(
+                db,
+                customer_id,
+                plan="research_pro",
+                status="active",
+                stripe_subscription_id=sub_id,
+            )
 
     elif event_type == "invoice.payment_failed":
         customer_id = data.get("customer")

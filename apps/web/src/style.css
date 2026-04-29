@@ -25,6 +25,10 @@ body {
   min-height: 100vh;
 }
 
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
 a { color: var(--accent-2); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
@@ -193,6 +197,35 @@ a:hover { text-decoration: underline; }
   margin-bottom: 0.5rem;
 }
 
+.status-strip {
+  max-width: 1100px;
+  margin: 1.25rem auto 0;
+  padding: 0.85rem 1.25rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: var(--radius);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+}
+
+.status-banner {
+  max-width: 1100px;
+  margin: 1rem auto 0;
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-sm);
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  color: var(--text);
+}
+
+.status-banner-error {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
 /* ── Scanner ──────────────────────────────────────────────────────────────── */
 .scanner-section {
   max-width: 800px;
@@ -212,6 +245,21 @@ a:hover { text-decoration: underline; }
   border-radius: var(--radius);
   overflow: hidden;
   margin-top: 1.5rem;
+}
+
+.account-inline {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.account-inline-label {
+  color: var(--text);
+  font-weight: 600;
 }
 
 .scanner-textarea {
@@ -420,6 +468,34 @@ a:hover { text-decoration: underline; }
 }
 .plan-features li::before { content: '✓  '; color: var(--success); }
 
+.plan-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: -0.25rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.plan-input {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: rgba(15, 23, 42, 0.92);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 0.85rem;
+  outline: none;
+}
+
+.plan-input:focus {
+  border-color: var(--accent-2);
+}
+
+.plan-note {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
 /* ── Footer ───────────────────────────────────────────────────────────────── */
 .footer {
   border-top: 1px solid var(--border);
@@ -434,3 +510,10 @@ a:hover { text-decoration: underline; }
 
 .footer-links a { color: var(--text-muted); }
 .footer-links a:hover { color: var(--text); }
+
+@media (max-width: 768px) {
+  .status-strip,
+  .account-inline {
+    flex-direction: column;
+  }
+}
