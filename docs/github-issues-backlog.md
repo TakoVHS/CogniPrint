@@ -16,16 +16,16 @@ Define a public benchmark corpus with clear licensing, provenance, source URLs, 
 
 Labels: `research`, `statistics`, `validation`
 
-Plan implementation of effect sizes, bootstrap confidence intervals, variance summaries, and a random perturbation baseline.
+The first descriptive validation layer now exists. The next step is to review whether validation v1.1 should remain descriptive, or whether a narrower inferential layer is justified after benchmark expansion and external review.
 
 ## 4. Assemble empirical-stability manuscript v1
 
 Labels: `manuscript`, `research`, `paper`
 
-Use `paper/empirical-stability-v1.md`, `evidence/empirical-v1/`, clean Methods/Results/Limitations materials, and external review feedback to prepare a follow-up manuscript.
+Use `paper/empirical-stability-v1.md`, `docs/manuscript-validation-v1.1-notes.md`, `evidence/empirical-v1/`, `evidence/statistical-validation-v1/`, clean Methods/Results/Limitations materials, and external review feedback to prepare a follow-up manuscript.
 
 ## 5. Request external review on Methods/Results/Limitations
 
 Labels: `review`, `manuscript`, `external-feedback`
 
-Ask external reviewers to assess framing, methods clarity, results interpretation, limitations, and required next experiments.
+Ask external reviewers to assess framing, methods clarity, results interpretation, validation-layer usefulness, limitations, and which next experiments or benchmark additions are most needed.
