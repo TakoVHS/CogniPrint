@@ -84,6 +84,27 @@ Next:
 - decide which validation components justify a stronger inferential implementation;
 - expand corpus diversity only where provenance and release criteria remain clear.
 
+## 2026-04-30 — Benchmark Expansion Execution v1.1 Scaffold
+
+Completed:
+- added `datasets/public-benchmark-v1.1/` as the next benchmark-expansion scaffold;
+- added `datasets/public-benchmark-v1.1/metadata/intake-candidates.csv` as a target-oriented intake registry for the next release wave;
+- added `datasets/public-benchmark-v1.1/metadata/coverage-targets.md`;
+- added `datasets/public-benchmark-v1.1/metadata/release-gate.md`;
+- added `datasets/public-benchmark-v1.1/metadata/sample-plan-template.csv`;
+- added `evidence/public-benchmark-v1.1/` as a zero-count evidence scaffold for the next released benchmark increment;
+- extended evidence integrity checks so the new `v1.1` scaffold is validated together with the existing public layers.
+
+Current status:
+- `public-benchmark-v1` remains the current released subset;
+- `public-benchmark-v1.1` now exists as the next benchmark-expansion surface;
+- the next substantive benchmark step is prepared as intake and release-gate work rather than as untracked ad hoc additions.
+
+Next:
+- select and verify the next wave of public baselines;
+- populate `datasets/public-benchmark-v1.1/metadata/sample-plan-template.csv` with approved release candidates;
+- release the next benchmark increment only after provenance, licensing, and counts are internally consistent.
+
 ## 2026-04-20
 
 Completed:

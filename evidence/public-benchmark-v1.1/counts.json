@@ -1,0 +1,9 @@
+{
+  "snapshot_id": "public-benchmark-v1.1",
+  "released_samples": 0,
+  "released_variants": 0,
+  "released_languages": 0,
+  "released_source_classes": 0,
+  "released_perturbation_axes": 0,
+  "notes": "Zero-count scaffold for the next benchmark increment."
+}

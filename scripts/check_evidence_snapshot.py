@@ -29,6 +29,16 @@ REQUIRED_FILES = {
         "coverage-summary.md",
         "README.md",
     },
+    "evidence/public-benchmark-v1.1": {
+        "manifest.json",
+        "counts.json",
+        "methods-summary.md",
+        "results-summary.md",
+        "limitations-summary.md",
+        "evidence-table.md",
+        "provenance-summary.md",
+        "README.md",
+    },
     "evidence/statistical-validation-v1": {
         "manifest.json",
         "counts.json",
@@ -66,6 +76,16 @@ def validate_benchmark(root: Path, errors: list[str]) -> None:
     for key in ("released_samples", "released_variants", "released_languages", "released_source_classes", "released_perturbation_axes"):
         if key not in counts:
             errors.append(f"evidence/public-benchmark-v1 counts.json missing {key}")
+
+    manifest_v11 = json.loads((root / "evidence/public-benchmark-v1.1/manifest.json").read_text(encoding="utf-8"))
+    counts_v11 = json.loads((root / "evidence/public-benchmark-v1.1/counts.json").read_text(encoding="utf-8"))
+    if manifest_v11.get("snapshot_id") != "public-benchmark-v1.1":
+        errors.append("evidence/public-benchmark-v1.1 snapshot_id mismatch")
+    for key in ("released_samples", "released_variants", "released_languages", "released_source_classes", "released_perturbation_axes"):
+        if key not in manifest_v11:
+            errors.append(f"evidence/public-benchmark-v1.1 manifest missing {key}")
+        if key not in counts_v11:
+            errors.append(f"evidence/public-benchmark-v1.1 counts.json missing {key}")
 
 
 def validate_statistical(root: Path, errors: list[str]) -> None:

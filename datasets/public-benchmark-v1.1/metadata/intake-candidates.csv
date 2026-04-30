@@ -1,0 +1,13 @@
+candidate_slot_id,target_language,target_domain,source_family,target_kind,status,preferred_source_policy,notes
+pbv11-slot-001,en,literary-prose,public-domain prose,baseline-target,intake-open,stable-public-url-and-clear-reuse,Add two additional English literary prose baselines beyond the current released subset.
+pbv11-slot-002,en,government-prose,public-domain government text,baseline-target,intake-open,government-or-public-domain-only,Add at least one additional English government or public-institution prose baseline.
+pbv11-slot-003,en,political-prose,public-domain political prose,baseline-target,intake-open,stable-public-url-and-clear-reuse,Extend the current English political prose slice beyond one baseline.
+pbv11-slot-004,fr,literary-prose,public-domain prose,baseline-target,intake-open,stable-public-url-and-clear-reuse,Expand French coverage beyond the current single released baseline.
+pbv11-slot-005,de,literary-prose,public-domain prose,baseline-target,intake-open,stable-public-url-and-clear-reuse,Introduce a first German-language public-domain baseline.
+pbv11-slot-006,ru,literary-prose,public-domain prose,baseline-target,intake-open,stable-public-url-and-clear-reuse,Introduce a first Russian-language public-domain baseline.
+pbv11-slot-007,es,literary-prose,public-domain prose,baseline-target,intake-open,stable-public-url-and-clear-reuse,Expand Spanish coverage beyond the current single released baseline.
+pbv11-slot-008,vi,manually-authored research prose,manual benchmark sample,baseline-target,intake-open,manual-authoring-with-explicit-release-note,Prepare a small manually authored Vietnamese benchmark sample only if release provenance is explicit.
+pbv11-slot-009,en,scholarly-abstracts,permissively released abstracts,baseline-target,intake-open,license-and-attribution-must-be-explicit,Only proceed if reuse conditions are unambiguous and the material is publicly redistributable.
+pbv11-slot-010,multilingual,shared-axis coverage,controlled variant planning,variant-target,intake-open,no-release-without-baseline-provenance,Ensure every newly added baseline can support the six current perturbation axes before release.
+pbv11-slot-011,multilingual,benchmark-balance,coverage quality gate,quality-gate,intake-open,keep-language-and-domain-balance-explicit,Use this slot to track whether the next increment is overly dominated by one language or domain.
+pbv11-slot-012,multilingual,benchmark-release,bundle gate,release-gate,intake-open,counts-provenance-and-license-must-all-pass,Do not release the next increment until manifest and counts match the reviewed subset exactly.
