@@ -53,3 +53,4 @@ workspace/datasets/*
 !workspace/datasets/.gitkeep
 workspace/campaigns/*
 !workspace/campaigns/.gitkeep
+release_artifacts/*

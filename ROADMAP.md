@@ -1,16 +1,16 @@
 # ROADMAP
 
 ## 3 months
-- stabilise the public research framing of CogniPrint;
-- complete the baseline documentation and metadata package;
-- finish the terminology audit and keep the public vocabulary consistent.
+- consolidate the public evidence ladder across `empirical-v1`, `public-benchmark-v1`, and `statistical-validation-v1`;
+- complete reviewer-facing metadata, release discipline, and evidence integrity checks;
+- run external review against the current empirical package and benchmark-linked validation layer.
 
 ## 6 months
-- prepare the first preprint draft;
-- strengthen reproducibility and test coverage;
-- refine the mathematical documentation.
+- strengthen inferential validation beyond the current descriptive layer;
+- expand benchmark coverage across additional corpus families and perturbation types;
+- revise manuscript Methods, Results, and Limitations from review feedback.
 
 ## 12 months
-- prepare journal-facing materials;
-- expand the research note set;
-- maintain citation-ready releases and research infrastructure notes.
+- prepare a manuscript-oriented evidence package with reproducibility appendix;
+- maintain citation-ready reviewer releases and archival metadata checks;
+- decide whether hosted convenience layers remain bounded and separate from the research core.

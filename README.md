@@ -4,6 +4,15 @@
 
 The public project framing is a reproducible research methodology and a working empirical evidence package supporting a follow-up manuscript. Optional deployment materials for `apps/api` and `apps/web` exist as a separate application layer around the research engine, but they do not replace the current research-first positioning of the repository.
 
+## Evidence Ladder
+
+The current public evidence ladder is:
+
+- [`evidence/empirical-v1/`](evidence/empirical-v1/) — empirical evidence snapshot
+- [`evidence/public-benchmark-v1/`](evidence/public-benchmark-v1/) — released benchmark subset
+- [`evidence/statistical-validation-v1/`](evidence/statistical-validation-v1/) — benchmark-linked descriptive validation layer
+- [`docs/current-state-summary.md`](docs/current-state-summary.md) — one-page reviewer entry point
+
 ## Optional Hosted Billing Layer
 
 CogniPrint also contains an optional hosted convenience layer under `apps/api` and `apps/web`. This layer is bounded:

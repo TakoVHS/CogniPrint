@@ -36,6 +36,13 @@ jobs:
           source .venv/bin/activate
           make test
 
+      - name: Check metadata consistency
+        shell: bash
+        run: |
+          set -euo pipefail
+          source .venv/bin/activate
+          python scripts/check_metadata_consistency.py
+
       - name: Verify import compilation
         shell: bash
         run: |

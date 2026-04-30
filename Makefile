@@ -1,4 +1,4 @@
-.PHONY: bootstrap init-workspace test smoke validate-sources demo sample-run sample-compare sample-study sample-profile sample-corpus sample-perturb sample-dataset billing-test billing-smoke billing-run-api
+.PHONY: bootstrap init-workspace test smoke validate-sources demo sample-run sample-compare sample-study sample-profile sample-corpus sample-perturb sample-dataset billing-test billing-smoke billing-run-api reviewer-bundle reviewer-release-check
 
 PYTHON ?= python3
 VENV ?= .venv
@@ -62,3 +62,11 @@ billing-smoke:
 
 billing-run-api:
 	$(VENV)/bin/uvicorn apps.api.app.main:app --reload --port 8000
+
+reviewer-bundle:
+	bash scripts/build_reviewer_bundle.sh
+
+reviewer-release-check:
+	$(PY) scripts/check_metadata_consistency.py
+	$(PY) scripts/check_evidence_snapshot.py
+	bash scripts/build_reviewer_bundle.sh

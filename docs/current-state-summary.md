@@ -1,31 +1,29 @@
 # Current State Summary
 
-This document records the current public research state of CogniPrint.
+This document is the shortest reviewer-facing description of the current CogniPrint state.
 
-## What exists now
+## Current empirical base
 
-CogniPrint currently consists of:
+- **5 controlled perturbation campaigns**
+- **41 comparison rows**
+- **campaign-004:** 1 controlled series / 11 comparison rows
 
-- a mathematical manuscript layer;
-- a local empirical workstation;
-- controlled perturbation campaign workflows;
-- source provenance records and validation;
-- dataset scaffolds;
-- campaign-level summaries;
-- colleague-facing share packs;
-- manuscript-oriented empirical drafting outputs;
-- a public colleague-readable empirical evidence summary: `docs/empirical-evidence-summary-v1.md`;
-- a released public benchmark subset under `datasets/public-benchmark-v1/` and `evidence/public-benchmark-v1/`;
-- an expanded descriptive statistical validation layer under `evidence/statistical-validation-v1/`.
+## Public evidence ladder
 
-## Correct public framing
+CogniPrint now exposes three linked public evidence layers:
+
+- `evidence/empirical-v1/` — current empirical evidence snapshot
+- `evidence/public-benchmark-v1/` — released public benchmark subset
+- `evidence/statistical-validation-v1/` — descriptive validation layer linked to the benchmark subset
+
+## Correct framing
 
 CogniPrint should currently be described as:
 
 - a reproducible research workstation;
-- an empirical programme for controlled perturbation studies;
+- a controlled perturbation programme for text-profile studies;
 - a mathematical and empirical research project in progress;
-- a working empirical evidence package supporting a follow-up manuscript.
+- a **working empirical evidence package supporting a follow-up manuscript**.
 
 CogniPrint should not currently be described as:
 
@@ -34,16 +32,15 @@ CogniPrint should not currently be described as:
 - a forensic-style decision engine;
 - a final judgment system.
 
-## Current scientific value
+## Reviewer value
 
-The current value of the project is that it provides:
+The current public package provides:
 
 1. a repeatable local workflow for controlled text-profile experiments;
-2. explicit empirical artifacts for scientific review;
-3. manuscript-oriented outputs that can support a stronger second empirical paper;
-4. a concise evidence summary for colleagues and reviewers.
-5. a benchmark-linked validation layer that bridges public benchmark axes with campaign-level evidence, multi-draw random references, and threshold sensitivity review across several metrics.
+2. provenance-linked empirical artifacts for scientific review;
+3. benchmark-linked descriptive validation outputs;
+4. manuscript-oriented documentation and reviewer-facing summaries.
 
-## Practical next step
+## Immediate next step
 
-The next scientific step is to use the expanded validation layer in external review, then decide which parts justify a stronger inferential implementation beyond the current descriptive package.
+The next scientific step is external review of the current evidence ladder, followed by stronger inferential validation only where the current descriptive layer justifies it.

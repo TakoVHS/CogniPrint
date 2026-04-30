@@ -1,0 +1,57 @@
+name: Validate Evidence Layers
+
+on:
+  push:
+    paths:
+      - 'evidence/**'
+      - 'docs/**'
+      - 'scripts/**'
+      - '.github/workflows/validate_evidence.yml'
+  pull_request:
+    paths:
+      - 'evidence/**'
+      - 'docs/**'
+      - 'scripts/**'
+      - '.github/workflows/validate_evidence.yml'
+
+jobs:
+  validate-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Bootstrap environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m venv .venv
+          source .venv/bin/activate
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+
+      - name: Validate evidence snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          source .venv/bin/activate
+          python scripts/check_evidence_snapshot.py
+
+      - name: Validate JSON manifests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m json.tool evidence/empirical-v1/manifest.json >/tmp/empirical_manifest.json
+          python -m json.tool evidence/public-benchmark-v1/manifest.json >/tmp/benchmark_manifest.json
+          python -m json.tool evidence/statistical-validation-v1/manifest.json >/tmp/stat_manifest.json
+
+      - name: Smoke reviewer bundle build
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/build_reviewer_bundle.sh

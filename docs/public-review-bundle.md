@@ -69,3 +69,15 @@ Use the phrase:
 > working empirical evidence package supporting a follow-up manuscript
 
 Do not present the current package as a settled empirical paper.
+
+## Reviewer release pattern
+
+Use the reviewer tag pattern:
+
+`v0.2.0-reviewer-YYYYMMDD`
+
+The reviewer bundle should be reproducible with:
+
+```bash
+make reviewer-bundle
+```
