@@ -18,11 +18,11 @@ The next increment should eventually contain:
 
 ## Current status
 
-The current `v1.1` release now contains three approved waves:
+The current `v1.1` release now contains four approved waves:
 
-- `6` baseline excerpts;
-- `36` controlled variants;
+- `9` baseline excerpts;
+- `54` controlled variants;
 - `5` released languages (`de`, `ru`, `en`, `fr`, `es`);
 - `3` released source classes (`public-domain literary text`, `public-domain government text`, `public-domain political prose`).
 
-The release is more balanced than the earlier waves, but it remains a small benchmark increment rather than a broad benchmark validation result.
+The release is materially more balanced than the earlier waves, but it remains a benchmark-growth layer rather than a broad benchmark validation result.

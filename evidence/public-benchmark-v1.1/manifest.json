@@ -1,10 +1,10 @@
 {
   "snapshot_id": "public-benchmark-v1.1",
-  "status": "third released benchmark-expansion wave after the public-benchmark-v1 subset",
+  "status": "fourth released benchmark-expansion wave after the public-benchmark-v1 subset",
   "dataset_root": "datasets/public-benchmark-v1.1",
   "evidence_root": "evidence/public-benchmark-v1.1",
-  "released_samples": 6,
-  "released_variants": 36,
+  "released_samples": 9,
+  "released_variants": 54,
   "released_languages": [
     "en",
     "es",
@@ -26,5 +26,5 @@
     "informalized_style"
   ],
   "counts_source": "datasets/public-benchmark-v1.1/metadata/sample-plan-template.csv",
-  "guardrail": "This release extends the public benchmark layer with three small approved waves. It remains a limited benchmark increment and does not imply broader benchmark-performance claims."
+  "guardrail": "This release extends the public benchmark layer with four approved waves. It remains a limited benchmark increment and does not imply broader benchmark-performance claims."
 }

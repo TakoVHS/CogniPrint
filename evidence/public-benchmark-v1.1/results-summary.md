@@ -2,8 +2,8 @@
 
 The released `v1.1` benchmark waves now contribute:
 
-- `6` new baseline excerpts;
-- `36` controlled variants;
+- `9` new baseline excerpts;
+- `54` controlled variants;
 - `5` benchmark languages (`de`, `ru`, `en`, `fr`, `es`);
 - `3` released source classes.
 
@@ -17,9 +17,12 @@ This release is useful because it:
 - adds a French literary baseline to reduce language concentration;
 - adds an English political baseline, which improves non-literary coverage more directly;
 - adds a Spanish literary baseline with clean public provenance;
+- adds a French political baseline;
+- adds a Spanish government baseline;
+- adds a German government baseline;
 - preserves the six perturbation axes already used in the current released benchmark subset;
 - creates a clean bridge from intake planning to a non-zero released `v1.1` increment.
 
 ## Guardrail
 
-This is still a small benchmark-expansion release. It does not by itself justify broader benchmark-performance claims or stronger inferential wording, but it is a more meaningful basis for rerunning descriptive validation than the earlier waves alone.
+This is still a benchmark-expansion release. It does not by itself justify broader benchmark-performance claims or stronger inferential wording, but it is a substantially more meaningful basis for rerunning descriptive validation than the earlier waves alone.

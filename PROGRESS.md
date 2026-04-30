@@ -145,6 +145,27 @@ Next:
 - inspect whether benchmark-versus-campaign bridge summaries shift materially under the broader benchmark mix;
 - continue benchmark growth only where provenance remains clear and source-domain skew is reduced rather than hidden.
 
+## 2026-04-30 — Public Benchmark v1.1 Fourth Released Wave
+
+Completed:
+- selected a larger fourth approved `v1.1` wave from the intake registry;
+- added one French public-domain political baseline;
+- added one Spanish public-domain government baseline;
+- added one German public-domain government baseline;
+- added six controlled variants for each new baseline across the current perturbation axes;
+- updated `evidence/public-benchmark-v1.1/` from a three-wave release to a four-wave release.
+
+Current status:
+- `public-benchmark-v1.1` now releases `9` baselines and `54` controlled variants;
+- released languages remain `de`, `ru`, `en`, `fr`, and `es`, but source-domain balance is broader than in the earlier waves;
+- released source classes remain literary, government, and political prose, with a less literary-heavy mix;
+- the benchmark is still limited, but it is materially stronger for descriptive reruns than the smaller early `v1.1` releases.
+
+Next:
+- rerun descriptive validation against the larger benchmark layer;
+- inspect whether benchmark-versus-campaign bridge and random-baseline distributions stabilize under the broader source mix;
+- keep the next increment focused on provenance-clean breadth rather than on nominal language count alone.
+
 ## 2026-04-20
 
 Completed:

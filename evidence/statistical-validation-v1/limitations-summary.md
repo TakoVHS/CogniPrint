@@ -9,4 +9,4 @@
 - no significance testing is claimed in this layer.
 
 Current empirical campaign count: `5`.
-Current benchmark baseline count: `6`.
+Current benchmark baseline count: `9`.

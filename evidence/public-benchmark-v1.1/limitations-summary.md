@@ -4,7 +4,7 @@ The current `v1.1` release remains limited.
 
 Main limitations:
 
-- only `6` baselines are released in this increment;
-- literary prose still dominates the release, even after adding government and political baselines;
+- only `9` baselines are released in this increment;
+- literary prose no longer dominates as strongly as before, but benchmark breadth is still limited;
 - the released waves expand language coverage, but not yet to the target scale described in the benchmark plan;
 - this release should still be treated as an intermediate release step rather than as a broad benchmark expansion result.

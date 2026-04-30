@@ -3,23 +3,23 @@
     "draw_mean_bootstrap": {
       "confidence": 0.95,
       "count": 64,
-      "lower": 0.976328,
-      "mean": 0.977912,
+      "lower": 0.982711,
+      "mean": 0.983761,
       "resamples": 2000,
-      "upper": 0.979362
+      "upper": 0.98474
     },
     "draw_mean_summary": {
       "count": 64,
-      "max": 0.99169,
-      "mean": 0.977912,
-      "median": 0.978025,
-      "min": 0.964929
+      "max": 0.991823,
+      "mean": 0.983761,
+      "median": 0.984249,
+      "min": 0.972498
     },
     "pooled_summary": {
-      "count": 2304,
+      "count": 3456,
       "max": 1.0,
-      "mean": 0.977912,
-      "median": 0.998787,
+      "mean": 0.983761,
+      "median": 0.999106,
       "min": 0.837681
     }
   },
@@ -28,23 +28,23 @@
     "draw_mean_bootstrap": {
       "confidence": 0.95,
       "count": 64,
-      "lower": 8.549851,
-      "mean": 8.92545,
+      "lower": 8.991032,
+      "mean": 9.375026,
       "resamples": 2000,
-      "upper": 9.296735
+      "upper": 9.75524
     },
     "draw_mean_summary": {
       "count": 64,
-      "max": 11.723039,
-      "mean": 8.92545,
-      "median": 9.042362,
-      "min": 5.356108
+      "max": 12.750323,
+      "mean": 9.375026,
+      "median": 9.372298,
+      "min": 5.934722
     },
     "pooled_summary": {
-      "count": 2304,
-      "max": 37.750425,
-      "mean": 8.92545,
-      "median": 5.020702,
+      "count": 3456,
+      "max": 42.000004,
+      "mean": 9.375026,
+      "median": 5.029025,
       "min": 0.027772
     }
   },
@@ -52,29 +52,29 @@
     "draw_mean_bootstrap": {
       "confidence": 0.95,
       "count": 64,
-      "lower": 9.168787,
-      "mean": 9.539614,
+      "lower": 9.616019,
+      "mean": 10.001168,
       "resamples": 2000,
-      "upper": 9.915088
+      "upper": 10.379256
     },
     "draw_mean_summary": {
       "count": 64,
-      "max": 12.389431,
-      "mean": 9.539614,
-      "median": 9.637088,
-      "min": 5.892397
+      "max": 13.325114,
+      "mean": 10.001168,
+      "median": 10.03046,
+      "min": 6.352443
     },
     "pooled_summary": {
-      "count": 2304,
-      "max": 38.161818,
-      "mean": 9.539614,
-      "median": 5.896079,
+      "count": 3456,
+      "max": 42.06285,
+      "mean": 10.001168,
+      "median": 6.268128,
       "min": 0.039127
     }
   },
   "mode": "repeatable multi-draw cross-baseline reference distribution",
-  "pair_count_per_draw": 36,
+  "pair_count_per_draw": 54,
   "seed": 1729,
   "source_note": "Random baseline uses repeatable seeded cross-baseline benchmark variant draws rather than matched same-baseline perturbations.",
-  "total_pairs": 2304
+  "total_pairs": 3456
 }

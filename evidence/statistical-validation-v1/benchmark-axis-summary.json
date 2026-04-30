@@ -3,144 +3,144 @@
     "axis": "compressed_version",
     "cosine_bootstrap": {
       "confidence": 0.95,
-      "count": 6,
-      "lower": 0.96894,
-      "mean": 0.986102,
+      "count": 9,
+      "lower": 0.978366,
+      "mean": 0.990591,
       "resamples": 2000,
-      "upper": 0.998168
+      "upper": 0.999094
     },
     "euclidean_bootstrap": {
       "confidence": 0.95,
-      "count": 6,
-      "lower": 5.685734,
-      "mean": 7.737574,
+      "count": 9,
+      "lower": 4.914874,
+      "mean": 7.459324,
       "resamples": 2000,
-      "upper": 10.355873
+      "upper": 9.909366
     },
     "group_count": 1,
-    "mean_cosine_similarity": 0.986102,
-    "mean_euclidean_distance": 7.737574,
-    "mean_manhattan_distance": 8.753368,
-    "row_count": 6
+    "mean_cosine_similarity": 0.990591,
+    "mean_euclidean_distance": 7.459324,
+    "mean_manhattan_distance": 8.363535,
+    "row_count": 9
   },
   {
     "axis": "formalized_style",
     "cosine_bootstrap": {
       "confidence": 0.95,
-      "count": 6,
-      "lower": 0.99752,
-      "mean": 0.998865,
+      "count": 9,
+      "lower": 0.998219,
+      "mean": 0.999214,
       "resamples": 2000,
-      "upper": 0.999705
+      "upper": 0.999837
     },
     "euclidean_bootstrap": {
       "confidence": 0.95,
-      "count": 6,
-      "lower": 1.214486,
-      "mean": 2.452218,
+      "count": 9,
+      "lower": 0.885351,
+      "mean": 1.910191,
       "resamples": 2000,
-      "upper": 4.017096
+      "upper": 3.114169
     },
     "group_count": 1,
-    "mean_cosine_similarity": 0.998865,
-    "mean_euclidean_distance": 2.452218,
-    "mean_manhattan_distance": 3.313078,
-    "row_count": 6
+    "mean_cosine_similarity": 0.999214,
+    "mean_euclidean_distance": 1.910191,
+    "mean_manhattan_distance": 2.534902,
+    "row_count": 9
   },
   {
     "axis": "informalized_style",
     "cosine_bootstrap": {
       "confidence": 0.95,
-      "count": 6,
-      "lower": 0.960489,
-      "mean": 0.985687,
+      "count": 9,
+      "lower": 0.96954,
+      "mean": 0.986353,
       "resamples": 2000,
-      "upper": 0.999688
+      "upper": 0.997442
     },
     "euclidean_bootstrap": {
       "confidence": 0.95,
-      "count": 6,
-      "lower": 2.87381,
-      "mean": 6.292201,
+      "count": 9,
+      "lower": 4.708025,
+      "mean": 11.762124,
       "resamples": 2000,
-      "upper": 9.845275
+      "upper": 20.253941
     },
     "group_count": 1,
-    "mean_cosine_similarity": 0.985687,
-    "mean_euclidean_distance": 6.292201,
-    "mean_manhattan_distance": 7.151109,
-    "row_count": 6
+    "mean_cosine_similarity": 0.986353,
+    "mean_euclidean_distance": 11.762124,
+    "mean_manhattan_distance": 12.923603,
+    "row_count": 9
   },
   {
     "axis": "punctuation_cleanup",
     "cosine_bootstrap": {
       "confidence": 0.95,
-      "count": 6,
-      "lower": 0.916892,
-      "mean": 0.970998,
+      "count": 9,
+      "lower": 0.940781,
+      "mean": 0.976852,
       "resamples": 2000,
       "upper": 0.999999
     },
     "euclidean_bootstrap": {
       "confidence": 0.95,
-      "count": 6,
-      "lower": 0.033926,
-      "mean": 9.990286,
+      "count": 9,
+      "lower": 0.037001,
+      "mean": 8.223324,
       "resamples": 2000,
-      "upper": 20.913887
+      "upper": 16.95253
     },
     "group_count": 1,
-    "mean_cosine_similarity": 0.970998,
-    "mean_euclidean_distance": 9.990286,
-    "mean_manhattan_distance": 10.027919,
-    "row_count": 6
+    "mean_cosine_similarity": 0.976852,
+    "mean_euclidean_distance": 8.223324,
+    "mean_manhattan_distance": 8.254065,
+    "row_count": 9
   },
   {
     "axis": "sentence_split_merge",
     "cosine_bootstrap": {
       "confidence": 0.95,
-      "count": 6,
-      "lower": 0.937772,
-      "mean": 0.959893,
+      "count": 9,
+      "lower": 0.94963,
+      "mean": 0.966768,
       "resamples": 2000,
-      "upper": 0.980258
+      "upper": 0.981631
     },
     "euclidean_bootstrap": {
       "confidence": 0.95,
-      "count": 6,
-      "lower": 7.008749,
-      "mean": 15.421605,
+      "count": 9,
+      "lower": 9.637832,
+      "mean": 18.392628,
       "resamples": 2000,
-      "upper": 25.850233
+      "upper": 27.626389
     },
     "group_count": 1,
-    "mean_cosine_similarity": 0.959893,
-    "mean_euclidean_distance": 15.421605,
-    "mean_manhattan_distance": 15.810561,
-    "row_count": 6
+    "mean_cosine_similarity": 0.966768,
+    "mean_euclidean_distance": 18.392628,
+    "mean_manhattan_distance": 18.72797,
+    "row_count": 9
   },
   {
     "axis": "word_order_shift",
     "cosine_bootstrap": {
       "confidence": 0.95,
-      "count": 6,
-      "lower": 0.920513,
-      "mean": 0.971022,
+      "count": 9,
+      "lower": 0.946538,
+      "mean": 0.980594,
       "resamples": 2000,
-      "upper": 0.999541
+      "upper": 0.999745
     },
     "euclidean_bootstrap": {
       "confidence": 0.95,
-      "count": 6,
-      "lower": 1.946455,
-      "mean": 11.4007,
+      "count": 9,
+      "lower": 3.062847,
+      "mean": 9.728097,
       "resamples": 2000,
-      "upper": 20.963641
+      "upper": 17.524969
     },
     "group_count": 1,
-    "mean_cosine_similarity": 0.971022,
-    "mean_euclidean_distance": 11.4007,
-    "mean_manhattan_distance": 11.927986,
-    "row_count": 6
+    "mean_cosine_similarity": 0.980594,
+    "mean_euclidean_distance": 9.728097,
+    "mean_manhattan_distance": 10.252926,
+    "row_count": 9
   }
 ]

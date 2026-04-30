@@ -8,12 +8,15 @@
 - `pbv11-sample-004-baseline` — `fr` — public-domain literary text — `6` released variants
 - `pbv11-sample-005-baseline` — `en` — public-domain political prose — `6` released variants
 - `pbv11-sample-006-baseline` — `es` — public-domain literary text — `6` released variants
+- `pbv11-sample-007-baseline` — `fr` — public-domain political prose — `6` released variants
+- `pbv11-sample-008-baseline` — `es` — public-domain government text — `6` released variants
+- `pbv11-sample-009-baseline` — `de` — public-domain government text — `6` released variants
 
 ## Released perturbation axes
 
-- punctuation cleanup — `6` released variants
-- controlled compression — `6` released variants
-- sentence split and merge — `6` released variants
-- word-order shift — `6` released variants
-- formalized style — `6` released variants
-- informalized style — `6` released variants
+- punctuation cleanup — `9` released variants
+- controlled compression — `9` released variants
+- sentence split and merge — `9` released variants
+- word-order shift — `9` released variants
+- formalized style — `9` released variants
+- informalized style — `9` released variants

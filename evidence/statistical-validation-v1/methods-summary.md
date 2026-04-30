@@ -6,8 +6,8 @@ This package aggregates campaign-level comparison rows and benchmark-subset comp
 
 - empirical campaigns reviewed: `5`
 - empirical comparison rows reviewed: `41`
-- public benchmark baselines reviewed: `6`
-- public benchmark variants reviewed: `36`
+- public benchmark baselines reviewed: `9`
+- public benchmark variants reviewed: `54`
 
 ## Implemented summaries
 

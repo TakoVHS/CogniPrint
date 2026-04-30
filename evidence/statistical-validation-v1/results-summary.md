@@ -1,6 +1,6 @@
 # Statistical Validation v1.1 Results Summary
 
-The current validation layer summarizes `41` empirical comparison rows and `36` released benchmark variants.
+The current validation layer summarizes `41` empirical comparison rows and `54` released benchmark variants.
 
 ## Overall metric summaries
 
@@ -22,21 +22,21 @@ The current validation layer summarizes `41` empirical comparison rows and `36` 
 ## Random baseline reference
 
 - repeatable random baseline draws: `64`
-- cross-baseline pairs per draw: `36`
-- pooled random baseline mean Euclidean distance: `8.92545`
-- draw-mean Euclidean reference interval: `8.549851` to `9.296735`
+- cross-baseline pairs per draw: `54`
+- pooled random baseline mean Euclidean distance: `9.375026`
+- draw-mean Euclidean reference interval: `8.991032` to `9.75524`
 
 ## Threshold sensitivity note
 
 - current Euclidean grid campaign counts: low=`12`, moderate=`13`, larger=`16`
-- current Euclidean grid benchmark counts: low=`6`, moderate=`10`, larger=`20`
+- current Euclidean grid benchmark counts: low=`12`, moderate=`12`, larger=`30`
 - current cosine grid campaign counts: low=`24`, moderate=`5`, larger=`12`
-- current cosine grid benchmark counts: low=`22`, moderate=`3`, larger=`11`
+- current cosine grid benchmark counts: low=`34`, moderate=`6`, larger=`14`
 
 ## Benchmark-versus-campaign bridge
 
 - shared axes reviewed in the bridge: `6`
-- closest Euclidean alignment across shared axes: `formalized_style` with delta `1.413941` and band `close`
-- widest Euclidean gap across shared axes: `sentence_split_merge` with delta `11.973804` and band `wider`
+- closest Euclidean alignment across shared axes: `formalized_style` with delta `0.871914` and band `close`
+- widest Euclidean gap across shared axes: `sentence_split_merge` with delta `14.944827` and band `wider`
 
 These values should be read as descriptive stability tendencies and perturbation-effect summaries rather than definitive inferential results.

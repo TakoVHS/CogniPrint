@@ -4,7 +4,7 @@ This file summarizes the released `v1.1` benchmark waves.
 
 ## Release method
 
-The `v1.1` release extends the existing public benchmark layer with three small approved waves rather than a full benchmark jump.
+The `v1.1` release extends the existing public benchmark layer with four approved waves rather than a full benchmark jump.
 
 Current release method:
 
@@ -24,6 +24,9 @@ The released `v1.1` waves add:
 - one French-language literary baseline;
 - one English-language political baseline;
 - one Spanish-language literary baseline;
+- one French-language political baseline;
+- one Spanish-language government baseline;
+- one German-language government baseline;
 - six controlled variants for each baseline.
 
 The released waves are intentionally small. Their purpose is to extend language and source-class coverage without destabilizing the meaning of the already released `public-benchmark-v1` subset.
@@ -32,3 +35,5 @@ The third wave was selected to improve source-domain balance rather than to add 
 
 - a second English non-literary baseline in political prose;
 - a Spanish baseline with clean public provenance.
+
+The fourth wave continues the same logic at a larger scale. It adds three non-literary baselines in one pass so that domain diversity grows faster than simple language count.
