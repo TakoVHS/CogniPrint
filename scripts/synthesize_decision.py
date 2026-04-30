@@ -8,9 +8,9 @@ from collections import Counter
 from pathlib import Path
 
 VOTE_PATTERNS = {
-    "increment": re.compile(r"\b(increment)\b", re.IGNORECASE),
-    "memo": re.compile(r"\b(memo)\b", re.IGNORECASE),
-    "abstain": re.compile(r"\b(abstain)\b", re.IGNORECASE),
+    "increment": re.compile(r"^\s*decision:\s*increment\b", re.IGNORECASE),
+    "memo": re.compile(r"^\s*decision:\s*memo\b", re.IGNORECASE),
+    "abstain": re.compile(r"^\s*decision:\s*abstain\b", re.IGNORECASE),
 }
 
 
@@ -18,7 +18,7 @@ def parse_votes(text: str) -> Counter[str]:
     counts: Counter[str] = Counter()
     for line in text.splitlines():
         normalized = line.strip()
-        if not normalized:
+        if not normalized or normalized.startswith("#"):
             continue
         for vote, pattern in VOTE_PATTERNS.items():
             if pattern.search(normalized):

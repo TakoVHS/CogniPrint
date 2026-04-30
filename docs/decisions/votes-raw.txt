@@ -1,0 +1,11 @@
+# One reviewer response per block.
+# Keep the key line exactly as one of:
+# Decision: Increment
+# Decision: Memo
+# Decision: Abstain
+#
+# Example:
+# Reviewer: reviewer-1
+# Decision: Memo
+# Reasoning: The descriptive layer still appears materially sensitive to benchmark composition.
+

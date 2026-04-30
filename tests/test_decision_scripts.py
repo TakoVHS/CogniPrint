@@ -16,11 +16,11 @@ class DecisionScriptTests(unittest.TestCase):
         self.assertEqual(counts["abstain"], 1)
 
     def test_resolve_decision_increment(self) -> None:
-        counts = parse_votes("Increment\nIncrement\nMemo\n")
+        counts = parse_votes("Decision: Increment\nDecision: Increment\nDecision: Memo\n")
         self.assertEqual(resolve_decision(counts), "increment")
 
     def test_resolve_decision_ambiguous(self) -> None:
-        counts = parse_votes("Increment\nMemo\nAbstain\n")
+        counts = parse_votes("Decision: Increment\nDecision: Memo\nDecision: Abstain\n")
         self.assertEqual(resolve_decision(counts), "ambiguous")
 
 

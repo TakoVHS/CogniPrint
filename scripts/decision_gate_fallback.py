@@ -13,6 +13,8 @@ def fallback_message(decision: str, counts: Counter[str]) -> str:
         return "Decision resolved: increment. Proceed only with a provenance-clean benchmark increment."
     if decision == "memo":
         return "Decision resolved: memo. Prepare a manuscript-facing interpretation memo without a new benchmark wave."
+    if decision == "pending":
+        return "Decision pending. No reviewer votes recorded yet; keep wording unchanged and wait for reviewer input before choosing wave-005."
     total = sum(counts.values())
     return (
         "Decision ambiguous. Keep inferential wording unchanged, avoid a large automatic benchmark wave, "

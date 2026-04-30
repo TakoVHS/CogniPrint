@@ -15,6 +15,17 @@ Primary decision anchors:
 | reviewer-2 | pending |  |  |
 | reviewer-3 | pending |  |  |
 
+## Operational status
+
+- packet status: ready
+- primary anchors:
+  - `docs/benchmark-shift-note-v1.1.md`
+  - `docs/benchmark-decision-memo-v1.1.md`
+- raw votes file: `docs/decisions/votes-raw.txt`
+- synthesized decision file: `docs/decisions/final-decision.json`
+- final narrative decision note: `docs/decisions/final-decision.md`
+- reviewer deadline: pending
+
 Accepted values for `Decision`:
 
 - `increment`
