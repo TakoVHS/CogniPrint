@@ -1,0 +1,30 @@
+from __future__ import annotations
+
+import unittest
+
+from scripts.sync_decision_gate_issue import extract_decision_line, render_votes
+
+
+class SyncDecisionGateIssueTests(unittest.TestCase):
+    def test_extract_decision_line_exact(self) -> None:
+        self.assertEqual(extract_decision_line("Decision: Increment"), "Decision: Increment")
+        self.assertEqual(extract_decision_line("Decision: Memo"), "Decision: Memo")
+        self.assertEqual(extract_decision_line("Decision: Abstain"), "Decision: Abstain")
+
+    def test_extract_decision_line_ignores_non_exact(self) -> None:
+        self.assertIsNone(extract_decision_line("Decision: increment maybe"))
+        self.assertIsNone(extract_decision_line("I think increment"))
+
+    def test_render_votes_skips_comments_without_decision(self) -> None:
+        payload = [
+            {"body": "No vote here", "author": {"login": "alice"}, "createdAt": "2026-04-30T00:00:00Z"},
+            {"body": "Decision: Memo\nReasoning: Still sensitive.", "author": {"login": "bob"}, "createdAt": "2026-04-30T01:00:00Z"},
+        ]
+        rendered = render_votes(payload)
+        self.assertIn("Reviewer: bob", rendered)
+        self.assertIn("Decision: Memo", rendered)
+        self.assertNotIn("Reviewer: alice", rendered)
+
+
+if __name__ == "__main__":
+    unittest.main()

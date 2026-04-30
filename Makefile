@@ -1,4 +1,4 @@
-.PHONY: bootstrap init-workspace test smoke validate-sources demo sample-run sample-compare sample-study sample-profile sample-corpus sample-perturb sample-dataset billing-test billing-smoke billing-run-api reviewer-bundle reviewer-release-check sync-feedback triage bootstrap-validation decision-summarize decision-fallback claims-drift-check preregister-wave005 check-prereg post-decision
+.PHONY: bootstrap init-workspace test smoke validate-sources demo sample-run sample-compare sample-study sample-profile sample-corpus sample-perturb sample-dataset billing-test billing-smoke billing-run-api reviewer-bundle reviewer-release-check sync-feedback triage bootstrap-validation decision-sync decision-summarize decision-fallback claims-drift-check preregister-wave005 check-prereg post-decision
 
 PYTHON ?= python3
 VENV ?= .venv
@@ -85,6 +85,9 @@ triage:
 bootstrap-validation:
 	$(CLI) report --study-dir workspace/studies --aggregate --output workspace/exports/v1_validation.md --csv-output workspace/exports/v1_validation.csv
 	$(PY) scripts/bootstrap_validation.py --csv workspace/exports/v1_validation.csv --json > docs/validation-status.json
+
+decision-sync:
+	$(PY) scripts/sync_decision_gate_issue.py
 
 decision-summarize:
 	$(PY) scripts/synthesize_decision.py --input docs/decisions/votes-raw.txt --output docs/decisions/final-decision.json

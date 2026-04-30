@@ -1,11 +1,6 @@
-# One reviewer response per block.
-# Keep the key line exactly as one of:
-# Decision: Increment
-# Decision: Memo
-# Decision: Abstain
-#
-# Example:
-# Reviewer: reviewer-1
-# Decision: Memo
-# Reasoning: The descriptive layer still appears materially sensitive to benchmark composition.
+# Synced from GitHub decision-gate issue comments.
+# Only comments that contain an exact Decision line are included.
+# Allowed values: Decision: Increment | Decision: Memo | Decision: Abstain
 
+# No decision-bearing comments found yet.
+# Add reviewer comments to issue #16 using an exact Decision line.

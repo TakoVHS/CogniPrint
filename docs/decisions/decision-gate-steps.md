@@ -17,6 +17,7 @@
 ```bash
 cd /home/vietcash/projects/CogniPrint
 source .venv/bin/activate
+python scripts/sync_decision_gate_issue.py
 python scripts/synthesize_decision.py --input docs/decisions/votes-raw.txt --output docs/decisions/final-decision.json
 python scripts/decision_gate_fallback.py --input docs/decisions/votes-raw.txt
 python scripts/post_decision.py
