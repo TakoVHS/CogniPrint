@@ -1,4 +1,4 @@
-.PHONY: bootstrap init-workspace test smoke validate-sources demo sample-run sample-compare sample-study sample-profile sample-corpus sample-perturb sample-dataset billing-test billing-smoke billing-run-api reviewer-bundle reviewer-release-check sync-feedback triage bootstrap-validation decision-summarize decision-fallback claims-drift-check
+.PHONY: bootstrap init-workspace test smoke validate-sources demo sample-run sample-compare sample-study sample-profile sample-corpus sample-perturb sample-dataset billing-test billing-smoke billing-run-api reviewer-bundle reviewer-release-check sync-feedback triage bootstrap-validation decision-summarize decision-fallback claims-drift-check preregister-wave005 check-prereg post-decision
 
 PYTHON ?= python3
 VENV ?= .venv
@@ -94,3 +94,12 @@ decision-fallback:
 
 claims-drift-check:
 	$(PY) scripts/check_claims_drift.py
+
+preregister-wave005:
+	$(PY) scripts/preregister_wave005.py
+
+check-prereg:
+	$(PY) scripts/check_prereg_compliance.py
+
+post-decision:
+	$(PY) scripts/post_decision.py

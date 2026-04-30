@@ -11,3 +11,27 @@
 7. [ ] If the result is ambiguous, run `python scripts/decision_gate_fallback.py --input docs/decisions/votes-raw.txt`
 8. [ ] Save the final outcome in `docs/decisions/final-decision.md`
 9. [ ] Commit the decision outcome before any `wave-005` action
+
+## Post-decision commands
+
+```bash
+cd /home/vietcash/projects/CogniPrint
+source .venv/bin/activate
+python scripts/synthesize_decision.py --input docs/decisions/votes-raw.txt --output docs/decisions/final-decision.json
+python scripts/decision_gate_fallback.py --input docs/decisions/votes-raw.txt
+python scripts/post_decision.py
+```
+
+If the decision is `increment`, complete `docs/pre-registration-wave005.md` and lock it before any data loading:
+
+```bash
+python scripts/preregister_wave005.py
+python scripts/check_prereg_compliance.py
+```
+
+If the decision is `memo`, generate and scan the interpretation note:
+
+```bash
+python scripts/generate_interpretation_memo.py
+python scripts/check_claims_drift.py --additional docs/interpretation-memo-v1.md
+```

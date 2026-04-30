@@ -48,7 +48,12 @@ ALLOW_IF_NEAR = (
 def find_matches(root: Path, globs: list[str]) -> list[str]:
     errors: list[str] = []
     for pattern in globs:
-        for path in root.glob(pattern):
+        candidate = Path(pattern)
+        if candidate.is_absolute():
+            paths = [candidate]
+        else:
+            paths = list(root.glob(pattern))
+        for path in paths:
             if path.name == "check_claims_drift.py":
                 continue
             if not path.is_file():
@@ -71,9 +76,10 @@ def find_matches(root: Path, globs: list[str]) -> list[str]:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Check tracked docs and site text for dangerous claims drift.")
     parser.add_argument("--root", default=str(Path(__file__).resolve().parents[1]))
+    parser.add_argument("--additional", nargs="*", default=[], help="Additional files or glob patterns relative to root.")
     args = parser.parse_args(argv)
     root = Path(args.root).resolve()
-    errors = find_matches(root, DEFAULT_GLOBS)
+    errors = find_matches(root, DEFAULT_GLOBS + list(args.additional))
     if errors:
         print("Claims drift check failed:")
         for error in errors:

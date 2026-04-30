@@ -24,6 +24,7 @@ Primary decision anchors:
 - raw votes file: `docs/decisions/votes-raw.txt`
 - synthesized decision file: `docs/decisions/final-decision.json`
 - final narrative decision note: `docs/decisions/final-decision.md`
+- post-decision dispatcher: `scripts/post_decision.py`
 - reviewer deadline: pending
 
 Accepted values for `Decision`:
