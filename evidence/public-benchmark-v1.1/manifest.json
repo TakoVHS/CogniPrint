@@ -1,12 +1,25 @@
 {
   "snapshot_id": "public-benchmark-v1.1",
-  "status": "expansion scaffold for the next released public benchmark increment",
+  "status": "first released benchmark-expansion wave after the public-benchmark-v1 subset",
   "dataset_root": "datasets/public-benchmark-v1.1",
   "evidence_root": "evidence/public-benchmark-v1.1",
-  "released_samples": 0,
-  "released_variants": 0,
-  "released_languages": [],
-  "released_source_classes": [],
-  "released_perturbation_axes": [],
-  "guardrail": "This directory is a benchmark-expansion scaffold only. It does not claim a released benchmark increment yet."
+  "released_samples": 2,
+  "released_variants": 12,
+  "released_languages": [
+    "de",
+    "ru"
+  ],
+  "released_source_classes": [
+    "public-domain literary text"
+  ],
+  "released_perturbation_axes": [
+    "punctuation_cleanup",
+    "compressed_version",
+    "sentence_split_merge",
+    "word_order_shift",
+    "formalized_style",
+    "informalized_style"
+  ],
+  "counts_source": "datasets/public-benchmark-v1.1/metadata/sample-plan-template.csv",
+  "guardrail": "This release extends the public benchmark layer with a small approved wave. It remains a limited benchmark increment and does not imply broader benchmark-performance claims."
 }

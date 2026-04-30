@@ -1,6 +1,6 @@
 # Public Benchmark v1.1 Evidence Scaffold
 
-This directory is reserved for the next public benchmark evidence increment after the currently released subset in `evidence/public-benchmark-v1/`.
+This directory records the first public benchmark evidence increment after the currently released subset in `evidence/public-benchmark-v1/`.
 
 It exists so that benchmark-expansion work can be tracked without mutating the meaning of the current `v1` release.
 
@@ -18,4 +18,10 @@ The next increment should eventually contain:
 
 ## Current status
 
-This directory is an empty evidence scaffold for the next benchmark increment. It does not yet contain a released corpus slice or benchmark-analysis outputs.
+The current `v1.1` wave releases:
+
+- `2` baseline excerpts;
+- `12` controlled variants;
+- `2` new languages (`de`, `ru`).
+
+This wave should be read as a small approved benchmark expansion increment. It does not claim benchmark-analysis results or broader statistical validation.

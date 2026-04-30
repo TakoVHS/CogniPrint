@@ -1,5 +1,10 @@
 # Public Benchmark v1.1 Limitations Summary
 
-The current `v1.1` layer is only an expansion scaffold.
+The current `v1.1` wave remains limited.
 
-There are no released `v1.1` benchmark results yet, so the current limitation is simply that the increment has not been assembled and released.
+Main limitations:
+
+- only `2` new baselines are released in this increment;
+- both new baselines are literary rather than domain-diverse;
+- the released wave expands language coverage, but not yet to the target scale described in the benchmark plan;
+- this wave should still be treated as an intermediate release step rather than as a broad benchmark expansion result.

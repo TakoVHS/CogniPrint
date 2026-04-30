@@ -3,8 +3,8 @@ pbv11-slot-001,en,literary-prose,public-domain prose,baseline-target,intake-open
 pbv11-slot-002,en,government-prose,public-domain government text,baseline-target,intake-open,government-or-public-domain-only,Add at least one additional English government or public-institution prose baseline.
 pbv11-slot-003,en,political-prose,public-domain political prose,baseline-target,intake-open,stable-public-url-and-clear-reuse,Extend the current English political prose slice beyond one baseline.
 pbv11-slot-004,fr,literary-prose,public-domain prose,baseline-target,intake-open,stable-public-url-and-clear-reuse,Expand French coverage beyond the current single released baseline.
-pbv11-slot-005,de,literary-prose,public-domain prose,baseline-target,intake-open,stable-public-url-and-clear-reuse,Introduce a first German-language public-domain baseline.
-pbv11-slot-006,ru,literary-prose,public-domain prose,baseline-target,intake-open,stable-public-url-and-clear-reuse,Introduce a first Russian-language public-domain baseline.
+pbv11-slot-005,de,literary-prose,public-domain prose,baseline-target,selected-wave-001,stable-public-url-and-clear-reuse,Selected for the first v1.1 wave as a German-language public-domain literary baseline.
+pbv11-slot-006,ru,literary-prose,public-domain prose,baseline-target,selected-wave-001,stable-public-url-and-clear-reuse,Selected for the first v1.1 wave as a Russian-language public-domain literary baseline.
 pbv11-slot-007,es,literary-prose,public-domain prose,baseline-target,intake-open,stable-public-url-and-clear-reuse,Expand Spanish coverage beyond the current single released baseline.
 pbv11-slot-008,vi,manually-authored research prose,manual benchmark sample,baseline-target,intake-open,manual-authoring-with-explicit-release-note,Prepare a small manually authored Vietnamese benchmark sample only if release provenance is explicit.
 pbv11-slot-009,en,scholarly-abstracts,permissively released abstracts,baseline-target,intake-open,license-and-attribution-must-be-explicit,Only proceed if reuse conditions are unambiguous and the material is publicly redistributable.

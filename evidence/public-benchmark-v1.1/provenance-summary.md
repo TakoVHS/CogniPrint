@@ -1,5 +1,12 @@
 # Public Benchmark v1.1 Provenance Summary
 
-No released `v1.1` benchmark baselines are present yet.
+The current `v1.1` wave releases two public-domain baseline excerpts with explicit source URLs:
 
-Use `datasets/public-benchmark-v1.1/metadata/` as the intake and release-gate layer until the next increment is ready.
+- `Rotkäppchen` via German Wikisource
+- `Муму` via Russian Wikisource
+
+Each released variant is derived locally from its released baseline excerpt and tracked in:
+
+- `datasets/public-benchmark-v1.1/metadata/sample-plan-template.csv`
+
+No private or workspace-only input text is included in this wave.
