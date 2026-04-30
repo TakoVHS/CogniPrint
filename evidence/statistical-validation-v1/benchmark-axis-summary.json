@@ -4,23 +4,23 @@
     "cosine_bootstrap": {
       "confidence": 0.95,
       "count": 6,
-      "lower": 0.984635,
-      "mean": 0.990595,
+      "lower": 0.96894,
+      "mean": 0.986102,
       "resamples": 2000,
-      "upper": 0.99624
+      "upper": 0.998168
     },
     "euclidean_bootstrap": {
       "confidence": 0.95,
       "count": 6,
-      "lower": 3.567167,
-      "mean": 9.016583,
+      "lower": 5.685734,
+      "mean": 7.737574,
       "resamples": 2000,
-      "upper": 14.677736
+      "upper": 10.355873
     },
     "group_count": 1,
-    "mean_cosine_similarity": 0.990595,
-    "mean_euclidean_distance": 9.016583,
-    "mean_manhattan_distance": 10.608102,
+    "mean_cosine_similarity": 0.986102,
+    "mean_euclidean_distance": 7.737574,
+    "mean_manhattan_distance": 8.753368,
     "row_count": 6
   },
   {
@@ -28,23 +28,23 @@
     "cosine_bootstrap": {
       "confidence": 0.95,
       "count": 6,
-      "lower": 0.99486,
-      "mean": 0.996753,
+      "lower": 0.99752,
+      "mean": 0.998865,
       "resamples": 2000,
-      "upper": 0.998295
+      "upper": 0.999705
     },
     "euclidean_bootstrap": {
       "confidence": 0.95,
       "count": 6,
-      "lower": 2.6558,
-      "mean": 4.983856,
+      "lower": 1.214486,
+      "mean": 2.452218,
       "resamples": 2000,
-      "upper": 7.475502
+      "upper": 4.017096
     },
     "group_count": 1,
-    "mean_cosine_similarity": 0.996753,
-    "mean_euclidean_distance": 4.983856,
-    "mean_manhattan_distance": 6.223191,
+    "mean_cosine_similarity": 0.998865,
+    "mean_euclidean_distance": 2.452218,
+    "mean_manhattan_distance": 3.313078,
     "row_count": 6
   },
   {
@@ -52,23 +52,23 @@
     "cosine_bootstrap": {
       "confidence": 0.95,
       "count": 6,
-      "lower": 0.985532,
-      "mean": 0.990321,
+      "lower": 0.960489,
+      "mean": 0.985687,
       "resamples": 2000,
-      "upper": 0.994623
+      "upper": 0.999688
     },
     "euclidean_bootstrap": {
       "confidence": 0.95,
       "count": 6,
-      "lower": 4.844318,
-      "mean": 9.356799,
+      "lower": 2.87381,
+      "mean": 6.292201,
       "resamples": 2000,
-      "upper": 13.383252
+      "upper": 9.845275
     },
     "group_count": 1,
-    "mean_cosine_similarity": 0.990321,
-    "mean_euclidean_distance": 9.356799,
-    "mean_manhattan_distance": 11.290178,
+    "mean_cosine_similarity": 0.985687,
+    "mean_euclidean_distance": 6.292201,
+    "mean_manhattan_distance": 7.151109,
     "row_count": 6
   },
   {
@@ -76,23 +76,23 @@
     "cosine_bootstrap": {
       "confidence": 0.95,
       "count": 6,
-      "lower": 0.998575,
-      "mean": 0.999525,
+      "lower": 0.916892,
+      "mean": 0.970998,
       "resamples": 2000,
-      "upper": 1.0
+      "upper": 0.999999
     },
     "euclidean_bootstrap": {
       "confidence": 0.95,
       "count": 6,
-      "lower": 0.005401,
-      "mean": 0.200403,
+      "lower": 0.033926,
+      "mean": 9.990286,
       "resamples": 2000,
-      "upper": 0.58757
+      "upper": 20.913887
     },
     "group_count": 1,
-    "mean_cosine_similarity": 0.999525,
-    "mean_euclidean_distance": 0.200403,
-    "mean_manhattan_distance": 0.203515,
+    "mean_cosine_similarity": 0.970998,
+    "mean_euclidean_distance": 9.990286,
+    "mean_manhattan_distance": 10.027919,
     "row_count": 6
   },
   {
@@ -100,23 +100,23 @@
     "cosine_bootstrap": {
       "confidence": 0.95,
       "count": 6,
-      "lower": 0.988867,
-      "mean": 0.993089,
+      "lower": 0.937772,
+      "mean": 0.959893,
       "resamples": 2000,
-      "upper": 0.996075
+      "upper": 0.980258
     },
     "euclidean_bootstrap": {
       "confidence": 0.95,
       "count": 6,
-      "lower": 3.761454,
-      "mean": 7.154827,
+      "lower": 7.008749,
+      "mean": 15.421605,
       "resamples": 2000,
-      "upper": 10.22297
+      "upper": 25.850233
     },
     "group_count": 1,
-    "mean_cosine_similarity": 0.993089,
-    "mean_euclidean_distance": 7.154827,
-    "mean_manhattan_distance": 7.317966,
+    "mean_cosine_similarity": 0.959893,
+    "mean_euclidean_distance": 15.421605,
+    "mean_manhattan_distance": 15.810561,
     "row_count": 6
   },
   {
@@ -124,23 +124,23 @@
     "cosine_bootstrap": {
       "confidence": 0.95,
       "count": 6,
-      "lower": 0.998831,
-      "mean": 0.999269,
+      "lower": 0.920513,
+      "mean": 0.971022,
       "resamples": 2000,
-      "upper": 0.999678
+      "upper": 0.999541
     },
     "euclidean_bootstrap": {
       "confidence": 0.95,
       "count": 6,
-      "lower": 1.025828,
-      "mean": 2.853086,
+      "lower": 1.946455,
+      "mean": 11.4007,
       "resamples": 2000,
-      "upper": 4.813902
+      "upper": 20.963641
     },
     "group_count": 1,
-    "mean_cosine_similarity": 0.999269,
-    "mean_euclidean_distance": 2.853086,
-    "mean_manhattan_distance": 3.336298,
+    "mean_cosine_similarity": 0.971022,
+    "mean_euclidean_distance": 11.4007,
+    "mean_manhattan_distance": 11.927986,
     "row_count": 6
   }
 ]

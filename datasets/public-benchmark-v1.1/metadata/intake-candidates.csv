@@ -1,11 +1,11 @@
 candidate_slot_id,target_language,target_domain,source_family,target_kind,status,preferred_source_policy,notes
 pbv11-slot-001,en,literary-prose,public-domain prose,baseline-target,intake-open,stable-public-url-and-clear-reuse,Add two additional English literary prose baselines beyond the current released subset.
 pbv11-slot-002,en,government-prose,public-domain government text,baseline-target,selected-wave-002,government-or-public-domain-only,Selected for the second v1.1 wave as an English-language public-domain government baseline.
-pbv11-slot-003,en,political-prose,public-domain political prose,baseline-target,intake-open,stable-public-url-and-clear-reuse,Extend the current English political prose slice beyond one baseline.
+pbv11-slot-003,en,political-prose,public-domain political prose,baseline-target,selected-wave-003,stable-public-url-and-clear-reuse,Selected for the third v1.1 wave as an English-language public-domain political baseline.
 pbv11-slot-004,fr,literary-prose,public-domain prose,baseline-target,selected-wave-002,stable-public-url-and-clear-reuse,Selected for the second v1.1 wave as a French-language public-domain literary baseline.
 pbv11-slot-005,de,literary-prose,public-domain prose,baseline-target,selected-wave-001,stable-public-url-and-clear-reuse,Selected for the first v1.1 wave as a German-language public-domain literary baseline.
 pbv11-slot-006,ru,literary-prose,public-domain prose,baseline-target,selected-wave-001,stable-public-url-and-clear-reuse,Selected for the first v1.1 wave as a Russian-language public-domain literary baseline.
-pbv11-slot-007,es,literary-prose,public-domain prose,baseline-target,intake-open,stable-public-url-and-clear-reuse,Expand Spanish coverage beyond the current single released baseline.
+pbv11-slot-007,es,literary-prose,public-domain prose,baseline-target,selected-wave-003,stable-public-url-and-clear-reuse,Selected for the third v1.1 wave as a Spanish-language public-domain literary baseline.
 pbv11-slot-008,vi,manually-authored research prose,manual benchmark sample,baseline-target,intake-open,manual-authoring-with-explicit-release-note,Prepare a small manually authored Vietnamese benchmark sample only if release provenance is explicit.
 pbv11-slot-009,en,scholarly-abstracts,permissively released abstracts,baseline-target,intake-open,license-and-attribution-must-be-explicit,Only proceed if reuse conditions are unambiguous and the material is publicly redistributable.
 pbv11-slot-010,multilingual,shared-axis coverage,controlled variant planning,variant-target,intake-open,no-release-without-baseline-provenance,Ensure every newly added baseline can support the six current perturbation axes before release.

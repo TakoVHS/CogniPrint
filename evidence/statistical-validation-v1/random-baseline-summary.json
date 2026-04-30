@@ -3,24 +3,24 @@
     "draw_mean_bootstrap": {
       "confidence": 0.95,
       "count": 64,
-      "lower": 0.994557,
-      "mean": 0.994825,
+      "lower": 0.976328,
+      "mean": 0.977912,
       "resamples": 2000,
-      "upper": 0.995081
+      "upper": 0.979362
     },
     "draw_mean_summary": {
       "count": 64,
-      "max": 0.997303,
-      "mean": 0.994825,
-      "median": 0.99479,
-      "min": 0.992862
+      "max": 0.99169,
+      "mean": 0.977912,
+      "median": 0.978025,
+      "min": 0.964929
     },
     "pooled_summary": {
       "count": 2304,
       "max": 1.0,
-      "mean": 0.994825,
-      "median": 0.997149,
-      "min": 0.978311
+      "mean": 0.977912,
+      "median": 0.998787,
+      "min": 0.837681
     }
   },
   "draw_count": 64,
@@ -28,48 +28,48 @@
     "draw_mean_bootstrap": {
       "confidence": 0.95,
       "count": 64,
-      "lower": 5.536993,
-      "mean": 5.783678,
+      "lower": 8.549851,
+      "mean": 8.92545,
       "resamples": 2000,
-      "upper": 6.025547
+      "upper": 9.296735
     },
     "draw_mean_summary": {
       "count": 64,
-      "max": 8.819288,
-      "mean": 5.783678,
-      "median": 5.748587,
-      "min": 3.71343
+      "max": 11.723039,
+      "mean": 8.92545,
+      "median": 9.042362,
+      "min": 5.356108
     },
     "pooled_summary": {
       "count": 2304,
-      "max": 18.544352,
-      "mean": 5.783678,
-      "median": 3.050177,
-      "min": 0.003535
+      "max": 37.750425,
+      "mean": 8.92545,
+      "median": 5.020702,
+      "min": 0.027772
     }
   },
   "manhattan_distance": {
     "draw_mean_bootstrap": {
       "confidence": 0.95,
       "count": 64,
-      "lower": 6.413228,
-      "mean": 6.687673,
+      "lower": 9.168787,
+      "mean": 9.539614,
       "resamples": 2000,
-      "upper": 6.957549
+      "upper": 9.915088
     },
     "draw_mean_summary": {
       "count": 64,
-      "max": 10.107801,
-      "mean": 6.687673,
-      "median": 6.600428,
-      "min": 4.333331
+      "max": 12.389431,
+      "mean": 9.539614,
+      "median": 9.637088,
+      "min": 5.892397
     },
     "pooled_summary": {
       "count": 2304,
-      "max": 21.300696,
-      "mean": 6.687673,
-      "median": 4.436227,
-      "min": 0.004982
+      "max": 38.161818,
+      "mean": 9.539614,
+      "median": 5.896079,
+      "min": 0.039127
     }
   },
   "mode": "repeatable multi-draw cross-baseline reference distribution",

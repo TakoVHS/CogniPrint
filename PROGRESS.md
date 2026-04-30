@@ -125,6 +125,26 @@ Next:
 - prioritize source-domain balance over raw volume;
 - rerun downstream descriptive validation only after the next benchmark increment is large enough to make the comparison meaningful.
 
+## 2026-04-30 — Public Benchmark v1.1 Third Released Wave
+
+Completed:
+- selected a third approved `v1.1` wave from the intake registry;
+- added one English public-domain political baseline;
+- added one Spanish public-domain literary baseline;
+- added six controlled variants for each new baseline across the current perturbation axes;
+- updated `evidence/public-benchmark-v1.1/` from a two-wave release to a three-wave release.
+
+Current status:
+- `public-benchmark-v1.1` now releases `6` baselines and `36` controlled variants;
+- released languages in `v1.1` now include `de`, `ru`, `en`, `fr`, and `es`;
+- released source classes in `v1.1` now include literary, government, and political prose;
+- the benchmark remains small, but it is more suitable for rerunning descriptive validation than the earlier `v1.1` waves alone.
+
+Next:
+- rerun descriptive validation against the expanded benchmark layer;
+- inspect whether benchmark-versus-campaign bridge summaries shift materially under the broader benchmark mix;
+- continue benchmark growth only where provenance remains clear and source-domain skew is reduced rather than hidden.
+
 ## 2026-04-20
 
 Completed:

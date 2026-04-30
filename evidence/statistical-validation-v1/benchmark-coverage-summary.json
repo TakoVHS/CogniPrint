@@ -1,8 +1,10 @@
 {
   "languages": {
-    "en": 4,
+    "de": 1,
+    "en": 2,
     "es": 1,
-    "fr": 1
+    "fr": 1,
+    "ru": 1
   },
   "perturbation_axes": {
     "compressed_version": 6,

@@ -5,9 +5,9 @@
       "grids": [
         {
           "benchmark_counts": {
-            "larger": 8,
-            "low": 18,
-            "moderate": 10
+            "larger": 13,
+            "low": 21,
+            "moderate": 2
           },
           "campaign_counts": {
             "larger": 15,
@@ -20,9 +20,9 @@
         },
         {
           "benchmark_counts": {
-            "larger": 4,
-            "low": 23,
-            "moderate": 9
+            "larger": 11,
+            "low": 22,
+            "moderate": 3
           },
           "campaign_counts": {
             "larger": 12,
@@ -35,9 +35,9 @@
         },
         {
           "benchmark_counts": {
-            "larger": 0,
-            "low": 31,
-            "moderate": 5
+            "larger": 8,
+            "low": 24,
+            "moderate": 4
           },
           "campaign_counts": {
             "larger": 6,
@@ -55,9 +55,9 @@
       "grids": [
         {
           "benchmark_counts": {
-            "larger": 22,
-            "low": 6,
-            "moderate": 8
+            "larger": 26,
+            "low": 4,
+            "moderate": 6
           },
           "campaign_counts": {
             "larger": 23,
@@ -70,9 +70,9 @@
         },
         {
           "benchmark_counts": {
-            "larger": 16,
-            "low": 7,
-            "moderate": 13
+            "larger": 20,
+            "low": 6,
+            "moderate": 10
           },
           "campaign_counts": {
             "larger": 16,
@@ -85,9 +85,9 @@
         },
         {
           "benchmark_counts": {
-            "larger": 16,
-            "low": 12,
-            "moderate": 8
+            "larger": 20,
+            "low": 10,
+            "moderate": 6
           },
           "campaign_counts": {
             "larger": 5,
@@ -105,9 +105,9 @@
       "grids": [
         {
           "benchmark_counts": {
-            "larger": 19,
-            "low": 7,
-            "moderate": 10
+            "larger": 22,
+            "low": 6,
+            "moderate": 8
           },
           "campaign_counts": {
             "larger": 21,
@@ -120,9 +120,9 @@
         },
         {
           "benchmark_counts": {
-            "larger": 15,
-            "low": 12,
-            "moderate": 9
+            "larger": 19,
+            "low": 10,
+            "moderate": 7
           },
           "campaign_counts": {
             "larger": 9,
@@ -135,9 +135,9 @@
         },
         {
           "benchmark_counts": {
-            "larger": 14,
-            "low": 14,
-            "moderate": 8
+            "larger": 15,
+            "low": 12,
+            "moderate": 9
           },
           "campaign_counts": {
             "larger": 1,

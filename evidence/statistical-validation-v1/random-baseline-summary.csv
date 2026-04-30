@@ -1,7 +1,7 @@
 metric,summary_type,count,mean,median,min,max,lower,upper
-cosine_similarity,pooled,2304,0.994825,0.997149,0.978311,1.0,,
-cosine_similarity,draw_means,64,0.994825,0.99479,0.992862,0.997303,,
-euclidean_distance,pooled,2304,5.783678,3.050177,0.003535,18.544352,,
-euclidean_distance,draw_means,64,5.783678,5.748587,3.71343,8.819288,,
-manhattan_distance,pooled,2304,6.687673,4.436227,0.004982,21.300696,,
-manhattan_distance,draw_means,64,6.687673,6.600428,4.333331,10.107801,,
+cosine_similarity,pooled,2304,0.977912,0.998787,0.837681,1.0,,
+cosine_similarity,draw_means,64,0.977912,0.978025,0.964929,0.99169,,
+euclidean_distance,pooled,2304,8.92545,5.020702,0.027772,37.750425,,
+euclidean_distance,draw_means,64,8.92545,9.042362,5.356108,11.723039,,
+manhattan_distance,pooled,2304,9.539614,5.896079,0.039127,38.161818,,
+manhattan_distance,draw_means,64,9.539614,9.637088,5.892397,12.389431,,

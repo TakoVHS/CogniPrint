@@ -23,20 +23,20 @@ The current validation layer summarizes `41` empirical comparison rows and `36` 
 
 - repeatable random baseline draws: `64`
 - cross-baseline pairs per draw: `36`
-- pooled random baseline mean Euclidean distance: `5.783678`
-- draw-mean Euclidean reference interval: `5.536993` to `6.025547`
+- pooled random baseline mean Euclidean distance: `8.92545`
+- draw-mean Euclidean reference interval: `8.549851` to `9.296735`
 
 ## Threshold sensitivity note
 
 - current Euclidean grid campaign counts: low=`12`, moderate=`13`, larger=`16`
-- current Euclidean grid benchmark counts: low=`7`, moderate=`13`, larger=`16`
+- current Euclidean grid benchmark counts: low=`6`, moderate=`10`, larger=`20`
 - current cosine grid campaign counts: low=`24`, moderate=`5`, larger=`12`
-- current cosine grid benchmark counts: low=`23`, moderate=`9`, larger=`4`
+- current cosine grid benchmark counts: low=`22`, moderate=`3`, larger=`11`
 
 ## Benchmark-versus-campaign bridge
 
 - shared axes reviewed in the bridge: `6`
-- closest Euclidean alignment across shared axes: `word_order_shift` with delta `1.744741` and band `moderate`
-- widest Euclidean gap across shared axes: `informalized_style` with delta `7.829415` and band `wider`
+- closest Euclidean alignment across shared axes: `formalized_style` with delta `1.413941` and band `close`
+- widest Euclidean gap across shared axes: `sentence_split_merge` with delta `11.973804` and band `wider`
 
 These values should be read as descriptive stability tendencies and perturbation-effect summaries rather than definitive inferential results.
