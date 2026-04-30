@@ -63,6 +63,33 @@ Ask colleagues to evaluate:
 - whether the benchmark-decision memo makes the next-step logic clearer;
 - which additional corpora or campaign types would make the follow-up manuscript stronger.
 
+## Canonical decision intake
+
+Use the canonical GitHub decision issue for the narrow benchmark-increment gate:
+
+- `https://github.com/TakoVHS/CogniPrint/issues/16`
+
+Preferred reviewer reply format:
+
+```text
+Decision: Increment
+Reasoning: <1-2 short paragraphs>
+```
+
+or
+
+```text
+Decision: Memo
+Reasoning: <1-2 short paragraphs>
+```
+
+or
+
+```text
+Decision: Abstain
+Reasoning: <1-2 short paragraphs>
+```
+
 ## Review-loop decision gate
 
 After the external review pass, decide explicitly between these paths:
