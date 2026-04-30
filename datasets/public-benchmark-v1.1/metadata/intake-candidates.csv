@@ -1,8 +1,8 @@
 candidate_slot_id,target_language,target_domain,source_family,target_kind,status,preferred_source_policy,notes
 pbv11-slot-001,en,literary-prose,public-domain prose,baseline-target,intake-open,stable-public-url-and-clear-reuse,Add two additional English literary prose baselines beyond the current released subset.
-pbv11-slot-002,en,government-prose,public-domain government text,baseline-target,intake-open,government-or-public-domain-only,Add at least one additional English government or public-institution prose baseline.
+pbv11-slot-002,en,government-prose,public-domain government text,baseline-target,selected-wave-002,government-or-public-domain-only,Selected for the second v1.1 wave as an English-language public-domain government baseline.
 pbv11-slot-003,en,political-prose,public-domain political prose,baseline-target,intake-open,stable-public-url-and-clear-reuse,Extend the current English political prose slice beyond one baseline.
-pbv11-slot-004,fr,literary-prose,public-domain prose,baseline-target,intake-open,stable-public-url-and-clear-reuse,Expand French coverage beyond the current single released baseline.
+pbv11-slot-004,fr,literary-prose,public-domain prose,baseline-target,selected-wave-002,stable-public-url-and-clear-reuse,Selected for the second v1.1 wave as a French-language public-domain literary baseline.
 pbv11-slot-005,de,literary-prose,public-domain prose,baseline-target,selected-wave-001,stable-public-url-and-clear-reuse,Selected for the first v1.1 wave as a German-language public-domain literary baseline.
 pbv11-slot-006,ru,literary-prose,public-domain prose,baseline-target,selected-wave-001,stable-public-url-and-clear-reuse,Selected for the first v1.1 wave as a Russian-language public-domain literary baseline.
 pbv11-slot-007,es,literary-prose,public-domain prose,baseline-target,intake-open,stable-public-url-and-clear-reuse,Expand Spanish coverage beyond the current single released baseline.

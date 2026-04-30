@@ -1,9 +1,9 @@
 {
   "snapshot_id": "public-benchmark-v1.1",
-  "released_samples": 2,
-  "released_variants": 12,
-  "released_languages": 2,
-  "released_source_classes": 1,
+  "released_samples": 4,
+  "released_variants": 24,
+  "released_languages": 4,
+  "released_source_classes": 2,
   "released_perturbation_axes": 6,
-  "notes": "Counts reflect the first approved v1.1 benchmark wave only."
+  "notes": "Counts reflect the first and second approved v1.1 benchmark waves."
 }

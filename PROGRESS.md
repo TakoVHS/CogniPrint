@@ -105,6 +105,26 @@ Next:
 - populate `datasets/public-benchmark-v1.1/metadata/sample-plan-template.csv` with approved release candidates;
 - release the next benchmark increment only after provenance, licensing, and counts are internally consistent.
 
+## 2026-04-30 — Public Benchmark v1.1 Second Released Wave
+
+Completed:
+- selected a second approved `v1.1` wave from the intake registry;
+- added one English public-domain government baseline;
+- added one French public-domain literary baseline;
+- added six controlled variants for each new baseline across the current perturbation axes;
+- updated `evidence/public-benchmark-v1.1/` from a first-wave release to a two-wave release.
+
+Current status:
+- `public-benchmark-v1.1` now releases `4` baselines and `24` controlled variants;
+- released languages in `v1.1` now include `de`, `ru`, `en`, and `fr`;
+- released source classes in `v1.1` now include literary and government prose;
+- the benchmark remains small, but it is less narrowly literary than the first released wave.
+
+Next:
+- add another small approved wave only if provenance remains as clean as the current release;
+- prioritize source-domain balance over raw volume;
+- rerun downstream descriptive validation only after the next benchmark increment is large enough to make the comparison meaningful.
+
 ## 2026-04-20
 
 Completed:

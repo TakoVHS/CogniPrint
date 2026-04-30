@@ -1,10 +1,10 @@
 # Public Benchmark v1.1 Methods Summary
 
-This file summarizes the first approved `v1.1` benchmark wave.
+This file summarizes the released `v1.1` benchmark waves.
 
 ## Release method
 
-The `v1.1` wave extends the existing public benchmark layer with a small approved release rather than a full benchmark jump.
+The `v1.1` release extends the existing public benchmark layer with two small approved waves rather than a full benchmark jump.
 
 Current release method:
 
@@ -14,12 +14,14 @@ Current release method:
 - record every baseline and variant in `datasets/public-benchmark-v1.1/metadata/sample-plan-template.csv`;
 - publish matching counts and summaries under `evidence/public-benchmark-v1.1/`.
 
-## Current first wave
+## Current released waves
 
-The first `v1.1` wave adds:
+The released `v1.1` waves add:
 
-- one German-language baseline;
-- one Russian-language baseline;
+- one German-language literary baseline;
+- one Russian-language literary baseline;
+- one English-language government baseline;
+- one French-language literary baseline;
 - six controlled variants for each baseline.
 
-This wave is intentionally small. Its purpose is to extend language and source coverage without destabilizing the meaning of the already released `public-benchmark-v1` subset.
+The released waves are intentionally small. Their purpose is to extend language and source-class coverage without destabilizing the meaning of the already released `public-benchmark-v1` subset.
