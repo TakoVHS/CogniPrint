@@ -43,4 +43,11 @@ The current public package provides:
 
 ## Immediate next step
 
-The next scientific step is to compare the descriptive validation shifts between the smaller and larger `public-benchmark-v1.1` states, then decide whether another domain-diversity increment is needed before any stronger inferential framing is attempted.
+The current scientific decision is to treat the benchmark shift as still materially sensitive to benchmark composition.
+
+That means the immediate next step is not stronger inferential framing. It is to use:
+
+- `docs/benchmark-shift-note-v1.1.md`
+- `docs/benchmark-decision-memo-v1.1.md`
+
+as the review anchors for deciding whether the next move should be another provenance-clean benchmark increment or a narrower interpretation pass.

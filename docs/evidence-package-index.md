@@ -29,12 +29,13 @@ Campaign `empirical-campaign-004` contributes `1` controlled perturbation series
 6. `evidence/statistical-validation-v1/results-summary.md`
 7. `evidence/statistical-validation-v1/benchmark-campaign-bridge-summary.md`
 8. `docs/benchmark-shift-note-v1.1.md`
-9. `evidence/statistical-validation-v1/limitations-summary.md`
-10. `docs/manuscript-validation-v1.1-notes.md`
-11. `docs/claims-matrix.md`
-12. `docs/benchmark-protocol.md`
-13. `paper/empirical-stability-v1.md`
-14. `docs/public-review-bundle.md`
+9. `docs/benchmark-decision-memo-v1.1.md`
+10. `evidence/statistical-validation-v1/limitations-summary.md`
+11. `docs/manuscript-validation-v1.1-notes.md`
+12. `docs/claims-matrix.md`
+13. `docs/benchmark-protocol.md`
+14. `paper/empirical-stability-v1.md`
+15. `docs/public-review-bundle.md`
 
 ## What this package is for
 

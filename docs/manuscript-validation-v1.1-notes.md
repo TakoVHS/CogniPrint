@@ -12,8 +12,8 @@ The latest benchmark-growth pass should also be read together with `docs/benchma
 
 - empirical campaigns reviewed: `5`
 - empirical comparison rows reviewed: `41`
-- released benchmark baselines reviewed: `6`
-- released benchmark variants reviewed: `36`
+- released benchmark baselines reviewed: `9`
+- released benchmark variants reviewed: `54`
 - overlapping bridge axes reviewed: `6`
 
 ## What validation v1.1 adds
@@ -28,10 +28,10 @@ The current layer contributes four concrete review aids:
 ## Current descriptive anchors
 
 - empirical mean Euclidean distance: `2.610789`
-- pooled random-reference mean Euclidean distance: `5.783678`
-- random-reference draw-mean Euclidean interval: `5.536993` to `6.025547`
-- closest current Euclidean bridge alignment: `word_order_shift` with delta `1.744741`
-- widest current Euclidean bridge gap: `informalized_style` with delta `7.829415`
+- pooled random-reference mean Euclidean distance: `9.375026`
+- random-reference draw-mean Euclidean interval: `8.991032` to `9.75524`
+- closest current Euclidean bridge alignment: `formalized_style` with delta `0.871914`
+- widest current Euclidean bridge gap: `sentence_split_merge` with delta `14.944827`
 
 These values are useful for discussion of observed pattern and measured shift. They should not be promoted to inferential or decision-level claims.
 
@@ -43,6 +43,11 @@ The current manuscript should use these outputs in a bounded way:
 - as a reminder that metric-family choice affects interpretation;
 - as support for discussing which perturbation families look more or less corpus-bound;
 - as evidence that the repository now contains a reviewable validation layer, not just campaign summaries.
+
+The current manuscript route should also read these summaries together with:
+
+- `docs/benchmark-shift-note-v1.1.md`
+- `docs/benchmark-decision-memo-v1.1.md`
 
 ## What the manuscript should not claim
 

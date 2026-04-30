@@ -44,8 +44,9 @@ It does **not** by itself justify:
 This file should now be read together with:
 
 - `docs/benchmark-shift-note-v1.1.md`
+- `docs/benchmark-decision-memo-v1.1.md`
 
-The benchmark-shift note compares the earlier `36`-variant validation state with the current `54`-variant state and is the better reference for deciding whether the descriptive layer is stabilizing under a broader benchmark mix.
+The benchmark-shift note compares the earlier `36`-variant validation state with the current `54`-variant state, and the benchmark-decision memo records the current judgment that the descriptive layer is still moving materially under benchmark composition changes.
 
 ## Reproduction
 

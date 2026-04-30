@@ -10,13 +10,13 @@ The current empirical package is useful for manuscript planning and colleague re
 
 The repository already contains a small released benchmark subset:
 
-- `6` public baselines;
-- `36` controlled variants;
-- `3` released languages;
+- `9` public baselines in the current `v1.1` growth layer;
+- `54` controlled variants in the current `v1.1` growth layer;
+- `5` released languages across the current `v1.1` growth layer;
 - `3` released source classes;
 - `6` perturbation axes.
 
-This is a legitimate first public benchmark layer, but it is still too small to support stronger benchmark-level generalization.
+This is a legitimate benchmark-growth layer, but it is still too small to support stronger benchmark-level generalization.
 
 ## Minimum viable benchmark v1.1
 
