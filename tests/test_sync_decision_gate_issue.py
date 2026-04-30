@@ -15,6 +15,10 @@ class SyncDecisionGateIssueTests(unittest.TestCase):
         self.assertIsNone(extract_decision_line("Decision: increment maybe"))
         self.assertIsNone(extract_decision_line("I think increment"))
 
+    def test_extract_decision_line_rejects_template_comment_with_multiple_votes(self) -> None:
+        payload = "Decision: Increment\nor\nDecision: Memo\nor\nDecision: Abstain"
+        self.assertIsNone(extract_decision_line(payload))
+
     def test_render_votes_skips_comments_without_decision(self) -> None:
         payload = [
             {"body": "No vote here", "author": {"login": "alice"}, "createdAt": "2026-04-30T00:00:00Z"},

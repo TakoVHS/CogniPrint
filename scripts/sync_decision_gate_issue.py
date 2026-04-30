@@ -27,16 +27,19 @@ def fetch_issue_comments(repo: str, issue_number: int) -> list[dict[str, object]
 
 
 def extract_decision_line(body: str) -> str | None:
+    matches: list[str] = []
     for raw_line in body.splitlines():
         line = raw_line.strip()
         lowered = line.casefold()
         if lowered == "decision: increment":
-            return "Decision: Increment"
-        if lowered == "decision: memo":
-            return "Decision: Memo"
-        if lowered == "decision: abstain":
-            return "Decision: Abstain"
-    return None
+            matches.append("Decision: Increment")
+        elif lowered == "decision: memo":
+            matches.append("Decision: Memo")
+        elif lowered == "decision: abstain":
+            matches.append("Decision: Abstain")
+    if len(matches) != 1:
+        return None
+    return matches[0]
 
 
 def render_votes(comments: list[dict[str, object]]) -> str:
