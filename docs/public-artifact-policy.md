@@ -8,10 +8,12 @@ CogniPrint uses a local workspace for empirical runs, campaign generation, datas
 
 ## Public artifact layer
 
-The authoritative public empirical snapshot is maintained under:
+The authoritative public empirical layer is maintained under the `evidence/` tree, including:
 
 ```text
 evidence/empirical-v1/
+evidence/public-benchmark-v1/
+evidence/statistical-validation-v1/
 ```
 
 This snapshot may include:
@@ -36,13 +38,26 @@ The `workspace/` directory is primarily an execution/output area. It may contain
 - manuscript draft materials;
 - local notes.
 
-Some workspace files may be force-added when they are intentionally selected as public review material, but the default assumption is that raw or temporary workspace material is local-only.
+Some workspace files may be force-added when they are intentionally selected as public review material, but the default assumption is that workspace material is local-only and non-authoritative unless it has been explicitly promoted into the tracked public layer.
 
 ## Publication rule
 
 Raw local input texts should not be published in the public evidence snapshot unless they have been explicitly reviewed and cleared for release.
 
 Public summaries should avoid exposing unnecessary raw local text. They should focus on counts, methods, results summaries, limitations, provenance boundaries, and review routes.
+
+The authoritative public summary should therefore live in tracked `evidence/` directories rather than in ad hoc `workspace/` outputs.
+
+## Evidence update rule
+
+Whenever a new public evidence layer or evidence-layer revision is created, update the machine-readable bookkeeping files together with the human-readable summaries.
+
+At minimum, update:
+
+- `manifest.json`
+- `counts.json`
+
+This rule applies to every public evidence directory, including empirical, benchmark, and validation layers.
 
 ## Due diligence rule
 

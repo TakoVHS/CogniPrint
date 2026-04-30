@@ -23,14 +23,17 @@ Use the following files for a compact review package:
 9. `docs/claims-review-questionnaire.md`
 10. `docs/claims-matrix.md`
 11. `docs/benchmark-protocol.md`
-12. `docs/validation-status.md`
-13. `paper/empirical-stability-v1.md`
-14. `evidence/empirical-v1/README.md`
-15. `evidence/public-benchmark-v1/coverage-summary.md`
-16. `evidence/statistical-validation-v1/results-summary.md`
-17. `evidence/statistical-validation-v1/benchmark-campaign-bridge-summary.md`
-18. `evidence/statistical-validation-v1/limitations-summary.md`
-19. `docs/public-vs-local-materials.md`
+12. `docs/public-benchmark-plan.md`
+13. `docs/statistical-validation-plan.md`
+14. `docs/manuscript-readiness-checklist.md`
+15. `docs/validation-status.md`
+16. `paper/empirical-stability-v1.md`
+17. `evidence/empirical-v1/README.md`
+18. `evidence/public-benchmark-v1/coverage-summary.md`
+19. `evidence/statistical-validation-v1/results-summary.md`
+20. `evidence/statistical-validation-v1/benchmark-campaign-bridge-summary.md`
+21. `evidence/statistical-validation-v1/limitations-summary.md`
+22. `docs/public-vs-local-materials.md`
 
 ## Current empirical base
 
