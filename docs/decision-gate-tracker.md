@@ -18,6 +18,7 @@ Primary decision anchors:
 ## Operational status
 
 - packet status: ready
+- canonical GitHub decision issue: `https://github.com/TakoVHS/CogniPrint/issues/16`
 - primary anchors:
   - `docs/benchmark-shift-note-v1.1.md`
   - `docs/benchmark-decision-memo-v1.1.md`

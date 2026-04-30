@@ -8,6 +8,8 @@ Use this short message when sending the current CogniPrint package to an externa
 
 > The narrowest review question at this stage is whether the shift between the smaller and larger benchmark states looks moderate enough to justify another benchmark increment, or whether the current descriptive layer still appears too sensitive to benchmark composition.
 
+> If possible, record the answer in the canonical GitHub decision-gate issue rather than sending an untracked one-line reply.
+
 Release page:
 
 `https://github.com/TakoVHS/CogniPrint/releases/tag/v0.2.0-reviewer-20260430`

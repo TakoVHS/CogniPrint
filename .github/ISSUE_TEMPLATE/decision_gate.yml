@@ -1,7 +1,7 @@
 name: "Decision Gate - benchmark increment"
 description: "Reviewer decision on whether the current benchmark shift is moderate enough for the next benchmark increment."
 title: "[DECISION] "
-labels: ["feedback", "decision-gate"]
+labels: ["review", "external-feedback", "benchmark"]
 body:
   - type: markdown
     attributes:

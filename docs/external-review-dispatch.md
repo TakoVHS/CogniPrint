@@ -62,6 +62,12 @@ Suggested wording for review outreach:
 
 After external review, the next technical decision should be explicit rather than automatic.
 
+Prefer collecting the narrow decision-gate responses in one canonical GitHub issue so the vote trail and reasoning stay linked to the frozen reviewer packet.
+
+Current intake issue:
+
+- `https://github.com/TakoVHS/CogniPrint/issues/16`
+
 Questions to answer:
 
 1. Did reviewers find the validation layer clarifying or distracting?
