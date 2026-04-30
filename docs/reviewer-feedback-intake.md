@@ -49,6 +49,8 @@ Primary review anchor:
 - Is the public benchmark subset useful in its current form?
 - Is the benchmark-versus-campaign bridge useful?
 - Are the random-reference and threshold-sensitivity summaries understandable?
+- Does the benchmark shift between the smaller and larger `v1.1` states look moderate enough for another benchmark increment?
+- Does the benchmark-decision memo seem scientifically reasonable?
 - Which next benchmark additions would matter most?
 
 ## Claims and non-claims

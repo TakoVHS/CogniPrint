@@ -24,6 +24,8 @@ Use the following tracked files as the primary review packet:
 8. `evidence/public-benchmark-v1/coverage-summary.md`
 9. `evidence/statistical-validation-v1/results-summary.md`
 10. `evidence/statistical-validation-v1/benchmark-campaign-bridge-summary.md`
+11. `docs/benchmark-shift-note-v1.1.md`
+12. `docs/benchmark-decision-memo-v1.1.md`
 
 Use local workspace materials only as optional follow-up context during direct collaboration.
 
@@ -47,13 +49,14 @@ Ask reviewers to focus on:
 - whether the limitations section is explicit enough about corpus bounds;
 - whether validation v1.1 improves interpretability;
 - whether the benchmark-versus-campaign bridge is useful for discussing perturbation families;
+- whether the benchmark shift now looks moderate enough for another benchmark increment;
 - which next benchmark or corpus additions would most improve the manuscript.
 
 ## Suggested short dispatch message
 
 Suggested wording for review outreach:
 
-> I am sending a compact CogniPrint review packet anchored to the frozen reviewer release v0.2.0-reviewer-20260430. The current repository contains a working empirical evidence package supporting a follow-up manuscript. I am asking for feedback on framing, methods clarity, evidence-table usefulness, validation-layer usefulness, and limitations. The package is not being presented as a completed empirical study.
+> I am sending a compact CogniPrint review packet anchored to the frozen reviewer release v0.2.0-reviewer-20260430. The current repository contains a working empirical evidence package supporting a follow-up manuscript. I am asking for feedback on framing, methods clarity, evidence-table usefulness, validation-layer usefulness, limitations, and whether the current benchmark shift looks moderate enough for another benchmark increment. The package is not being presented as a completed empirical study.
 
 ## Decision gate after review
 
