@@ -25,6 +25,8 @@ If the reviewer prefers section-level reading, include these tracked entry point
 
 - `docs/current-state-summary.md`
 - `docs/public-review-bundle.md`
+- `docs/reviewer-feedback-intake.md`
+- `docs/claims-review-questionnaire.md`
 - `paper/empirical-stability-v1.md`
 - `evidence/public-benchmark-v1/coverage-summary.md`
 - `evidence/statistical-validation-v1/results-summary.md`

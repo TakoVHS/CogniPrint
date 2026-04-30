@@ -19,15 +19,17 @@ Use the following files for a compact review package:
 5. `docs/manuscript-validation-v1.1-notes.md`
 6. `docs/external-review-dispatch.md`
 7. `docs/reviewer-handoff-message.md`
-8. `docs/claims-matrix.md`
-9. `docs/benchmark-protocol.md`
-10. `paper/empirical-stability-v1.md`
-11. `evidence/empirical-v1/README.md`
-12. `evidence/public-benchmark-v1/coverage-summary.md`
-13. `evidence/statistical-validation-v1/results-summary.md`
-14. `evidence/statistical-validation-v1/benchmark-campaign-bridge-summary.md`
-15. `evidence/statistical-validation-v1/limitations-summary.md`
-16. `docs/public-vs-local-materials.md`
+8. `docs/reviewer-feedback-intake.md`
+9. `docs/claims-review-questionnaire.md`
+10. `docs/claims-matrix.md`
+11. `docs/benchmark-protocol.md`
+12. `paper/empirical-stability-v1.md`
+13. `evidence/empirical-v1/README.md`
+14. `evidence/public-benchmark-v1/coverage-summary.md`
+15. `evidence/statistical-validation-v1/results-summary.md`
+16. `evidence/statistical-validation-v1/benchmark-campaign-bridge-summary.md`
+17. `evidence/statistical-validation-v1/limitations-summary.md`
+18. `docs/public-vs-local-materials.md`
 
 ## Current empirical base
 
