@@ -39,6 +39,14 @@ It does **not** by itself justify:
 - completed-study claims;
 - stronger manuscript claims without benchmark expansion and further review.
 
+## Relationship to benchmark expansion
+
+This file should now be read together with:
+
+- `docs/benchmark-shift-note-v1.1.md`
+
+The benchmark-shift note compares the earlier `36`-variant validation state with the current `54`-variant state and is the better reference for deciding whether the descriptive layer is stabilizing under a broader benchmark mix.
+
 ## Reproduction
 
 ```bash

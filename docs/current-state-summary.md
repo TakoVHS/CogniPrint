@@ -14,7 +14,7 @@ CogniPrint now exposes three linked public evidence layers:
 
 - `evidence/empirical-v1/` — current empirical evidence snapshot
 - `evidence/public-benchmark-v1/` — released public benchmark subset
-- `evidence/statistical-validation-v1/` — descriptive validation layer linked to the benchmark subset
+- `evidence/statistical-validation-v1/` — descriptive validation layer linked to the expanded benchmark program
 
 ## Correct framing
 
@@ -43,4 +43,4 @@ The current public package provides:
 
 ## Immediate next step
 
-The next scientific step is external review of the current evidence ladder, followed by stronger inferential validation only where the current descriptive layer justifies it.
+The next scientific step is to compare the descriptive validation shifts between the smaller and larger `public-benchmark-v1.1` states, then decide whether another domain-diversity increment is needed before any stronger inferential framing is attempted.

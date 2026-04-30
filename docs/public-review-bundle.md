@@ -27,13 +27,14 @@ Use the following files for a compact review package:
 13. `docs/statistical-validation-plan.md`
 14. `docs/manuscript-readiness-checklist.md`
 15. `docs/validation-status.md`
-16. `paper/empirical-stability-v1.md`
-17. `evidence/empirical-v1/README.md`
-18. `evidence/public-benchmark-v1/coverage-summary.md`
-19. `evidence/statistical-validation-v1/results-summary.md`
-20. `evidence/statistical-validation-v1/benchmark-campaign-bridge-summary.md`
-21. `evidence/statistical-validation-v1/limitations-summary.md`
-22. `docs/public-vs-local-materials.md`
+16. `docs/benchmark-shift-note-v1.1.md`
+17. `paper/empirical-stability-v1.md`
+18. `evidence/empirical-v1/README.md`
+19. `evidence/public-benchmark-v1/coverage-summary.md`
+20. `evidence/statistical-validation-v1/results-summary.md`
+21. `evidence/statistical-validation-v1/benchmark-campaign-bridge-summary.md`
+22. `evidence/statistical-validation-v1/limitations-summary.md`
+23. `docs/public-vs-local-materials.md`
 
 ## Current empirical base
 
@@ -57,6 +58,7 @@ Ask colleagues to evaluate:
 - whether the Limitations section is explicit enough;
 - whether validation v1.1 improves interpretability or adds unnecessary complexity;
 - whether the benchmark-versus-campaign bridge is useful for manuscript discussion of perturbation families;
+- whether the benchmark-shift note shows moderate stabilization or continued benchmark sensitivity;
 - which additional corpora or campaign types would make the follow-up manuscript stronger.
 
 ## Review-loop decision gate

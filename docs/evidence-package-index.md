@@ -28,12 +28,13 @@ Campaign `empirical-campaign-004` contributes `1` controlled perturbation series
 5. `evidence/public-benchmark-v1/coverage-summary.md`
 6. `evidence/statistical-validation-v1/results-summary.md`
 7. `evidence/statistical-validation-v1/benchmark-campaign-bridge-summary.md`
-8. `evidence/statistical-validation-v1/limitations-summary.md`
-9. `docs/manuscript-validation-v1.1-notes.md`
-10. `docs/claims-matrix.md`
-11. `docs/benchmark-protocol.md`
-12. `paper/empirical-stability-v1.md`
-13. `docs/public-review-bundle.md`
+8. `docs/benchmark-shift-note-v1.1.md`
+9. `evidence/statistical-validation-v1/limitations-summary.md`
+10. `docs/manuscript-validation-v1.1-notes.md`
+11. `docs/claims-matrix.md`
+12. `docs/benchmark-protocol.md`
+13. `paper/empirical-stability-v1.md`
+14. `docs/public-review-bundle.md`
 
 ## What this package is for
 
@@ -45,4 +46,4 @@ Do not present this package as a publication-ready empirical paper or as a gener
 
 ## Next manuscript step
 
-The next step is to consolidate the evidence summary, benchmark coverage, statistical validation summaries, and tracked manuscript-facing notes into a stronger follow-up manuscript draft and circulate a compact review pack to colleagues.
+The next step is to compare the current benchmark-shift note against the validation summaries and decide whether the descriptive layer is stabilizing enough for another benchmark increment or still moving too much for stronger inferential wording.

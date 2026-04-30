@@ -6,6 +6,8 @@ This document summarizes the current validation-layer material that should be ca
 
 The current validation package under `evidence/statistical-validation-v1/` is not a separate empirical study. It is a manuscript-support layer that helps interpret the existing campaign evidence package more clearly.
 
+The latest benchmark-growth pass should also be read together with `docs/benchmark-shift-note-v1.1.md`, which compares the smaller and larger benchmark states and records how the descriptive reference layer moves under a broader source mix.
+
 ## Current validation base
 
 - empirical campaigns reviewed: `5`
