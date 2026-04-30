@@ -43,6 +43,13 @@ jobs:
           source .venv/bin/activate
           python scripts/check_metadata_consistency.py
 
+      - name: Check claims drift
+        shell: bash
+        run: |
+          set -euo pipefail
+          source .venv/bin/activate
+          python scripts/check_claims_drift.py
+
       - name: Verify import compilation
         shell: bash
         run: |

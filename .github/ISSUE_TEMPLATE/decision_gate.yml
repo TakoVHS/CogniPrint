@@ -1,0 +1,26 @@
+name: "Decision Gate - benchmark increment"
+description: "Reviewer decision on whether the current benchmark shift is moderate enough for the next benchmark increment."
+title: "[DECISION] "
+labels: ["feedback", "decision-gate"]
+body:
+  - type: markdown
+    attributes:
+      value: "Please answer the narrow decision-gate question for the current CogniPrint reviewer packet."
+  - type: dropdown
+    id: vote
+    attributes:
+      label: Decision
+      options:
+        - "Increment - shift looks moderate enough for the next benchmark increment"
+        - "Memo - descriptive layer still depends too strongly on benchmark composition"
+        - "Abstain - not enough information"
+    validations:
+      required: true
+  - type: textarea
+    id: reasoning
+    attributes:
+      label: Short reasoning
+      description: "One or two short paragraphs are enough."
+      placeholder: "Why does the current shift look moderate enough, or why does it still look too benchmark-sensitive?"
+    validations:
+      required: true

@@ -1,4 +1,4 @@
-.PHONY: bootstrap init-workspace test smoke validate-sources demo sample-run sample-compare sample-study sample-profile sample-corpus sample-perturb sample-dataset billing-test billing-smoke billing-run-api reviewer-bundle reviewer-release-check sync-feedback triage bootstrap-validation
+.PHONY: bootstrap init-workspace test smoke validate-sources demo sample-run sample-compare sample-study sample-profile sample-corpus sample-perturb sample-dataset billing-test billing-smoke billing-run-api reviewer-bundle reviewer-release-check sync-feedback triage bootstrap-validation decision-summarize decision-fallback claims-drift-check
 
 PYTHON ?= python3
 VENV ?= .venv
@@ -69,6 +69,7 @@ reviewer-bundle:
 reviewer-release-check:
 	$(PY) scripts/check_metadata_consistency.py
 	$(PY) scripts/check_evidence_snapshot.py
+	$(PY) scripts/check_claims_drift.py
 	bash scripts/build_reviewer_bundle.sh
 
 sync-feedback:
@@ -84,3 +85,12 @@ triage:
 bootstrap-validation:
 	$(CLI) report --study-dir workspace/studies --aggregate --output workspace/exports/v1_validation.md --csv-output workspace/exports/v1_validation.csv
 	$(PY) scripts/bootstrap_validation.py --csv workspace/exports/v1_validation.csv --json > docs/validation-status.json
+
+decision-summarize:
+	$(PY) scripts/synthesize_decision.py --input docs/decisions/votes-raw.txt --output docs/decisions/final-decision.json
+
+decision-fallback:
+	$(PY) scripts/decision_gate_fallback.py --input docs/decisions/votes-raw.txt
+
+claims-drift-check:
+	$(PY) scripts/check_claims_drift.py
