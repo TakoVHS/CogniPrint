@@ -1,0 +1,40 @@
+{
+  "metric": "cosine_similarity",
+  "group1": {
+    "name": "light",
+    "count": 16,
+    "mean": 0.999753,
+    "median": 0.999977,
+    "bootstrap_mean": {
+      "count": 16,
+      "mean": 0.999753,
+      "confidence": 0.95,
+      "resamples": 2000,
+      "lower": 0.999433,
+      "upper": 0.999974
+    }
+  },
+  "group2": {
+    "name": "strong",
+    "count": 39,
+    "mean": 0.981189,
+    "median": 0.976804,
+    "bootstrap_mean": {
+      "count": 39,
+      "mean": 0.981189,
+      "confidence": 0.95,
+      "resamples": 2000,
+      "lower": 0.977284,
+      "upper": 0.985041
+    }
+  },
+  "mean_difference": {
+    "group1_minus_group2": 0.018564,
+    "lower": 0.014595,
+    "upper": 0.022486
+  },
+  "hedges_g": 1.711265,
+  "cliffs_delta": 0.942308,
+  "permutation_p_value": 0.0,
+  "guardrail": "Exploratory descriptive validation on the current aggregate study export. Treat wide intervals or near-zero effect sizes as signals to expand the benchmark rather than to strengthen claims."
+}

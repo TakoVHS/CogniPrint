@@ -55,3 +55,11 @@ jobs:
         run: |
           set -euo pipefail
           bash scripts/build_reviewer_bundle.sh
+
+      - name: Smoke review helper scripts
+        shell: bash
+        run: |
+          set -euo pipefail
+          source .venv/bin/activate
+          python scripts/bootstrap_validation.py --help >/tmp/bootstrap_validation_help.txt
+          python scripts/synthesize_feedback.py --help >/tmp/synthesize_feedback_help.txt

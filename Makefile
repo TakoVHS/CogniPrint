@@ -1,4 +1,4 @@
-.PHONY: bootstrap init-workspace test smoke validate-sources demo sample-run sample-compare sample-study sample-profile sample-corpus sample-perturb sample-dataset billing-test billing-smoke billing-run-api reviewer-bundle reviewer-release-check
+.PHONY: bootstrap init-workspace test smoke validate-sources demo sample-run sample-compare sample-study sample-profile sample-corpus sample-perturb sample-dataset billing-test billing-smoke billing-run-api reviewer-bundle reviewer-release-check sync-feedback triage bootstrap-validation
 
 PYTHON ?= python3
 VENV ?= .venv
@@ -70,3 +70,17 @@ reviewer-release-check:
 	$(PY) scripts/check_metadata_consistency.py
 	$(PY) scripts/check_evidence_snapshot.py
 	bash scripts/build_reviewer_bundle.sh
+
+sync-feedback:
+	$(PY) scripts/synthesize_feedback.py
+
+triage:
+	@if command -v gh >/dev/null 2>&1; then \
+		gh issue list --repo TakoVHS/CogniPrint --label feedback --json number,title,labels,state,url; \
+	else \
+		echo "gh CLI not available"; \
+	fi
+
+bootstrap-validation:
+	$(CLI) report --study-dir workspace/studies --aggregate --output workspace/exports/v1_validation.md --csv-output workspace/exports/v1_validation.csv
+	$(PY) scripts/bootstrap_validation.py --csv workspace/exports/v1_validation.csv --json > docs/validation-status.json

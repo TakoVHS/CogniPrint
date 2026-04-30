@@ -1,0 +1,46 @@
+name: "\U0001F4CB Reviewer Feedback"
+description: Structured review feedback for the current CogniPrint reviewer release.
+title: "[REVIEW] "
+labels:
+  - feedback
+  - triage
+body:
+  - type: markdown
+    attributes:
+      value: "Thank you for reviewing CogniPrint. Please identify the section and the type of concern as precisely as possible."
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - framing / claims
+        - methods (statistics, metrics)
+        - results / evidence interpretation
+        - limitations
+        - benchmark / validation layer
+        - reproducibility / code
+        - documentation
+    validations:
+      required: true
+  - type: textarea
+    id: feedback
+    attributes:
+      label: Detailed feedback
+      placeholder: "What is incorrect, unclear, or too strong? Point to the file, section, or phrase when possible."
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - critical (blocks publication or validation)
+        - major (should be fixed before the next release)
+        - minor (clarification, wording, typo)
+  - type: checkboxes
+    id: guardrail
+    attributes:
+      label: Confirmation
+      options:
+        - label: "I reviewed the claims matrix and understand that CogniPrint does not claim forensic or attribution certainty."
+          required: true

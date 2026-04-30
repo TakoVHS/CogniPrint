@@ -20,6 +20,10 @@ cp "${ROOT}/docs/reviewer-release-v0.2.0.md" "${BUNDLE_ROOT}/docs/"
 cp "${ROOT}/docs/reviewer-handoff-message.md" "${BUNDLE_ROOT}/docs/"
 cp "${ROOT}/docs/reviewer-feedback-intake.md" "${BUNDLE_ROOT}/docs/"
 cp "${ROOT}/docs/claims-review-questionnaire.md" "${BUNDLE_ROOT}/docs/"
+cp "${ROOT}/docs/benchmark-expansion-plan.md" "${BUNDLE_ROOT}/docs/"
+test -f "${ROOT}/docs/validation-status.md" && cp "${ROOT}/docs/validation-status.md" "${BUNDLE_ROOT}/docs/" || true
+test -f "${ROOT}/docs/validation-status.json" && cp "${ROOT}/docs/validation-status.json" "${BUNDLE_ROOT}/docs/" || true
+test -f "${ROOT}/docs/feedback-synthesis-latest.md" && cp "${ROOT}/docs/feedback-synthesis-latest.md" "${BUNDLE_ROOT}/docs/" || true
 
 mkdir -p "${ROOT}/release_artifacts"
 tar -czf "${ARCHIVE_PATH}" -C "${ROOT}/release_artifacts" "cogniprint_reviewer_${DATE_TAG}"
