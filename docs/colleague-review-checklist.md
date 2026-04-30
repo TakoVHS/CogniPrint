@@ -11,15 +11,15 @@ It should not be evaluated as a publication-ready empirical paper.
 ## Recommended review order
 
 1. `docs/empirical-evidence-summary-v1.md`
-2. `workspace/reports/paper-2/follow-up-manuscript-draft.md`
-3. `workspace/reports/paper-2/clean-methods-section.md`
-4. `workspace/reports/paper-2/clean-results-section.md`
-5. `workspace/reports/paper-2/clean-limitations-section.md`
-6. `evidence/statistical-validation-v1/results-summary.md`
-7. `evidence/statistical-validation-v1/benchmark-campaign-bridge-summary.md`
-8. `workspace/reports/paper-2/evidence-table.md`
-9. `workspace/share/colleague-pack-004/one-page-summary.md`
-10. `workspace/share/colleague-pack-004/what-to-send-colleagues.md`
+2. `paper/empirical-stability-v1.md`
+3. `docs/manuscript-validation-v1.1-notes.md`
+4. `evidence/public-benchmark-v1/coverage-summary.md`
+5. `evidence/statistical-validation-v1/results-summary.md`
+6. `evidence/statistical-validation-v1/benchmark-campaign-bridge-summary.md`
+7. `docs/claims-matrix.md`
+8. `docs/benchmark-protocol.md`
+9. `docs/public-review-bundle.md`
+10. `docs/external-review-dispatch.md`
 
 ## Review questions
 

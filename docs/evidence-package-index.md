@@ -29,15 +29,11 @@ Campaign `empirical-campaign-004` contributes `1` controlled perturbation series
 6. `evidence/statistical-validation-v1/results-summary.md`
 7. `evidence/statistical-validation-v1/benchmark-campaign-bridge-summary.md`
 8. `evidence/statistical-validation-v1/limitations-summary.md`
-9. `workspace/reports/paper-2/clean-methods-section.md`
-10. `workspace/reports/paper-2/clean-results-section.md`
-11. `workspace/reports/paper-2/clean-limitations-section.md`
-12. `workspace/reports/paper-2/evidence-table.md`
-13. `workspace/reports/paper-2/follow-up-manuscript-draft.md`
-14. `workspace/share/colleague-pack-004/one-page-summary.md`
-15. `workspace/share/colleague-pack-004/what-to-send-colleagues.md`
-16. `workspace/share/colleague-pack-004/email-to-colleagues.md`
-17. `workspace/share/colleague-pack-004/review-request-message.md`
+9. `docs/manuscript-validation-v1.1-notes.md`
+10. `docs/claims-matrix.md`
+11. `docs/benchmark-protocol.md`
+12. `paper/empirical-stability-v1.md`
+13. `docs/public-review-bundle.md`
 
 ## What this package is for
 
@@ -49,4 +45,4 @@ Do not present this package as a publication-ready empirical paper or as a gener
 
 ## Next manuscript step
 
-The next step is to consolidate the evidence summary, benchmark coverage, statistical validation summaries, clean Methods, clean Results, clean Limitations, and evidence table into a stronger follow-up manuscript draft and circulate a compact review pack to colleagues.
+The next step is to consolidate the evidence summary, benchmark coverage, statistical validation summaries, and tracked manuscript-facing notes into a stronger follow-up manuscript draft and circulate a compact review pack to colleagues.

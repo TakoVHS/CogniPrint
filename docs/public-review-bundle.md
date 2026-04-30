@@ -18,17 +18,15 @@ Use the following files for a compact review package:
 4. `docs/colleague-review-checklist.md`
 5. `docs/manuscript-validation-v1.1-notes.md`
 6. `docs/external-review-dispatch.md`
-7. `paper/empirical-stability-v1.md`
-8. `evidence/statistical-validation-v1/results-summary.md`
-9. `evidence/statistical-validation-v1/benchmark-campaign-bridge-summary.md`
-10. `workspace/reports/paper-2/clean-methods-section.md`
-11. `workspace/reports/paper-2/clean-results-section.md`
-12. `workspace/reports/paper-2/clean-limitations-section.md`
-13. `workspace/reports/paper-2/evidence-table.md`
-14. `workspace/reports/paper-2/follow-up-manuscript-draft.md`
-15. `workspace/share/colleague-pack-004/one-page-summary.md`
-16. `workspace/share/colleague-pack-004/email-to-colleagues.md`
-17. `workspace/share/colleague-pack-004/review-request-message.md`
+7. `docs/claims-matrix.md`
+8. `docs/benchmark-protocol.md`
+9. `paper/empirical-stability-v1.md`
+10. `evidence/empirical-v1/README.md`
+11. `evidence/public-benchmark-v1/coverage-summary.md`
+12. `evidence/statistical-validation-v1/results-summary.md`
+13. `evidence/statistical-validation-v1/benchmark-campaign-bridge-summary.md`
+14. `evidence/statistical-validation-v1/limitations-summary.md`
+15. `docs/public-vs-local-materials.md`
 
 ## Current empirical base
 
@@ -81,3 +79,5 @@ The reviewer bundle should be reproducible with:
 ```bash
 make reviewer-bundle
 ```
+
+The tracked reviewer release is built from public evidence layers and tracked docs, not from local-only `workspace/` drafting files.

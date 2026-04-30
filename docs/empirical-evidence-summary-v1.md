@@ -108,13 +108,13 @@ The correct framing is: working empirical evidence package supporting a follow-u
 For scientific feedback, send a compact package rather than the whole workspace:
 
 1. `docs/empirical-evidence-summary-v1.md`
-2. `workspace/reports/paper-2/follow-up-manuscript-draft.md`
-3. `workspace/reports/paper-2/clean-methods-section.md`
-4. `workspace/reports/paper-2/clean-results-section.md`
-5. `workspace/reports/paper-2/clean-limitations-section.md`
-6. `workspace/reports/paper-2/evidence-table.md`
-7. `workspace/share/colleague-pack-004/one-page-summary.md`
-8. `workspace/share/colleague-pack-004/what-to-send-colleagues.md`
+2. `paper/empirical-stability-v1.md`
+3. `docs/manuscript-validation-v1.1-notes.md`
+4. `docs/public-review-bundle.md`
+5. `docs/claims-matrix.md`
+6. `docs/benchmark-protocol.md`
+7. `docs/current-state-summary.md`
+8. `docs/external-review-dispatch.md`
 
 ## Recommended colleague-facing description
 
