@@ -17,6 +17,7 @@ cp "${ROOT}/docs/claims-matrix.md" "${BUNDLE_ROOT}/docs/"
 cp "${ROOT}/docs/benchmark-protocol.md" "${BUNDLE_ROOT}/docs/"
 cp "${ROOT}/docs/due-diligence-response.md" "${BUNDLE_ROOT}/docs/"
 cp "${ROOT}/docs/reviewer-release-v0.2.0.md" "${BUNDLE_ROOT}/docs/"
+cp "${ROOT}/docs/reviewer-handoff-message.md" "${BUNDLE_ROOT}/docs/"
 
 mkdir -p "${ROOT}/release_artifacts"
 tar -czf "${ARCHIVE_PATH}" -C "${ROOT}/release_artifacts" "cogniprint_reviewer_${DATE_TAG}"

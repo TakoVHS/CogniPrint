@@ -27,6 +27,16 @@ Use the following tracked files as the primary review packet:
 
 Use local workspace materials only as optional follow-up context during direct collaboration.
 
+## Frozen reviewer release
+
+For external review, prefer the frozen reviewer release rather than the moving `main` branch.
+
+- GitHub release: `v0.2.0-reviewer-20260430`
+- Release page: `https://github.com/TakoVHS/CogniPrint/releases/tag/v0.2.0-reviewer-20260430`
+- Reviewer bundle asset: `https://github.com/TakoVHS/CogniPrint/releases/download/v0.2.0-reviewer-20260430/cogniprint_reviewer_20260430.tar.gz`
+
+Use the tracked files above when discussing specific sections, but use the frozen release as the review anchor.
+
 ## What reviewers should evaluate
 
 Ask reviewers to focus on:
@@ -43,7 +53,7 @@ Ask reviewers to focus on:
 
 Suggested wording for review outreach:
 
-> I am sending a compact CogniPrint review packet. The current repository contains a working empirical evidence package supporting a follow-up manuscript. I am asking for feedback on framing, methods clarity, evidence-table usefulness, validation-layer usefulness, and limitations. The package is not being presented as a completed empirical study.
+> I am sending a compact CogniPrint review packet anchored to the frozen reviewer release v0.2.0-reviewer-20260430. The current repository contains a working empirical evidence package supporting a follow-up manuscript. I am asking for feedback on framing, methods clarity, evidence-table usefulness, validation-layer usefulness, and limitations. The package is not being presented as a completed empirical study.
 
 ## Decision gate after review
 
