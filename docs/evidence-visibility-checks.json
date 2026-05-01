@@ -1,0 +1,25 @@
+{
+  "generated_at": "2026-05-01T19:50:14.379Z",
+  "status": "ok",
+  "evidence_snapshot": {
+    "campaigns": 5,
+    "comparison_rows": 41,
+    "campaign_004_rows": 11
+  },
+  "benchmark_subset": {
+    "released_baselines": 6,
+    "released_variants": 36,
+    "released_languages": 3,
+    "released_source_classes": 3
+  },
+  "validation_v1_1": {
+    "snapshot_id": "statistical-validation-v1.1",
+    "benchmark_baselines": 9,
+    "benchmark_variants": 54,
+    "benchmark_languages": 5,
+    "benchmark_source_classes": 3,
+    "shared_bridge_axes": 6,
+    "framing": "descriptive"
+  },
+  "guardrail": "The evidence visibility layer is descriptive and review-oriented. It does not upgrade the scientific meaning of the current public evidence package into a settled empirical endpoint, a forensic workflow, or a stronger attribution claim."
+}

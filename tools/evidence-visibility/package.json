@@ -1,0 +1,15 @@
+{
+  "name": "evidence-visibility",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "./node_modules/.bin/tsc --noEmit",
+    "build": "./node_modules/.bin/tsc -p tsconfig.json",
+    "generate": "node dist/index.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.16.11",
+    "typescript": "^5.6.3"
+  }
+}
