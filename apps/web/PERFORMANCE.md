@@ -7,6 +7,7 @@ This note records the current bounded performance and hygiene state of the optio
 - the chart-heavy scan results surface is lazy-loaded;
 - Vite output is expected to split the chart bundle away from the initial shell;
 - the frontend keeps its runtime integration surface explicit around `/ready`, `/account/status`, and `/scan`.
+- build-only tooling (`vite`, `typescript`, `@vitejs/plugin-react`) is kept in `devDependencies`, not the runtime dependency set.
 
 ## Audit triage
 
