@@ -24,6 +24,8 @@ Campaign outputs are emitted in multiple manuscript-friendly formats. For campai
 
 The workflow is local and reproducible in the limited engineering sense that the repository retains the source files, run manifests, study manifests, campaign summaries, and validation scripts needed to rerun or audit the current materials on the same workstation setup. In the current repository state, provenance validation has passed. This supports colleague review of how each result was produced, while still requiring further corpus expansion before stronger empirical claims would be appropriate.
 
+The manuscript should also distinguish between the empirical campaign layer and the benchmark-linked validation layer. The campaign layer is the direct source of the `5` campaigns and `41` comparison rows. The benchmark-linked validation layer is a secondary descriptive interpretation layer used to contextualize those campaign results against released public benchmark materials. It is not a separate inferential study, and it should not be read as if it independently establishes population-level conclusions.
+
 ## Current Empirical Base
 
 The current evidence package contains:
@@ -67,6 +69,8 @@ The current validation layer should be read as a bridge between campaign-level e
 
 This v1.1 layer improves interpretability but does not remove the descriptive and corpus-bound character of the current evidence package.
 
+Methodologically, the benchmark-linked validation layer is best understood as a contextual comparison surface. It provides reference distributions, bridge rows, and threshold-oriented descriptive summaries that help the manuscript explain observed campaign behavior more clearly. It does not supply a preregistered inferential design, a stable benchmark-wide null model, or a corpus-generalized decision rule.
+
 In the current package, the random-reference layer reports `64` draws with `54` cross-baseline pairs per draw. The pooled random-reference mean Euclidean distance is `9.375026`, while the draw-mean Euclidean reference interval spans `8.991032` to `9.75524`. The current empirical campaign mean Euclidean distance remains lower at `2.610789`. This remains a useful descriptive contrast for the manuscript because it helps show that the campaign package is not behaving like indiscriminate cross-baseline mismatch in the broader released benchmark-growth layer.
 
 The current threshold layer also helps structure interpretation. Under the current Euclidean grid, the campaign package yields low=`12`, moderate=`13`, larger=`16`, while the benchmark subset yields low=`7`, moderate=`13`, larger=`16`. Under the current cosine grid, the campaign package yields low=`24`, moderate=`5`, larger=`12`, while the benchmark subset yields low=`23`, moderate=`9`, larger=`4`. The manuscript should use these outputs as framing aids rather than as basis for a fixed decision boundary.
@@ -86,6 +90,8 @@ The perturbation campaigns are designed around controlled edits to selected base
 The current package should also be bounded by purpose. It is not an authorship attribution workflow, not a source-verification workflow, and not a forensic or legal instrument. The outputs are analytical signals attached to specific local runs, not conclusions about identity or source.
 
 The current validation layer does not remove these limitations. The random-reference summaries remain cross-baseline references rather than a full null model. The threshold outputs remain descriptive and metric-dependent. The benchmark-versus-campaign bridge remains constrained by a still-small benchmark-growth layer with limited source classes and languages. These layers improve review quality, but they do not justify stronger population-level or decision-level claims.
+
+An additional limitation is benchmark-composition sensitivity. The current benchmark-growth pass improved the descriptive frame, but it also changed the reference behavior enough to matter for interpretation. This means that the manuscript can responsibly discuss benchmark-linked descriptive contrast, yet it still has to state that the current reading depends materially on the released benchmark mix rather than on a benchmark state that can already be treated as settled.
 
 ## Discussion
 

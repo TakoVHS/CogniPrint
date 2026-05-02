@@ -8,6 +8,8 @@ The current validation package under `evidence/statistical-validation-v1/` is no
 
 The latest benchmark-growth pass should also be read together with `docs/benchmark-shift-note-v1.1.md`, which compares the smaller and larger benchmark states and records how the descriptive reference layer moves under a broader source mix.
 
+For manuscript purposes, this means the validation layer belongs in Methods and Discussion as a contextual interpretation layer, not as an independent inferential results section.
+
 ## Current validation base
 
 - empirical campaigns reviewed: `5`
@@ -48,6 +50,7 @@ The current manuscript route should also read these summaries together with:
 
 - `docs/benchmark-shift-note-v1.1.md`
 - `docs/benchmark-decision-memo-v1.1.md`
+- `docs/manuscript-benchmark-validation-synthesis-v1.1.md`
 
 ## What the manuscript should not claim
 
@@ -66,3 +69,5 @@ The repository should only move from the current descriptive validation layer to
 2. review of whether the validation layer clarifies rather than obscures the evidence package;
 3. a clearer public benchmark expansion decision;
 4. a concrete plan for which inferential outputs are empirically justified by the available corpus.
+
+Until then, the manuscript should treat benchmark-composition sensitivity as an explicit limitation rather than as a detail left implicit in the supplementary notes.
