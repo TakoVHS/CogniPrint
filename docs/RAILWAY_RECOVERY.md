@@ -164,8 +164,14 @@ After linking and deploying, run the smoke-test script:
 bash scripts/railway_smoke.sh
 ```
 
-It will check `railway status`, retrieve the domain, and poll `GET /health`
-until it returns HTTP 200 (or fail with a clear error message).
+It will check `railway status`, retrieve the domain, verify `GET /health`,
+and then verify `GET /ready` before treating the deploy as operational.
+
+For a local runtime check of the optional API layer, also run:
+
+```bash
+make api-runtime-smoke
+```
 
 ---
 
@@ -227,4 +233,5 @@ railway variables
 
 - [`docs/RAILWAY_CLI.md`](RAILWAY_CLI.md) — Full deployment guide
 - [`scripts/railway_recover.sh`](../scripts/railway_recover.sh) — Interactive recovery helper
-- [`scripts/railway_smoke.sh`](../scripts/railway_smoke.sh) — Post-deploy smoke test
+- [`scripts/railway_smoke.sh`](../scripts/railway_smoke.sh) — Post-deploy health + readiness test
+- [`scripts/api_runtime_smoke.sh`](../scripts/api_runtime_smoke.sh) — Local runtime smoke for the optional API layer

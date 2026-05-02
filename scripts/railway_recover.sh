@@ -238,6 +238,7 @@ echo -e "  ${BOLD}railway open${NC}           — open Railway dashboard in brow
 echo -e "  ${BOLD}railway logs${NC}           — tail live deployment logs"
 echo -e "  ${BOLD}railway variables${NC}      — list environment variables"
 echo ""
-echo -e "  ${BOLD}bash scripts/railway_smoke.sh${NC}   — post-deploy smoke test"
+echo -e "  ${BOLD}bash scripts/railway_smoke.sh${NC}   — post-deploy health + readiness check"
+echo -e "  ${BOLD}make api-runtime-smoke${NC}           — local runtime smoke for optional API layer"
 echo ""
 ok "Recovery script complete."

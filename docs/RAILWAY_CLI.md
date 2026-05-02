@@ -58,6 +58,7 @@ The script will:
 7. Run `railway up` to trigger the deployment
 8. Print the Railway domain
 9. Poll `GET /health` until it returns HTTP 200
+10. Verify `GET /ready` before treating the deploy as ready
 
 ---
 
@@ -124,7 +125,7 @@ The `railway.json` at the repo root is already configured for production:
 |---|---|---|
 | `builder` | `NIXPACKS` | Auto-detects Python, installs `requirements.txt` |
 | `startCommand` | `uvicorn ... --port $PORT` | Railway injects `$PORT` automatically |
-| `healthcheckPath` | `/health` | Returns `{"ok": true}` |
+| `healthcheckPath` | `/health` | Shallow liveness endpoint used by Railway |
 | `healthcheckTimeout` | `300` | Seconds before Railway marks the deploy unhealthy |
 | `restartPolicyType` | `ON_FAILURE` | Auto-restarts crashed containers |
 | `restartPolicyMaxRetries` | `10` | |
@@ -181,3 +182,20 @@ Expected response:
 ```
 
 Railway polls this endpoint to determine deploy health. The deploy is marked **failed** if this returns a non-2xx status within `healthcheckTimeout` seconds.
+
+## Readiness Endpoint
+
+```
+GET /ready
+```
+
+Expected response includes:
+
+```json
+{
+  "ok": true,
+  "database": "ok"
+}
+```
+
+Use `/ready` for deploy-time verification and operational smoke checks after Railway reports the service healthy.

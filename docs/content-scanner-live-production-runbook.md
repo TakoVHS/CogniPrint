@@ -14,9 +14,14 @@ Healthcheck:
 
 `/health`
 
+Readiness:
+
+`/ready`
+
 Production gate:
 
 - `/health` returns 200.
+- `/ready` returns 200 and confirms database reachability.
 - `/scan` accepts a text payload.
 - Fourth Free scan returns upgrade/paywall response.
 

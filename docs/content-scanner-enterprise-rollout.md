@@ -72,6 +72,7 @@ npm run build
 Do not call the product production-ready until all of these pass:
 
 - Railway `/health` returns 200.
+- Railway `/ready` returns 200 and confirms runtime readiness.
 - Frontend can scan sample text against Railway API.
 - Free quota blocks the fourth anonymous daily scan.
 - Stripe Checkout creates a Pro subscription session.

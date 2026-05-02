@@ -132,9 +132,10 @@ else
 fi
 
 # ────────────────────────────────────────────────────────────────────────────
-# 9. Health check
+# 9. Health and readiness checks
 # ────────────────────────────────────────────────────────────────────────────
 HEALTH_URL="https://${DOMAIN}/health"
+READY_URL="https://${DOMAIN}/ready"
 info "Running health check: ${HEALTH_URL}"
 
 MAX_RETRIES=10
@@ -156,10 +157,22 @@ for i in $(seq 1 $MAX_RETRIES); do
   fi
 done
 
+info "Running readiness check: ${READY_URL}"
+READY_STATUS=$(curl -s -o /tmp/cogniprint_ready_response.json -w "%{http_code}" --max-time 10 "$READY_URL" 2>/dev/null || echo "000")
+if [[ "$READY_STATUS" == "200" ]]; then
+  ok "Readiness check passed (HTTP 200)."
+  curl -s "$READY_URL" | python3 -m json.tool 2>/dev/null || true
+else
+  error "Readiness check failed with HTTP ${READY_STATUS}. Check Railway logs:"
+  echo "  railway logs"
+  exit 1
+fi
+
 echo ""
 ok "======================================================================"
 ok " CogniPrint API is live at: https://${DOMAIN}"
 ok " Health endpoint:           https://${DOMAIN}/health"
+ok " Readiness endpoint:        https://${DOMAIN}/ready"
 ok " Scan endpoint:             https://${DOMAIN}/scan"
 ok " Stripe webhook:            https://${DOMAIN}/webhooks/stripe"
 ok "======================================================================"

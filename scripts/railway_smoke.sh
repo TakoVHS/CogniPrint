@@ -76,7 +76,7 @@ else
 fi
 
 # ────────────────────────────────────────────────────────────────────────────
-# 3. curl /health
+# 3. curl /health and /ready
 # ────────────────────────────────────────────────────────────────────────────
 echo -e "\n${BOLD}── 3. GET /health ──${NC}"
 
@@ -85,7 +85,8 @@ if [[ -z "$DOMAIN" ]]; then
   check_fail "Health check skipped (no domain)"
 else
   HEALTH_URL="https://${DOMAIN}/health"
-  info "Checking: ${HEALTH_URL}"
+  READY_URL="https://${DOMAIN}/ready"
+  info "Checking liveness: ${HEALTH_URL}"
 
   MAX_RETRIES=5
   SLEEP_SECS=6
@@ -111,10 +112,24 @@ else
       cat /tmp/cogniprint_health_response.json 2>/dev/null || true
     fi
   done
+
+  echo -e "\n${BOLD}── 4. GET /ready ──${NC}"
+  info "Checking readiness: ${READY_URL}"
+  READY_STATUS=$(curl -s -o /tmp/cogniprint_ready_response.json -w "%{http_code}" --max-time 15 "$READY_URL" 2>/dev/null || echo "000")
+  if [[ "$READY_STATUS" == "200" ]]; then
+    check_pass "GET /ready → HTTP 200"
+    echo -e "  Response body:"
+    python3 -m json.tool /tmp/cogniprint_ready_response.json 2>/dev/null \
+      || cat /tmp/cogniprint_ready_response.json
+  else
+    check_fail "GET /ready → HTTP ${READY_STATUS}"
+    echo -e "  Raw response:"
+    cat /tmp/cogniprint_ready_response.json 2>/dev/null || true
+  fi
 fi
 
 # ────────────────────────────────────────────────────────────────────────────
-# 4. Summary
+# 5. Summary
 # ────────────────────────────────────────────────────────────────────────────
 echo ""
 echo -e "${BOLD}══════════════════════════════════════${NC}"
@@ -124,6 +139,7 @@ if [[ $FAIL -eq 0 ]]; then
     echo ""
     ok "API base URL:      https://${DOMAIN}"
     ok "Health endpoint:   https://${DOMAIN}/health"
+    ok "Readiness endpoint:https://${DOMAIN}/ready"
     ok "Scan endpoint:     https://${DOMAIN}/scan"
     ok "Stripe webhook:    https://${DOMAIN}/webhooks/stripe"
   fi
