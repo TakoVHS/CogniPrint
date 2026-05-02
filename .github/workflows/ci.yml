@@ -36,6 +36,13 @@ jobs:
           source .venv/bin/activate
           make test
 
+      - name: Run API contract tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          source .venv/bin/activate
+          make api-contract-test
+
       - name: Check metadata consistency
         shell: bash
         run: |
@@ -55,7 +62,7 @@ jobs:
         run: |
           set -euo pipefail
           source .venv/bin/activate
-          python -m compileall -q src tests
+          python -m compileall -q src tests scripts apps/api/app apps/api/tests
 
       - name: Run lightweight smoke checks
         shell: bash

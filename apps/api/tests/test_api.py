@@ -303,3 +303,25 @@ def test_subscription_status_schema(
     body = status.json()
     assert set(body.keys()) == {"user_id", "plan", "subscription_status", "current_period_end"}
     assert body["subscription_status"] == "none"
+
+
+def test_openapi_registers_response_contracts(client: TestClient):
+    schema = client.get("/openapi.json")
+    assert schema.status_code == 200
+    openapi = schema.json()
+
+    health_schema = openapi["paths"]["/health"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]
+    account_schema = openapi["paths"]["/account/status"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]
+    scan_schema = openapi["paths"]["/scan"]["post"]["responses"]["200"]["content"]["application/json"]["schema"]
+    billing_schema = openapi["paths"]["/api/billing/config"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]
+    checkout_schema = openapi["paths"]["/api/billing/create-checkout-session"]["post"]["responses"]["200"]["content"]["application/json"]["schema"]
+    portal_schema = openapi["paths"]["/api/billing/create-portal-session"]["post"]["responses"]["200"]["content"]["application/json"]["schema"]
+    webhook_schema = openapi["paths"]["/api/billing/webhook"]["post"]["responses"]["200"]["content"]["application/json"]["schema"]
+
+    assert health_schema["$ref"].endswith("/HealthResponse")
+    assert account_schema["$ref"].endswith("/AccountStatusResponse")
+    assert scan_schema["$ref"].endswith("/ScanResponse")
+    assert billing_schema["$ref"].endswith("/BillingConfigResponse")
+    assert checkout_schema["$ref"].endswith("/UrlResponse")
+    assert portal_schema["$ref"].endswith("/UrlResponse")
+    assert webhook_schema["$ref"].endswith("/WebhookAckResponse")

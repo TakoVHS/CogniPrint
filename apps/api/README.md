@@ -17,4 +17,13 @@ Current API surfaces used by the optional SaaS layer:
 - `POST /api/billing/webhook`
 - `GET /api/billing/subscription-status`
 
+The current API now also exposes explicit JSON response contracts through FastAPI and Pydantic response models. The intended contract surface is visible in `/openapi.json` and is covered by API tests for:
+
+- `HealthResponse`
+- `AccountStatusResponse`
+- `ScanResponse`
+- `BillingConfigResponse`
+- `UrlResponse`
+- `WebhookAckResponse`
+
 The current frontend uses a browser-local `user_id` as the minimum viable account identifier for free quota tracking, Stripe Checkout activation, and customer portal lookup.

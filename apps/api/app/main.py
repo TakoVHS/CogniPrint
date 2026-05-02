@@ -115,6 +115,75 @@ class PortalRequest(BaseModel):
     customer_id: str | None = Field(default=None, max_length=64)
 
 
+class HealthResponse(BaseModel):
+    ok: bool
+    service: str
+    version: str
+    stripe_checkout_enabled: bool
+    environment: str
+    billing_mode: str
+
+
+class PriceIdsResponse(BaseModel):
+    starter: str | None = None
+    research_pro: str | None = None
+
+
+class AccountStatusResponse(BaseModel):
+    user_id: str
+    email: str | None = None
+    plan: str
+    subscription_status: str
+    quota_remaining_today: int | None = None
+    free_daily_scan_limit: int
+    max_text_chars: int
+    checkout_enabled: bool
+    billing_mode: str
+    price_ids: PriceIdsResponse
+
+
+class BillingPlanPublic(BaseModel):
+    label: str
+    price_id: str | None = None
+    free_tier: bool | None = None
+    contact_only: bool | None = None
+
+
+class BillingPlansResponse(BaseModel):
+    starter: BillingPlanPublic
+    research_pro: BillingPlanPublic
+    institution: BillingPlanPublic
+
+
+class BillingConfigResponse(BaseModel):
+    billing_enabled: bool
+    configured: bool
+    mode: str
+    app_public_url: str
+    plans: BillingPlansResponse
+
+
+class InsightCardResponse(BaseModel):
+    title: str
+    value: float | int
+    severity: str
+
+
+class ScanResponse(BaseModel):
+    disclaimer: str
+    plan: str
+    quota_remaining_today: int | None = None
+    metrics: dict[str, Any]
+    fingerprint: dict[str, Any]
+    fingerprint_vector: list[float | int]
+    content_hash: str
+    insight_cards: list[InsightCardResponse]
+
+
+class UrlResponse(BaseModel):
+    url: str
+
+
 class SubscriptionStatusResponse(BaseModel):
     user_id: str
     plan: str
@@ -122,27 +191,32 @@ class SubscriptionStatusResponse(BaseModel):
     current_period_end: str | None = None
 
 
-def _account_status_payload(db: Session, user_id: str, email: str | None = None) -> dict[str, Any]:
+class WebhookAckResponse(BaseModel):
+    received: bool
+    duplicate: bool = False
+
+
+def _account_status_payload(db: Session, user_id: str, email: str | None = None) -> AccountStatusResponse:
     settings = get_billing_settings()
     account = ensure_account(db, user_id, email)
     db.commit()
     pro = is_pro_account(db, user_id)
     sub = get_subscription(db, user_id)
-    return {
-        "user_id": account.user_id,
-        "email": account.email,
-        "plan": sub.plan if sub else ("research_pro" if pro else "free"),
-        "subscription_status": sub.status if sub else "none",
-        "quota_remaining_today": _quota_remaining_today(db, user_id),
-        "free_daily_scan_limit": _free_daily_limit(),
-        "max_text_chars": _max_text_chars(pro),
-        "checkout_enabled": _stripe_checkout_enabled(),
-        "billing_mode": settings.billing_mode,
-        "price_ids": {
-            "starter": settings.stripe_price_starter if settings.is_configured() else None,
-            "research_pro": settings.stripe_price_research_pro if settings.is_configured() else None,
-        },
-    }
+    return AccountStatusResponse(
+        user_id=account.user_id,
+        email=account.email,
+        plan=sub.plan if sub else ("research_pro" if pro else "free"),
+        subscription_status=sub.status if sub else "none",
+        quota_remaining_today=_quota_remaining_today(db, user_id),
+        free_daily_scan_limit=_free_daily_limit(),
+        max_text_chars=_max_text_chars(pro),
+        checkout_enabled=_stripe_checkout_enabled(),
+        billing_mode=settings.billing_mode,
+        price_ids=PriceIdsResponse(
+            starter=settings.stripe_price_starter if settings.is_configured() else None,
+            research_pro=settings.stripe_price_research_pro if settings.is_configured() else None,
+        ),
+    )
 
 
 def _today() -> datetime.date:  # type: ignore[return-value]
@@ -217,35 +291,35 @@ def _insights(profile: dict[str, Any]) -> list[dict[str, Any]]:
     ]
 
 
-@app.get("/health")
-def health() -> dict[str, Any]:
+@app.get("/health", response_model=HealthResponse)
+def health() -> HealthResponse:
     settings = get_billing_settings()
-    return {
-        "ok": True,
-        "service": "cogniprint-content-scanner-api",
-        "version": "0.1.0",
-        "stripe_checkout_enabled": _stripe_checkout_enabled(),
-        "environment": os.getenv("ENVIRONMENT", "development"),
-        "billing_mode": settings.billing_mode,
-    }
+    return HealthResponse(
+        ok=True,
+        service="cogniprint-content-scanner-api",
+        version="0.1.0",
+        stripe_checkout_enabled=_stripe_checkout_enabled(),
+        environment=os.getenv("ENVIRONMENT", "development"),
+        billing_mode=settings.billing_mode,
+    )
 
 
-@app.get("/account/status")
+@app.get("/account/status", response_model=AccountStatusResponse)
 def account_status(
     user_id: str = Query(..., min_length=1, max_length=160),
     email: str | None = Query(default=None, max_length=320),
     db: Session = Depends(get_db),
-) -> dict[str, Any]:
+) -> AccountStatusResponse:
     return _account_status_payload(db, user_id, email)
 
 
-@app.get("/api/billing/config")
-def billing_config() -> dict[str, Any]:
-    return _billing_public_config(get_billing_settings())
+@app.get("/api/billing/config", response_model=BillingConfigResponse)
+def billing_config() -> BillingConfigResponse:
+    return BillingConfigResponse.model_validate(_billing_public_config(get_billing_settings()))
 
 
-@app.post("/scan")
-def scan(payload: ScanRequest, db: Session = Depends(get_db)) -> dict[str, Any]:
+@app.post("/scan", response_model=ScanResponse)
+def scan(payload: ScanRequest, db: Session = Depends(get_db)) -> ScanResponse:
     ensure_account(db, payload.user_id)
     pro = is_pro_account(db, payload.user_id)
     max_chars = _max_text_chars(pro)
@@ -262,23 +336,23 @@ def scan(payload: ScanRequest, db: Session = Depends(get_db)) -> dict[str, Any]:
     )
     db.add(record)
     db.commit()
-    return {
-        "disclaimer": DISCLAIMER,
-        "plan": "pro" if pro else "free",
-        "quota_remaining_today": remaining,
-        "metrics": profile["metrics"],
-        "fingerprint": profile["fingerprint"],
-        "fingerprint_vector": profile["fingerprint_vector"],
-        "content_hash": profile["content_hash"],
-        "insight_cards": _insights(profile),
-    }
+    return ScanResponse(
+        disclaimer=DISCLAIMER,
+        plan="pro" if pro else "free",
+        quota_remaining_today=remaining,
+        metrics=profile["metrics"],
+        fingerprint=profile["fingerprint"],
+        fingerprint_vector=profile["fingerprint_vector"],
+        content_hash=profile["content_hash"],
+        insight_cards=[InsightCardResponse.model_validate(card) for card in _insights(profile)],
+    )
 
 
 @app.post("/billing/create-checkout-session")
 @app.post("/api/billing/create-checkout-session")
 def create_checkout_session(
     payload: CheckoutRequest, request: Request, db: Session = Depends(get_db)
-) -> dict[str, str]:
+) -> UrlResponse:
     del request
     settings = _require_billing_settings()
     price_id = settings.price_for_plan(payload.plan)
@@ -301,12 +375,12 @@ def create_checkout_session(
         cancel_url=settings.stripe_cancel_url,
         allow_promotion_codes=True,
     )
-    return {"url": session.url}
+    return UrlResponse(url=session.url)
 
 
 @app.post("/billing/create-portal-session")
 @app.post("/api/billing/create-portal-session")
-def create_portal_session(payload: PortalRequest, db: Session = Depends(get_db)) -> dict[str, str]:
+def create_portal_session(payload: PortalRequest, db: Session = Depends(get_db)) -> UrlResponse:
     settings = _require_billing_settings()
     customer_id = payload.customer_id
     if not customer_id:
@@ -321,7 +395,7 @@ def create_portal_session(payload: PortalRequest, db: Session = Depends(get_db))
         customer=customer_id,
         return_url=settings.stripe_customer_portal_return_url,
     )
-    return {"url": portal.url}
+    return UrlResponse(url=portal.url)
 
 
 @app.get("/api/billing/subscription-status", response_model=SubscriptionStatusResponse)
@@ -332,8 +406,8 @@ def billing_subscription_status(
     status = _account_status_payload(db, user_id)
     return SubscriptionStatusResponse(
         user_id=user_id,
-        plan=status["plan"],
-        subscription_status=status["subscription_status"],
+        plan=status.plan,
+        subscription_status=status.subscription_status,
         current_period_end=None,
     )
 
@@ -358,7 +432,7 @@ async def stripe_webhook(
     request: Request,
     stripe_signature: str = Header(default=""),
     db: Session = Depends(get_db),
-) -> dict[str, bool]:
+) -> WebhookAckResponse:
     settings = _require_billing_settings()
 
     stripe.api_key = settings.stripe_secret_key
@@ -373,7 +447,7 @@ async def stripe_webhook(
     event_type = event["type"]
     data = event["data"]["object"]
     if not mark_webhook_event_processed(db, event_id, event_type):
-        return {"received": True, "duplicate": True}
+        return WebhookAckResponse(received=True, duplicate=True)
 
     if event_type == "checkout.session.completed":
         user_id = data.get("client_reference_id") or data.get("metadata", {}).get("user_id")
@@ -435,4 +509,4 @@ async def stripe_webhook(
         elif customer_id:
             downgrade_by_customer(db, customer_id, "past_due")
 
-    return {"received": True}
+    return WebhookAckResponse(received=True)
