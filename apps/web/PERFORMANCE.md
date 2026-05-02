@@ -9,6 +9,7 @@ This note records the current bounded performance and hygiene state of the optio
 - the frontend keeps its runtime integration surface explicit around `/ready`, `/account/status`, and `/scan`.
 - build-only tooling (`vite`, `typescript`, `@vitejs/plugin-react`) is kept in `devDependencies`, not the runtime dependency set.
 - the web package now declares the Vite 8 Node engine requirement (`^20.19.0 || >=22.12.0`).
+- the hosted scanner flow now has a browser-level verification path via `make web-browser-verify`.
 
 ## Audit triage
 
@@ -25,4 +26,4 @@ The next bounded frontend performance pass should consider:
 
 1. further chunk analysis if the `charts-vendor` bundle continues to grow under Rolldown;
 2. optional route- or feature-level splitting only if the hosted app layer gains more UI surface;
-3. a browser-level verification pass for the hosted scanner flow against local `/ready`, `/scan`, and `/account/status`.
+3. tightening browser verification or web runtime smoke into CI only if the verification cost stays bounded.
