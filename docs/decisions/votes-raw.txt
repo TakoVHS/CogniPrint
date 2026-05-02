@@ -2,5 +2,12 @@
 # Only comments that contain an exact Decision line are included.
 # Allowed values: Decision: Increment | Decision: Memo | Decision: Abstain
 
-# No decision-bearing comments found yet.
-# Add reviewer comments to issue #16 using an exact Decision line.
+Reviewer: TakoVHS
+Decision: Increment
+Source: GitHub issue comment on #2026-05-01T18:42:04Z
+Reasoning:
+Decision: Increment
+
+Reasoning: The current project state is sufficient for a bounded scientific consolidation increment, but not for stronger external claims. CogniPrint currently has a public empirical evidence snapshot, a small public benchmark subset, and a descriptive validation layer v1.1. This supports manuscript preparation and due-diligence documentation, but it does not support claims of a completed empirical study, forensic determination, authorship verdict, or production-grade detector.
+
+The next increment should be limited to research-integrity work: due-diligence response, empirical-stability manuscript draft, public benchmark results layer, statistical validation v1.2 plan, manuscript readiness checklist, and reviewer-facing issue backlog. Grant outreach, sales materials, Stripe/commercial work, and stronger scientific claims should remain out of scope until the manuscript and benchmark evidence are more mature.

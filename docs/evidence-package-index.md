@@ -51,4 +51,4 @@ Do not present this package as a publication-ready empirical paper or as a gener
 
 ## Next manuscript step
 
-The next step is to compare the current benchmark-shift note against the validation summaries and decide whether the descriptive layer is stabilizing enough for another benchmark increment or still moving too much for stronger inferential wording.
+The next step is to carry the resolved `increment` decision into a provenance-clean benchmark-growth pass while keeping the manuscript wording descriptive and corpus-bound.

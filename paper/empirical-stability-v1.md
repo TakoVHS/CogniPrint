@@ -97,13 +97,13 @@ An additional limitation is benchmark-composition sensitivity. The current bench
 
 At the current stage, the main value of the evidence package is organizational and descriptive. The repository now supports a coherent path from provenance-linked local inputs to campaign summaries, evidence tables, manuscript-ready sections, and compact colleague-review materials. This makes it possible to ask more disciplined questions about framing and method before expanding the corpus further.
 
-The current evidence package is strong enough to support a follow-up manuscript draft, but not strong enough to justify broad population claims. The most useful immediate next step is not another tooling layer; it is careful external review of whether the current framing, methods narrative, evidence table, and limitations are precise enough for a scientific audience.
+The current evidence package is strong enough to support a follow-up manuscript draft, but not strong enough to justify broad population claims. The current decision gate now supports a bounded provenance-clean benchmark increment, which is a more useful immediate next step than additional infrastructure work. That increment should be treated as evidence-growth work for manuscript support, not as a basis for stronger public claims.
 
-The review loop should now explicitly cover the validation layer as well. Colleagues should be asked whether the random-reference description is understandable, whether the cross-metric threshold summaries clarify or confuse the evidence package, whether the benchmark-versus-campaign bridge improves the manuscript's interpretation of perturbation families, and whether the current benchmark-growth layer is already useful enough for manuscript support despite still being small.
+The review loop should still explicitly cover the validation layer. Colleagues should be asked whether the random-reference description is understandable, whether the cross-metric threshold summaries clarify or confuse the evidence package, and whether the benchmark-versus-campaign bridge improves the manuscript's interpretation of perturbation families while the benchmark layer continues to expand under bounded guardrails.
 
 ## Future Work
 
-- use external review to decide whether the current validation layer is clarifying enough to keep in its present form;
+- lock and execute a provenance-clean `wave-005` benchmark increment under the current pre-registration guardrails;
 - expand the released public benchmark corpus with broader source classes and language coverage;
 - strengthen the current descriptive validation layer into a broader inferential program only where the corpus justifies it;
 - expand campaign diversity and corpus heterogeneity;

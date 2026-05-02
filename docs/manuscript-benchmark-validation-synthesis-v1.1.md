@@ -52,4 +52,4 @@ The current manuscript route should use this synthesis in four places:
 
 The current manuscript can now be more coherent about why the validation layer is worth including.
 
-It still should not claim that the benchmark-growth layer has stabilized enough to justify stronger inferential framing without external review and further benchmark work.
+The resolved decision gate now supports a bounded provenance-clean benchmark increment. It still should not claim that the benchmark-growth layer has stabilized enough to justify stronger inferential framing. The immediate manuscript consequence is narrower: describe the current layer as sufficient for the next benchmark-growth step, not as sufficient for stronger claims.

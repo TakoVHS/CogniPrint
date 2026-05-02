@@ -50,11 +50,11 @@ The current public package provides:
 
 ## Immediate next step
 
-The current scientific decision is to treat the benchmark shift as still materially sensitive to benchmark composition.
+The current decision gate now resolves to a bounded `increment` path.
 
-That means the immediate next step is not stronger inferential framing. It is to use:
+That means the immediate next step is still not stronger inferential framing. It is to:
 
-- `docs/benchmark-shift-note-v1.1.md`
-- `docs/benchmark-decision-memo-v1.1.md`
-
-as the review anchors for deciding whether the next move should be another provenance-clean benchmark increment or a narrower interpretation pass.
+1. lock `docs/pre-registration-wave005.md`;
+2. keep the next benchmark increment provenance-clean and research-first;
+3. rerun the descriptive validation layer after the next increment;
+4. keep manuscript wording bounded while the evidence base grows.

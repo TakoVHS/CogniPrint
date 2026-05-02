@@ -2,21 +2,21 @@
 
 Status:
 
-- pending reviewer input
+- reviewer decision recorded
 
 Current state:
 
-- no reviewer votes recorded yet
-- no final decision between `increment` and `memo` has been made
+- `docs/decisions/final-decision.json` resolves to `increment`
+- the current decision gate supports a bounded, provenance-clean benchmark increment
+- the decision does not support stronger inferential, forensic, or attribution-style claims
 
 Next action:
 
-1. collect reviewer responses in `docs/decisions/votes-raw.txt`
-2. run `python scripts/synthesize_decision.py --input docs/decisions/votes-raw.txt --output docs/decisions/final-decision.json`
-3. if needed, run `python scripts/decision_gate_fallback.py --input docs/decisions/votes-raw.txt`
+1. complete and lock `docs/pre-registration-wave005.md`
+2. run `python scripts/preregister_wave005.py` before any new data loading
+3. keep the next increment provenance-clean and research-first
+4. rerun the descriptive validation layer after the next benchmark increment completes
 
-Decision branches once reviewer input arrives:
+Resolved branch:
 
-- if `increment`: complete and lock `docs/pre-registration-wave005.md` before any new data loading
-- if `memo`: generate `docs/interpretation-memo-v1.md` from the current descriptive validation layer
-- if `ambiguous`: keep claims unchanged and stay on the narrower follow-up path
+- `increment`: proceed only with a bounded benchmark-growth pass under the current pre-registration and artifact-policy guardrails
