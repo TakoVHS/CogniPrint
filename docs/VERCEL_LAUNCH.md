@@ -101,7 +101,7 @@ The current frontend expects:
 - `GET /ready` as the stronger runtime-readiness check when validating the backend;
 - `POST /scan` for scanner results;
 - `GET /account/status?user_id=...` to restore plan and quota state for the current browser account;
-- `POST /billing/create-checkout-session` to start Stripe Checkout.
+- `POST /api/billing/create-checkout-session` to start Stripe Checkout.
 
 Stripe success and cancel returns use root-page query parameters:
 
