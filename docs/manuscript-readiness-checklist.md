@@ -46,7 +46,7 @@ Limitations are closer to readiness when:
 - corpus size limits are explicit;
 - benchmark size limits are explicit;
 - descriptive versus inferential boundaries are explicit;
-- reviewers can see that the hosted layer, if present, does not change the scientific claim boundary.
+- reviewers can see that the optional hosted app layer, if present, does not change the scientific claim boundary.
 
 Current status:
 
