@@ -2,6 +2,15 @@
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000'
 
+export interface RuntimeStatus {
+  ok: boolean
+  service: string
+  version: string
+  database: string
+  analysis_backend: string
+  billing_configured: boolean
+}
+
 export interface ScanResult {
   disclaimer: string
   plan: 'free' | 'pro'
@@ -52,6 +61,15 @@ export interface AccountStatus {
     starter: string | null
     research_pro: string | null
   }
+}
+
+export async function getRuntimeStatus(): Promise<RuntimeStatus> {
+  const res = await fetch(`${API_BASE}/ready`)
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ detail: res.statusText }))
+    throw new Error(err.detail ?? 'Failed to load runtime status')
+  }
+  return res.json()
 }
 
 export async function scanText(text: string, userId = 'anonymous'): Promise<ScanResult> {

@@ -17,7 +17,9 @@ import {
   createCheckoutSession,
   createPortalSession,
   getAccountStatus,
+  getRuntimeStatus,
   AccountStatus,
+  RuntimeStatus,
   ScanResult,
 } from './lib/api'
 
@@ -391,6 +393,7 @@ export default function App() {
   const [loading, setLoading] = useState(false)
   const [quota, setQuota] = useState<number | null>(null)
   const [account, setAccount] = useState<AccountStatus | null>(null)
+  const [runtimeStatus, setRuntimeStatus] = useState<RuntimeStatus | null>(null)
   const [accountError, setAccountError] = useState<string | null>(null)
   const [email, setEmail] = useState('')
   const [statusMessage, setStatusMessage] = useState<string | null>(null)
@@ -409,8 +412,19 @@ export default function App() {
     }
   }, [email, userId])
 
+  const loadRuntimeStatus = useCallback(async () => {
+    try {
+      const status = await getRuntimeStatus()
+      setRuntimeStatus(status)
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to load runtime readiness.'
+      setAccountError(message)
+    }
+  }, [])
+
   useEffect(() => {
     const savedEmail = window.localStorage.getItem(EMAIL_STORAGE_KEY) ?? ''
+    void loadRuntimeStatus()
     if (savedEmail) {
       setEmail(savedEmail)
       void loadAccount(savedEmail)
@@ -425,7 +439,7 @@ export default function App() {
     } else if (checkout === 'cancelled') {
       setStatusMessage('Checkout was cancelled. Your free access remains active.')
     }
-  }, [loadAccount])
+  }, [loadAccount, loadRuntimeStatus])
 
   useEffect(() => {
     window.localStorage.setItem(EMAIL_STORAGE_KEY, email)
@@ -458,6 +472,8 @@ export default function App() {
         </div>
         <div>
           <strong>Checkout:</strong> {account?.checkout_enabled ? 'enabled' : 'not configured'}
+          {' · '}
+          <strong>Runtime:</strong> {runtimeStatus?.ok ? `${runtimeStatus.database}/${runtimeStatus.analysis_backend}` : 'unavailable'}
         </div>
       </section>
       {statusMessage && <section className="status-banner">{statusMessage}</section>}

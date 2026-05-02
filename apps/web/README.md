@@ -6,6 +6,7 @@ This frontend is not the primary public scientific surface of CogniPrint. The cu
 
 Current frontend behavior:
 
+- calls `GET /ready` to verify API runtime readiness;
 - creates and persists a browser-local `user_id`;
 - calls `GET /account/status` to restore plan and quota state;
 - calls `POST /scan` with that `user_id`;
@@ -14,3 +15,9 @@ Current frontend behavior:
 - handles Stripe return states on the root page via `?checkout=success` and `?checkout=cancelled`.
 
 The pricing and account copy should stay research-first: hosted convenience, managed empirical reports, and review-oriented exports, not stronger scientific conclusions.
+
+Current web/API integration expectations:
+
+- `/ready` is the stronger runtime gate;
+- `/account/status` restores plan, quota, and checkout availability;
+- `/scan` remains the hosted analysis action used by the scanner UI.
