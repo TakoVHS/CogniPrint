@@ -11,6 +11,8 @@ The current public evidence ladder is:
 - [`evidence/empirical-v1/`](evidence/empirical-v1/) — empirical evidence snapshot
 - [`evidence/public-benchmark-v1/`](evidence/public-benchmark-v1/) — released benchmark subset
 - [`evidence/statistical-validation-v1/`](evidence/statistical-validation-v1/) — benchmark-linked descriptive validation layer
+- [`docs/evidence-visibility-checks.json`](docs/evidence-visibility-checks.json) — generated evidence visibility summary
+- [`docs/evidence-visibility-dashboard.md`](docs/evidence-visibility-dashboard.md) — dashboard notes for the public site
 - [`docs/current-state-summary.md`](docs/current-state-summary.md) — one-page reviewer entry point
 
 ## Optional Hosted Billing Layer

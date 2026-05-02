@@ -16,6 +16,11 @@ CogniPrint now exposes three linked public evidence layers:
 - `evidence/public-benchmark-v1/` — released public benchmark subset
 - `evidence/statistical-validation-v1/` — descriptive validation layer linked to the expanded benchmark program
 
+The reviewer-facing visibility layer now also includes:
+
+- `docs/evidence-visibility-checks.json` — generated compact checks for the public scientific state
+- `/evidence/dashboard.html` — public static dashboard for the same descriptive layer
+
 ## Correct framing
 
 CogniPrint should currently be described as:
