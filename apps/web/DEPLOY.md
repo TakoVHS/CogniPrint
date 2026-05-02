@@ -23,3 +23,10 @@ Expected backend integration surface:
 - `GET /ready`
 - `GET /account/status`
 - `POST /scan`
+
+Before treating the optional web layer as deployable, also run:
+
+```bash
+cd apps/web
+npm run build
+```

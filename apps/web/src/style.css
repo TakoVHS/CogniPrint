@@ -304,6 +304,14 @@ a:hover { text-decoration: underline; }
   padding: 2rem 1.5rem 4rem;
 }
 
+.result-loading-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  color: var(--text-muted);
+}
+
 .result-header {
   display: flex;
   align-items: center;

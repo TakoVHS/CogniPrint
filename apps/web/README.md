@@ -21,3 +21,7 @@ Current web/API integration expectations:
 - `/ready` is the stronger runtime gate;
 - `/account/status` restores plan, quota, and checkout availability;
 - `/scan` remains the hosted analysis action used by the scanner UI.
+
+Performance and audit notes are tracked in:
+
+- `apps/web/PERFORMANCE.md`
