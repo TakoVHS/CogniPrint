@@ -1,4 +1,4 @@
-.PHONY: bootstrap init-workspace test smoke validate-sources demo sample-run sample-compare sample-study sample-profile sample-corpus sample-perturb sample-dataset billing-test billing-smoke billing-run-api reviewer-bundle reviewer-release-check sync-feedback triage bootstrap-validation decision-status decision-sync decision-summarize decision-fallback claims-drift-check preregister-wave005 check-prereg post-decision
+.PHONY: bootstrap init-workspace test smoke validate-sources demo sample-run sample-compare sample-study sample-profile sample-corpus sample-perturb sample-dataset billing-test billing-smoke billing-run-api reviewer-bundle reviewer-release-check sync-feedback triage bootstrap-validation evidence-visibility-check decision-status decision-sync decision-summarize decision-fallback claims-drift-check preregister-wave005 check-prereg post-decision
 
 PYTHON ?= python3
 VENV ?= .venv
@@ -70,6 +70,7 @@ reviewer-release-check:
 	$(PY) scripts/check_metadata_consistency.py
 	$(PY) scripts/check_evidence_snapshot.py
 	$(PY) scripts/check_claims_drift.py
+	$(PY) scripts/check_evidence_visibility.py
 	bash scripts/build_reviewer_bundle.sh
 
 sync-feedback:
@@ -85,6 +86,9 @@ triage:
 bootstrap-validation:
 	$(CLI) report --study-dir workspace/studies --aggregate --output workspace/exports/v1_validation.md --csv-output workspace/exports/v1_validation.csv
 	$(PY) scripts/bootstrap_validation.py --csv workspace/exports/v1_validation.csv --json > docs/validation-status.json
+
+evidence-visibility-check:
+	$(PY) scripts/check_evidence_visibility.py
 
 decision-status:
 	$(PY) scripts/decision_gate_status.py
