@@ -21,7 +21,7 @@ REQUIRED_VARS=(
   FRONTEND_URL
   STRIPE_SECRET_KEY
   STRIPE_WEBHOOK_SECRET
-  STRIPE_PRO_PRICE_ID
+  STRIPE_PRICE_RESEARCH_PRO
 )
 
 # ────────────────────────────────────────────────────────────────────────────
@@ -46,8 +46,8 @@ import json, sys
 data = json.load(sys.stdin)
 for k, v in data.items():
     # Sanitise: skip values that look like they contain shell-unsafe chars
-    safe_v = v.replace(\"'\", \"'\\\\''\")
-    print(f\"export {k}='{safe_v}'\")
+    safe_v = v.replace("'", "'\\''")
+    print(f"export {k}='{safe_v}'")
 " 2>/dev/null || true)"
   ok "Variables loaded from Railway."
 else
