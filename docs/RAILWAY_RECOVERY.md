@@ -184,7 +184,8 @@ railway variables set DATABASE_URL="postgresql://user:pass@host:5432/dbname"
 railway variables set FRONTEND_URL="https://your-vercel-app.vercel.app"
 railway variables set STRIPE_SECRET_KEY="sk_live_..."
 railway variables set STRIPE_WEBHOOK_SECRET="whsec_..."
-railway variables set STRIPE_PRO_PRICE_ID="price_..."
+railway variables set STRIPE_PRICE_RESEARCH_PRO="price_..."
+railway variables set STRIPE_PRICE_STARTER="price_..."   # optional
 ```
 
 ### Safe Defaults (can be scripted)
