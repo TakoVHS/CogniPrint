@@ -33,7 +33,8 @@ The current evidence package contains:
 - campaign-004 contribution of `1` controlled series and `11` comparison rows;
 - public evidence snapshot under `evidence/empirical-v1/`.
 - released public benchmark subset under `evidence/public-benchmark-v1/`;
-- initial descriptive statistical validation outputs under `evidence/statistical-validation-v1/`.
+- expanded public benchmark growth layer under `evidence/public-benchmark-v1.1/`;
+- benchmark-linked descriptive statistical validation outputs under `evidence/statistical-validation-v1/`.
 
 The public artifact policy excludes raw local-only inputs from the public snapshot.
 
@@ -47,6 +48,14 @@ Campaign `empirical-campaign-004` contributes one controlled perturbation series
 
 Taken together, these results support a narrow descriptive claim: within the current local evidence package, some controlled edits produce small profile differences while others produce larger measured shifts. The direction and size of the effect depend on the particular variant design, the baseline text, and the metric configuration used in the run bundle. At this stage, the results are most useful as colleague-reviewable empirical materials for a follow-up manuscript rather than as broad claims about text populations.
 
+## Benchmark Growth Layer v1.1
+
+The manuscript should distinguish between the smaller released benchmark subset and the later growth layer used to improve interpretation of the validation frame.
+
+The currently released subset under `evidence/public-benchmark-v1/` records `6` baselines and `36` controlled variants. The broader interpretive layer under `evidence/public-benchmark-v1.1/` records `9` baselines, `54` controlled variants, `5` benchmark languages, and `3` released source classes. This expanded layer should still be treated as small and still requires further growth, but it gives the current manuscript a broader descriptive contrast than the smaller subset alone.
+
+The main manuscript value of this benchmark growth layer is not benchmark finality. Its value is that it improves the descriptive reading of how campaign-level perturbation effects sit against a somewhat broader public reference mix.
+
 ## Validation Layer v1.1
 
 The current validation layer should be read as a bridge between campaign-level evidence and a broader benchmark programme. In its current v1.1 state it contributes four practical elements:
@@ -58,11 +67,13 @@ The current validation layer should be read as a bridge between campaign-level e
 
 This v1.1 layer improves interpretability but does not remove the descriptive and corpus-bound character of the current evidence package.
 
-In the current package, the random-reference layer reports `64` draws with `36` cross-baseline pairs per draw. The pooled random-reference mean Euclidean distance is `5.783678`, while the draw-mean Euclidean reference interval spans `5.536993` to `6.025547`. The current empirical campaign mean Euclidean distance remains lower at `2.610789`. This is a useful descriptive contrast for the manuscript because it helps show that the campaign package is not behaving like indiscriminate cross-baseline mismatch in the released benchmark subset.
+In the current package, the random-reference layer reports `64` draws with `54` cross-baseline pairs per draw. The pooled random-reference mean Euclidean distance is `9.375026`, while the draw-mean Euclidean reference interval spans `8.991032` to `9.75524`. The current empirical campaign mean Euclidean distance remains lower at `2.610789`. This remains a useful descriptive contrast for the manuscript because it helps show that the campaign package is not behaving like indiscriminate cross-baseline mismatch in the broader released benchmark-growth layer.
 
 The current threshold layer also helps structure interpretation. Under the current Euclidean grid, the campaign package yields low=`12`, moderate=`13`, larger=`16`, while the benchmark subset yields low=`7`, moderate=`13`, larger=`16`. Under the current cosine grid, the campaign package yields low=`24`, moderate=`5`, larger=`12`, while the benchmark subset yields low=`23`, moderate=`9`, larger=`4`. The manuscript should use these outputs as framing aids rather than as basis for a fixed decision boundary.
 
-The benchmark-versus-campaign bridge shows that overlap is not uniform across perturbation families. Among the shared axes, the closest current Euclidean alignment is `word_order_shift` with delta `1.744741`, while the widest current gap is `informalized_style` with delta `7.829415`. This strengthens the discussion section because it lets the manuscript differentiate between perturbation families that appear to travel more smoothly from the released benchmark subset into the local campaign layer and those that still look strongly corpus-bound.
+The benchmark-versus-campaign bridge shows that overlap is not uniform across perturbation families. Among the shared axes, the closest current Euclidean alignment is `formalized_style` with delta `0.871914`, while the widest current gap is `sentence_split_merge` with delta `14.944827`. This strengthens the discussion section because it lets the manuscript differentiate between perturbation families that appear to travel more smoothly from the broader benchmark-growth layer into the local campaign layer and those that still look strongly corpus-bound.
+
+The bridge should still be read cautiously. The combined benchmark-plus-validation layer now supports clearer reviewer-facing descriptive analysis than the smaller benchmark state did, but benchmark composition still moves the reference behavior materially enough to matter for interpretation.
 
 ## Limitations
 
@@ -74,7 +85,7 @@ The perturbation campaigns are designed around controlled edits to selected base
 
 The current package should also be bounded by purpose. It is not an authorship attribution workflow, not a source-verification workflow, and not a forensic or legal instrument. The outputs are analytical signals attached to specific local runs, not conclusions about identity or source.
 
-The current validation layer does not remove these limitations. The random-reference summaries remain cross-baseline references rather than a full null model. The threshold outputs remain descriptive and metric-dependent. The benchmark-versus-campaign bridge remains constrained by a small released benchmark subset with limited source classes and languages. These layers improve review quality, but they do not justify stronger population-level or decision-level claims.
+The current validation layer does not remove these limitations. The random-reference summaries remain cross-baseline references rather than a full null model. The threshold outputs remain descriptive and metric-dependent. The benchmark-versus-campaign bridge remains constrained by a still-small benchmark-growth layer with limited source classes and languages. These layers improve review quality, but they do not justify stronger population-level or decision-level claims.
 
 ## Discussion
 
@@ -82,7 +93,7 @@ At the current stage, the main value of the evidence package is organizational a
 
 The current evidence package is strong enough to support a follow-up manuscript draft, but not strong enough to justify broad population claims. The most useful immediate next step is not another tooling layer; it is careful external review of whether the current framing, methods narrative, evidence table, and limitations are precise enough for a scientific audience.
 
-The review loop should now explicitly cover the validation layer as well. Colleagues should be asked whether the random-reference description is understandable, whether the cross-metric threshold summaries clarify or confuse the evidence package, and whether the benchmark-versus-campaign bridge improves the manuscript's interpretation of perturbation families.
+The review loop should now explicitly cover the validation layer as well. Colleagues should be asked whether the random-reference description is understandable, whether the cross-metric threshold summaries clarify or confuse the evidence package, whether the benchmark-versus-campaign bridge improves the manuscript's interpretation of perturbation families, and whether the current benchmark-growth layer is already useful enough for manuscript support despite still being small.
 
 ## Future Work
 
@@ -104,7 +115,8 @@ See `evidence/empirical-v1/` for the current public evidence snapshot.
 - evidence table;
 - provenance summary;
 - benchmark-versus-campaign bridge summary;
-- validation v1.1 notes.
+- validation v1.1 notes;
+- benchmark-validation interpretation note.
 
 ## Review Status
 

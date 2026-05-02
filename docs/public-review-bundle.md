@@ -30,15 +30,16 @@ Use the following files for a compact review package:
 16. `docs/benchmark-shift-note-v1.1.md`
 17. `docs/benchmark-decision-memo-v1.1.md`
 18. `docs/benchmark-validation-interpretation-v1.1.md`
-19. `docs/evidence-visibility-dashboard.md`
-20. `docs/evidence-visibility-checks.json`
-21. `paper/empirical-stability-v1.md`
-22. `evidence/empirical-v1/README.md`
-23. `evidence/public-benchmark-v1/coverage-summary.md`
-24. `evidence/statistical-validation-v1/results-summary.md`
-25. `evidence/statistical-validation-v1/benchmark-campaign-bridge-summary.md`
-26. `evidence/statistical-validation-v1/limitations-summary.md`
-27. `docs/public-vs-local-materials.md`
+19. `docs/manuscript-benchmark-validation-synthesis-v1.1.md`
+20. `docs/evidence-visibility-dashboard.md`
+21. `docs/evidence-visibility-checks.json`
+22. `paper/empirical-stability-v1.md`
+23. `evidence/empirical-v1/README.md`
+24. `evidence/public-benchmark-v1/coverage-summary.md`
+25. `evidence/statistical-validation-v1/results-summary.md`
+26. `evidence/statistical-validation-v1/benchmark-campaign-bridge-summary.md`
+27. `evidence/statistical-validation-v1/limitations-summary.md`
+28. `docs/public-vs-local-materials.md`
 
 ## Current empirical base
 
