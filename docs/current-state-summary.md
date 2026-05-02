@@ -20,6 +20,7 @@ The reviewer-facing visibility layer now also includes:
 
 - `docs/evidence-visibility-checks.json` — generated compact checks for the public scientific state
 - `/evidence/dashboard.html` — public static dashboard for the same descriptive layer
+- `docs/benchmark-validation-interpretation-v1.1.md` — narrow prose bridge between the benchmark-growth layer and validation v1.1
 
 ## Correct framing
 

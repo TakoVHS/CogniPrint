@@ -30,14 +30,15 @@ Campaign `empirical-campaign-004` contributes `1` controlled perturbation series
 7. `evidence/statistical-validation-v1/benchmark-campaign-bridge-summary.md`
 8. `docs/benchmark-shift-note-v1.1.md`
 9. `docs/benchmark-decision-memo-v1.1.md`
-10. `docs/evidence-visibility-dashboard.md`
-11. `docs/evidence-visibility-checks.json`
-12. `evidence/statistical-validation-v1/limitations-summary.md`
-13. `docs/manuscript-validation-v1.1-notes.md`
-14. `docs/claims-matrix.md`
-15. `docs/benchmark-protocol.md`
-16. `paper/empirical-stability-v1.md`
-17. `docs/public-review-bundle.md`
+10. `docs/benchmark-validation-interpretation-v1.1.md`
+11. `docs/evidence-visibility-dashboard.md`
+12. `docs/evidence-visibility-checks.json`
+13. `evidence/statistical-validation-v1/limitations-summary.md`
+14. `docs/manuscript-validation-v1.1-notes.md`
+15. `docs/claims-matrix.md`
+16. `docs/benchmark-protocol.md`
+17. `paper/empirical-stability-v1.md`
+18. `docs/public-review-bundle.md`
 
 ## What this package is for
 
