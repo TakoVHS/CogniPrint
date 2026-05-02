@@ -24,4 +24,4 @@ The next bounded frontend performance pass should consider:
 
 1. a Vite major-upgrade trial branch with explicit build verification;
 2. further chunk analysis if the scan-results bundle continues to grow;
-3. optional route- or feature-level splitting only if the hosted layer gains more UI surface.
+3. optional route- or feature-level splitting only if the hosted app layer gains more UI surface.
