@@ -11,6 +11,7 @@ from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
+from sqlalchemy import text
 
 from .billing import PLAN_LABELS, BillingSettings, get_billing_settings
 from .database import (
@@ -127,6 +128,15 @@ class HealthResponse(BaseModel):
 class PriceIdsResponse(BaseModel):
     starter: str | None = None
     research_pro: str | None = None
+
+
+class ReadinessResponse(BaseModel):
+    ok: bool
+    service: str
+    version: str
+    database: str
+    analysis_backend: str
+    billing_configured: bool
 
 
 class AccountStatusResponse(BaseModel):
@@ -301,6 +311,19 @@ def health() -> HealthResponse:
         stripe_checkout_enabled=_stripe_checkout_enabled(),
         environment=os.getenv("ENVIRONMENT", "development"),
         billing_mode=settings.billing_mode,
+    )
+
+
+@app.get("/ready", response_model=ReadinessResponse)
+def ready(db: Session = Depends(get_db)) -> ReadinessResponse:
+    db.execute(text("SELECT 1"))
+    return ReadinessResponse(
+        ok=True,
+        service="cogniprint-content-scanner-api",
+        version="0.1.0",
+        database="ok",
+        analysis_backend="cogniprint.analysis" if analyze_text is not None else "fallback-profile",
+        billing_configured=get_billing_settings().is_configured(),
     )
 
 

@@ -43,6 +43,13 @@ jobs:
           source .venv/bin/activate
           make api-contract-test
 
+      - name: Run API runtime smoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          source .venv/bin/activate
+          make api-runtime-smoke
+
       - name: Check metadata consistency
         shell: bash
         run: |

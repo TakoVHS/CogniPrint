@@ -63,6 +63,15 @@ def test_health(client: TestClient):
     assert "stripe_checkout_enabled" in body
 
 
+def test_ready(client: TestClient):
+    r = client.get("/ready")
+    assert r.status_code == 200
+    body = r.json()
+    assert body["ok"] is True
+    assert body["database"] == "ok"
+    assert body["analysis_backend"] in {"cogniprint.analysis", "fallback-profile"}
+
+
 # ──────────────────────────── /account/status ────────────────────────────────
 
 
@@ -311,6 +320,7 @@ def test_openapi_registers_response_contracts(client: TestClient):
     openapi = schema.json()
 
     health_schema = openapi["paths"]["/health"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]
+    ready_schema = openapi["paths"]["/ready"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]
     account_schema = openapi["paths"]["/account/status"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]
     scan_schema = openapi["paths"]["/scan"]["post"]["responses"]["200"]["content"]["application/json"]["schema"]
     billing_schema = openapi["paths"]["/api/billing/config"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]
@@ -319,6 +329,7 @@ def test_openapi_registers_response_contracts(client: TestClient):
     webhook_schema = openapi["paths"]["/api/billing/webhook"]["post"]["responses"]["200"]["content"]["application/json"]["schema"]
 
     assert health_schema["$ref"].endswith("/HealthResponse")
+    assert ready_schema["$ref"].endswith("/ReadinessResponse")
     assert account_schema["$ref"].endswith("/AccountStatusResponse")
     assert scan_schema["$ref"].endswith("/ScanResponse")
     assert billing_schema["$ref"].endswith("/BillingConfigResponse")

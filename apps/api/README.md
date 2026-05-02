@@ -9,6 +9,7 @@ The repository's public scientific framing remains research-first. Outputs remai
 Current API surfaces used by the optional SaaS layer:
 
 - `GET /health`
+- `GET /ready`
 - `GET /account/status`
 - `POST /scan`
 - `GET /api/billing/config`
@@ -20,6 +21,7 @@ Current API surfaces used by the optional SaaS layer:
 The current API now also exposes explicit JSON response contracts through FastAPI and Pydantic response models. The intended contract surface is visible in `/openapi.json` and is covered by API tests for:
 
 - `HealthResponse`
+- `ReadinessResponse`
 - `AccountStatusResponse`
 - `ScanResponse`
 - `BillingConfigResponse`
@@ -27,3 +29,8 @@ The current API now also exposes explicit JSON response contracts through FastAP
 - `WebhookAckResponse`
 
 The current frontend uses a browser-local `user_id` as the minimum viable account identifier for free quota tracking, Stripe Checkout activation, and customer portal lookup.
+
+For runtime operations, prefer:
+
+- `GET /health` for shallow process liveness;
+- `GET /ready` for deploy-time readiness, including database reachability.

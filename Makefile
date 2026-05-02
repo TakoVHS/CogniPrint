@@ -1,4 +1,4 @@
-.PHONY: bootstrap init-workspace test smoke validate-sources demo sample-run sample-compare sample-study sample-profile sample-corpus sample-perturb sample-dataset api-contract-test billing-test billing-smoke billing-run-api reviewer-bundle reviewer-release-check sync-feedback triage bootstrap-validation evidence-visibility-check evidence-dashboard-check decision-status decision-sync decision-summarize decision-fallback claims-drift-check preregister-wave005 check-prereg post-decision
+.PHONY: bootstrap init-workspace test smoke validate-sources demo sample-run sample-compare sample-study sample-profile sample-corpus sample-perturb sample-dataset api-contract-test api-runtime-smoke billing-test billing-smoke billing-run-api reviewer-bundle reviewer-release-check sync-feedback triage bootstrap-validation evidence-visibility-check evidence-dashboard-check decision-status decision-sync decision-summarize decision-fallback claims-drift-check preregister-wave005 check-prereg post-decision
 
 PYTHON ?= python3
 VENV ?= .venv
@@ -51,6 +51,9 @@ demo: sample-run sample-compare sample-study sample-profile
 
 api-contract-test:
 	PYTHONPATH=. $(PY) -m pytest -q apps/api/tests/test_api.py
+
+api-runtime-smoke:
+	bash scripts/api_runtime_smoke.sh
 
 billing-test:
 	$(MAKE) api-contract-test
