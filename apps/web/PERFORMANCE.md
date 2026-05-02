@@ -5,24 +5,24 @@ This note records the current bounded performance and hygiene state of the optio
 ## Current changes
 
 - the chart-heavy scan results surface is lazy-loaded;
-- Vite output is expected to split the chart bundle away from the initial shell;
+- Vite 8 output splits the chart bundle away from the initial shell;
 - the frontend keeps its runtime integration surface explicit around `/ready`, `/account/status`, and `/scan`.
 - build-only tooling (`vite`, `typescript`, `@vitejs/plugin-react`) is kept in `devDependencies`, not the runtime dependency set.
+- the web package now declares the Vite 8 Node engine requirement (`^20.19.0 || >=22.12.0`).
 
 ## Audit triage
 
-`npm audit` currently reports two moderate advisories tied to the Vite and esbuild toolchain.
+After the Vite 8 trial upgrade, `npm audit` reports zero vulnerabilities for the optional web layer.
 
 Current reading:
 
-- these are development-tooling advisories, not evidence of a runtime compromise in the built static bundle;
-- the available automated fix is a semver-major Vite upgrade;
-- that upgrade should be handled as a separate bounded pass, because it can change the frontend build and plugin surface materially.
+- the prior Vite/esbuild advisories were resolved by the bounded major upgrade to Vite 8 and `@vitejs/plugin-react` 6;
+- the main residual risk has shifted from audit noise to normal post-upgrade verification of build output and runtime wiring.
 
 ## Next performance pass
 
 The next bounded frontend performance pass should consider:
 
-1. a Vite major-upgrade trial branch with explicit build verification;
-2. further chunk analysis if the scan-results bundle continues to grow;
-3. optional route- or feature-level splitting only if the hosted app layer gains more UI surface.
+1. further chunk analysis if the `charts-vendor` bundle continues to grow under Rolldown;
+2. optional route- or feature-level splitting only if the hosted app layer gains more UI surface;
+3. a browser-level verification pass for the hosted scanner flow against local `/ready`, `/scan`, and `/account/status`.

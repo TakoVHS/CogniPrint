@@ -86,17 +86,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Set up Node 20
+      - name: Set up Node 20.20.0
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '20.20.0'
           cache: 'npm'
           cache-dependency-path: apps/web/package-lock.json
+
+      - name: Audit optional web app dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd apps/web
+          npm ci
+          npm audit --audit-level=moderate
 
       - name: Build optional web app
         shell: bash
         run: |
           set -euo pipefail
           cd apps/web
-          npm ci
           npm run build
