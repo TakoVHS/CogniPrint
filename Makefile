@@ -1,4 +1,4 @@
-.PHONY: bootstrap init-workspace test smoke validate-sources demo sample-run sample-compare sample-study sample-profile sample-corpus sample-perturb sample-dataset billing-test billing-smoke billing-run-api reviewer-bundle reviewer-release-check sync-feedback triage bootstrap-validation evidence-visibility-check decision-status decision-sync decision-summarize decision-fallback claims-drift-check preregister-wave005 check-prereg post-decision
+.PHONY: bootstrap init-workspace test smoke validate-sources demo sample-run sample-compare sample-study sample-profile sample-corpus sample-perturb sample-dataset billing-test billing-smoke billing-run-api reviewer-bundle reviewer-release-check sync-feedback triage bootstrap-validation evidence-visibility-check evidence-dashboard-check decision-status decision-sync decision-summarize decision-fallback claims-drift-check preregister-wave005 check-prereg post-decision
 
 PYTHON ?= python3
 VENV ?= .venv
@@ -71,6 +71,7 @@ reviewer-release-check:
 	$(PY) scripts/check_evidence_snapshot.py
 	$(PY) scripts/check_claims_drift.py
 	$(PY) scripts/check_evidence_visibility.py
+	$(PY) scripts/check_evidence_dashboard.py
 	bash scripts/build_reviewer_bundle.sh
 
 sync-feedback:
@@ -89,6 +90,9 @@ bootstrap-validation:
 
 evidence-visibility-check:
 	$(PY) scripts/check_evidence_visibility.py
+
+evidence-dashboard-check:
+	$(PY) scripts/check_evidence_dashboard.py
 
 decision-status:
 	$(PY) scripts/decision_gate_status.py
