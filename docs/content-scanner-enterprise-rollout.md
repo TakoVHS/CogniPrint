@@ -2,7 +2,7 @@
 
 ## Status
 
-This branch is reserved for an optional application deployment layer around the existing CogniPrint research engine.
+This document covers an optional application deployment layer around the existing CogniPrint research engine.
 
 The implementation package is prepared externally as `cogniprint-content-scanner-enterprise.zip` and should be unpacked at repository root before opening the final PR.
 
@@ -29,7 +29,8 @@ Backend:
 - `DATABASE_URL=<railway-postgres-url>`
 - `STRIPE_SECRET_KEY=<stripe-secret>`
 - `STRIPE_WEBHOOK_SECRET=<stripe-webhook-secret>`
-- `STRIPE_PRO_PRICE_ID=<stripe-price-id>`
+- `STRIPE_PRICE_RESEARCH_PRO=<stripe-price-id>`
+- `STRIPE_PRICE_STARTER=<stripe-price-id>` (optional)
 - `FREE_DAILY_SCAN_LIMIT=3`
 - `MAX_TEXT_CHARS_FREE=12000`
 - `MAX_TEXT_CHARS_PRO=120000`
@@ -40,7 +41,7 @@ Frontend:
 
 ## Stripe setup
 
-Create a Stripe Product named `CogniPrint Pro` with a recurring monthly USD price of 199. Copy the recurring Price ID into `STRIPE_PRO_PRICE_ID`.
+Create a Stripe Product named `CogniPrint Pro` with a recurring monthly USD price of 199. Copy the recurring Price ID into `STRIPE_PRICE_RESEARCH_PRO`.
 
 Webhook endpoint:
 
