@@ -20,4 +20,4 @@
 - CogniPrint does not provide guaranteed classification.
 - CogniPrint does not provide final judgment outputs about a text.
 - The current public package is not a publication-ready empirical paper.
-- The optional hosted layer does not imply stronger scientific conclusions than the research core supports.
+- The optional hosted app layer does not imply stronger scientific conclusions than the research core supports.
