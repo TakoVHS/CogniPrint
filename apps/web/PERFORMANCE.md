@@ -10,6 +10,10 @@ This note records the current bounded performance and hygiene state of the optio
 - build-only tooling (`vite`, `typescript`, `@vitejs/plugin-react`) is kept in `devDependencies`, not the runtime dependency set.
 - the web package now declares the Vite 8 Node engine requirement (`^20.19.0 || >=22.12.0`).
 - the hosted scanner flow now has a browser-level verification path via `make web-browser-verify`.
+- the result shell and the chart surface are now split again:
+  - `ResultPanel` remains a small result-shell chunk;
+  - `FingerprintRadarChart` and `InsightBarChart` load separately;
+  - shared Recharts categorical infrastructure remains concentrated in `generateCategoricalChart-*`.
 
 ## Audit triage
 
@@ -24,6 +28,6 @@ Current reading:
 
 The next bounded frontend performance pass should consider:
 
-1. further chunk analysis if the `charts-vendor` bundle continues to grow under Rolldown;
+1. further chunk analysis if the shared `generateCategoricalChart-*` chunk remains the dominant chart payload;
 2. optional route- or feature-level splitting only if the hosted app layer gains more UI surface;
 3. tightening browser verification or web runtime smoke into CI only if the verification cost stays bounded.

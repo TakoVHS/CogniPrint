@@ -1,24 +1,11 @@
-import {
-  RadarChart,
-  Radar,
-  PolarGrid,
-  PolarAngleAxis,
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Cell,
-} from 'recharts'
+import { lazy, Suspense } from 'react'
 
 import type { ScanResult } from '../lib/api'
+import type { FingerprintRadarDatum } from './FingerprintRadarChart'
+import type { InsightBarDatum } from './InsightBarChart'
 
-const SEVERITY_COLOR: Record<string, string> = {
-  low: '#22c55e',
-  medium: '#f59e0b',
-  high: '#ef4444',
-}
+const FingerprintRadarChart = lazy(() => import('./FingerprintRadarChart'))
+const InsightBarChart = lazy(() => import('./InsightBarChart'))
 
 function MetricCard({ label, value }: { label: string; value: string | number }) {
   return (
@@ -30,14 +17,14 @@ function MetricCard({ label, value }: { label: string; value: string | number })
 }
 
 export default function ResultPanel({ result }: { result: ScanResult }) {
-  const radarData = Object.entries(result.fingerprint)
+  const radarData: FingerprintRadarDatum[] = Object.entries(result.fingerprint)
     .slice(0, 6)
     .map(([key, val]) => ({
       subject: key.replace(/_/g, ' '),
       value: Math.min(Math.abs(Number(val)) * 100, 100),
     }))
 
-  const barData = result.insight_cards.map(c => ({
+  const barData: InsightBarDatum[] = result.insight_cards.map(c => ({
     name: c.title,
     value: typeof c.value === 'number' ? Math.round(c.value * 100) / 100 : c.value,
     severity: c.severity,
@@ -65,38 +52,16 @@ export default function ResultPanel({ result }: { result: ScanResult }) {
       <div className="charts-row">
         <div className="chart-card">
           <h3 className="chart-title">Fingerprint Radar</h3>
-          <ResponsiveContainer width="100%" height={260}>
-            <RadarChart data={radarData}>
-              <PolarGrid stroke="#334155" />
-              <PolarAngleAxis dataKey="subject" tick={{ fill: '#94a3b8', fontSize: 11 }} />
-              <Radar
-                name="signal"
-                dataKey="value"
-                stroke="#6366f1"
-                fill="#6366f1"
-                fillOpacity={0.25}
-              />
-            </RadarChart>
-          </ResponsiveContainer>
+          <Suspense fallback={<div className="chart-loading-state">Loading radar chart…</div>}>
+            <FingerprintRadarChart data={radarData} />
+          </Suspense>
         </div>
 
         <div className="chart-card">
           <h3 className="chart-title">Insight Signals</h3>
-          <ResponsiveContainer width="100%" height={260}>
-            <BarChart data={barData} layout="vertical">
-              <XAxis type="number" tick={{ fill: '#94a3b8', fontSize: 11 }} />
-              <YAxis dataKey="name" type="category" width={130} tick={{ fill: '#94a3b8', fontSize: 11 }} />
-              <Tooltip
-                contentStyle={{ background: '#1e293b', border: '1px solid #334155', borderRadius: 8 }}
-                labelStyle={{ color: '#e2e8f0' }}
-              />
-              <Bar dataKey="value" radius={[0, 4, 4, 0]}>
-                {barData.map((entry, idx) => (
-                  <Cell key={idx} fill={SEVERITY_COLOR[entry.severity] ?? '#6366f1'} />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
+          <Suspense fallback={<div className="chart-loading-state">Loading signal chart…</div>}>
+            <InsightBarChart data={barData} />
+          </Suspense>
         </div>
       </div>
 
