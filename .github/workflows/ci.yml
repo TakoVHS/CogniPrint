@@ -107,3 +107,58 @@ jobs:
           set -euo pipefail
           cd apps/web
           npm run build
+
+  web-browser-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    needs: [test, web-build]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Bootstrap virtual environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m venv .venv
+          source .venv/bin/activate
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+
+      - name: Set up Node 20.20.0
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.20.0'
+          cache: 'npm'
+          cache-dependency-path: apps/web/package-lock.json
+
+      - name: Install optional web dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd apps/web
+          npm ci
+
+      - name: Run browser-level hosted flow verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          export WEB_BROWSER_VERIFY_SKIP_NPM_CI=1
+          bash scripts/web_browser_verify.sh
+
+      - name: Upload browser verification artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-browser-verify
+          path: |
+            workspace/browser-verify/
+            .web-browser-verify-api.log
+            .web-browser-verify-web.log
+          if-no-files-found: ignore
