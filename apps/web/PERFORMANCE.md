@@ -11,10 +11,14 @@ This note records the current bounded performance and hygiene state of the optio
 - the web package now declares the Vite 8 Node engine requirement (`^20.19.0 || >=22.12.0`).
 - the hosted scanner flow now has a browser-level verification path via `make web-browser-verify`.
 - the browser-level hosted scanner verification now runs in CI as a separate heavy gate with artifact upload.
-- the result shell and the chart surface are now split again:
-  - `ResultPanel` remains a small result-shell chunk;
-  - `FingerprintRadarChart` and `InsightBarChart` load separately;
-  - shared Recharts categorical infrastructure remains concentrated in `generateCategoricalChart-*`.
+- the chart surface no longer depends on `recharts`;
+- the former `generateCategoricalChart-*` shared payload has been removed from the production build;
+- the current post-remediation chunk shape is:
+  - `ResultPanel-*` at about `2.50 kB`;
+  - `FingerprintRadarChart-*` at about `1.47 kB`;
+  - `InsightBarChart-*` at about `1.09 kB`;
+  - `index-*` at about `13.96 kB`;
+  - `react-vendor-*` at about `139.83 kB`.
 
 ## Audit triage
 
@@ -29,6 +33,6 @@ Current reading:
 
 The next bounded frontend performance pass should consider:
 
-1. further chunk analysis if the shared `generateCategoricalChart-*` chunk remains the dominant chart payload;
-2. optional route- or feature-level splitting only if the hosted app layer gains more UI surface;
-3. measuring whether the new CI browser gate stays stable enough to keep as a default required check.
+1. observing whether the new browser-level CI gate stays stable enough to remain required by default;
+2. optional route- or feature-level splitting only if the hosted app layer gains materially more UI surface;
+3. revisiting `react-vendor-*` only if bundle pressure returns after new UI additions.
