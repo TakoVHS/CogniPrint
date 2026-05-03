@@ -173,23 +173,23 @@ jobs:
           fi
 
           python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
-import json
-from pathlib import Path
+          import json
+          from pathlib import Path
 
-summary = json.loads(Path("workspace/browser-verify/verification-summary.json").read_text())
-durations = summary.get("durations_seconds", {})
+          summary = json.loads(Path("workspace/browser-verify/verification-summary.json").read_text())
+          durations = summary.get("durations_seconds", {})
 
-print("## Web browser verify")
-print()
-print(f"- status: `{summary.get('status')}`")
-print(f"- stage: `{summary.get('stage')}`")
-print(f"- api: `{summary.get('api_base_url')}`")
-print(f"- web: `{summary.get('web_base_url')}`")
-print(f"- screenshot: `{summary.get('screenshot_path')}`")
-print(f"- api ready: `{durations.get('api_ready')}` s")
-print(f"- web ready: `{durations.get('web_ready')}` s")
-print(f"- total: `{durations.get('total')}` s")
-PY
+          print("## Web browser verify")
+          print()
+          print(f"- status: `{summary.get('status')}`")
+          print(f"- stage: `{summary.get('stage')}`")
+          print(f"- api: `{summary.get('api_base_url')}`")
+          print(f"- web: `{summary.get('web_base_url')}`")
+          print(f"- screenshot: `{summary.get('screenshot_path')}`")
+          print(f"- api ready: `{durations.get('api_ready')}` s")
+          print(f"- web ready: `{durations.get('web_ready')}` s")
+          print(f"- total: `{durations.get('total')}` s")
+          PY
 
       - name: Upload browser verification artifacts
         if: always()
