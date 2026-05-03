@@ -9,6 +9,8 @@ from pathlib import Path
 
 from scripts.synthesize_feedback import infer_category, infer_severity, synthesize_feedback
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
 
 class FeedbackScriptsTests(unittest.TestCase):
     def test_infer_category_prefers_claims(self) -> None:
@@ -60,7 +62,7 @@ class BootstrapValidationScriptTests(unittest.TestCase):
                     "--resamples",
                     "200",
                 ],
-                cwd="/home/vietcash/projects/CogniPrint",
+                cwd=REPO_ROOT,
                 check=True,
                 text=True,
                 stdout=subprocess.PIPE,
