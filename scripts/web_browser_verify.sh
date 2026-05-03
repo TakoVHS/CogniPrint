@@ -10,7 +10,51 @@ WEB_HOST="127.0.0.1"
 WEB_PORT="${WEB_BROWSER_VERIFY_PORT:-}"
 ARTIFACT_DIR="${ROOT}/workspace/browser-verify"
 SCREENSHOT_PATH="${ARTIFACT_DIR}/hosted-scanner-flow.png"
+SUMMARY_PATH="${ARTIFACT_DIR}/verification-summary.json"
 SKIP_NPM_CI="${WEB_BROWSER_VERIFY_SKIP_NPM_CI:-0}"
+VERIFY_STAGE="init"
+VERIFY_STATUS="failed"
+START_TS="$(date +%s)"
+API_READY_TS=""
+WEB_READY_TS=""
+VERIFY_DONE_TS=""
+
+write_summary() {
+  export SUMMARY_PATH SCREENSHOT_PATH API_BASE_URL WEB_BASE_URL VERIFY_STAGE VERIFY_STATUS START_TS API_READY_TS WEB_READY_TS VERIFY_DONE_TS
+  python3 - <<'PY'
+import json
+import os
+from pathlib import Path
+
+def as_int(name: str):
+    value = os.environ.get(name, "")
+    return int(value) if value else None
+
+start_ts = as_int("START_TS")
+api_ready_ts = as_int("API_READY_TS")
+web_ready_ts = as_int("WEB_READY_TS")
+verify_done_ts = as_int("VERIFY_DONE_TS")
+
+summary = {
+    "status": os.environ.get("VERIFY_STATUS", "failed"),
+    "stage": os.environ.get("VERIFY_STAGE", "unknown"),
+    "api_base_url": os.environ.get("API_BASE_URL"),
+    "web_base_url": os.environ.get("WEB_BASE_URL"),
+    "screenshot_path": os.environ.get("SCREENSHOT_PATH"),
+    "started_at_epoch": start_ts,
+    "api_ready_at_epoch": api_ready_ts,
+    "web_ready_at_epoch": web_ready_ts,
+    "finished_at_epoch": verify_done_ts,
+    "durations_seconds": {
+        "api_ready": (api_ready_ts - start_ts) if start_ts and api_ready_ts else None,
+        "web_ready": (web_ready_ts - start_ts) if start_ts and web_ready_ts else None,
+        "total": (verify_done_ts - start_ts) if start_ts and verify_done_ts else None,
+    },
+}
+
+Path(os.environ["SUMMARY_PATH"]).write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+PY
+}
 
 reserve_port() {
   python3 - <<'PY'
@@ -59,6 +103,9 @@ cleanup() {
   if [[ "${status}" -eq 0 ]]; then
     rm -f "${API_LOG_FILE}" "${WEB_LOG_FILE}"
   else
+    VERIFY_STATUS="failed"
+    VERIFY_DONE_TS="$(date +%s)"
+    write_summary
     echo "Web browser verification failed. Logs preserved:"
     echo "  API: ${API_LOG_FILE}"
     echo "  WEB: ${WEB_LOG_FILE}"
@@ -69,14 +116,17 @@ trap 'status=$?; trap - EXIT; cleanup "$status"; exit "$status"' EXIT
 
 rm -f "${API_LOG_FILE}" "${WEB_LOG_FILE}" "${DB_FILE}" "${DB_FILE}-journal"
 mkdir -p "${ARTIFACT_DIR}"
+rm -f "${SUMMARY_PATH}"
 
 export DATABASE_URL="sqlite:///${DB_FILE}"
 export BILLING_ENABLED="${BILLING_ENABLED:-true}"
 export ENVIRONMENT="web-browser-verify"
 
+VERIFY_STAGE="boot-api"
 .venv/bin/uvicorn apps.api.app.main:app --host "${API_HOST}" --port "${API_PORT}" >"${API_LOG_FILE}" 2>&1 &
 echo $! > "${API_PID_FILE}"
 
+VERIFY_STAGE="wait-api-health"
 for _ in $(seq 1 30); do
   if curl -fsS "${API_BASE_URL}/health" >/tmp/cogniprint-web-browser-health.json 2>/dev/null; then
     break
@@ -85,7 +135,9 @@ for _ in $(seq 1 30); do
 done
 
 curl -fsS "${API_BASE_URL}/health" >/tmp/cogniprint-web-browser-health.json >/dev/null
+API_READY_TS="$(date +%s)"
 
+VERIFY_STAGE="boot-web-preview"
 (
   cd "${ROOT}/apps/web"
   if [[ "${SKIP_NPM_CI}" != "1" ]]; then
@@ -96,6 +148,7 @@ curl -fsS "${API_BASE_URL}/health" >/tmp/cogniprint-web-browser-health.json >/de
 ) &
 echo $! > "${WEB_PID_FILE}"
 
+VERIFY_STAGE="wait-web-preview"
 for _ in $(seq 1 30); do
   if curl -fsS "${WEB_BASE_URL}" >/tmp/cogniprint-web-browser-root.html 2>/dev/null; then
     break
@@ -103,13 +156,23 @@ for _ in $(seq 1 30); do
   sleep 1
 done
 
+curl -fsS "${WEB_BASE_URL}" >/tmp/cogniprint-web-browser-root.html >/dev/null
+WEB_READY_TS="$(date +%s)"
+
 cd "${ROOT}/apps/web"
 if [[ "${CI:-}" == "true" ]]; then
+  VERIFY_STAGE="install-playwright-ci"
   npx playwright install --with-deps chromium >>"${WEB_LOG_FILE}" 2>&1
 else
+  VERIFY_STAGE="install-playwright-local"
   npx playwright install chromium >>"${WEB_LOG_FILE}" 2>&1
 fi
+VERIFY_STAGE="browser-verify"
 node "${ROOT}/apps/web/scripts/browser_verify.mjs" "${WEB_BASE_URL}" "${SCREENSHOT_PATH}"
+VERIFY_STATUS="passed"
+VERIFY_DONE_TS="$(date +%s)"
+write_summary
 
 echo "Web browser verification passed: ${WEB_BASE_URL} -> ${API_BASE_URL}"
 echo "Screenshot: ${SCREENSHOT_PATH}"
+echo "Summary: ${SUMMARY_PATH}"

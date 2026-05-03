@@ -11,6 +11,8 @@ This note records the current bounded performance and hygiene state of the optio
 - the web package now declares the Vite 8 Node engine requirement (`^20.19.0 || >=22.12.0`).
 - the hosted scanner flow now has a browser-level verification path via `make web-browser-verify`.
 - the browser-level hosted scanner verification now runs in CI as a separate heavy gate with artifact upload.
+- the CI browser gate now emits a structured verification summary JSON and a GitHub Actions step summary for run-to-run stability observation.
+- the same gate is scheduled to run daily so flakiness can be observed across repeated runs, not only on code changes.
 - the chart surface no longer depends on `recharts`;
 - the former `generateCategoricalChart-*` shared payload has been removed from the production build;
 - the current post-remediation chunk shape is:
